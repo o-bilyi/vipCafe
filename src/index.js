@@ -1,10 +1,10 @@
 import React from 'react';
-import App from './core/App';
+import App from './modules/App';
 import ReactDOM from 'react-dom';
-import './assets/style/index.scss';
-import {Provider } from 'react-redux';
-import { configureStore, history } from 'core';
+import './assets/styles/index.scss';
+import { Provider } from 'react-redux';
 import { AppContainer } from "react-hot-loader";
+import { configureStore, history } from './core';
 import { RouterService } from './shared/services';
 
 export const store = configureStore();

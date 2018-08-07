@@ -1,5 +1,8 @@
 import {generateReducer} from '../utils';
-import {loginActionTypes, logoutActionTypes, registrationActionTypes} from 'core/models/auth';
+import {
+  loginActionTypes,
+  logoutActionTypes,
+  registrationActionTypes} from '../../models/auth';
 
 const initialState = {
   userISAuthorized: false,
@@ -32,15 +35,9 @@ const loginSuccessReducer = (state) => {
 export const auth = generateReducer(initialState, {
   [registrationActionTypes.REGISTRATION_SUCCESS_ACTION]: loginSuccessReducer,
   [loginActionTypes.LOGIN_SUCCESS_ACTION]: loginSuccessReducer,
-  [loginActionTypes.GOOGLE_LOGIN_SUCCESS_ACTION]: loginSuccessReducer,
-  [loginActionTypes.FACEBOOK_LOGIN_SUCCESS_ACTION]: loginSuccessReducer,
 
   [loginActionTypes.LOGIN_INIT_ACTION]: loginInitReducer,
-  [loginActionTypes.GOOGLE_LOGIN_INIT_ACTION]: loginInitReducer,
-  [loginActionTypes.FACEBOOK_LOGIN_INIT_ACTION]: loginInitReducer,
 
-  [loginActionTypes.GOOGLE_LOGIN_FAIL_ACTION]: loginFailReducer,
-  [loginActionTypes.FACEBOOK_LOGIN_FAIL_ACTION]: loginFailReducer,
   [loginActionTypes.LOGIN_FAIL_ACTION]: loginFailReducer,
 
   [logoutActionTypes.LOGOUT_SUCCESS_ACTION] : (state) => {

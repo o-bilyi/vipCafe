@@ -13,7 +13,6 @@
  *  )
  */
 
-
 export function generateReducer(initialState, handlers) {
   return (state = initialState, action) => {
     if (handlers.hasOwnProperty(action.type)) {

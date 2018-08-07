@@ -8,8 +8,6 @@ export const navigationScheme = {
   dashboardProfile: '/dashboard/profile',
   dashboardProfileChangePassword: '/dashboard/profile/change-password',
   dashboardSettings: '/dashboard/settings',
-  dashboardSkype: '/dashboard/skype',
-  dashboardPayPal: '/dashboard/payPal',
   forgotPassword: '/forgot-password',
 };
 

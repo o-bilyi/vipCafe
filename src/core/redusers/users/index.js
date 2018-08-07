@@ -1,6 +1,6 @@
 import {logoutActionTypes} from '../../models/auth';
-import {usersProfileActionTypes} from '../../models/users';
 import {generateReducer, baseHandler} from '../utils';
+import {usersProfileActionTypes} from '../../models/users';
 
 const initialState = {
   username: null,
@@ -23,5 +23,4 @@ export const userProfile = generateReducer(initialState, {
     return initialState;
   },
   [usersProfileActionTypes.USER_PROFILE_SUCCESS_ACTION]: baseHandler,
-  [usersProfileActionTypes.USER_BALANCE_SUCCESS_ACTION] : baseHandler
 });
