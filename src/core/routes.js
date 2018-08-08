@@ -5,6 +5,7 @@ import {Route} from 'react-router-dom';
 export const navigationScheme = {
   home: '/', //default open catalog page
   basket : '/basket',
+  login : '/login',
   dashboard: '/dashboard',
   createUser: '/create-user',
   newArrivals : '/new-arrivals',
@@ -24,7 +25,12 @@ export const MAIN_ROUTES = [
   {
     path: navigationScheme.dashboard,
     exact: true,
-    component: () => import('../modules/dashboard/Dashboard.module'),
+    component: () => import('../modules/dashboard/Dashboard.module')
+  },
+  {
+    path: navigationScheme.login,
+    exact: true,
+    component: () => import('../modules/aut/login/Login.module')
   }
 ];
 

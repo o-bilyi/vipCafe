@@ -2,6 +2,9 @@ import React from 'react';
 
 export default class Catalog extends React.Component {
   render() {
-    return <div>Hello</div>
+    return <div>
+      Hell dsf sfcdso
+      <span/>
+    </div>
   }
 }

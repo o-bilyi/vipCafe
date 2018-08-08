@@ -1,7 +1,10 @@
 import React from "react";
+import {userIsAuthenticated} from '../../core/auth-redirect';
 
-export default class Dashboard extends React.Component {
+class Dashboard extends React.Component {
   render() {
     return <div>Dashboard</div>
   }
 }
+
+export default userIsAuthenticated(Dashboard);
