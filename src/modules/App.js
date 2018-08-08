@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Switch} from 'react-router';
 import ReduxToastr from 'react-redux-toastr';
 import {generateRoutes, MAIN_ROUTES} from '../core';
-import {ConnectedRouter} from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 
 export default class App extends React.Component {
   static propTypes = {
@@ -13,7 +13,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <ConnectedRouter history={this.props.history}>
           <Switch>
             {generateRoutes(MAIN_ROUTES)}
@@ -27,7 +27,7 @@ export default class App extends React.Component {
           transitionIn="fadeIn"
           transitionOut="fadeOut"
           progressBar/>
-      </div>
+      </Fragment>
     );
   }
 }

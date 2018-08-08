@@ -3,72 +3,29 @@ import Loadable from 'react-loadable';
 import {Route} from 'react-router-dom';
 
 export const navigationScheme = {
-  home: '/',
+  home: '/', //default open catalog page
+  basket : '/basket',
   dashboard: '/dashboard',
-  dashboardProfile: '/dashboard/profile',
-  dashboardProfileChangePassword: '/dashboard/profile/change-password',
-  dashboardSettings: '/dashboard/settings',
+  createUser: '/create-user',
+  newArrivals : '/new-arrivals',
   forgotPassword: '/forgot-password',
+  sharesAndOffers : '/shares-and-offers',
+  archiveOfOrders : '/archive-of-orders'
 };
 
 const Loading = () => <div className="loader">Loading ...</div>;
-
-// export const PROFILE_ROUTES = [
-//   {
-//     path : navigationScheme.dashboardProfile,
-//     exact: true,
-//     component: () => import('../modules/profile/Profile.module')
-//   },
-//   {
-//     path : navigationScheme.dashboardProfileChangePassword,
-//     exact: true,
-//     component: () => import('../modules/change-password/ChangePassword.module')
-//   },
-// ];
-//
-// export const DASHBOARD_ROUTES = [
-//   {
-//     path: navigationScheme.dashboard,
-//     exact: true,
-//     component: () => import('../modules/dashboard/Dashboard.module'),
-//   },
-//   {
-//     path: navigationScheme.dashboardProfile,
-//     component: () => import('../modules/profile/index')
-//   },
-//   {
-//     path: navigationScheme.dashboardSettings,
-//     component: () => import('../modules/dashboard-settings/DashboardSettings.module'),
-//   },
-//   {
-//     path: navigationScheme.dashboardSkype,
-//     component: () => import('../modules/skype/Skype.module'),
-//   },
-//   {
-//     path: navigationScheme.dashboardPayPal,
-//     component: () => import('../modules/pay-pal/PayPal.module'),
-//   },
-// ];
 
 export const MAIN_ROUTES = [
   {
     path: navigationScheme.home,
     exact: true,
-    component: () => import('../modules/catalog/catalog.module')
+    component: () => import('../modules/catalog/Catalog.module')
   },
-  // {
-  //   path: navigationScheme.connect,
-  //   component: () => import('../modules/connect/Connect.module')
-  // },
-  // {
-  //   path: navigationScheme.dashboard,
-  //   component: () => import('../modules/dashboard'),
-  //   routes: DASHBOARD_ROUTES,
-  // },
-  // {
-  //   path: navigationScheme.forgotPassword,
-  //   component: () => import('../modules/forgot-pass/ForgotPass.module'),
-  // }
+  {
+    path: navigationScheme.dashboard,
+    exact: true,
+    component: () => import('../modules/dashboard/Dashboard.module'),
+  }
 ];
 
 export function generateRoutes(routes) {
