@@ -3,22 +3,29 @@ import Loadable from 'react-loadable';
 import {Route} from 'react-router-dom';
 
 export const navigationScheme = {
-  home: '/', //default open catalog page
-  basket : '/basket',
-  login : '/login',
-  dashboard: '/dashboard',
+  login : '/',
+  signUp : '/sign-up',
   createUser: '/create-user',
-  newArrivals : '/new-arrivals',
   forgotPassword: '/forgot-password',
+
+  basket : '/basket',
+  catalog : '/catalog',
+  dashboard: '/dashboard',
+  newArrivals : '/new-arrivals',
   sharesAndOffers : '/shares-and-offers',
-  archiveOfOrders : '/archive-of-orders'
+  archiveOfOrders : '/archive-of-orders',
 };
 
 const Loading = () => <div className="loader">Loading ...</div>;
 
 export const MAIN_ROUTES = [
   {
-    path: navigationScheme.home,
+    path: navigationScheme.login,
+    exact: true,
+    component: () => import('../modules/auth/login/Login.module')
+  },
+  {
+    path: navigationScheme.catalog,
     exact: true,
     component: () => import('../modules/catalog/Catalog.module')
   },
@@ -28,9 +35,9 @@ export const MAIN_ROUTES = [
     component: () => import('../modules/dashboard/Dashboard.module')
   },
   {
-    path: navigationScheme.login,
+    path: navigationScheme.signUp,
     exact: true,
-    component: () => import('../modules/auth/login/Login.module')
+    component: () => import('../modules/auth/sign-up/SignUp.module')
   }
 ];
 
