@@ -30,7 +30,7 @@ export const MAIN_ROUTES = [
   {
     path: navigationScheme.login,
     exact: true,
-    component: () => import('../modules/aut/login/Login.module')
+    component: () => import('../modules/auth/login/Login.module')
   }
 ];
 

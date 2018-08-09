@@ -3,21 +3,27 @@ import {generateReducer, baseHandler} from '../utils';
 import {usersProfileActionTypes} from '../../models/users';
 
 const initialState = {
-  username: null,
-  name: null,
-  description : null,
-  country: null,
-  character : null,
   id : null,
-  balance : null,
-  rate : ""
+  name : null,
+  email : null,
+  lastName : null,
+  surname : null,
+  nameCompany : null,
+  mobile : null,
+  city : null,
+  delivery : null,
+  tradeFormat : null,
+  sitePage : null,
+  telegram : null,
+  viber : null,
+  discount : null,
 };
 
 export const userProfile = generateReducer(initialState, {
   /**
    * Listen logout action for cleaning user data after logout
    * @param state
-   * @return {{fetching: boolean, userISAuthorized: boolean}}
+   * @return {{fetching: boolean, isAuthorized: boolean}}
    */
   [logoutActionTypes.LOGOUT_SUCCESS_ACTION]: () => {
     return initialState;

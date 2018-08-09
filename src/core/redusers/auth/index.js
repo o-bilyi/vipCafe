@@ -5,7 +5,7 @@ import {
   registrationActionTypes} from '../../models/auth';
 
 const initialState = {
-  userISAuthorized: false,
+  isAuthorized: false,
   fetching: false,
 };
 
@@ -26,7 +26,7 @@ const loginInitReducer = (state) => {
 const loginSuccessReducer = (state) => {
   return {
     ...state,
-    userISAuthorized: true,
+    isAuthorized: true,
     fetching: false,
   };
 };
@@ -44,7 +44,7 @@ export const auth = generateReducer(initialState, {
     return {
       ...state,
       fetching: false,
-      userISAuthorized : false
+      isAuthorized : false
     }
   }
 });
