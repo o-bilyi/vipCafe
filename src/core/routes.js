@@ -38,6 +38,11 @@ export const MAIN_ROUTES = [
     path: navigationScheme.signUp,
     exact: true,
     component: () => import('../modules/auth/sign-up/SignUp.module')
+  },
+  {
+    path: navigationScheme.forgotPassword,
+    exact: true,
+    component: () => import('../modules/auth/forgot-pass/ForgotPass.module')
   }
 ];
 

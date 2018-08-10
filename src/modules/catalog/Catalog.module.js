@@ -1,7 +1,10 @@
 import React from 'react';
 
-export default function Catalog() {
-  return(
-    <div>Catalog</div>
-  );
+export default class Catalog extends React.Component {
+  render() {
+    return <div>
+      Hell dsf sfcdso
+      <span/>
+    </div>
+  }
 }

@@ -1,0 +1,18 @@
+.auth-page {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  background-size: cover;
+  justify-content: center;
+  //background: url("../src/assets/img/auth-page-bg.png") no-repeat center;
+
+  .login-form {
+
+  }
+
+  .auth-form {
+    background-size: cover;
+    padding: 45px 50px 40px;
+    //background: url("./assets/img/auth-form-bg.png") no-repeat center;
+  }
+}
