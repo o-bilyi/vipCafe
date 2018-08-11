@@ -1,0 +1,150 @@
+.auth-page {
+  display: flex;
+  padding: 80px 0;
+  min-height: 100vh;
+  align-items: center;
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+  background: url("/img/auth-page-bg.png") no-repeat center;
+
+  .auth-form {
+    position: relative;
+    background-size: 50%;
+    padding: 30px 50px 30px;
+    background: url("/img/auth-form-bg.png") no-repeat center;
+  }
+
+  .auth-form-clover {
+    position: absolute;
+    right: -32px;
+    top: -20px;
+  }
+
+  .login-form {
+    width: 100%;
+    max-width: 480px;
+
+    .title-page {
+      color: #fff;
+      font-size: 24px;
+      line-height: 1.33;
+      margin-bottom: 38px;
+      text-transform: uppercase;
+    }
+  }
+
+  .input-container {
+    position: relative;
+    &.input-container-email {
+      margin-bottom: 30px;
+    }
+
+    .form-label {
+      color: #fff;
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 40px;
+      padding: 0 16px;
+      border: 1px solid #e8e8e8;
+    }
+
+    .error-text {
+      bottom: 10px;
+      right: 16px;
+      color: #fa5ca6;
+      font-size: 12px;
+      position: absolute;
+    }
+
+  }
+
+  .forgot-password {
+    margin-top: 14px;
+
+    .forgot-password-link {
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    margin: 40px 0 34px;
+    align-items: center;
+    justify-content: center;
+
+    .submit-button {
+      @include button(200px);
+    }
+  }
+
+  .registered-link-wrap {
+    text-align: center;
+
+    .registered-link {
+      color: #fff;
+      font-size: 13px;
+      line-height: 2.46;
+      text-decoration: none;
+    }
+    .underline {
+      margin-left: 5px;
+      text-decoration: underline;
+    }
+  }
+
+  .continue-without-authorization {
+    margin-top: 40px;
+    text-align: center;
+
+    .continue-without-authorization-link {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 18px;
+      transition: color .3s;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  .contacts-block {
+    display: flex;
+    margin-top: 60px;
+    align-items: center;
+
+    .logo-icon-svg {
+      fill: #fff;
+      width: 100px;
+      height: 43px;
+    }
+    
+    .email-link,
+    .number-link {
+      color: #fff;
+      display: block;
+      font-size: 12px;
+      text-decoration: none;
+      &:first-child {
+        margin-bottom: 8px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .separator {
+      width: 1px;
+      height: 60px;
+      margin: 0 25px;
+      background-color: rgba(255, 255, 255, 0.60);
+    }
+  }
+
+}

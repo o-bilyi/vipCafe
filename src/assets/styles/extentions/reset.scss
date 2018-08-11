@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -9,7 +9,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline; }
+  outline: none;
+  vertical-align: baseline;
+  box-sizing: border-box;}
 
 /* HTML5 display-role reset for older browsers */
 
@@ -38,3 +40,49 @@ q {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+input {
+  box-sizing: border-box;
+  outline: none;
+}
+
+button {
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #e8e8e8;
+  -webkit-text-fill-color: #e8e8e8;
+  -webkit-box-shadow: 0 0 0 1000px #e8e8e8 inset;
+  transition: background-color 5000s ease-in-out 0s;
+
+  &:disabled {
+    border: 1px solid #2a2e2e;
+    -webkit-text-fill-color: #2a2e2e;
+    -webkit-box-shadow: 0 0 0 1000px lightgrey inset;
+  }
+}

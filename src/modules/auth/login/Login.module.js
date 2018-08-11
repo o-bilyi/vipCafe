@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { toastr } from 'react-redux-toastr';
 import {navigationScheme} from '../../../core';
+import LogoIconSVG from '../../../assets/svg/logo.svg';
 import {userIsNotAuthenticated} from '../../../core/auth-redirect';
 
 const initialState = {
@@ -85,8 +86,10 @@ class Login extends React.Component {
     return (
       <div className="auth-page login">
         <form method="post" className="auth-form login-form" onSubmit={this.handleSubmit}>
-          <div className="input-container">
-            <label htmlFor="#email">Телефон (або електронна адреса):</label>
+          <img src="/img/clover.png" className="auth-form-clover" alt="clover"/>
+          <h1 className="title-page">Вхід в акаунт</h1>
+          <div className="input-container input-container-email">
+            <label className="form-label" htmlFor="#email">Телефон (або електронна адреса):</label>
             <input onChange={this.onFieldsChange}
                    value={email}
                    type="text"
@@ -95,8 +98,8 @@ class Login extends React.Component {
                    className="form-input email"/>
             	{error.email && <p className="error-text">{error.email}</p>}
           </div>
-          <div className="input-container">
-            <label htmlFor="#password">Пароль:</label>
+          <div className="input-container input-container-password">
+            <label className="form-label" htmlFor="#password">Пароль:</label>
             <input onChange={this.onFieldsChange}
                    value={password}
                    type="password"
@@ -104,14 +107,43 @@ class Login extends React.Component {
                    id="password"
                    className="form-input password"/>
             	{error.password && <p className="error-text">{error.password}</p>}
-            <p className="forgot-password">
-              <Link className="forgot-password-link" to={navigationScheme.forgotPassword}>Забули пароль?</Link>
-            </p>
           </div>
+          <p className="forgot-password">
+            <Link className="forgot-password-link" to={navigationScheme.forgotPassword}>Забули пароль?</Link>
+          </p>
           <div className="button-container">
-            <button type="submit">Увійти</button>
+            <button className="submit-button" type="submit">Увійти</button>
+          </div>
+          <div className="registered-link-wrap">
+            <Link
+              to={navigationScheme.createUser}
+              className="registered-link">У Вас немає акаунту?
+              <span className="underline">Зареєструйтесь</span></Link>
           </div>
         </form>
+
+        <div className="continue-without-authorization">
+          <Link
+            to={navigationScheme.catalog}
+            className="continue-without-authorization-link">
+            Продовжити без авторизації</Link>
+        </div>
+
+        <div className="contacts-block">
+          <div className="logo">
+            <LogoIconSVG className="logo-icon-svg"/>
+          </div>
+          <div className="separator"/>
+          <div className="email-and-number">
+            <a
+              className="email-link"
+              href="mailto:vipcafe@info">vipcafe@info</a>
+            <a
+              className="number-link"
+              href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+          </div>
+        </div>
+
       </div>
     )
   }

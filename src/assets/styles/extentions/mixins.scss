@@ -1,0 +1,49 @@
+@mixin button($width:100%, $height:44px,$font-size:14px,$color:white,$radius:22px) {
+  width: $width;
+  color: $color;
+  height: $height;
+  font-size: $font-size;
+  border-radius: $radius;
+  //box-shadow: 0 1px 17px 0 rgba(134, 191, 107, 0.47);
+  //background-image: linear-gradient(310deg, #0fb2f6, #6fa256, #92cc76);
+  background-image: linear-gradient(310deg, #0ff6a2, #6fa256, #92cc76);
+}
+
+@mixin flex-ai-c-jc-sb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin transition {
+  transition: all 0.3s;
+}
+
+@mixin disabled-button {
+  &:disabled {
+    background-image: linear-gradient(225deg, #e0d4ef, #f3f2f2);
+    color: #676767;
+    cursor: default;
+  }
+}
+
+@mixin disabled-input {
+  &:disabled {
+    &[type="text"],
+    &[type="password"],
+    &[type="email"] {
+      cursor: default;
+      background-color: #dfd7e8;
+    }
+  }
+}
+
+@mixin error-input {
+  &.validation-error {
+    &[type="text"],
+    &[type="password"],
+    &[type="email"] {
+      box-shadow: 0 0 6px 1px red;
+    }
+  }
+}
