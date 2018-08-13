@@ -91,6 +91,7 @@ class Login extends React.Component {
           <div className="input-container input-container-email">
             <label className="form-label" htmlFor="#email">Телефон (або електронна адреса):</label>
             <input onChange={this.onFieldsChange}
+                   placeholder="test@gmail.com"
                    value={email}
                    type="text"
                    name="email"
@@ -102,6 +103,7 @@ class Login extends React.Component {
             <label className="form-label" htmlFor="#password">Пароль:</label>
             <input onChange={this.onFieldsChange}
                    value={password}
+                   placeholder="******"
                    type="password"
                    name="password"
                    id="password"
