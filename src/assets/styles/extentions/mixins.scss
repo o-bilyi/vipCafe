@@ -1,12 +1,21 @@
-@mixin button($width:100%, $height:44px,$font-size:14px,$color:white,$radius:22px) {
+@mixin button(
+  $width:100%,$height:44px,$font-size:14px,
+  $color:white,$text-transform: uppercase,$radius:22px)
+{
   width: $width;
   color: $color;
   height: $height;
   font-size: $font-size;
   border-radius: $radius;
-  //box-shadow: 0 1px 17px 0 rgba(134, 191, 107, 0.47);
-  //background-image: linear-gradient(310deg, #0fb2f6, #6fa256, #92cc76);
-  background-image: linear-gradient(310deg, #0ff6a2, #6fa256, #92cc76);
+  text-transform: $text-transform;
+}
+
+@mixin success-style-btn {
+  background-image: linear-gradient(to right, #92cc76, #89c16e, #80b766, #78ac5e, #6fa256);
+}
+
+@mixin standard-style-btn {
+  background: #4c4743 url("../img/auth-form-bg.png") no-repeat center/cover;
 }
 
 @mixin flex-ai-c-jc-sb {
@@ -15,8 +24,8 @@
   align-items: center;
 }
 
-@mixin transition {
-  transition: all 0.3s;
+@mixin transition($type:all, $duration:.3s,$animation-type:ease-in,$delay:0) {
+  transition: $type $duration $animation-type $delay;
 }
 
 @mixin disabled-button {

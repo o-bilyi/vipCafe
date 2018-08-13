@@ -12,6 +12,7 @@ export const navigationScheme = {
   catalog : '/catalog',
   dashboard: '/dashboard',
   newArrivals : '/new-arrivals',
+  privacyPolicy : '/privacy-policy',
   sharesAndOffers : '/shares-and-offers',
   archiveOfOrders : '/archive-of-orders',
 };
