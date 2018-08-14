@@ -118,7 +118,7 @@ class Login extends React.Component {
           </div>
           <div className="registered-link-wrap">
             <Link
-              to={navigationScheme.createUser}
+              to={navigationScheme.signUp}
               className="registered-link">У Вас немає акаунту?
               <span className="underline">Зареєструйтесь</span></Link>
           </div>

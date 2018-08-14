@@ -5,7 +5,6 @@ import {Route} from 'react-router-dom';
 export const navigationScheme = {
   login : '/',
   signUp : '/sign-up',
-  createUser: '/create-user',
   forgotPassword: '/forgot-password',
 
   basket : '/basket',

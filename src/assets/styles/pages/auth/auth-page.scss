@@ -8,9 +8,18 @@
   background: url("/img/auth-page-bg.png") no-repeat center/cover;
 
   .auth-form {
+    width: 100%;
     position: relative;
     padding: 30px 50px 30px;
     background: url("/img/auth-form-bg.png") no-repeat center/cover;
+
+    .title-page {
+      color: #fff;
+      font-size: 24px;
+      line-height: 1.33;
+      margin-bottom: 38px;
+      text-transform: uppercase;
+    }
   }
 
   .auth-form-clover {
@@ -20,16 +29,29 @@
   }
 
   .login-form {
-    width: 100%;
     max-width: 480px;
+  }
 
-    .title-page {
-      color: #fff;
-      font-size: 24px;
-      line-height: 1.33;
-      margin-bottom: 38px;
-      text-transform: uppercase;
+  .signUp-form {
+    max-width: 980px;
+  }
+
+  .signUp-form-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px 50px;
+    align-items: flex-start;
+
+    .input-container {
+      width: 50%;
+      margin: 0 10px;
+      max-width: 280px;
+
+      &:not(.input-container-sitePage) {
+        margin-bottom: 30px;
+      }
     }
+
   }
 
   .input-container {
@@ -49,6 +71,7 @@
       width: 100%;
       height: 40px;
       padding: 0 16px;
+      font-size: 13px;
       border: 1px solid #e8e8e8;
     }
 
@@ -59,7 +82,50 @@
       font-size: 12px;
       position: absolute;
     }
+  }
 
+  .input-container-delivery,
+  .input-container-tradeFormat {
+    .form-input {
+      border: none;
+      background-color: #fff;
+    }
+  }
+
+  .input-container-telegram-and-viber {
+    height: 40px;
+    display: flex;
+    margin: 4px 10px;
+    align-items: flex-end;
+
+    .telegram-and-viber-title {
+      padding: 2px 0;
+      font-size: 12px;
+      margin-right: 40px;
+    }
+
+    .checkbox-label {
+      color: #fff;
+      &.telegram {
+        margin-right: 30px;
+      }
+    }
+  }
+  
+  .telegram-and-viber-title {
+    color: #fff;
+  }
+  
+  .privacy-policy {
+    color: #fff;
+    font-size: 13px;
+    line-height: 2.46;
+    text-align: center;
+    
+    .privacy-policy-link {
+      margin: 0 5px;
+      color: #fff;
+    }
   }
 
   .forgot-password {

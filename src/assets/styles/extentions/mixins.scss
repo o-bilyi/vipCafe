@@ -18,12 +18,6 @@
   background: #4c4743 url("../img/auth-form-bg.png") no-repeat center/cover;
 }
 
-@mixin flex-ai-c-jc-sb {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 @mixin transition($type:all, $duration:.3s,$animation-type:ease-in,$delay:0) {
   transition: $type $duration $animation-type $delay;
 }
