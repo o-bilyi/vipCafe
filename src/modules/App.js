@@ -27,13 +27,12 @@ class App extends React.Component {
           </Switch>
         </ConnectedRouter>
         <ReduxToastr
-          timeOut={4000}
           newestOnTop={false}
           preventDuplicates
-          position="bottom-left"
-          transitionIn="fadeIn"
-          transitionOut="fadeOut"
-          progressBar/>
+          position="top-right"
+          transitionIn="bounceInDown"
+          transitionOut="bounceOutUp"
+          progressBar={false}/>
       </div>
     );
   }

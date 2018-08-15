@@ -75,14 +75,13 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border: 1px solid #e8e8e8;
-  -webkit-text-fill-color: #e8e8e8;
+  border: none;
+  -webkit-text-fill-color: #000;
   -webkit-box-shadow: 0 0 0 1000px #e8e8e8 inset;
-  transition: background-color 5000s ease-in-out 0s;
 
   &:disabled {
     border: 1px solid #2a2e2e;
-    -webkit-text-fill-color: #2a2e2e;
+    -webkit-text-fill-color: #000;
     -webkit-box-shadow: 0 0 0 1000px lightgrey inset;
   }
 }

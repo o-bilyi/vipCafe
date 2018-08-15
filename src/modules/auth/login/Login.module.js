@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { toastr } from 'react-redux-toastr';
+import Button from '@material-ui/core/Button';
 import {navigationScheme} from '../../../core';
+import TextField from '@material-ui/core/TextField';
 import LogoIconSVG from '../../../assets/svg/logo.svg';
 import {userIsNotAuthenticated} from '../../../core/auth-redirect';
 
@@ -72,11 +74,14 @@ class Login extends React.Component {
       },
       method : "post",
       body : JSON.stringify(inputs),
-    }).then(status).then(() => {
+    })
+      .then(status)
+      .then(() => {
       this.setState(initialState);
       toastr.success("Форма відправлена!");
-    }).catch((error) => {
-      toastr.warning("Помилка, повідомлення не відправлено!");
+    })
+      .catch((error) => {
+      toastr.error("Логін або Пароль не вірний!");
       console.error("Request failed", error);
     });
   };
@@ -85,12 +90,12 @@ class Login extends React.Component {
     const {email, password, error} = this.state;
     return (
       <div className="auth-page login">
-        <form method="post" className="auth-form login-form" onSubmit={this.handleSubmit}>
+        <form autoComplete="off" method="post" className="auth-form login-form" onSubmit={this.handleSubmit}>
           <img src="/img/clover.png" className="auth-form-clover" alt="clover"/>
           <h1 className="title-page">Вхід в акаунт</h1>
           <div className="input-container input-container-email">
             <label className="form-label" htmlFor="#email">Телефон (або електронна адреса):</label>
-            <input onChange={this.onFieldsChange}
+            <TextField onChange={this.onFieldsChange}
                    placeholder="test@gmail.com"
                    value={email}
                    type="text"
@@ -101,7 +106,7 @@ class Login extends React.Component {
           </div>
           <div className="input-container input-container-password">
             <label className="form-label" htmlFor="#password">Пароль:</label>
-            <input onChange={this.onFieldsChange}
+            <TextField onChange={this.onFieldsChange}
                    value={password}
                    placeholder="******"
                    type="password"
@@ -114,7 +119,7 @@ class Login extends React.Component {
             <Link className="forgot-password-link" to={navigationScheme.forgotPassword}>Забули пароль?</Link>
           </p>
           <div className="button-container">
-            <button className="submit-button" type="submit">Увійти</button>
+            <Button className="submit-button" type="submit">Увійти</Button>
           </div>
           <div className="registered-link-wrap">
             <Link

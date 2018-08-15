@@ -1,117 +1,117 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { toastr } from 'react-redux-toastr';
-import {navigationScheme} from '../../../core';
-import Checkbox from '@material-ui/core/Checkbox';
-import { withStyles } from '@material-ui/core/styles';
-import LogoIconSVG from '../../../assets/svg/logo.svg';
-import { FormControlLabel } from '@material-ui/core';
+import {Link} from 'react-router-dom';
+import {toastr} from 'react-redux-toastr';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+import {navigationScheme} from '../../../core';
 import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
+import {FormControlLabel} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+import LogoIconSVG from '../../../assets/svg/logo.svg';
+import TextField from '@material-ui/core/TextField';
 
 const initialState = {
-  name : "",
-  surName : "",
-  lastName : "",
-  mobile : "",
-  email : "",
-  nameCompany : "",
-  city : "",
-  delivery : "",
-  tradeFormat : "",
-  sitePage : "",
-  telegram : false,
-  viber : false,
-  openDeliverySelect : false,
-  openTradeFormatSelect : false,
-  error : {
-    name : null,
-    mobile : null,
-    city : null
+  name: '',
+  surName: '',
+  lastName: '',
+  mobile: '',
+  email: '',
+  nameCompany: '',
+  city: '',
+  delivery: 'Нова Пошта',
+  tradeFormat: 'Ларьоооок',
+  sitePage: '',
+  telegram: false,
+  viber: false,
+  openDeliverySelect: false,
+  openTradeFormatSelect: false,
+  error: {
+    name: null,
+    mobile: null,
+    city: null,
   },
 };
 
 const validation = {
-  email : (val) => {
+  email: (val) => {
     let error = null;
     const emailValidation = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (!emailValidation.test(val)) {
-      error = "E-mail введений не вірно!";
+      error = 'E-mail введений не вірно!';
     }
     return error;
   },
-  password : (val) => {
+  password: (val) => {
     if (val.length < 4) {
-      return "Не менше 4 символів!";
+      return 'Не менше 4 символів!';
     }
     return null;
-  }
+  },
 };
 
 const styles = {
   root: {
-    borderRadius : 0
+    borderRadius: 0,
   },
 
-  checked: {
-    color: "#92cc76",
-    borderRadius: 0
-  },
+  checked: {},
 
-  checkbox : {
-    color: "#fff",
-    // backgroundColor : "#fff",
+  checkbox: {
+    color: '#fff',
+
     '&$checked': {
-      borderRadius : 0,
-      color: "#92cc76",
+      color: '#fff',
     },
 
     width: 20,
     height: 20,
 
-    label : {
-      color : "red"
-    },
   },
 
   sizeIcon: {
-    fontSize: 20
+    fontSize: 20,
   },
 
   menuItemStyle: {
-    fontSize : "13px",
-    color : "#494949"
+    fontSize: '13px',
+    color: '#494949',
   },
 
-  selectStyle : {
-    alignItems : "center",
-    height: "40px",
+  selectStyle: {
+    alignItems: 'center',
+    height: '40px',
 
     '&$active': {
-      borderRadius : 0,
-      color: "#92cc76",
-    }
+      borderRadius: 0,
+      color: '#92cc76',
+    },
 
-  }
+  },
 };
 
-const deliveryItems = ["Нова Пошта","Міст Експрес"];
+const deliveryItems = ['Нова Пошта', 'Міст Експрес'];
 
-const tradeFormatItems = ["Ларьоооок","Базар","Інет магаз"];
+const tradeFormatItems = ['Ларьоооок', 'Базар', 'Інет магаз'];
 
 class SignUp extends React.Component {
 
   state = initialState;
 
   onFieldsChange = event => {
-    const errorText = validation[event.target.name](event.target.value);
-
     this.setState({
-      [event.target.name] : event.target.value,
-      error : {
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  onFieldsChangeAndCheckError = event => {
+    const errorText = validation[event.target.name](event.target.value);
+    this.setState({
+      [event.target.name]: event.target.value,
+      error: {
         ...this.state.error,
-        [event.target.name] : errorText,
+        [event.target.name]: errorText,
       },
     });
   };
@@ -119,10 +119,34 @@ class SignUp extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    const {
+      name,
+      surName,
+      lastName,
+      mobile,
+      email,
+      nameCompany,
+      city,
+      delivery,
+      tradeFormat,
+      sitePage,
+      telegram,
+      viber,
+    } = this.state;
+
     const inputs = {
-      user : this.state.user,
-      site : this.state.site,
-      email : this.state.email,
+      name,
+      surName,
+      lastName,
+      mobile,
+      email,
+      nameCompany,
+      city,
+      delivery,
+      tradeFormat,
+      sitePage,
+      telegram,
+      viber,
     };
 
     function status(response) {
@@ -132,60 +156,61 @@ class SignUp extends React.Component {
       return Promise.reject(response.statusText);
     }
 
-    fetch("/api/signUp", {
-      headers : {
-        "Accept" : "application/json",
-        "Content-Type" : "application/json",
+    fetch('/api/signUp', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
-      method : "post",
-      body : JSON.stringify(inputs),
+      method: 'post',
+      body: JSON.stringify(inputs),
     }).then(status)
-    .then(() => {
-      this.setState(initialState);
-      toastr.success("Форма відправлена!");
-    })
-    .catch((error) => {
-      toastr.warning("Помилка, повідомлення не відправлено!");
-      console.error("Request failed", error);
-    });
+      .then(() => {
+        this.setState(initialState);
+        toastr.success('Форма відправлена!');
+      })
+      .catch((error) => {
+        toastr.warning('Помилка, повідомлення не відправлено!');
+        console.error('Request failed', error);
+      });
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+    this.setState({[name]: event.target.checked});
   };
 
   handleChangeSelect = name => event => {
-    this.setState({ [name] : event.target.value });
+    this.setState({[name]: event.target.value});
   };
 
   handleClose = name => {
-    this.setState({ [name]: false });
+    this.setState({[name]: false});
   };
 
   handleOpen = name => {
-    this.setState({ [name]: true });
+    this.setState({[name]: true});
   };
 
   _getSelectItems = items => items.map((item, key) => {
     return <MenuItem
       key={key}
       style={styles.menuItemStyle}
-      value={item}>{item}</MenuItem>
+      value={item}>{item}</MenuItem>;
   });
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     const {
       name, surName,
-      lastName,mobile,
+      lastName, mobile,
       email, nameCompany,
-      city,delivery,
-      tradeFormat,sitePage,
-      telegram,viber,
+      city, delivery,
+      tradeFormat, sitePage,
+      telegram, viber,
       openDeliverySelect,
       openTradeFormatSelect,
-      error} = this.state;
+      error,
+    } = this.state;
 
     return (
       <div className="auth-page signUp">
@@ -195,106 +220,114 @@ class SignUp extends React.Component {
           <h1 className="title-page">Реєстрація акаунту</h1>
 
           <div className="signUp-form-container">
-            <div className={`input-container input-container-name ${error.name ? "error" : ""}`}>
+            <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
               <label className="form-label" htmlFor="#name">Ім’я:</label>
-              <input onChange={this.onFieldsChange}
-                     required="required"
-                     placeholder="Боб"
-                     value={name}
-                     type="text"
-                     name="name"
-                     id="name"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChangeAndCheckError}
+                required
+                placeholder="Боб"
+                value={name}
+                type="text"
+                name="name"
+                id="name"
+                className="form-input"/>
               {error.name && <p className="error-text">{error.name}</p>}
             </div>
 
             <div className="input-container input-container-surName">
               <label className="form-label" htmlFor="#name">Прізвище:</label>
-              <input onChange={this.onFieldsChange}
-                     required="required"
-                     placeholder="Боб"
-                     value={surName}
-                     type="text"
-                     name="name"
-                     id="name"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChange}
+                required
+                placeholder="Боб"
+                value={surName}
+                type="text"
+                name="name"
+                id="name"
+                className="form-input"/>
               {error.surName && <p className="error-text">{error.surName}</p>}
             </div>
 
             <div className="input-container input-container-lastName">
               <label className="form-label" htmlFor="#lastName">По-батькові:</label>
-              <input onChange={this.onFieldsChange}
-                     value={lastName}
-                     placeholder="Бобіков"
-                     type="text"
-                     name="lastName"
-                     id="lastName"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChange}
+                value={lastName}
+                placeholder="Бобіков"
+                type="text"
+                name="lastName"
+                id="lastName"
+                className="form-input"/>
             </div>
 
-            <div className={`input-container input-container-mobile ${error.mobile ? "error" : ""}`}>
+            <div className={`input-container input-container-mobile ${error.mobile ? 'error' : ''}`}>
               <label className="form-label" htmlFor="#mobile">Телефон:</label>
-              <input onChange={this.onFieldsChange}
-                     value={mobile}
-                     placeholder="+380"
-                     type="text"
-                     name="mobile"
-                     id="mobile"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChangeAndCheckError}
+                required
+                value={mobile}
+                placeholder="+380"
+                type="text"
+                name="mobile"
+                id="mobile"
+                className="form-input"/>
               {error.mobile && <p className="error-text">{error.mobile}</p>}
             </div>
 
             <div className="input-container input-container-email">
               <label className="form-label" htmlFor="#mobile">Електронна адреса:</label>
-              <input onChange={this.onFieldsChange}
-                     value={email}
-                     placeholder="coffeeman@gmail.com"
-                     type="email"
-                     name="email"
-                     id="email"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChange}
+                value={email}
+                placeholder="coffeeman@gmail.com"
+                type="email"
+                name="email"
+                id="email"
+                className="form-input"/>
             </div>
 
             <div className="input-container input-container-nameCompany">
               <label className="form-label" htmlFor="#nameCompany">Назва компанії:</label>
-              <input onChange={this.onFieldsChange}
-                     value={nameCompany}
-                     placeholder="lariok.com"
-                     type="text"
-                     name="nameCompany"
-                     id="nameCompany"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChange}
+                value={nameCompany}
+                placeholder="lariok.com"
+                type="text"
+                name="nameCompany"
+                id="nameCompany"
+                className="form-input"/>
             </div>
 
-            <div className={`input-container input-container-city ${error.city ? "error" : ""}`}>
+            <div className={`input-container input-container-city ${error.city ? 'error' : ''}`}>
               <label className="form-label" htmlFor="#city">Місто:</label>
-              <input onChange={this.onFieldsChange}
-                     value={city}
-                     placeholder="Чернівці"
-                     type="text"
-                     name="city"
-                     id="city"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChange}
+                required
+                value={city}
+                placeholder="Чернівці"
+                type="text"
+                name="city"
+                id="city"
+                className="form-input"/>
               {error.city && <p className="error-text">{error.city}</p>}
             </div>
 
             <div className="input-container input-container-delivery">
               <label className="form-label"
                      htmlFor="#delivery">Доставка:</label>
-                <Select
-                  value={delivery}
-                  aria-haspopup="true"
-                  className="form-input"
-                  open={openDeliverySelect}
-                  style={styles.selectStyle}
-                  onChange={this.handleChangeSelect("delivery")}
-                  onOpen={() => this.handleOpen("openDeliverySelect")}
-                  aria-owns={openDeliverySelect ? 'simple-menu' : null}
-                  onClose={() => this.handleClose("openDeliverySelect")}
-                >
-                  {
-                    this._getSelectItems(deliveryItems)
-                  }
+              <Select
+                value={delivery}
+                aria-haspopup="true"
+                className="form-input"
+                open={openDeliverySelect}
+                style={styles.selectStyle}
+                onChange={this.handleChangeSelect('delivery')}
+                onOpen={() => this.handleOpen('openDeliverySelect')}
+                onClose={() => this.handleClose('openDeliverySelect')}
+              >
+                {
+                  this._getSelectItems(deliveryItems)
+                }
               </Select>
             </div>
 
@@ -306,11 +339,10 @@ class SignUp extends React.Component {
                 className="form-input"
                 style={styles.selectStyle}
                 open={openTradeFormatSelect}
-                onChange={this.handleChangeSelect("tradeFormat")}
-                onOpen={() => this.handleOpen("openTradeFormatSelect")}
-                aria-owns={openTradeFormatSelect ? 'simple-menu' : null}
-                onClose={() => this.handleClose("openTradeFormatSelect")}
-                >
+                onChange={this.handleChangeSelect('tradeFormat')}
+                onOpen={() => this.handleOpen('openTradeFormatSelect')}
+                onClose={() => this.handleClose('openTradeFormatSelect')}
+              >
                 {
                   this._getSelectItems(tradeFormatItems)
                 }
@@ -319,13 +351,14 @@ class SignUp extends React.Component {
 
             <div className="input-container input-container-sitePage">
               <label className="form-label" htmlFor="#sitePage">Сайт:</label>
-              <input onChange={this.onFieldsChange}
-                     value={sitePage}
-                     placeholder="LariOK"
-                     type="text"
-                     name="sitePage"
-                     id="sitePage"
-                     className="form-input"/>
+              <TextField
+                onChange={this.onFieldsChange}
+                value={sitePage}
+                placeholder="LariOK"
+                type="text"
+                name="sitePage"
+                id="sitePage"
+                className="form-input"/>
             </div>
 
             <div className="input-container-telegram-and-viber">
@@ -335,8 +368,7 @@ class SignUp extends React.Component {
                 control={
                   <Checkbox
                     checked={telegram}
-                    className={styles.checkbox}
-                    onChange={this.handleChange("telegram")}
+                    onChange={this.handleChange('telegram')}
                     classes={{
                       root: classes.checkbox,
                       checked: classes.checked,
@@ -345,7 +377,7 @@ class SignUp extends React.Component {
                 }
                 label="Telegram"
                 classes={{
-                  root: classes.label
+                  label: 'label',
                 }}
               />
               <FormControlLabel
@@ -353,8 +385,7 @@ class SignUp extends React.Component {
                 control={
                   <Checkbox
                     checked={viber}
-                    className={styles.checkbox}
-                    onChange={this.handleChange("viber")}
+                    onChange={this.handleChange('viber')}
                     classes={{
                       root: classes.checkbox,
                       checked: classes.checked,
@@ -362,7 +393,9 @@ class SignUp extends React.Component {
                   />
                 }
                 label="Viber"
-                style={{color : "red"}}
+                classes={{
+                  label: 'label',
+                }}
               />
             </div>
           </div>
@@ -372,7 +405,7 @@ class SignUp extends React.Component {
             Після реєстрації з Вами зв’яжеться менеджер.</p>
 
           <div className="button-container">
-            <button className="submit-button" type="submit">зареєструвати</button>
+            <Button className="submit-button" variant="extendedFab" aria-label="signUp" type="submit">зареєструвати</Button>
           </div>
 
           <div className="registered-link-wrap">
@@ -406,7 +439,7 @@ class SignUp extends React.Component {
         </div>
 
       </div>
-    )
+    );
   }
 }
 
