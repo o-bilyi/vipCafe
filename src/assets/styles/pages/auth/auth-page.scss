@@ -60,6 +60,11 @@
 
   .input-container {
     position: relative;
+
+    .form-input-wrap {
+      width: 100%;
+    }
+
     &.input-container-email {
       margin-bottom: 30px;
     }
@@ -77,12 +82,16 @@
       font-size: 13px;
       color: #494949;
 
-      input {
+      .input-style {
         height: 40px;
         color: #494949;
         padding: 0 16px;
         background-color: #fff;
         font: normal normal 13px'Roboto', sans-serif;
+      }
+
+      &:after,&:before {
+        border-bottom-color: #6fa256 !important;
       }
     }
 
@@ -133,17 +142,17 @@
       font-family: 'Roboto', sans-serif;
     }
   }
-  
+
   .telegram-and-viber-title {
     color: #fff;
   }
-  
+
   .privacy-policy {
     color: #fff;
     font-size: 13px;
     line-height: 2.46;
     text-align: center;
-    
+
     .privacy-policy-link {
       margin: 0 5px;
       color: #fff;

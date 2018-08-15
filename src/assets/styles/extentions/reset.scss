@@ -19,7 +19,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block; }
 
 body {
-  line-height: 1; }
+  line-height: 1;
+  box-sizing: border-box;
+  background-color: #3e3e3e;
+  font-family: 'Roboto', sans-serif;
+}
 
 ol, ul {
   list-style: none; }
@@ -40,12 +44,6 @@ q {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
-
-body {
-  font-family: 'Roboto', sans-serif;
-  box-sizing: border-box;
-  background: #fff;
-}
 
 input {
   box-sizing: border-box;
@@ -84,4 +82,11 @@ select:-webkit-autofill:focus {
     -webkit-text-fill-color: #000;
     -webkit-box-shadow: 0 0 0 1000px lightgrey inset;
   }
+}
+
+.loader {
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
 }

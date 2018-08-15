@@ -101,7 +101,13 @@ class Login extends React.Component {
                    type="text"
                    name="email"
                    id="email"
-                   className="form-input email"/>
+                   className="form-input-wrap"
+                   InputProps={{
+                     classes: {
+                       root: "form-input",
+                       input: "input-style",
+                     }
+                   }}/>
             	{error.email && <p className="error-text">{error.email}</p>}
           </div>
           <div className="input-container input-container-password">
@@ -112,7 +118,13 @@ class Login extends React.Component {
                    type="password"
                    name="password"
                    id="password"
-                   className="form-input password"/>
+                   className="form-input-wrap"
+                   InputProps={{
+                     classes: {
+                       root: "form-input",
+                       input: "input-style",
+                     }
+                   }}/>
             	{error.password && <p className="error-text">{error.password}</p>}
           </div>
           <p className="forgot-password">

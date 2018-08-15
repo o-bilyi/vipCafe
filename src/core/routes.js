@@ -1,6 +1,8 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import {Route} from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import green from '@material-ui/core/colors/green';
 
 export const navigationScheme = {
   login : '/',
@@ -16,7 +18,7 @@ export const navigationScheme = {
   archiveOfOrders : '/archive-of-orders',
 };
 
-const Loading = () => <div className="loader">Loading ...</div>;
+const Loading = () => <div className="loader"><CircularProgress style={{color : green[500]}}/></div>;
 
 export const MAIN_ROUTES = [
   {

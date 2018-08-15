@@ -9,8 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import {FormControlLabel} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
-import LogoIconSVG from '../../../assets/svg/logo.svg';
 import TextField from '@material-ui/core/TextField';
+import LogoIconSVG from '../../../assets/svg/logo.svg';
 
 const initialState = {
   name: '',
@@ -67,7 +67,6 @@ const styles = {
 
     width: 20,
     height: 20,
-
   },
 
   sizeIcon: {
@@ -81,14 +80,8 @@ const styles = {
 
   selectStyle: {
     alignItems: 'center',
-    height: '40px',
-
-    '&$active': {
-      borderRadius: 0,
-      color: '#92cc76',
-    },
-
-  },
+    height: '40px'
+  }
 };
 
 const deliveryItems = ['Нова Пошта', 'Міст Експрес'];
@@ -223,6 +216,7 @@ class SignUp extends React.Component {
             <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
               <label className="form-label" htmlFor="#name">Ім’я:</label>
               <TextField
+                autoComplete="off"
                 onChange={this.onFieldsChangeAndCheckError}
                 required
                 placeholder="Боб"
@@ -230,7 +224,13 @@ class SignUp extends React.Component {
                 type="text"
                 name="name"
                 id="name"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
               {error.name && <p className="error-text">{error.name}</p>}
             </div>
 
@@ -244,7 +244,13 @@ class SignUp extends React.Component {
                 type="text"
                 name="name"
                 id="name"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
               {error.surName && <p className="error-text">{error.surName}</p>}
             </div>
 
@@ -257,7 +263,13 @@ class SignUp extends React.Component {
                 type="text"
                 name="lastName"
                 id="lastName"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
             </div>
 
             <div className={`input-container input-container-mobile ${error.mobile ? 'error' : ''}`}>
@@ -270,7 +282,13 @@ class SignUp extends React.Component {
                 type="text"
                 name="mobile"
                 id="mobile"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
               {error.mobile && <p className="error-text">{error.mobile}</p>}
             </div>
 
@@ -283,7 +301,13 @@ class SignUp extends React.Component {
                 type="email"
                 name="email"
                 id="email"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
             </div>
 
             <div className="input-container input-container-nameCompany">
@@ -295,7 +319,13 @@ class SignUp extends React.Component {
                 type="text"
                 name="nameCompany"
                 id="nameCompany"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
             </div>
 
             <div className={`input-container input-container-city ${error.city ? 'error' : ''}`}>
@@ -308,7 +338,13 @@ class SignUp extends React.Component {
                 type="text"
                 name="city"
                 id="city"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
               {error.city && <p className="error-text">{error.city}</p>}
             </div>
 
@@ -341,8 +377,7 @@ class SignUp extends React.Component {
                 open={openTradeFormatSelect}
                 onChange={this.handleChangeSelect('tradeFormat')}
                 onOpen={() => this.handleOpen('openTradeFormatSelect')}
-                onClose={() => this.handleClose('openTradeFormatSelect')}
-              >
+                onClose={() => this.handleClose('openTradeFormatSelect')}>
                 {
                   this._getSelectItems(tradeFormatItems)
                 }
@@ -358,7 +393,13 @@ class SignUp extends React.Component {
                 type="text"
                 name="sitePage"
                 id="sitePage"
-                className="form-input"/>
+                className="form-input-wrap"
+                InputProps={{
+                  classes: {
+                    root: "form-input",
+                    input: "input-style",
+                  }
+                }}/>
             </div>
 
             <div className="input-container-telegram-and-viber">
