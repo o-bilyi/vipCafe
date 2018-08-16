@@ -4,13 +4,13 @@ import {Link} from 'react-router-dom';
 import {toastr} from 'react-redux-toastr';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
 import {navigationScheme} from '../../../core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
-import {FormControlLabel} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import LogoIconSVG from '../../../assets/svg/logo.svg';
+import {FormControlLabel, TextField} from '@material-ui/core';
 
 const initialState = {
   name: '',
@@ -25,6 +25,7 @@ const initialState = {
   sitePage: '',
   telegram: false,
   viber: false,
+  openThanksModal: false,
   openDeliverySelect: false,
   openTradeFormatSelect: false,
   error: {
@@ -156,7 +157,8 @@ class SignUp extends React.Component {
       },
       method: 'post',
       body: JSON.stringify(inputs),
-    }).then(status)
+    })
+      .then(status)
       .then(() => {
         this.setState(initialState);
         toastr.success('Форма відправлена!');
@@ -189,6 +191,16 @@ class SignUp extends React.Component {
       style={styles.menuItemStyle}
       value={item}>{item}</MenuItem>;
   });
+
+  handleOpenThanksModal = () => {
+    this.setState({ openThanksModal: true });
+  };
+
+  handleCloseThanksModal = () => {
+    this.setState({ openThanksModal: false });
+  };
+
+  _goToPlatform = () => navigationScheme.catalog;
 
   render() {
     const {classes} = this.props;
@@ -446,7 +458,7 @@ class SignUp extends React.Component {
             Після реєстрації з Вами зв’яжеться менеджер.</p>
 
           <div className="button-container">
-            <Button className="submit-button" variant="extendedFab" aria-label="signUp" type="submit">зареєструвати</Button>
+            <Button onClick={this.handleOpenThanksModal} className="submit-button" variant="extendedFab" aria-label="signUp" type="submit">зареєструвати</Button>
           </div>
 
           <div className="registered-link-wrap">
@@ -479,6 +491,41 @@ class SignUp extends React.Component {
           </div>
         </div>
 
+        <Dialog
+          fullScreen
+          open={this.state.openThanksModal}
+          onClose={this.handleCloseThanksModal}
+        >
+          <div className="thanks-modal-wrap">
+            <div className="thanks-modal">
+              <h2 className="title-page">Дякуємо за заявку <img src="/img/clover.png" className="clover-img" alt="clover"/></h2>
+              <p className="short-description">З Вами зв’яжеться менеджер для уточнення <br/> данних на підтвердження реєстрації.</p>
+              <div className="separate"/>
+              <p className="short-description">до підтвердження реєстрації Ви можете переглянути сайт <br/> без можливості переглядати ціни та оформлювати замовлення:</p>
+              <div className="button-container">
+                <Button
+                  onClick={this._goToPlatform}
+                  className="go-to-platform" aria-label="go-to-platform"
+                  type="button">переглянути сайт</Button>
+              </div>
+
+              <div className="contacts-block">
+                <div className="logo">
+                  <LogoIconSVG className="logo-icon-svg"/>
+                </div>
+                <div className="separator"/>
+                <div className="email-and-number">
+                  <a
+                    className="email-link"
+                    href="mailto:vipcafe@info">vipcafe@info</a>
+                  <a
+                    className="number-link"
+                    href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Dialog>
       </div>
     );
   }
