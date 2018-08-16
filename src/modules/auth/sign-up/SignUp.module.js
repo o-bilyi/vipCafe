@@ -370,6 +370,7 @@ class SignUp extends React.Component {
                 open={openDeliverySelect}
                 style={styles.selectStyle}
                 onChange={this.handleChangeSelect('delivery')}
+                SelectDisplayProps={{className : "select-label"}}
                 onOpen={() => this.handleOpen('openDeliverySelect')}
                 onClose={() => this.handleClose('openDeliverySelect')}
               >
@@ -387,6 +388,7 @@ class SignUp extends React.Component {
                 className="form-input"
                 style={styles.selectStyle}
                 open={openTradeFormatSelect}
+                SelectDisplayProps={{className : "select-label"}}
                 onChange={this.handleChangeSelect('tradeFormat')}
                 onOpen={() => this.handleOpen('openTradeFormatSelect')}
                 onClose={() => this.handleClose('openTradeFormatSelect')}>

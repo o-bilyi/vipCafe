@@ -82,6 +82,12 @@
       font-size: 13px;
       color: #494949;
 
+      .select-label {
+        &:focus {
+          background-color: transparent;
+        }
+      }
+
       .input-style {
         height: 40px;
         color: #494949;
