@@ -1,22 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import connect from 'react-redux/es/connect/connect';
+import Wrapper from 'shared/components/wrapper/Wrapper.component';
+// import PropTypes from 'prop-types';
 
-class Catalog extends React.Component {
-  static propTypes = {
-    globalState: PropTypes.object
-  };
-
+export default class Catalog extends React.Component {
   render() {
-    console.warn(this.props.globalState);
-    return <div>Catalog</div>
+    return (
+      <Wrapper>
+        catalog
+      </Wrapper>
+    )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    globalState: state.globalState,
-  };
-};
-
-export default connect(mapStateToProps)(Catalog);

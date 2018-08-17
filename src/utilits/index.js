@@ -1,42 +1,63 @@
-// import React from 'react';
-import PropTypes from 'prop-types';
-import connect from 'react-redux/es/connect/connect';
+class DeviceSize {
+  /**
+   *
+   * @type {number}
+   * @private
+   */
+  _width = 0;
+  /**
+   *
+   * @type {number}
+   * @private
+   */
+  _height = 0;
 
-const GlobalStore = ({store}) => {
+  /**
+   *
+   * @type {Array}
+   * @private
+   */
+  _subscribers = [];
 
-  const deviceType = {
-    desktop: 'desktop',
-    tablet: 'tablet',
-    mobile: 'mobile',
+  constructor() {
+    window.addEventListener('resize', this._onResize, false);
+    this._onResize();
+  }
+
+  _onResize = () => {
+    this._width = document.body.clientWidth;
+    this._height = document.body.clientHeight;
+    this._subscribers.forEach(i => i.func(this.size));
   };
 
-  const getDeviceType = () => {
-    const bodyWidth = this.props.globalState;
-    let type;
-    if (bodyWidth > 1024) {
-      type = 'desktop';
+  get size() {
+    return {
+      width : this._width,
+      height : this._height
     }
-    if (bodyWidth <= 1024 && !bodyWidth < 680) {
-      type = 'tablet';
-    }
-    if (bodyWidth <= 680) {
-      type = 'mobile';
-    }
-    return (type);
+  }
+
+  /**
+   *
+   * @param func
+   * @returns {number}
+   */
+  subscribe = (func) => {
+    const id = new Date().getTime();
+    this._subscribers.push({
+      id,
+      func
+    });
+    return id;
   };
 
-  return(store);
+  /**
+   *
+   * @param id
+   */
+  unsubscribe = id => {
+    this._subscribers = this._subscribers.filter(elem => elem.id !== id);
+  }
+}
 
-};
-
-GlobalStore.PropTypes = {
-  globalState: PropTypes.object,
-};
-
-const mapStateToProps = state => {
-  return {
-    globalState: state.globalState,
-  };
-};
-
-export default connect(mapStateToProps)(GlobalStore);
+export const DeviceSizeService = new DeviceSize();

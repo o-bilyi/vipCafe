@@ -9,6 +9,7 @@ import {navigationScheme} from '../../../core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import {withStyles} from '@material-ui/core/styles';
+import { DeviceSizeService } from '../../../utilits';
 import LogoIconSVG from '../../../assets/svg/logo.svg';
 import {FormControlLabel, TextField} from '@material-ui/core';
 
@@ -98,11 +99,15 @@ class SignUp extends React.Component {
     classes: PropTypes.object.isRequired
   };
 
-  state = {
-    ...initialState,
-    width : document.body.clientWidth,
-    height : document.body.clientHeight
-  };
+  state = initialState;
+
+  componentDidMount() {
+    this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    DeviceSizeService.unsubscribe(this.deviceServiceId);
+  }
 
   fieldsChange = event => {
     this.setState({
@@ -257,10 +262,10 @@ class SignUp extends React.Component {
       telegram, viber,
       openDeliverySelect,
       openTradeFormatSelect,
-      error, width
+      error
     } = this.state;
 
-    if(width < 1025) {
+    if(DeviceSizeService.size.width < 1025) {
       return(
         <div className="auth-page signUp">
           <div className="auth-header-mobile">
@@ -537,8 +542,7 @@ class SignUp extends React.Component {
             fullScreen
             scroll={'paper'}
             classes={{
-              root : "root-classes",
-              paperFullScreen : "root-paper-full"
+              paperFullScreen : "thanks-modal-bg"
             }}
             open={this.state.openThanksModal}
             onClose={this.handleCloseThanksModal}
@@ -855,6 +859,9 @@ class SignUp extends React.Component {
           fullScreen
           open={this.state.openThanksModal}
           onClose={this.handleCloseThanksModal}
+          classes={{
+            paperFullScreen : "thanks-modal-bg"
+          }}
         >
           <div className="thanks-modal-wrap">
             <div className="thanks-modal">

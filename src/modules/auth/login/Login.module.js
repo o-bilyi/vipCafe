@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { toastr } from 'react-redux-toastr';
 import Button from '@material-ui/core/Button';
-import {navigationScheme} from '../../../core';
+import {navigationScheme} from 'core';
+import {DeviceSizeService} from 'utilits';
 import TextField from '@material-ui/core/TextField';
-import LogoIconSVG from '../../../assets/svg/logo.svg';
-import {userIsNotAuthenticated} from '../../../core/auth-redirect';
+import LogoIconSVG from 'assets/svg/logo.svg';
+import {userIsNotAuthenticated} from 'core/auth-redirect';
 
 const initialState = {
   email : "",
@@ -44,6 +45,14 @@ class Login extends React.Component {
     height : document.body.clientHeight
   };
 
+  componentDidMount() {
+    this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    DeviceSizeService.unsubscribe(this.deviceServiceId);
+  }
+
   onFieldsChange = event => {
     const errorText = validation[event.target.name](event.target.value);
 
@@ -55,7 +64,6 @@ class Login extends React.Component {
       },
     });
   };
-
 
   handleSubmit = event => {
     event.preventDefault();
@@ -93,8 +101,8 @@ class Login extends React.Component {
   };
 
   _getContent = () => {
-    const {email, password, error, width} = this.state;
-    if(width < 1025) {
+    const {email, password, error} = this.state;
+    if(DeviceSizeService.size.width < 1025) {
       return(
         <div className="auth-page login">
           <div className="auth-header-mobile">
