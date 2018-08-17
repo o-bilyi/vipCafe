@@ -11,10 +11,16 @@ class App extends React.Component {
     auth: PropTypes.bool,
     store: PropTypes.object,
     history: PropTypes.object,
+    windowSettings: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
+    const settings = {
+      width : document.body.clientWidth,
+      height : document.documentElement.clientHeight
+    };
+    this.props.windowSettings(settings);
     console.warn(this.props.auth);
   }
 
@@ -44,4 +50,15 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    windowSettings(settings) {
+      dispatch({
+        type: 'WINDOW_SETTING_TYPE',
+        payload: settings,
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

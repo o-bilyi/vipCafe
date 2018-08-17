@@ -1,5 +1,5 @@
-import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect'
 import {navigationScheme} from './routes';
+import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect'
 
 export const userIsAuthenticated = connectedRouterRedirect({
   // The url to redirect user to if they fail

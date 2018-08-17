@@ -1,0 +1,132 @@
+@media (max-width: 1024px) {
+  .auth-page {
+    padding: 0;
+    align-items: flex-start;
+    background: #3e3e3e url("/img/auth-form-bg.png") no-repeat center/cover;
+
+    .auth-form {
+      margin: auto;
+      padding: 30px 25px 0;
+      background: transparent;
+    }
+
+    .continue-without-authorization {
+      margin: 40px auto;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .auth-page {
+    .signUp-form-container {
+      justify-content: space-between;
+      .input-container {
+        width: 48%;
+        max-width: 50%;
+      }
+    }
+
+    .input-container-telegram-and-viber {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      .telegram-and-viber-title {
+        width: 100%;
+        margin-right: 0;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-page {
+
+    .auth-form {
+      .title-page {
+        font-size: 14px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .input-container.input-container-email {
+      margin-bottom: 20px;
+    }
+
+    .registered-link-wrap {
+      .registered-link {
+        font-size: 12px;
+      }
+    }
+
+    .button-container {
+      margin: 20px 0;
+      .submit-button {
+        @include button(120px, 32px,30px,12px);
+      }
+    }
+
+    .continue-without-authorization {
+      .continue-without-authorization-link {
+        font-size: 12px;
+      }
+    }
+
+    .auth-header-mobile {
+      padding: 6px 10px;
+      .logo-icon-svg {
+        width: 60px;
+        height: 25px;
+      }
+      .separator {
+        height: 20px;
+        margin: 0 10px;
+      }
+    }
+  }
+  .thanks-modal-wrap {
+    .title-page {
+      font-size: 48px;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .thanks-modal-wrap {
+    padding: 60px 30px;
+    .title-page {
+      font-size: 18px;
+      margin-bottom: 30px;
+      .clover-img {
+        top: -8px;
+        width: 15px;
+        right: -10px;
+      }
+    }
+    .short-description {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .separate {
+      margin: 20px auto;
+    }
+    .go-to-platform {
+      @include button(190px,32px,30px,12px);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    .signUp-form-container {
+      .input-container {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

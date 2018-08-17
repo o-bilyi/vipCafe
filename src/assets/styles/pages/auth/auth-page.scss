@@ -22,10 +22,44 @@
     }
   }
 
+  .auth-header-mobile {
+    width: 100%;
+    display: flex;
+    padding: 6px 20px;
+    align-items: center;
+    justify-content: space-between;
+    background: #3e3e3e url("/img/auth-page-bg.png") no-repeat center/cover;
+
+    .logo-icon-svg {
+      fill: #fff;
+      width: 84px;
+      height: 35px;
+    }
+
+    .email-and-number {
+      display: flex;
+      align-items: center;
+    }
+
+    .email-link,
+    .number-link {
+      color: #fff;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .separator {
+      width: 1px;
+      height: 30px;
+      margin: 0 15px;
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
   .auth-form-clover {
-    position: absolute;
-    right: -32px;
     top: -20px;
+    right: -32px;
+    position: absolute;
   }
 
   .login-form {
@@ -43,12 +77,12 @@
   .signUp-form-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -10px 50px;
+    margin: 0 -1% 50px;
     align-items: flex-start;
 
     .input-container {
-      width: 50%;
-      margin: 0 10px;
+      width: 48%;
+      margin: 0 1%;
       max-width: 280px;
 
       &:not(.input-container-sitePage) {
@@ -126,6 +160,7 @@
   .input-container-telegram-and-viber {
     height: 40px;
     display: flex;
+    flex-wrap: wrap;
     margin: 4px 10px;
     align-items: flex-end;
 
