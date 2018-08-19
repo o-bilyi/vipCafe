@@ -50,6 +50,21 @@ export const MAIN_ROUTES = [
     path: navigationScheme.privacyPolicy,
     exact: true,
     component: () => import('../modules/privacy-policy/PrivacyPolicy.module')
+  },
+  {
+    path: navigationScheme.basket,
+    exact: true,
+    component: () => import('../modules/basket/Basket.module')
+  },
+  {
+    path: navigationScheme.newArrivals,
+    exact: true,
+    component: () => import('../modules/basket/Basket.module')
+  },
+  {
+    path: navigationScheme.sharesAndOffers,
+    exact: true,
+    component: () => import('../modules/shared-and-offers/SharesAndOffers.module')
   }
 ];
 

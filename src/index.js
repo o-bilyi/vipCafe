@@ -14,7 +14,7 @@ RouterService.setStore(store);
 ReactDOM.render(
   <AppContainer>
     <Provider store={store}>
-      <App history={history} store={store}/>
+      <App history={history}/>
     </Provider>
   </AppContainer>,
   document.getElementById('root'));

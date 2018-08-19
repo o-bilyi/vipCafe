@@ -9,7 +9,7 @@ import {navigationScheme} from '../../../core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import {withStyles} from '@material-ui/core/styles';
-import { DeviceSizeService } from '../../../utilits';
+import {DeviceSizeService} from '../../../utilits';
 import LogoIconSVG from '../../../assets/svg/logo.svg';
 import {FormControlLabel, TextField} from '@material-ui/core';
 
@@ -50,11 +50,11 @@ const validation = {
     return null;
   },
   city: (val) => {
-    if(val.length.length < 3) {
-      return 'Введіть місто'
+    if (val.length.length < 3) {
+      return 'Введіть місто';
     }
     return null;
-  }
+  },
 };
 
 const styles = {
@@ -86,8 +86,8 @@ const styles = {
 
   selectStyle: {
     alignItems: 'center',
-    height: '40px'
-  }
+    height: '40px',
+  },
 };
 
 const deliveryItems = ['Нова Пошта', 'Міст Експрес'];
@@ -96,7 +96,7 @@ const tradeFormatItems = ['Ларьоооок', 'Базар', 'Інет мага
 
 class SignUp extends React.Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
   };
 
   state = initialState;
@@ -237,11 +237,11 @@ class SignUp extends React.Component {
    */
 
   handleOpenThanksModal = () => {
-    this.setState({ openThanksModal: true });
+    this.setState({openThanksModal: true});
   };
 
   handleCloseThanksModal = () => {
-    this.setState({ openThanksModal: false });
+    this.setState({openThanksModal: false});
   };
 
   /**
@@ -262,11 +262,11 @@ class SignUp extends React.Component {
       telegram, viber,
       openDeliverySelect,
       openTradeFormatSelect,
-      error
+      error,
     } = this.state;
 
-    if(DeviceSizeService.size.width < 1025) {
-      return(
+    if (DeviceSizeService.size.width < 1025) {
+      return (
         <div className="auth-page signUp">
           <div className="auth-header-mobile">
             <div className="logo">
@@ -300,9 +300,9 @@ class SignUp extends React.Component {
                   className="form-input-wrap"
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
                 {error.name && <p className="error-text">{error.name}</p>}
               </div>
@@ -320,9 +320,9 @@ class SignUp extends React.Component {
                   className="form-input-wrap"
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
                 {error.surName && <p className="error-text">{error.surName}</p>}
               </div>
@@ -339,9 +339,9 @@ class SignUp extends React.Component {
                   className="form-input-wrap"
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
               </div>
 
@@ -358,9 +358,9 @@ class SignUp extends React.Component {
                   className="form-input-wrap"
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
                 {error.mobile && <p className="error-text">{error.mobile}</p>}
               </div>
@@ -377,9 +377,9 @@ class SignUp extends React.Component {
                   placeholder="coffeeman@gmail.com"
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
               </div>
 
@@ -395,9 +395,9 @@ class SignUp extends React.Component {
                   className="form-input-wrap"
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
               </div>
 
@@ -414,9 +414,9 @@ class SignUp extends React.Component {
                   onChange={this.fieldsChange}
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
                 {error.city && <p className="error-text">{error.city}</p>}
               </div>
@@ -430,7 +430,7 @@ class SignUp extends React.Component {
                   open={openDeliverySelect}
                   style={styles.selectStyle}
                   onChange={this.handleChangeSelect('delivery')}
-                  SelectDisplayProps={{className : "select-label"}}
+                  SelectDisplayProps={{className: 'select-label'}}
                   onOpen={() => this.handleOpenSelect('openDeliverySelect')}
                   onClose={() => this.handleCloseSelect('openDeliverySelect')}
                 >
@@ -448,7 +448,7 @@ class SignUp extends React.Component {
                   className="form-input"
                   style={styles.selectStyle}
                   open={openTradeFormatSelect}
-                  SelectDisplayProps={{className : "select-label"}}
+                  SelectDisplayProps={{className: 'select-label'}}
                   onChange={this.handleChangeSelect('tradeFormat')}
                   onOpen={() => this.handleOpenSelect('openTradeFormatSelect')}
                   onClose={() => this.handleCloseSelect('openTradeFormatSelect')}>
@@ -470,9 +470,9 @@ class SignUp extends React.Component {
                   className="form-input-wrap"
                   InputProps={{
                     classes: {
-                      root: "form-input",
-                      input: "input-style",
-                    }
+                      root: 'form-input',
+                      input: 'input-style',
+                    },
                   }}/>
               </div>
 
@@ -520,7 +520,12 @@ class SignUp extends React.Component {
               Після реєстрації з Вами зв’яжеться менеджер.</p>
 
             <div className="button-container">
-              <Button onClick={this.handleOpenThanksModal} className="submit-button" variant="extendedFab" aria-label="signUp" type="submit">зареєструвати</Button>
+              <Button
+                onClick={this.handleOpenThanksModal}
+                className="submit-button"
+                variant="extendedFab"
+                aria-label="signUp"
+                type="submit">зареєструвати</Button>
             </div>
 
             <div className="registered-link-wrap">
@@ -542,7 +547,7 @@ class SignUp extends React.Component {
             fullScreen
             scroll={'paper'}
             classes={{
-              paperFullScreen : "thanks-modal-bg"
+              paperFullScreen: 'thanks-modal-bg',
             }}
             open={this.state.openThanksModal}
             onClose={this.handleCloseThanksModal}
@@ -552,7 +557,8 @@ class SignUp extends React.Component {
                 <h2 className="title-page">Дякуємо за заявку <img src="/img/clover.png" className="clover-img" alt="clover"/></h2>
                 <p className="short-description">З Вами зв’яжеться менеджер для уточнення <br/> данних на підтвердження реєстрації.</p>
                 <div className="separate"/>
-                <p className="short-description">до підтвердження реєстрації Ви можете переглянути сайт <br/> без можливості переглядати ціни та оформлювати замовлення:</p>
+                <p className="short-description">до підтвердження реєстрації Ви можете переглянути сайт <br/> без можливості переглядати ціни та
+                  оформлювати замовлення:</p>
                 <div className="button-container">
                   <Button
                     onClick={this._goToPlatform}
@@ -580,7 +586,7 @@ class SignUp extends React.Component {
         </div>
       );
     }
-    return(
+    return (
       <div className="auth-page signUp">
         <form autoComplete="off"
               method="post" className="auth-form signUp-form" onSubmit={this.handleSubmit}>
@@ -602,9 +608,9 @@ class SignUp extends React.Component {
                 className="form-input-wrap"
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
               {error.name && <p className="error-text">{error.name}</p>}
             </div>
@@ -622,9 +628,9 @@ class SignUp extends React.Component {
                 className="form-input-wrap"
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
               {error.surName && <p className="error-text">{error.surName}</p>}
             </div>
@@ -641,9 +647,9 @@ class SignUp extends React.Component {
                 className="form-input-wrap"
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
             </div>
 
@@ -660,9 +666,9 @@ class SignUp extends React.Component {
                 className="form-input-wrap"
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
               {error.mobile && <p className="error-text">{error.mobile}</p>}
             </div>
@@ -679,9 +685,9 @@ class SignUp extends React.Component {
                 placeholder="coffeeman@gmail.com"
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
             </div>
 
@@ -697,9 +703,9 @@ class SignUp extends React.Component {
                 className="form-input-wrap"
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
             </div>
 
@@ -716,9 +722,9 @@ class SignUp extends React.Component {
                 onChange={this.fieldsChange}
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
               {error.city && <p className="error-text">{error.city}</p>}
             </div>
@@ -732,7 +738,7 @@ class SignUp extends React.Component {
                 open={openDeliverySelect}
                 style={styles.selectStyle}
                 onChange={this.handleChangeSelect('delivery')}
-                SelectDisplayProps={{className : "select-label"}}
+                SelectDisplayProps={{className: 'select-label'}}
                 onOpen={() => this.handleOpenSelect('openDeliverySelect')}
                 onClose={() => this.handleCloseSelect('openDeliverySelect')}
               >
@@ -750,7 +756,7 @@ class SignUp extends React.Component {
                 className="form-input"
                 style={styles.selectStyle}
                 open={openTradeFormatSelect}
-                SelectDisplayProps={{className : "select-label"}}
+                SelectDisplayProps={{className: 'select-label'}}
                 onChange={this.handleChangeSelect('tradeFormat')}
                 onOpen={() => this.handleOpenSelect('openTradeFormatSelect')}
                 onClose={() => this.handleCloseSelect('openTradeFormatSelect')}>
@@ -772,9 +778,9 @@ class SignUp extends React.Component {
                 className="form-input-wrap"
                 InputProps={{
                   classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  }
+                    root: 'form-input',
+                    input: 'input-style',
+                  },
                 }}/>
             </div>
 
@@ -822,7 +828,8 @@ class SignUp extends React.Component {
             Після реєстрації з Вами зв’яжеться менеджер.</p>
 
           <div className="button-container">
-            <Button onClick={this.handleOpenThanksModal} className="submit-button" variant="extendedFab" aria-label="signUp" type="submit">зареєструвати</Button>
+            <Button onClick={this.handleOpenThanksModal} className="submit-button" variant="extendedFab" aria-label="signUp"
+                    type="submit">зареєструвати</Button>
           </div>
 
           <div className="registered-link-wrap">
@@ -860,7 +867,7 @@ class SignUp extends React.Component {
           open={this.state.openThanksModal}
           onClose={this.handleCloseThanksModal}
           classes={{
-            paperFullScreen : "thanks-modal-bg"
+            paperFullScreen: 'thanks-modal-bg',
           }}
         >
           <div className="thanks-modal-wrap">
@@ -868,7 +875,8 @@ class SignUp extends React.Component {
               <h2 className="title-page">Дякуємо за заявку <img src="/img/clover.png" className="clover-img" alt="clover"/></h2>
               <p className="short-description">З Вами зв’яжеться менеджер для уточнення <br/> данних на підтвердження реєстрації.</p>
               <div className="separate"/>
-              <p className="short-description">до підтвердження реєстрації Ви можете переглянути сайт <br/> без можливості переглядати ціни та оформлювати замовлення:</p>
+              <p className="short-description">до підтвердження реєстрації Ви можете переглянути сайт <br/> без можливості переглядати ціни та
+                оформлювати замовлення:</p>
               <div className="button-container">
                 <Button
                   onClick={this._goToPlatform}
@@ -894,14 +902,14 @@ class SignUp extends React.Component {
           </div>
         </Dialog>
       </div>
-    )
+    );
 
   };
 
   render() {
     return (
       this._getContent()
-    )
+    );
   }
 }
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
-export default class Basket extends React.Component {
+export default class NewArrivals extends React.Component {
   render() {
-    return(
+    return (
       <Wrapper>
-        Basket
+        NewArrivals
       </Wrapper>
     )
   }

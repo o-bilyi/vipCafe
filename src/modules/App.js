@@ -9,7 +9,6 @@ import connect from 'react-redux/es/connect/connect';
 class App extends React.Component {
   static propTypes = {
     auth: PropTypes.bool,
-    store: PropTypes.object,
     history: PropTypes.object
   };
 

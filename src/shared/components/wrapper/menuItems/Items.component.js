@@ -1,83 +1,87 @@
 import React from 'react';
+import {navigationScheme} from 'core';
+import {NavLink} from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import StarIcon from '@material-ui/icons/Star';
-import SendIcon from '@material-ui/icons/Send';
-import ReportIcon from '@material-ui/icons/Report';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
-import {Button} from '@material-ui/core';
+import StoreIcon from '@material-ui/icons/Store';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import TransformIcon from '@material-ui/icons/Transform';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-import Divider from '@material-ui/core/Divider';
-
-export const firstMenuItems = (
-  <div>
-    <ListItem button>
+export const firstMenuItems = [
+  <ListItem key={1} button className="menu-item">
+    <NavLink
+      className="menu-link"
+      to={navigationScheme.catalog}
+      activeClassName="active">
       <ListItemIcon>
-        <InboxIcon />
+        <StoreIcon className="menu-icon"/>
       </ListItemIcon>
-      <ListItemText primary="каталог товарів" />
-    </ListItem>
+      <ListItemText className="menu-text" primary="каталог товарів"/>
+    </NavLink>
+  </ListItem>,
 
-    <Divider/>
-
-    <ListItem button>
+  <ListItem key={2} button className="menu-item">
+    <NavLink
+      className="menu-link"
+      to={navigationScheme.sharesAndOffers}
+      activeClassName="active">
       <ListItemIcon>
-        <StarIcon />
+        <DescriptionIcon className="menu-icon"/>
       </ListItemIcon>
-      <ListItemText primary="акції і пропозиції" />
-    </ListItem>
+      <ListItemText className="menu-text" primary="акції і пропозиції"/>
+    </NavLink>
+  </ListItem>,
 
-    <Divider/>
-
-    <ListItem button>
+  <ListItem key={3} button className="menu-item">
+    <NavLink
+      className="menu-link"
+      to={navigationScheme.newArrivals} activeClassName="active">
       <ListItemIcon>
-        <SendIcon />
+        <TransformIcon className="menu-icon"/>
       </ListItemIcon>
-      <ListItemText primary="нові поступлення" />
-    </ListItem>
-  </div>
-);
+      <ListItemText className="menu-text" primary="нові поступлення"/>
+    </NavLink>
+  </ListItem>,
+];
 
-export const secondMenuItems = (
-  <div>
-    <ListItem button>
+export const secondMenuItems = [
+  <ListItem key={1} button className="menu-item">
+    <NavLink
+      className="menu-link"
+      to={navigationScheme.archiveOfOrders} activeClassName="active">
       <ListItemIcon>
-        <DraftsIcon />
+        <ArchiveIcon className="menu-icon"/>
       </ListItemIcon>
-      <ListItemText primary="архів замовлень" />
-    </ListItem>
+      <ListItemText className="menu-text" primary="архів замовлень"/>
+    </NavLink>
+  </ListItem>,
 
-    <Divider/>
-
-    <ListItem button>
+  <ListItem key={2} button className="menu-item">
+    <NavLink
+      className="menu-link"
+      to={navigationScheme.basket} activeClassName="active">
       <ListItemIcon>
-        <ReportIcon />
+        <ShoppingCartIcon className="menu-icon"/>
       </ListItemIcon>
-      <ListItemText primary="позицій В кошику" />
-    </ListItem>
-  </div>
-);
+      <ListItemText className="menu-text" primary="позицій В кошику"/>
+    </NavLink>
+  </ListItem>,
+];
 
 export const managerBlock = (
-  <div>
-    <ListItem button>
+  <ListItem
+    button className="menu-item">
+    <NavLink
+      className="menu-link"
+      to={navigationScheme.basket} activeClassName="active">
       <ListItemIcon>
-        <DraftsIcon />
+        <DraftsIcon className="menu-icon"/>
       </ListItemIcon>
-
-      <h2 className="title">Ваш менеджер:</h2>
-      <p className="name-manager">Кравченко Анна</p>
-
-      <div className="email-and-phone">
-        <a href="mailto:vipcafe@info">vipcafe@info</a>
-        <div className="separator"/>
-        <a href="tel:+38 (095) 313 13 13">+38 (095) 313 13 13</a>
-      </div>
-
-      <Button classes="send-to-manager">НАПИСАТИ МЕНЕДЖЕРУ</Button>
-    </ListItem>
-  </div>
+    </NavLink>
+  </ListItem>
 );
