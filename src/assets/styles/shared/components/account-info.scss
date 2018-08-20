@@ -1,0 +1,58 @@
+.account-info-wrap {
+  color: #fff;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+
+  .user-info {
+    display: flex;
+    text-align: right;
+    margin-right: 20px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .user-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .user-email {
+    font-size: 11px;
+  }
+
+  .go-to-dashboard {
+    background-color: #3c3c3c;
+  }
+
+  .log-aut {
+    background-color: #c93f3f;
+  }
+
+  .go-to-dashboard,
+  .log-aut {
+    color: #fff;
+    display: flex;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: bold;
+    align-items: center;
+    text-decoration: none;
+    justify-content: center;
+    text-transform: uppercase;
+
+    .text {
+      display: none;
+      margin-right: 14px;
+    }
+
+    &:hover {
+      .text {
+        display: block;
+      }
+    }
+  }
+
+}

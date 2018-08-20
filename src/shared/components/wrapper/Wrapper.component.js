@@ -1,31 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import List from '@material-ui/core/List';
 import Logo from 'assets/svg/logo.svg';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
-import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SearchComponent from 'shared/components/search/Search.component';
+import {IconButton, Button, AppBar, Drawer, List} from '@material-ui/core';
+import AccountInfo from 'shared/components/account-info/AccountInfo.component';
 import { firstMenuItems, secondMenuItems, managerBlock} from './menuItems/Items.component';
 
-const styles = () => ({
-
-  hide: {
-    display: 'none',
-  },
-
-});
-
-class Wrapper extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
-  };
+export default class Wrapper extends React.Component {
   state = {
     open: false,
   };
@@ -39,8 +22,6 @@ class Wrapper extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div className={classNames("wrapper")}>
         <AppBar
@@ -56,12 +37,16 @@ class Wrapper extends React.Component {
               color="inherit"
               aria-label="Open drawer"
               onClick={this.handleDrawerOpen}
-              className={classNames("open-menu-btn", this.state.open && "hide")}
+              className={classNames("open-menu-btn", this.state.open && "hidden")}
             >
               <MenuIcon className="menu-icon"/>
             </Button>
 
-            <SearchComponent/>
+            <div className="search-and-user-info">
+              <SearchComponent/>
+
+              <AccountInfo/>
+            </div>
           </div>
         </AppBar>
         <Drawer
@@ -77,13 +62,13 @@ class Wrapper extends React.Component {
           </div>
 
           <h2 className={classNames("menu-title",
-            !this.state.open && classes.hide)}>Перегляньте:</h2>
+            !this.state.open && "hidden")}>Перегляньте:</h2>
 
           <List className="menu-item-wrap">{firstMenuItems}</List>
 
           <div className="order-items">
             <h2 className={classNames("menu-title",
-              !this.state.open && classes.hide)}>Ваші замовлення:</h2>
+              !this.state.open && "hidden")}>Ваші замовлення:</h2>
 
             <List className="menu-item-wrap">
               {secondMenuItems}
@@ -122,5 +107,3 @@ class Wrapper extends React.Component {
     );
   }
 }
-
-export default withStyles(styles)(Wrapper);
