@@ -6,30 +6,52 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SearchComponent from 'shared/components/search/Search.component';
 import {IconButton, Button, AppBar, Drawer, List} from '@material-ui/core';
 import AccountInfo from 'shared/components/account-info/AccountInfo.component';
-import { firstMenuItems, secondMenuItems, managerBlock} from './menuItems/Items.component';
+import {firstMenuItems, secondMenuItems, managerBlock} from './menuItems/Items.component';
+import ListItem from '@material-ui/core/ListItem';
+import {NavLink} from 'react-router-dom';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export default class Wrapper extends React.Component {
   state = {
-    open: false,
+    open: true,
   };
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
+    this.setState({open: true});
   };
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
+    this.setState({open: false});
+  };
+
+  _getMenuItems = (array) => {
+    return array.map((item, key) => {
+      return (
+        <ListItem key={key} button className="menu-item">
+          <NavLink
+            className="menu-link"
+            to={item.to} activeClassName="active">
+            <ListItemIcon>
+              <item.icon className="menu-icon"/>
+            </ListItemIcon>
+            <ListItemText className="menu-text" primary={item.text}/>
+            {item.number}
+          </NavLink>
+        </ListItem>
+      );
+    });
   };
 
   render() {
     return (
-      <div className={classNames("wrapper")}>
+      <div className={classNames('wrapper')}>
         <AppBar
           position="fixed"
           color="default"
-          className={classNames("header", this.state.open && "active")}
+          className={classNames('header', this.state.open && 'active')}
           classes={{
-            root : "root-class"
+            root: 'root-class',
           }}
         >
           <div className="search-and-show-menu">
@@ -37,7 +59,7 @@ export default class Wrapper extends React.Component {
               color="inherit"
               aria-label="Open drawer"
               onClick={this.handleDrawerOpen}
-              className={classNames("open-menu-btn", this.state.open && "hidden")}
+              className={classNames('open-menu-btn', this.state.open && 'hidden')}
             >
               <MenuIcon className="menu-icon"/>
             </Button>
@@ -52,34 +74,37 @@ export default class Wrapper extends React.Component {
         <Drawer
           variant="permanent"
           classes={{
-            paper: classNames("navigation-menu", !this.state.open && "active")}}
+            paper: classNames('navigation-menu', !this.state.open && 'active'),
+          }}
           open={this.state.open}>
-          <div className={classNames("menu-toolbar")}>
+          <div className={classNames('menu-toolbar')}>
             <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
-               <ArrowBackIcon className="arrow-back-icon"/>
+              <ArrowBackIcon className="arrow-back-icon"/>
             </IconButton>
             <Logo className="icon-logo"/>
           </div>
 
-          <h2 className={classNames("menu-title",
-            !this.state.open && "hidden")}>Перегляньте:</h2>
+          <h2 className={classNames('menu-title',
+            !this.state.open && 'hidden')}>Перегляньте:</h2>
 
-          <List className="menu-item-wrap">{firstMenuItems}</List>
+          <List className="menu-item-wrap">
+            { this._getMenuItems(firstMenuItems) }
+          </List>
 
           <div className="order-items">
-            <h2 className={classNames("menu-title",
-              !this.state.open && "hidden")}>Ваші замовлення:</h2>
+            <h2 className={classNames('menu-title',
+              !this.state.open && 'hidden')}>Ваші замовлення:</h2>
 
             <List className="menu-item-wrap">
-              {secondMenuItems}
-              <Button className={classNames("to-order",
-                !this.state.open && "hidden")}>ОФОРМИТИ ЗАМОВЛЕННЯ</Button>
+              { this._getMenuItems(secondMenuItems) }
+              <Button className={classNames('to-order',
+                !this.state.open && 'hidden')}>ОФОРМИТИ ЗАМОВЛЕННЯ</Button>
             </List>
           </div>
 
           {
             this.state.open
-            ?
+              ?
               <div className="manager-block">
                 <h2 className="menu-title">Ваш менеджер:</h2>
                 <p className="name-manager">Кравченко Анна</p>
@@ -92,7 +117,7 @@ export default class Wrapper extends React.Component {
 
                 <Button className="send-to-manager">НАПИСАТИ МЕНЕДЖЕРУ</Button>
               </div>
-            :
+              :
               <List>
                 {managerBlock}
               </List>
