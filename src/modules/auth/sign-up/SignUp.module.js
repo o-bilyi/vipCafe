@@ -5,12 +5,12 @@ import {toastr} from 'react-redux-toastr';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import {navigationScheme} from '../../../core';
+import {navigationScheme} from 'core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import {withStyles} from '@material-ui/core/styles';
-import {DeviceSizeService} from '../../../utilits';
-import LogoIconSVG from '../../../assets/svg/logo.svg';
+import {DeviceSizeService} from 'utilits';
+import LogoIconSVG from 'assets/svg/logo.svg';
 import {FormControlLabel, TextField} from '@material-ui/core';
 
 const initialState = {

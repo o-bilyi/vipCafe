@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Logo from 'assets/svg/logo.svg';
+import {DeviceSizeService} from 'utilits/index';
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SearchComponent from 'shared/components/search/Search.component';
@@ -16,6 +17,14 @@ export default class Wrapper extends React.Component {
   state = {
     open: true,
   };
+
+  componentDidMount() {
+    this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    DeviceSizeService.unsubscribe(this.deviceServiceId);
+  }
 
   handleDrawerOpen = () => {
     this.setState({open: true});
@@ -43,6 +52,28 @@ export default class Wrapper extends React.Component {
     });
   };
 
+  _getToolbar = () => {
+    if (DeviceSizeService.size.width < 1024) {
+      return (
+        <div className={classNames('menu-toolbar')}>
+          <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
+            <ArrowBackIcon className="arrow-back-icon"/>
+          </IconButton>
+          <Logo className="icon-logo"/>
+          <SearchComponent/>
+        </div>
+      );
+    }
+    return (
+      <div className={classNames('menu-toolbar')}>
+        <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
+          <ArrowBackIcon className="arrow-back-icon"/>
+        </IconButton>
+        <Logo className="icon-logo"/>
+      </div>
+    );
+  };
+
   render() {
     return (
       <div className={classNames('wrapper')}>
@@ -65,11 +96,18 @@ export default class Wrapper extends React.Component {
             </Button>
 
             <div className="search-and-user-info">
-              <SearchComponent/>
+              {
+                DeviceSizeService.size.width > 1024
+                ?
+                  <SearchComponent/>
+                :
+                  null
+              }
 
               <AccountInfo/>
             </div>
           </div>
+
         </AppBar>
         <Drawer
           variant="permanent"
@@ -77,18 +115,16 @@ export default class Wrapper extends React.Component {
             paper: classNames('navigation-menu', !this.state.open && 'active'),
           }}
           open={this.state.open}>
-          <div className={classNames('menu-toolbar')}>
-            <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
-              <ArrowBackIcon className="arrow-back-icon"/>
-            </IconButton>
-            <Logo className="icon-logo"/>
-          </div>
+
+         {
+           this._getToolbar()
+         }
 
           <h2 className={classNames('menu-title',
             !this.state.open && 'hidden')}>Перегляньте:</h2>
 
           <List className="menu-item-wrap">
-            { this._getMenuItems(firstMenuItems) }
+            {this._getMenuItems(firstMenuItems)}
           </List>
 
           <div className="order-items">
@@ -96,7 +132,7 @@ export default class Wrapper extends React.Component {
               !this.state.open && 'hidden')}>Ваші замовлення:</h2>
 
             <List className="menu-item-wrap">
-              { this._getMenuItems(secondMenuItems) }
+              {this._getMenuItems(secondMenuItems)}
               <Button className={classNames('to-order',
                 !this.state.open && 'hidden')}>ОФОРМИТИ ЗАМОВЛЕННЯ</Button>
             </List>

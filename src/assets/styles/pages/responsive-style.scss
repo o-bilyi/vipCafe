@@ -1,3 +1,18 @@
+@media (min-width: 1024px) {
+  .account-info-wrap {
+    .go-to-dashboard,
+    .log-aut {
+
+      &:hover {
+        .text {
+          display: block;
+        }
+      }
+
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .auth-page {
     padding: 0;
@@ -12,6 +27,60 @@
 
     .continue-without-authorization {
       margin: 40px auto;
+    }
+  }
+
+  .wrapper {
+
+    .header {
+      &.active {
+        width: 100%;
+        margin: 0;
+        z-index: auto;
+        .search-and-user-info {
+          display: none;
+        }
+      }
+    }
+
+    .search-and-user-info {
+      justify-content: flex-end;
+    }
+
+    .navigation-menu{
+      width: 100vw;
+
+      &.active {
+        width: 0;
+      }
+
+      .menu-toolbar {
+        padding: 0;
+        justify-content: space-between;
+      }
+
+      .icon-logo {
+        margin: 0 auto;
+      }
+
+      .search-wrap {
+        background-color: #66984b;
+        flex-shrink: 0;
+
+        &.open {
+          padding-left: 45px;
+        }
+
+      }
+
+      .search-input-wrap {
+
+        .input-style,
+        .label-style {
+          color: #fff;
+        }
+
+      }
     }
   }
 }

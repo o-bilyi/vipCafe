@@ -230,8 +230,13 @@
         min-height: auto;
         font-weight: bold;
         font-family: 'Roboto', sans-serif;
-        @include button(200px, 30px, 36px, 11px, #404040);
+        @include transition(background-color);
         background-color: rgba(248, 243, 240, 0.6);
+        @include button(200px, 30px, 36px, 11px, #404040);
+
+        &:hover {
+          background-color: #fff;
+        }
       }
     }
 
