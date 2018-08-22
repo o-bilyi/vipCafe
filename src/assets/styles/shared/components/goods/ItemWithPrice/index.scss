@@ -1,0 +1,110 @@
+.goods-wrap {
+  display: flex;
+  //margin: 0 -20px;
+  min-height: 100vh;
+  position: relative;
+  padding: 20px 30px;
+  align-items: flex-start;
+  background-color: #fafafa;
+  justify-content: flex-start;
+  box-shadow: 0 0 26px 2px rgba(135, 135, 135, 0.19);
+}
+
+.item-wrap {
+  width: 100%;
+  margin: 20px;
+  max-width: 240px;
+  border-radius: 5px;
+  padding: 55px 30px 30px;
+  background-color: #fafafa;
+  border: 1px solid #e8e8e8;
+
+  .item-image-wrap {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .item-image {
+    max-width: 100%;
+  }
+  
+  .item-title {
+    color: #2d2d2d;
+    font-size: 12px;
+    max-width: 157px;
+    font-weight: bold;
+    line-height: 1.33;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  .item-properties-wrap {
+    
+  }
+
+  .item-types {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .item-properties {
+    flex-grow: 1;
+    margin-bottom: 10px;
+
+    .icon {
+      width: 11px;
+      fill: #6e6e6e;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .text {
+      color: #6e6e6e;
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+  }
+
+  .item-number-and-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .count {
+      width: 50px;
+      height: 28px;
+      margin: 0 5px;
+      color: #6e6e6e;
+      font-size: 12px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #dcdcdc;
+      background-color: #e8e8e8;
+    }
+
+    .price-text,
+    .total-price {
+      color: #6e6e6e;
+    }
+
+    .price-text {
+      font-size: 12px;
+    }
+    .total-price {
+      font-size: 16px;
+    }
+  }
+
+  .add-to-basket {
+    @include button(180px,34px,17px,11px);
+    @include transition(background-color);
+    background-color: rgba(72, 72, 72, 0.7);
+
+    &:hover {
+      background-color: #484848;
+    }
+  }
+}

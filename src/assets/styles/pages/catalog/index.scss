@@ -1,0 +1,95 @@
+.catalog-page {
+  overflow: hidden;
+  padding: 40px 35px;
+  background-color: #f4f4f4;
+
+  .tab-categories {
+    text-align: center;
+    margin-bottom: 25px;
+
+    .tab-item {
+      height: 58px;
+      margin: 0 5px;
+      color: #4c4743;
+      padding: 0 20px;
+      font-size: 12px;
+      min-width: 150px;
+      font-weight: bold;
+      border-radius: 3px;
+      text-transform: uppercase;
+      border: 1px solid rgba(104, 89, 76, 0.2);
+
+      &.active,
+      &:hover {
+        color: #fff;
+        background-color: #bf6d25;
+
+        .tab-icon {
+          fill: #fff;
+        }
+      }
+    }
+
+    .tab-item-wrap {
+      display: inline-block;
+    }
+
+    .tab-icon {
+      width: 32px;
+      margin-right: 15px;
+      vertical-align: middle;
+      fill: rgba(86, 86, 86, 0.8);
+    }
+
+    .text {
+      flex-shrink: 0;
+      vertical-align: middle;
+    }
+  }
+
+  .filters {
+    text-align: center;
+    margin-bottom: 20px;
+
+    .select-container {
+
+      &:hover {
+        .filter-label,
+        .select-label {
+          color: #787878;
+        }
+
+      }
+
+    }
+
+    .filter-label {
+      margin-right: 24px;
+      font-style: italic;
+    }
+
+    .filter-label,
+    .select-label {
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      color: rgba(76, 71, 67, 0.2);
+    }
+
+    .select-label {
+      text-align: left;
+      margin-right: 24px;
+      color: rgba(76, 71, 67, 0.2);
+    }
+
+    .filter-select {
+      &:after {
+        border-bottom-width: 1px;
+        border-bottom-color: rgba(76, 71, 67, 0.2);
+      }
+    }
+
+    .product-select {
+      min-width: 70px;
+    }
+  }
+}
