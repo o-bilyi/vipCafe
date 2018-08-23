@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-// import PropTypes from 'prop-types';
 import CakeIcon from '@material-ui/icons/Cake';
 import {withStyles} from '@material-ui/core/styles';
-import Item from 'shared/components/goods/ItemWithPrice/index';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
+import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
 import {MenuItem, Button, Select, InputLabel, FormControl} from '@material-ui/core';
 
 const item = [
@@ -53,7 +52,7 @@ const styles = {
     },
   },
 
-  selected : {},
+  selected: {},
 
   selectStyle: {
     alignItems: 'center',
@@ -119,6 +118,15 @@ class Catalog extends React.Component {
         [name]: true,
       },
     });
+  };
+
+  _resetSelectItems = (resetItem) => (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(this.state[resetItem]);
+    this.setState({
+      [resetItem]: []
+    }, () =>  console.log(this.state[resetItem]));
   };
 
   render() {
@@ -266,7 +274,7 @@ class Catalog extends React.Component {
                 >
                   <li className="count-select-item-wrap">
                     <span className="count-select-item">count : {this.state.weight.length}</span>
-                    <button className="clear-select-item">очистити</button>
+                    <button onClick={this._resetSelectItems('weight')} className="clear-select-item">очистити</button>
                   </li>
 
                   {
@@ -281,7 +289,7 @@ class Catalog extends React.Component {
           <div className="goods-wrap">
             {
               item.map((item, key) => {
-                return <Item items={item} key={key}/>;
+                return <ItemWithPrice {...item} key={key}/>;
               })
             }
           </div>
