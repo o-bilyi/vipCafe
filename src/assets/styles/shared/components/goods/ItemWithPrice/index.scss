@@ -1,6 +1,8 @@
 .goods-wrap {
   display: flex;
   //margin: 0 -20px;
+  flex-wrap: wrap;
+
   min-height: 100vh;
   position: relative;
   padding: 20px 30px;
