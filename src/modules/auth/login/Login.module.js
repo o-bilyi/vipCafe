@@ -104,7 +104,7 @@ class Login extends React.Component {
     const {email, password, error} = this.state;
     if(DeviceSizeService.size.width < 1025) {
       return(
-        <div className="auth-page login">
+        <div className="auth-page login shared-form-wrap">
           <div className="auth-header-mobile">
             <div className="logo">
               <LogoIconSVG className="logo-icon-svg"/>
@@ -119,7 +119,7 @@ class Login extends React.Component {
                 href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
             </div>
           </div>
-          <form autoComplete="off" method="post" className="auth-form login-form" onSubmit={this.handleSubmit}>
+          <form autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
             <h1 className="title-page">Вхід в акаунт</h1>
             <div className="input-container input-container-email">
               <label className="form-label" htmlFor="#email">Телефон (або електронна адреса):</label>
@@ -178,8 +178,8 @@ class Login extends React.Component {
       );
     }
     return (
-      <div className="auth-page login">
-        <form autoComplete="off" method="post" className="auth-form login-form" onSubmit={this.handleSubmit}>
+      <div className="auth-page login shared-form-wrap">
+        <form autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
           <img src="/img/clover.png" className="auth-form-clover" alt="clover"/>
           <h1 className="title-page">Вхід в акаунт</h1>
           <div className="input-container input-container-email">

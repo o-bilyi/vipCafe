@@ -12,10 +12,11 @@ import ListItem from '@material-ui/core/ListItem';
 import {NavLink} from 'react-router-dom';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+// import LogoIconSVG from '../../assets/svg/logo.svg';
 
 export default class Wrapper extends React.Component {
   state = {
-    open: true,
+    open: false,
   };
 
   componentDidMount() {

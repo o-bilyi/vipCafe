@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ADBIcon from '@material-ui/icons/Adb';
 import {Link} from 'react-router-dom';
 import {navigationScheme} from 'core';
-
+import ADBIcon from '@material-ui/icons/Adb';
+import Dialog from '@material-ui/core/Dialog';
+import WarningIcon from '@material-ui/icons/ErrorOutline';
 
 export default class Item extends React.Component {
   static propTypes = {
@@ -14,8 +15,29 @@ export default class Item extends React.Component {
     priceWithOne : PropTypes.number,
   };
 
-  _addToBasket = (id) => () => {
-    console.warn("add", id);
+  state = {
+    countItem : '1',
+    openDescriptionModal : false,
+  };
+
+  countItem = (value) => {
+    this.setState({
+      countItem : value.target.value
+    })
+  };
+
+  getTotalCost = () => {
+    return this.state.countItem * this.props.priceWithOne;
+  };
+
+  _handleOpenDescriptionModal = () => {
+    this.setState({
+      openDescriptionModal : !this.state.openDescriptionModal
+    })
+  };
+
+  _addToBasket = (id,countItems) => () => {
+    console.warn("add", id, countItems);
   };
 
   _getTopContent = () => {
@@ -60,6 +82,16 @@ export default class Item extends React.Component {
     return (
       <div className='item-wrap'>
 
+        <div className="warning-block">
+          <div className="icon-container">
+            <WarningIcon className="icon"/>
+          </div>
+          <div className="description">
+            Замовлення лише в цілих упаковках або ящиках!
+            <button className="show-description-modal" onClick={this._handleOpenDescriptionModal}>детальніше</button>
+          </div>
+        </div>
+
         {
           this._getTopContent()
         }
@@ -67,6 +99,21 @@ export default class Item extends React.Component {
         {
           this.getBottomContent()
         }
+
+        <Dialog
+          scroll={'body'}
+          open={this.state.openDescriptionModal}
+          onClose={this._handleOpenDescriptionModal}
+          classes={{
+            paperFullScreen: 'thanks-modal-bg',
+          }}
+        >
+          <div className="description-warning-item">
+            Замовлення лише в цілих упаковках або ящиках!
+            Замовлення лише в цілих упаковках або ящиках!
+            Замовлення лише в цілих упаковках або ящиках!
+          </div>
+        </Dialog>
 
       </div>
     )

@@ -26,6 +26,18 @@ body {
   background-color: #3e3e3e;
   font-family: 'Roboto', sans-serif;
   padding-right: 0 !important;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 3px;
+    background-color: #fff;
+    border: solid 1px #e8e8e8;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #484848;
+  }
 }
 
 ol, ul {
@@ -69,6 +81,7 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
+  display: inline-block;
   background-color: transparent;
 }
 

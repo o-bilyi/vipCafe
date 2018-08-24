@@ -53,7 +53,8 @@
 
     .filter-product {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
+      align-items: flex-end;
       justify-content: center;
     }
 
@@ -88,10 +89,17 @@
       color: rgba(76, 71, 67, 0.6);
     }
 
+    .custom-label {
+      height: 40px;
+      display: flex;
+      margin-right: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
     .select-label {
       text-align: left;
       margin-right: 24px;
-      color: rgba(76, 71, 67, 0.6);
     }
 
     .filter-select {
@@ -103,25 +111,37 @@
         border-bottom: 1px solid rgba(76, 71, 67, 0.6);
       }
     }
-
-    .product-select {
-      min-width: 70px;
-      margin-right: 30px;
-    }
   }
 }
 
 .filter-ul {
   ul {
     width: 320px;
+    max-height: 370px;
     background-color: #f7f7f7;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 3px;
+    background-color: #fff;
+    border: solid 1px #e8e8e8;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #484848;
   }
   .filter-item {
     color: #494949;
     font-size: 14px;
     border-radius: 5px;
-    margin: 0 14px 10px;
+    margin: 0 14px;
     background-color: #e8e8e8;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
 
     &.selected {
       color: #fff;

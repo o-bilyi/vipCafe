@@ -1,10 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import CakeIcon from '@material-ui/icons/Cake';
-import {withStyles} from '@material-ui/core/styles';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
-import {MenuItem, Button, Select, InputLabel, FormControl} from '@material-ui/core';
+import {MenuItem,
+  Button, Select,
+  InputLabel,
+  FormControl,withStyles} from '@material-ui/core';
 
 const item = [
   {
@@ -27,6 +29,33 @@ const item = [
   },
   {
     id: 3,
+    title: 'Lavazza Crema e Aroma Espresso Blue',
+    img: '/img/img-item.png',
+    type: 'cereal',
+    number: 20,
+    priceWithOne: 12,
+    numberInPackage: 1000,
+  },
+  {
+    id: 4,
+    title: 'Lavazza Crema e Aroma Espresso Blue',
+    img: '/img/img-item.png',
+    type: 'capsule',
+    number: 100,
+    priceWithOne: 12,
+    numberInPackage: 10000,
+  },
+  {
+    id: 5,
+    title: 'Lavazza Crema e Aroma Espresso Blue',
+    img: '/img/img-item.png',
+    type: 'grounded',
+    number: 20,
+    priceWithOne: 12,
+    numberInPackage: 1000,
+  },
+  {
+    id: 6,
     title: 'Lavazza Crema e Aroma Espresso Blue',
     img: '/img/img-item.png',
     type: 'cereal',
@@ -177,12 +206,13 @@ class Catalog extends React.Component {
           <div className="filters">
             <div className="filter-product">
 
-              <div className="select-container">
-                <label className="filter-label" htmlFor="#product">Продукт:</label>
+              <FormControl className="select-container">
+                <InputLabel className="filter-label animate-label" htmlFor="#product">Продукт:</InputLabel>
                 <Select
                   value={product}
                   aria-haspopup="true"
                   open={openCheeseSelect}
+                  style={styles.selectStyle}
                   MenuProps={{className: 'filter-ul'}}
                   className="filter-select product-select"
                   onChange={this.handleChangeSelect('product')}
@@ -194,8 +224,9 @@ class Catalog extends React.Component {
                     this._getSelectItems(cheeseSelect)
                   }
                 </Select>
-                <label className="filter-label-of-goods">Фільтр товарів:</label>
-              </div>
+              </FormControl>
+
+              <label className="filter-label-of-goods custom-label">Фільтр товарів:</label>
 
               <FormControl className="select-container">
                 <InputLabel className="filter-label animate-label">сортування</InputLabel>

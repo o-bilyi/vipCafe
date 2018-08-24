@@ -60,7 +60,13 @@ const validation = {
 const styles = {
   root: {
     borderRadius: 0,
+    '&$selected': {
+      color: '#fff',
+      backgroundColor: '#78ae59',
+    },
   },
+
+  selected: {},
 
   checked: {},
 
@@ -267,7 +273,7 @@ class SignUp extends React.Component {
 
     if (DeviceSizeService.size.width < 1025) {
       return (
-        <div className="auth-page signUp">
+        <div className="auth-page shared-form-wrap shared-form">
           <div className="auth-header-mobile">
             <div className="logo">
               <LogoIconSVG className="logo-icon-svg"/>
@@ -285,7 +291,7 @@ class SignUp extends React.Component {
 
           <form autoComplete="off" method="post" className="auth-form signUp-form" onSubmit={this.handleSubmit}>
             <h1 className="title-page">Реєстрація акаунту</h1>
-            <div className="signUp-form-container">
+            <div className="shared-form-container">
               <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
                 <label className="form-label" htmlFor="#name">Ім’я:</label>
                 <TextField
@@ -587,13 +593,13 @@ class SignUp extends React.Component {
       );
     }
     return (
-      <div className="auth-page signUp">
+      <div className="auth-page shared-form-wrap">
         <form autoComplete="off"
-              method="post" className="auth-form signUp-form" onSubmit={this.handleSubmit}>
+              method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
           <img src="/img/clover.png" className="auth-form-clover" alt="clover"/>
           <h1 className="title-page">Реєстрація акаунту</h1>
 
-          <div className="signUp-form-container">
+          <div className="shared-form-container">
             <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
               <label className="form-label" htmlFor="#name">Ім’я:</label>
               <TextField

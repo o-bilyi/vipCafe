@@ -5,7 +5,7 @@ import {
   registrationActionTypes} from '../../models/auth';
 
 const initialState = {
-  isAuthorized: false,
+  isAuthorized: true,
   fetching: false,
 };
 
