@@ -383,128 +383,127 @@ class Catalog extends React.Component {
               })
             }
           </div>
-        </div>
+          <Dialog
+            fullScreen
+            open={this.state.openFilterModal}
+            onClose={this._handleOpenDescriptionModal}
+            className="filters-mobile-modal"
+          >
+            <div className="filters">
+              <button className="back-btn" onClick={this._toggleFilterModal}><ArrowIcon className="back-icon"/></button>
+              <div className="filter-product">
 
-        <Dialog
-          fullScreen
-          open={this.state.openFilterModal}
-          onClose={this._handleOpenDescriptionModal}
-          className="filters-mobile-modal"
-        >
-          <div className="filters">
-            <button className="back-btn" onClick={this._toggleFilterModal}><ArrowIcon className="back-icon"/></button>
-            <div className="filter-product">
+                <FormControl className="select-container" onClick={() => this.handleOpenSelect('openCheeseSelect')}>
+                  <InputLabel className="filter-label animate-label" htmlFor="#product">Продукт:</InputLabel>
+                  <Select
+                    value={product}
+                    aria-haspopup="true"
+                    open={openCheeseSelect}
+                    style={styles.selectStyle}
+                    MenuProps={{className: 'filter-ul'}}
+                    className="filter-select product-select"
+                    onChange={this.handleChangeSelect('product')}
+                    SelectDisplayProps={{className: 'select-label'}}
+                    onOpen={() => this.handleOpenSelect('openCheeseSelect')}
+                    onClose={() => this.handleCloseSelect('openCheeseSelect')}
+                  >
+                    {
+                      this._getSelectItems(cheeseSelect)
+                    }
+                  </Select>
+                </FormControl>
 
-              <FormControl className="select-container" onClick={() => this.handleOpenSelect('openCheeseSelect')}>
-                <InputLabel className="filter-label animate-label" htmlFor="#product">Продукт:</InputLabel>
-                <Select
-                  value={product}
-                  aria-haspopup="true"
-                  open={openCheeseSelect}
-                  style={styles.selectStyle}
-                  MenuProps={{className: 'filter-ul'}}
-                  className="filter-select product-select"
-                  onChange={this.handleChangeSelect('product')}
-                  SelectDisplayProps={{className: 'select-label'}}
-                  onOpen={() => this.handleOpenSelect('openCheeseSelect')}
-                  onClose={() => this.handleCloseSelect('openCheeseSelect')}
-                >
-                  {
-                    this._getSelectItems(cheeseSelect)
-                  }
-                </Select>
-              </FormControl>
+                <FormControl className="select-container">
+                  <InputLabel className="filter-label animate-label">сортування</InputLabel>
+                  <Select
+                    value={sort}
+                    aria-haspopup="true"
+                    open={openSortSelect}
+                    style={styles.selectStyle}
+                    className="filter-select"
+                    MenuProps={{className: 'filter-ul'}}
+                    onChange={this.handleChangeSelect('sort')}
+                    SelectDisplayProps={{className: 'select-label'}}
+                    onOpen={() => this.handleOpenSelect('openSortSelect')}
+                    onClose={() => this.handleCloseSelect('openSortSelect')}
+                  >
+                    {
+                      this._getSelectItems(sortSelect)
+                    }
+                  </Select>
+                </FormControl>
 
-              <FormControl className="select-container">
-                <InputLabel className="filter-label animate-label">сортування</InputLabel>
-                <Select
-                  value={sort}
-                  aria-haspopup="true"
-                  open={openSortSelect}
-                  style={styles.selectStyle}
-                  className="filter-select"
-                  MenuProps={{className: 'filter-ul'}}
-                  onChange={this.handleChangeSelect('sort')}
-                  SelectDisplayProps={{className: 'select-label'}}
-                  onOpen={() => this.handleOpenSelect('openSortSelect')}
-                  onClose={() => this.handleCloseSelect('openSortSelect')}
-                >
-                  {
-                    this._getSelectItems(sortSelect)
-                  }
-                </Select>
-              </FormControl>
+                <FormControl className="select-container">
+                  <InputLabel className="filter-label animate-label">Бренд</InputLabel>
+                  <Select
+                    value={brand}
+                    aria-haspopup="true"
+                    open={openBrandSelect}
+                    style={styles.selectStyle}
+                    className="filter-select"
+                    MenuProps={{className: 'filter-ul'}}
+                    onChange={this.handleChangeSelect('brand')}
+                    SelectDisplayProps={{className: 'select-label'}}
+                    onOpen={() => this.handleOpenSelect('openBrandSelect')}
+                    onClose={() => this.handleCloseSelect('openBrandSelect')}
+                  >
+                    {
+                      this._getSelectItems(brandSelect)
+                    }
+                  </Select>
+                </FormControl>
 
-              <FormControl className="select-container">
-                <InputLabel className="filter-label animate-label">Бренд</InputLabel>
-                <Select
-                  value={brand}
-                  aria-haspopup="true"
-                  open={openBrandSelect}
-                  style={styles.selectStyle}
-                  className="filter-select"
-                  MenuProps={{className: 'filter-ul'}}
-                  onChange={this.handleChangeSelect('brand')}
-                  SelectDisplayProps={{className: 'select-label'}}
-                  onOpen={() => this.handleOpenSelect('openBrandSelect')}
-                  onClose={() => this.handleCloseSelect('openBrandSelect')}
-                >
-                  {
-                    this._getSelectItems(brandSelect)
-                  }
-                </Select>
-              </FormControl>
+                <FormControl className="select-container">
+                  <InputLabel className="filter-label animate-label">тип сиру</InputLabel>
+                  <Select
+                    value={type}
+                    aria-haspopup="true"
+                    open={openTypeSelect}
+                    style={styles.selectStyle}
+                    className="filter-select"
+                    MenuProps={{className: 'filter-ul'}}
+                    onChange={this.handleChangeSelect('type')}
+                    SelectDisplayProps={{className: 'select-label'}}
+                    onOpen={() => this.handleOpenSelect('openTypeSelect')}
+                    onClose={() => this.handleCloseSelect('openTypeSelect')}
+                  >
+                    {
+                      this._getSelectItems(typeSelect)
+                    }
+                  </Select>
+                </FormControl>
 
-              <FormControl className="select-container">
-                <InputLabel className="filter-label animate-label">тип сиру</InputLabel>
-                <Select
-                  value={type}
-                  aria-haspopup="true"
-                  open={openTypeSelect}
-                  style={styles.selectStyle}
-                  className="filter-select"
-                  MenuProps={{className: 'filter-ul'}}
-                  onChange={this.handleChangeSelect('type')}
-                  SelectDisplayProps={{className: 'select-label'}}
-                  onOpen={() => this.handleOpenSelect('openTypeSelect')}
-                  onClose={() => this.handleCloseSelect('openTypeSelect')}
-                >
-                  {
-                    this._getSelectItems(typeSelect)
-                  }
-                </Select>
-              </FormControl>
+                <FormControl className="select-container">
+                  <InputLabel className="filter-label animate-label">ВАГА</InputLabel>
+                  <Select
+                    multiple
+                    value={weight}
+                    aria-haspopup="true"
+                    open={openWeightSelect}
+                    style={styles.selectStyle}
+                    className="filter-select"
+                    MenuProps={{className: 'filter-ul'}}
+                    onChange={this.handleChangeSelect('weight')}
+                    SelectDisplayProps={{className: 'select-label'}}
+                    onOpen={() => this.handleOpenSelect('openWeightSelect')}
+                    onClose={() => this.handleCloseSelect('openWeightSelect')}
+                  >
+                    <li className="count-select-item-wrap">
+                      <span className="count-select-item">count : {this.state.weight.length}</span>
+                      <button onClick={this._resetSelectItems('weight')} className="clear-select-item">очистити</button>
+                    </li>
 
-              <FormControl className="select-container">
-                <InputLabel className="filter-label animate-label">ВАГА</InputLabel>
-                <Select
-                  multiple
-                  value={weight}
-                  aria-haspopup="true"
-                  open={openWeightSelect}
-                  style={styles.selectStyle}
-                  className="filter-select"
-                  MenuProps={{className: 'filter-ul'}}
-                  onChange={this.handleChangeSelect('weight')}
-                  SelectDisplayProps={{className: 'select-label'}}
-                  onOpen={() => this.handleOpenSelect('openWeightSelect')}
-                  onClose={() => this.handleCloseSelect('openWeightSelect')}
-                >
-                  <li className="count-select-item-wrap">
-                    <span className="count-select-item">count : {this.state.weight.length}</span>
-                    <button onClick={this._resetSelectItems('weight')} className="clear-select-item">очистити</button>
-                  </li>
+                    {
+                      this._getSelectItems(weightSelect)
+                    }
+                  </Select>
+                </FormControl>
 
-                  {
-                    this._getSelectItems(weightSelect)
-                  }
-                </Select>
-              </FormControl>
-
+              </div>
             </div>
-          </div>
 
-        </Dialog>
+          </Dialog>
+        </div>
       </Wrapper>
     );
   }
