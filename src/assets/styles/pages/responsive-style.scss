@@ -13,6 +13,11 @@
   }
 }
 
+@media (max-width: 1080px) {
+  .shared-form {
+    padding: 30px;
+  }
+}
 @media (max-width: 1024px) {
   .auth-page {
     padding: 0;
@@ -30,6 +35,15 @@
     }
   }
 
+  .shared-form-container {
+    justify-content: space-between;
+    .input-container {
+      width: 48%;
+      max-width: 50%;
+    }
+  }
+
+
   .wrapper {
 
     .header {
@@ -41,6 +55,10 @@
           display: none;
         }
       }
+    }
+
+    .content {
+      margin-left: 0;
     }
 
     .search-and-user-info {
@@ -86,14 +104,6 @@
 }
 
 @media (max-width: 992px) {
-  .shared-form-container {
-    justify-content: space-between;
-    .input-container {
-      width: 48%;
-      max-width: 50%;
-    }
-  }
-
   .auth-page {
 
     .input-container-telegram-and-viber {
@@ -174,14 +184,22 @@
         min-width: auto;
       }
     }
+  }
 
-    .filters {
-      .select-container {
-        margin: 10px 2%;
-        flex-grow: 1;
-      }
+  .filters {
+    padding: 0 20px;
+    .select-container {
+      width: 100%;
+      margin: 10px 2%;
     }
   }
+
+  .filter-ul {
+    ul {
+      width: 100%;
+    }
+  }
+
   .goods-wrap {
     padding: 10px;
     justify-content: center;
@@ -218,6 +236,9 @@
 }
 
 @media (max-width: 480px) {
+  .shared-form-wrap {
+    padding: 0;
+  }
   .shared-form-container {
     .input-container {
       width: 100%;

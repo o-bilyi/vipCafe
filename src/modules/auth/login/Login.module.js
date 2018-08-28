@@ -1,48 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { toastr } from 'react-redux-toastr';
-import Button from '@material-ui/core/Button';
 import {navigationScheme} from 'core';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import {DeviceSizeService} from 'utilits';
-import TextField from '@material-ui/core/TextField';
+import {bindActionCreators} from 'redux';
+// import {toastr} from 'react-redux-toastr';
 import LogoIconSVG from 'assets/svg/logo.svg';
+import {loginAction} from 'core/actions/index';
+import {TextField, Button} from '@material-ui/core';
+import connect from 'react-redux/es/connect/connect';
 import {userIsNotAuthenticated} from 'core/auth-redirect';
 
 const initialState = {
-  email : "",
-  password : "",
-  width : null,
-  height : null,
-  error : {
-    email : null,
-    password : null,
+  email: '',
+  password: '',
+  error: {
+    email: null,
+    password: null,
   },
 };
 
 const validation = {
-  email : (val) => {
+  email: (val) => {
     let error = null;
     const emailValidation = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (!emailValidation.test(val)) {
-      error = "E-mail введений не вірно!";
+      error = 'E-mail введений не вірно!';
     }
     return error;
   },
-  password : (val) => {
+  password: (val) => {
     if (val.length < 4) {
-      return "Не менше 4 символів!";
+      return 'Не менше 4 символів!';
     }
     return null;
-  }
+  },
 };
 
-
 class Login extends React.Component {
-
+  static propTypes = {
+    loginAction: PropTypes.func,
+  };
   state = {
     ...initialState,
-    width : document.body.clientWidth,
-    height : document.body.clientHeight
   };
 
   componentDidMount() {
@@ -57,10 +57,10 @@ class Login extends React.Component {
     const errorText = validation[event.target.name](event.target.value);
 
     this.setState({
-      [event.target.name] : event.target.value,
-      error : {
+      [event.target.name]: event.target.value,
+      error: {
         ...this.state.error,
-        [event.target.name] : errorText,
+        [event.target.name]: errorText,
       },
     });
   };
@@ -69,41 +69,42 @@ class Login extends React.Component {
     event.preventDefault();
 
     const inputs = {
-      user : this.state.user,
-      site : this.state.site,
-      email : this.state.email,
+      email: this.state.email,
+      password: this.state.password,
     };
 
-    function status(response) {
-      if (response.ok) {
-        return Promise.resolve(response);
-      }
-      return Promise.reject(response.statusText);
-    }
+    this.props.loginAction(inputs.email, inputs.password);
 
-    fetch("/api/sendMessage", {
-      headers : {
-        "Accept" : "application/json",
-        "Content-Type" : "application/json",
-      },
-      method : "post",
-      body : JSON.stringify(inputs),
-    })
-      .then(status)
-      .then(() => {
-      this.setState(initialState);
-      toastr.success("Форма відправлена!");
-    })
-      .catch((error) => {
-      toastr.error("Логін або Пароль не вірний!");
-      console.error("Request failed", error);
-    });
+    // function status(response) {
+    //   if (response.ok) {
+    //     return Promise.resolve(response);
+    //   }
+    //   return Promise.reject(response.statusText);
+    // }
+    //
+    // fetch('/api/sendMessage', {
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   method: 'post',
+    //   body: JSON.stringify(inputs),
+    // })
+    //   .then(status)
+    //   .then(() => {
+    //     this.setState(initialState);
+    //     toastr.success('Форма відправлена!');
+    //   })
+    //   .catch((error) => {
+    //     toastr.error('Логін або Пароль не вірний!');
+    //     console.error('Request failed', error);
+    //   });
   };
 
   _getContent = () => {
     const {email, password, error} = this.state;
-    if(DeviceSizeService.size.width < 1025) {
-      return(
+    if (DeviceSizeService.size.width < 1025) {
+      return (
         <div className="auth-page login shared-form-wrap">
           <div className="auth-header-mobile">
             <div className="logo">
@@ -132,9 +133,9 @@ class Login extends React.Component {
                          className="form-input-wrap"
                          InputProps={{
                            classes: {
-                             root: "form-input",
-                             input: "input-style",
-                           }
+                             root: 'form-input',
+                             input: 'input-style',
+                           },
                          }}/>
               {error.email && <p className="error-text">{error.email}</p>}
             </div>
@@ -149,9 +150,9 @@ class Login extends React.Component {
                          className="form-input-wrap"
                          InputProps={{
                            classes: {
-                             root: "form-input",
-                             input: "input-style",
-                           }
+                             root: 'form-input',
+                             input: 'input-style',
+                           },
                          }}/>
               {error.password && <p className="error-text">{error.password}</p>}
             </div>
@@ -193,9 +194,9 @@ class Login extends React.Component {
                        className="form-input-wrap"
                        InputProps={{
                          classes: {
-                           root: "form-input",
-                           input: "input-style",
-                         }
+                           root: 'form-input',
+                           input: 'input-style',
+                         },
                        }}/>
             {error.email && <p className="error-text">{error.email}</p>}
           </div>
@@ -210,9 +211,9 @@ class Login extends React.Component {
                        className="form-input-wrap"
                        InputProps={{
                          classes: {
-                           root: "form-input",
-                           input: "input-style",
-                         }
+                           root: 'form-input',
+                           input: 'input-style',
+                         },
                        }}/>
             {error.password && <p className="error-text">{error.password}</p>}
           </div>
@@ -259,4 +260,11 @@ class Login extends React.Component {
     return this._getContent();
   }
 }
-export default userIsNotAuthenticated(Login)
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    loginAction,
+  }, dispatch);
+};
+
+export default connect(undefined, mapDispatchToProps)(userIsNotAuthenticated(Login));

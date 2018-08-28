@@ -1,18 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 import Logo from 'assets/svg/logo.svg';
-import {DeviceSizeService} from 'utilits/index';
-import MenuIcon from '@material-ui/icons/Menu';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import SearchComponent from 'shared/components/search/Search.component';
-import {IconButton, Button, AppBar, Drawer, List} from '@material-ui/core';
-import AccountInfo from 'shared/components/account-info/AccountInfo.component';
-import {firstMenuItems, secondMenuItems, managerBlock} from './menuItems/Items.component';
-import ListItem from '@material-ui/core/ListItem';
 import {NavLink} from 'react-router-dom';
+import MenuIcon from '@material-ui/icons/Menu';
+import {DeviceSizeService} from 'utilits/index';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import LogoIconSVG from '../../assets/svg/logo.svg';
+import SearchComponent from 'shared/components/search/Search.component';
+import AccountInfo from 'shared/components/account-info/AccountInfo.component';
+import {ListItem,IconButton, Button, AppBar, Drawer, List} from '@material-ui/core';
+import {firstMenuItems, secondMenuItems, managerBlock} from './menuItems/Items.component';
 
 export default class Wrapper extends React.Component {
   state = {
@@ -34,6 +32,13 @@ export default class Wrapper extends React.Component {
   handleDrawerClose = () => {
     this.setState({open: false});
   };
+
+  /**
+   * get select items
+   * @param array
+   * @returns {*}
+   * @private
+   */
 
   _getMenuItems = (array) => {
     return array.map((item, key) => {
@@ -82,9 +87,6 @@ export default class Wrapper extends React.Component {
           position="fixed"
           color="default"
           className={classNames('header', this.state.open && 'active')}
-          classes={{
-            root: 'root-class',
-          }}
         >
           <div className="search-and-show-menu">
             <Button

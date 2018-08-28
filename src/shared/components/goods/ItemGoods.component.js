@@ -6,7 +6,7 @@ import ADBIcon from '@material-ui/icons/Adb';
 import Dialog from '@material-ui/core/Dialog';
 import WarningIcon from '@material-ui/icons/ErrorOutline';
 
-export default class Item extends React.Component {
+export default class ItemGoods extends React.Component {
   static propTypes = {
     id : PropTypes.number,
     img : PropTypes.string,
@@ -104,15 +104,10 @@ export default class Item extends React.Component {
           scroll={'body'}
           open={this.state.openDescriptionModal}
           onClose={this._handleOpenDescriptionModal}
-          classes={{
-            paperFullScreen: 'thanks-modal-bg',
-          }}
+          className="goods-description-modal"
         >
-          <div className="description-warning-item">
-            Замовлення лише в цілих упаковках або ящиках!
-            Замовлення лише в цілих упаковках або ящиках!
-            Замовлення лише в цілих упаковках або ящиках!
-          </div>
+          <div className="description-warning-item">Кількість штук в упаковці або ящику вказана у характеристиці товару.
+            Якщо такої інформації немає, то товар можна замовляти поштучно.</div>
         </Dialog>
 
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import ItemGoods from './ItemGoods.component';
 import {Button} from '@material-ui/core';
 
-export default class Item extends ItemGoods {
+export default class ItemWithPrice extends ItemGoods {
   getBottomContent = () => {
     return [
       <div key={1} className="item-number-and-price">
