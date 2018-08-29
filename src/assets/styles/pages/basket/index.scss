@@ -1,17 +1,144 @@
 .basket-wrap {
   display: flex;
+  color: #2d2b2b;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
   background-color: #393939;
-  color: #2d2b2b;
+
+  .basket-title {
+    color: #fafafa;
+    font-size: 11px;
+    padding-bottom: 25px;
+  }
+
+  .title-and-count {
+    text-align: left;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
 
   .width-container {
     margin: auto;
     max-width: 970px;
   }
 
-  .basket-table {
+  .table-tr {
+    height: 90px;
+    vertical-align: middle;
     background-color: #fafafa;
+    border-bottom: 10px solid #393939;
+
+    td {
+      vertical-align: middle;
+    }
   }
+
+  .buttons-and-img {
+    width: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttons {
+    width: 45px;
+  }
+
+  .count-item-wrap {
+    width: 140px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .count-item {
+      width: 50px;
+      height: 29px;
+      color: #6e6e6e;
+      font-size: 12px;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #dcdcdc;
+      background-color: #e8e8e8;
+    }
+
+    .icon {
+      fill: rgba(68, 63, 61, 0.3);
+    }
+  }
+
+  .increment-item,
+  .decrement-item {
+    &:hover {
+      .icon {
+        fill: #443f3d;
+      }
+    }
+  }
+
+  .border-right {
+    border-right: 1px solid #dcdcdc;
+  }
+
+  .price-with-one,
+  .all-price {
+    width: 120px;
+    font-size: 16px;
+    text-align: center;
+
+    .icon {
+      width: 14px;
+      height: 13px;
+
+      fill: #443f3d;
+    }
+  }
+
+  .title-and-properties {
+    padding: 0 20px;
+  }
+
+  .image-wrap {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #dcdcdc;
+  }
+
+  .img-item {
+    width: 24px;
+  }
+
+  .remove-item {
+    border-bottom: 1px solid #dcdcdc;
+  }
+
+  .remove-item,
+  .copy-item {
+    width: 45px;
+    height: 45px;
+    background-color: #e8e8e8;
+
+    .icon {
+      fill : #dcdcdc
+    }
+  }
+
+  .remove-item:hover {
+    background-color: #c93f3f;
+    .icon {
+      fill: #fff;
+    }
+  }
+
+  .copy-item:hover {
+    background-color: #75a95d;
+    .icon {
+      fill: #fff;
+    }
+  }
+
 }
