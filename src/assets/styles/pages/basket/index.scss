@@ -1,0 +1,17 @@
+.basket-wrap {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #393939;
+  color: #2d2b2b;
+
+  .width-container {
+    margin: auto;
+    max-width: 970px;
+  }
+
+  .basket-table {
+    background-color: #fafafa;
+  }
+}

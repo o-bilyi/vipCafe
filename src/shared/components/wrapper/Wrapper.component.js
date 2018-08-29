@@ -71,7 +71,7 @@ export default class Wrapper extends React.Component {
       );
     }
     return (
-      <div className={classNames('menu-toolbar')}>
+      <div className='menu-toolbar'>
         <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
           <ArrowBackIcon className="arrow-back-icon"/>
         </IconButton>
@@ -82,7 +82,7 @@ export default class Wrapper extends React.Component {
 
   render() {
     return (
-      <div className={classNames('wrapper')}>
+      <div className='wrapper'>
         <AppBar
           position="fixed"
           color="default"
@@ -166,6 +166,8 @@ export default class Wrapper extends React.Component {
         <main className="content">
           {this.props.children}
         </main>
+
+        <img src="/img/clover.png" alt="clever" className="clever-img"/>
 
       </div>
     );
