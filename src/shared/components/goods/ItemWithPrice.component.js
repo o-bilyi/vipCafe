@@ -1,6 +1,7 @@
 import React from 'react';
-import ItemGoods from './ItemGoods.component';
 import {Button} from '@material-ui/core';
+import {euroSymbol} from 'utilits/index';
+import ItemGoods from './ItemGoods.component';
 
 export default class ItemWithPrice extends ItemGoods {
   getBottomContent = () => {
@@ -13,7 +14,7 @@ export default class ItemWithPrice extends ItemGoods {
           type="number" min="1" className="count"
           value={this.state.countItem}
           onChange={(value) => this.countItem(value)}/>
-        <span className="total-price">= {this.getTotalCost()} &#8364;</span>
+        <span className="total-price">= {this.getTotalCost()} {euroSymbol}</span>
 
       </div>,
 

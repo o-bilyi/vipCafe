@@ -1,10 +1,8 @@
 import React from 'react';
 import {navigationScheme} from 'core';
-import {NavLink} from 'react-router-dom';
 import CountItem from './CountItem.component';
-import ListItem from '@material-ui/core/ListItem';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import {ListItem,ListItemIcon} from '@material-ui/core';
 
 import StoreIcon from '@material-ui/icons/Store';
 import ArchiveIcon from '@material-ui/icons/Archive';
@@ -47,12 +45,10 @@ export const secondMenuItems = [
 
 export const managerBlock = (
   <ListItem button className="menu-item">
-    <NavLink
-      className="menu-link"
-      to={navigationScheme.basket} activeClassName="active">
+    <div className="menu-link">
       <ListItemIcon>
         <DraftsIcon className="menu-icon"/>
       </ListItemIcon>
-    </NavLink>
+    </div>
   </ListItem>
 );

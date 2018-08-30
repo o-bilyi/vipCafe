@@ -1,3 +1,5 @@
+import React from 'react';
+
 class DeviceSize {
   /**
    *
@@ -61,3 +63,5 @@ class DeviceSize {
 }
 
 export const DeviceSizeService = new DeviceSize();
+
+export const euroSymbol = <span className="euro-icon">&#8364;</span>;

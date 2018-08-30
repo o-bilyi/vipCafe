@@ -19,8 +19,33 @@
   }
 
   .width-container {
+    width: 100%;
     margin: auto;
-    max-width: 970px;
+    max-width: 940px;
+    padding: 25px 10px;
+  }
+
+  .max-height {
+    overflow-y: auto;
+    max-height: 570px;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      border-radius: 3px;
+      background-color: transparent;
+      border: solid 1px rgba(255, 255, 255, 0.2);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: #fafafa;
+    }
+  }
+
+  .basket-table {
+    width: 100%;
+    max-width: 905px;
   }
 
   .table-tr {
@@ -138,6 +163,107 @@
     background-color: #75a95d;
     .icon {
       fill: #fff;
+    }
+  }
+
+  .buttons-and-all-price-wrap {
+    width: 100%;
+    display: flex;
+    color: #fafafa;
+    max-width: 905px;
+    padding-top: 50px;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    &:before {
+      left: 0;
+      right: 0;
+      top: -31px;
+      content: '';
+      width: 100%;
+      height: 31px;
+      position: absolute;
+      background-color: rgba(60, 60, 60, 0.40);
+    }
+  }
+
+  .buttons-wrap {
+
+  }
+
+  .clear-basket {
+    @include button(180px,40px,44px,12px,rgba(250, 250, 250, 0.3));
+    border: 1px solid rgba(250, 250, 250, 0.3);
+    margin-right: 20px;
+
+    &:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+  }
+
+  .to-order {
+    @include button(240px,40px,44px,12px);
+    @include success-style-btn();
+  }
+
+  .price-wrap {
+    color: #fafafa;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .all-price-wrap,
+  .discount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .discount {
+    margin-bottom: 20px;
+  }
+
+  .discount-text {
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .percent {
+    color: #fff;
+    font-size: 10px;
+    margin-left: 5px;
+    padding: 4px 6px;
+    border-radius: 11px;
+    vertical-align: middle;
+    background-color: #c93f3f;
+  }
+
+  .discount-in-euro {
+    font-size: 18px;
+    text-align: right;
+
+    .icon {
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+  .all-price-text {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .all-price-number {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+
+    .icon {
+      width: 15px;
+      height: 15px;
     }
   }
 

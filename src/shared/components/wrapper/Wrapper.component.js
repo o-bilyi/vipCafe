@@ -157,7 +157,7 @@ export default class Wrapper extends React.Component {
                 <Button className="send-to-manager">НАПИСАТИ МЕНЕДЖЕРУ</Button>
               </div>
               :
-              <List>
+              <List className="menu-item-wrap">
                 {managerBlock}
               </List>
           }
