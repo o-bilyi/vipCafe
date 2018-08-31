@@ -3,7 +3,10 @@ import {Button} from '@material-ui/core';
 import Item from './components/Item.component';
 import ItemMobile from './components/ItemMobile.component';
 import {DeviceSizeService, euroSymbol} from 'utilits/index';
+import {connect} from 'react-redux';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
+import {bindActionCreators} from 'redux';
+import {loginAction} from '../../core/actions';
 
 const items = [
   {
@@ -64,7 +67,7 @@ const items = [
   }
 ];
 
-export default class Basket extends React.Component {
+class Basket extends React.Component {
   state = {
     percent: 0,
     allPrice: 0
@@ -203,3 +206,17 @@ export default class Basket extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth.isAuthorized,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    loginAction,
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket)
