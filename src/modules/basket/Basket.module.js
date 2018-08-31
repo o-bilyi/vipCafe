@@ -1,7 +1,8 @@
 import React from 'react';
 import {Button} from '@material-ui/core';
-import {DeviceSizeService, euroSymbol} from 'utilits/index';
 import Item from './components/Item.component';
+import ItemMobile from './components/ItemMobile.component';
+import {DeviceSizeService, euroSymbol} from 'utilits/index';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
 const items = [
@@ -92,54 +93,56 @@ export default class Basket extends React.Component {
   _getContent = () => {
     const {allPrice,percent} = this.state;
 
-    if (DeviceSizeService.size.width < 768) {
+    if (DeviceSizeService.size.width > 768) {
       return (
-        <div className="width-container">
-          <div className="max-height">
-            <table className="basket-table">
-              <thead>
-              <tr>
-                <th className="basket-title title-and-count">В кошику: {items.length}</th>
-                <th className="basket-title basket-title-empty"/>
-                <th className="basket-title">Кількість шт. (кг)</th>
-                <th className="basket-title">Ціна за шт. (кг)</th>
-                <th className="basket-title">Заг. вартість</th>
-              </tr>
-              </thead>
-              <tbody className="table-body">
-              {
-                items.map((item, key) => {
-                  return (
-                    <Item
-                      key={key}
-                      id={item.id}
-                      img={item.img}
-                      title={item.title}
-                      countItem={item.countItem}
-                      properties={item.properties}
-                      getAllPrice={this.getAllPrice}
-                      priceWithOne={item.priceWithOne}
-                    />
-                  );
-                })
-              }
-              </tbody>
-            </table>
-          </div>
-          <div className="buttons-and-all-price-wrap">
-            <div className="buttons-wrap">
-              <Button className="clear-basket">очистити кошик</Button>
-              <Button className="to-order">оформити замовлення</Button>
+        <div className="basket-wrap">
+          <div className="width-container">
+            <div className="max-height">
+              <table className="basket-table">
+                <thead>
+                <tr>
+                  <th className="basket-title title-and-count">В кошику: {items.length}</th>
+                  <th className="basket-title basket-title-empty"/>
+                  <th className="basket-title">Кількість шт. (кг)</th>
+                  <th className="basket-title">Ціна за шт. (кг)</th>
+                  <th className="basket-title">Заг. вартість</th>
+                </tr>
+                </thead>
+                <tbody className="table-body">
+                {
+                  items.map((item, key) => {
+                    return (
+                      <Item
+                        key={key}
+                        id={item.id}
+                        img={item.img}
+                        title={item.title}
+                        countItem={item.countItem}
+                        properties={item.properties}
+                        getAllPrice={this.getAllPrice}
+                        priceWithOne={item.priceWithOne}
+                      />
+                    );
+                  })
+                }
+                </tbody>
+              </table>
             </div>
-            <div className="price-wrap">
-              <h5 className="discount">
-                <span className="discount-text">Ваша знижка: <span className="percent">{percent}%</span></span>
-                <span className="discount-in-euro">{this._getDiscountPrice()}{euroSymbol}</span>
-              </h5>
-              <h2 className="all-price-wrap">
-                <span className="all-price-text">Всього до оплати:</span>
-                <span className="all-price-number">{allPrice}{euroSymbol}</span>
-              </h2>
+            <div className="buttons-and-all-price-wrap">
+              <div className="buttons-wrap">
+                <Button className="clear-basket">очистити кошик</Button>
+                <Button className="to-order">оформити замовлення</Button>
+              </div>
+              <div className="price-wrap">
+                <h5 className="discount">
+                  <span className="discount-text">Ваша знижка: <span className="percent">{percent}%</span></span>
+                  <span className="discount-in-euro">{this._getDiscountPrice()}{euroSymbol}</span>
+                </h5>
+                <h2 className="all-price-wrap">
+                  <span className="all-price-text">Всього до оплати:</span>
+                  <span className="all-price-number">{allPrice}{euroSymbol}</span>
+                </h2>
+              </div>
             </div>
           </div>
         </div>
@@ -147,67 +150,55 @@ export default class Basket extends React.Component {
     }
 
     return (
-      <div className="width-container">
-        <div className="max-height">
-          <table className="basket-table">
-            <thead>
-            <tr>
-              <th className="basket-title title-and-count">В кошику: {items.length}</th>
-              <th className="basket-title basket-title-empty"/>
-              <th className="basket-title">Кількість шт. (кг)</th>
-              <th className="basket-title">Ціна за шт. (кг)</th>
-              <th className="basket-title">Заг. вартість</th>
-            </tr>
-            </thead>
-            <tbody className="table-body">
-            {
-              items.map((item, key) => {
-                return (
-                  <Item
-                    key={key}
-                    id={item.id}
-                    img={item.img}
-                    title={item.title}
-                    countItem={item.countItem}
-                    properties={item.properties}
-                    getAllPrice={this.getAllPrice}
-                    priceWithOne={item.priceWithOne}
-                  />
-                );
-              })
-            }
-            </tbody>
-          </table>
-        </div>
-        <div className="buttons-and-all-price-wrap">
-          <div className="buttons-wrap">
-            <Button className="clear-basket">очистити кошик</Button>
-            <Button className="to-order">оформити замовлення</Button>
-          </div>
-          <div className="price-wrap">
-            <h5 className="discount">
-              <span className="discount-text">Ваша знижка: <span className="percent">{percent}%</span></span>
-              <span className="discount-in-euro">{this._getDiscountPrice()}{euroSymbol}</span>
-            </h5>
-            <h2 className="all-price-wrap">
-              <span className="all-price-text">Всього до оплати:</span>
-              <span className="all-price-number">{allPrice}{euroSymbol}</span>
-            </h2>
-          </div>
-        </div>
+      <div className="basket-wrap basket-mobile-wrap">
+       <div className="width-container">
+         <div className="buttons-and-all-price-wrap">
+           <div className="price-wrap">
+             <h5 className="discount">
+               <span className="discount-text">Ваша знижка: <span className="percent">{percent}%</span></span>
+               <span className="discount-in-euro">{this._getDiscountPrice()}{euroSymbol}</span>
+             </h5>
+             <h2 className="all-price-wrap">
+               <span className="all-price-text">Всього до оплати:</span>
+               <span className="all-price-number">{allPrice}{euroSymbol}</span>
+             </h2>
+           </div>
+           <div className="buttons-wrap">
+             <Button className="clear-basket">очистити кошик</Button>
+             <Button className="to-order">оформити замовлення</Button>
+           </div>
+         </div>
+
+         <div className="mobile-basket">
+           <h3 className="basket-title title-and-count">В кошику: {items.length}</h3>
+           {
+             items.map((item, key) => {
+               return (
+                 <ItemMobile
+                   key={key}
+                   id={item.id}
+                   img={item.img}
+                   title={item.title}
+                   countItem={item.countItem}
+                   properties={item.properties}
+                   getAllPrice={this.getAllPrice}
+                   priceWithOne={item.priceWithOne}
+                 />
+               );
+             })
+           }
+         </div>
+       </div>
       </div>
     )
-
   };
 
   render() {
     return (
       <Wrapper>
-        <div className="basket-wrap">
-          {
-            this._getContent()
-          }
-        </div>
+        {
+          this._getContent()
+        }
       </Wrapper>
     );
   }

@@ -208,6 +208,12 @@
       margin: 10px;
     }
   }
+
+  .wrapper {
+    .clever-img {
+      display: none;
+    }
+  }
 }
 
 @media (max-width: 680px) {

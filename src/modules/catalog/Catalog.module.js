@@ -5,11 +5,10 @@ import CakeIcon from '@material-ui/icons/Cake';
 import {DeviceSizeService} from 'utilits/index';
 import ArrowIcon from '@material-ui/icons/ArrowBack';
 import connect from 'react-redux/es/connect/connect';
-import Dialog from '@material-ui/core/Dialog/Dialog';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import ItemGoods from 'shared/components/goods/ItemGoods.component';
 import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
-import {MenuItem, Button, Select, InputLabel, FormControl,withStyles} from '@material-ui/core';
+import {MenuItem, Button, Select, InputLabel, FormControl,Dialog,withStyles} from '@material-ui/core';
 
 const item = [
   {
@@ -348,25 +347,25 @@ class Catalog extends React.Component {
           <div className="tab-categories">
             <Button onClick={() => this.handleChangeGoods('coffee')}
                     classes={{label: 'tab-item-wrap'}}
-                    className={classNames('tab-item', coffee && 'active')}>
+                    className={classNames('tab-item coffee', coffee && 'active')}>
               <CakeIcon className="tab-icon"/>
               <span className="text">кава</span>
             </Button>
             <Button onClick={() => this.handleChangeGoods('cheeseAndMeat')}
                     classes={{label: 'tab-item-wrap'}}
-                    className={classNames('tab-item', cheeseAndMeat && 'active')}>
+                    className={classNames('tab-item cheeseAndMeat', cheeseAndMeat && 'active')}>
               <CakeIcon className="tab-icon"/>
               <span className="text">сир/м'ясо</span>
             </Button>
             <Button onClick={() => this.handleChangeGoods('grocery')}
                     classes={{label: 'tab-item-wrap'}}
-                    className={classNames('tab-item', grocery && 'active')}>
+                    className={classNames('tab-item grocery', grocery && 'active')}>
               <CakeIcon className="tab-icon"/>
               <span className="text">бакалія</span>
             </Button>
             <Button onClick={() => this.handleChangeGoods('chocolate')}
                     classes={{label: 'tab-item-wrap'}}
-                    className={classNames('tab-item', chocolate && 'active')}>
+                    className={classNames('tab-item chocolate', chocolate && 'active')}>
               <CakeIcon className="tab-icon"/>
               <span className="text">шоколад</span>
             </Button>

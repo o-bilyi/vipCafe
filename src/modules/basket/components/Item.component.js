@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {euroSymbol} from 'utilits/index';
 import ClearIcon from '@material-ui/icons/Clear';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
@@ -22,12 +22,12 @@ export default class Item extends React.Component {
     priceWithOne : this.props.priceWithOne ? this.props.priceWithOne : 0
   };
 
-  _copyOrRemoveItem = (method, id) => () => {
+  copyOrRemoveItem = (method, id) => () => {
     console.warn(method);
     console.warn(id);
   };
 
-  _incrementOrDecrementItem = (increment) => () => {
+  incrementOrDecrementItem = (increment) => () => {
     if(increment) {
       this.setState({
         countItem : this.state.countItem + 1
@@ -39,22 +39,21 @@ export default class Item extends React.Component {
     }
   };
 
-  _changeCountItem = (value) => {
+  changeCountItem = (value) => {
     this.setState({
       countItem : value
     })
   };
 
-  render() {
+  getContent = () => {
     const {id,img, title,properties,getAllPrice} = this.props;
     const {countItem, priceWithOne} = this.state;
-
     return (
       <tr className="table-tr">
         <td className="buttons-and-img">
           <div className="buttons">
-            <button onClick={this._copyOrRemoveItem('remove', id)} className="remove-item"><ClearIcon className="icon"/></button>
-            <button onClick={this._copyOrRemoveItem('copy', id)} className="copy-item"><FileCopyIcon className="icon"/></button>
+            <button onClick={this.copyOrRemoveItem('remove', id)} className="remove-item"><ClearIcon className="icon"/></button>
+            <button onClick={this.copyOrRemoveItem('copy', id)} className="copy-item"><FileCopyIcon className="icon"/></button>
           </div>
           <div className="image-wrap">
             <img src={img} className="img-item" alt="img-item"/>
@@ -74,26 +73,30 @@ export default class Item extends React.Component {
         </td>
         <td className="border-right">
           <div className="count-item-wrap">
-            <button className="increment-item" onClick={this._incrementOrDecrementItem(false)}>
+            <button className="increment-item" onClick={this.incrementOrDecrementItem(false)}>
               <KeyboardArrowLeftIcon className="icon"/>
             </button>
             <input type="number" min={1} className="count-item"
-                   onChange={(value) => this._changeCountItem(value)}
+                   onChange={(value) => this.changeCountItem(value)}
                    value={countItem}/>
-            <button className="decrement-item" onClick={this._incrementOrDecrementItem(true)}>
+            <button className="decrement-item" onClick={this.incrementOrDecrementItem(true)}>
               <KeyboardArrowRightIcon className="icon"/>
             </button>
           </div>
         </td>
         <td className="price-with-one border-right">
           {priceWithOne}
-          <EuroSymbolIcon className="icon"/>
+          {euroSymbol}
         </td>
         <td className="all-price">
           {getAllPrice(priceWithOne, countItem)}
-          <EuroSymbolIcon className="icon"/>
+          {euroSymbol}
         </td>
       </tr>
     );
+  };
+
+  render() {
+    return this.getContent()
   }
 }

@@ -19,10 +19,37 @@
       text-transform: uppercase;
       border: 1px solid rgba(104, 89, 76, 0.2);
 
+      &.coffee {
+        &.active,
+        &:hover {
+          background-color: #4c4743;
+        }
+      }
+
+      &.cheeseAndMeat {
+        &.active,
+        &:hover {
+          background-color: #bf6d25;
+        }
+      }
+
+      &.grocery {
+        &.active,
+        &:hover {
+          background-color: #2bb26d;
+        }
+      }
+
+      &.chocolate {
+        &.active,
+        &:hover {
+          background-color: #68594c;
+        }
+      }
+
       &.active,
       &:hover {
         color: #fff;
-        background-color: #bf6d25;
 
         .tab-icon {
           fill: #fff;
