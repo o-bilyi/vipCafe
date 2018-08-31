@@ -5,6 +5,8 @@ import {navigationScheme} from 'core';
 import ADBIcon from '@material-ui/icons/Adb';
 import Dialog from '@material-ui/core/Dialog';
 import WarningIcon from '@material-ui/icons/ErrorOutline';
+import {store} from 'index';
+import {addToBasket} from 'core/actions/basket';
 
 export default class ItemGoods extends React.Component {
   static propTypes = {
@@ -36,8 +38,8 @@ export default class ItemGoods extends React.Component {
     })
   };
 
-  _addToBasket = (id,countItems) => () => {
-    console.warn("add", id, countItems);
+  _addToBasket = (id, count) => () => {
+    store.dispatch(addToBasket({id, count}))
   };
 
   _getTopContent = () => {

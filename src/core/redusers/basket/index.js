@@ -14,9 +14,10 @@ const calculatePrice = (items) => {
   return price;
 };
 
-const changeAndAddHAndler = (state, action) => {
-  const newItems = state.items.filter((i) => action.item.id !== i.id);
-  newItems.push(action.item);
+const changeAndAddHandler = (state, action) => {
+  const item = action.payload.item;
+  const newItems = state.items.filter((i) => item.id !== i.id);
+  newItems.push(item);
   return {
     ...state,
     items : newItems,
@@ -28,6 +29,6 @@ export const basket = generateReducer(initialState, {
   [basketActionTypes.REMOVE_ALL_BASKET_ITEMS_ACTION]: () => {
     return initialState;
   },
-  [basketActionTypes.ADD_BASKET_ITEM_ACTION]: changeAndAddHAndler,
-  [basketActionTypes.CHANGE_BASKET_ITEM_ACTION]: changeAndAddHAndler,
+  [basketActionTypes.ADD_BASKET_ITEM_ACTION]: changeAndAddHandler,
+  [basketActionTypes.CHANGE_BASKET_ITEM_ACTION]: changeAndAddHandler,
 });
