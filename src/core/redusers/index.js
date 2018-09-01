@@ -1,14 +1,20 @@
 import {auth} from './auth';
-import {userProfile} from './users';
 import {basket} from './basket';
+import {archive} from './archive';
+import {catalog} from './catalog';
+import {userProfile} from './users';
 import {combineReducers} from 'redux';
+import {newArrivals} from './newArrivals';
 import {routerReducer as routing} from 'react-router-redux';
 import {reducer as toastrReducer} from 'react-redux-toastr';
 
 export default combineReducers({
   routing,
-  userProfile,
   auth,
+  userProfile,
+  catalog,
+  newArrivals,
   basket,
+  archive,
   toastr : toastrReducer
 });

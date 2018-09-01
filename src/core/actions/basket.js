@@ -5,9 +5,8 @@ export function addToBasket(item) {
     type: basketActionTypes.ADD_BASKET_ITEM_ACTION,
     payload: {
       item : {
-        ...item,
-        price : 10
+        ...item
       }
-    },
+    }
   };
 }

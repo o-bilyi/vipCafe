@@ -12,14 +12,14 @@ export default class Item extends React.Component {
     img : PropTypes.string,
     title : PropTypes.string,
     getAllPrice: PropTypes.func,
-    countItem : PropTypes.number,
+    count : PropTypes.number,
     properties : PropTypes.array,
-    priceWithOne : PropTypes.number
+    price : PropTypes.number
   };
 
   state = {
-    countItem : this.props.countItem ? this.props.countItem : 0,
-    priceWithOne : this.props.priceWithOne ? this.props.priceWithOne : 0
+    count : this.props.count,
+    price : this.props.price
   };
 
   copyOrRemoveItem = (method, id) => () => {
@@ -30,24 +30,24 @@ export default class Item extends React.Component {
   incrementOrDecrementItem = (increment) => () => {
     if(increment) {
       this.setState({
-        countItem : this.state.countItem + 1
+        count : this.state.count + 1
       })
     }else {
       this.setState({
-        countItem : this.state.countItem > 1 ? this.state.countItem - 1 : this.state.countItem
+        count : this.state.count > 1 ? this.state.count - 1 : this.state.count
       })
     }
   };
 
   changeCountItem = (value) => {
     this.setState({
-      countItem : value
+      count : value
     })
   };
 
   getContent = () => {
     const {id,img, title,properties,getAllPrice} = this.props;
-    const {countItem, priceWithOne} = this.state;
+    const {count, price} = this.state;
     return (
       <tr className="table-tr">
         <td className="buttons-and-img">
@@ -78,18 +78,18 @@ export default class Item extends React.Component {
             </button>
             <input type="number" min={1} className="count-item"
                    onChange={(value) => this.changeCountItem(value)}
-                   value={countItem}/>
+                   value={count}/>
             <button className="decrement-item" onClick={this.incrementOrDecrementItem(true)}>
               <KeyboardArrowRightIcon className="icon"/>
             </button>
           </div>
         </td>
         <td className="price-with-one border-right">
-          {priceWithOne}
+          {price}
           {euroSymbol}
         </td>
         <td className="all-price">
-          {getAllPrice(priceWithOne, countItem)}
+          {getAllPrice(price, count)}
           {euroSymbol}
         </td>
       </tr>

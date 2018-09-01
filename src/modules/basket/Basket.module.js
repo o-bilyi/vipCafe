@@ -1,76 +1,21 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {Button} from '@material-ui/core';
 import Item from './components/Item.component';
 import ItemMobile from './components/ItemMobile.component';
 import {DeviceSizeService, euroSymbol} from 'utilits/index';
-import {connect} from 'react-redux';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
-import {bindActionCreators} from 'redux';
-import {loginAction} from '../../core/actions';
-
-const items = [
-  {
-    id : 1,
-    img : 'img/img-item.png',
-    title : 'Lavazza Crema e Aroma Espresso Blue',
-    properties : ['капсульна','капсульна'],
-    countItem : 1,
-    priceWithOne : 20
-  },
-  {
-    id : 2,
-    img : 'img/img-item.png',
-    title : 'Lavazza Crema e Aroma Espresso Blue',
-    properties : ['капсульна','капсульна'],
-    countItem : 3,
-    priceWithOne : 40
-  },
-  {
-    id : 3,
-    img : 'img/img-item.png',
-    title : 'Lavazza Crema e Aroma Espresso Blue',
-    properties : ['капсульна','капсульна'],
-    countItem : 5,
-    priceWithOne : 25
-  },
-  {
-    id : 4,
-    img : 'img/img-item.png',
-    title : 'Lavazza Crema e Aroma Espresso Blue',
-    properties : ['капсульна','капсульна'],
-    countItem : 5,
-    priceWithOne : 25
-  },
-  {
-    id : 5,
-    img : 'img/img-item.png',
-    title : 'Lavazza Crema e Aroma Espresso Blue',
-    properties : ['капсульна','капсульна'],
-    countItem : 5,
-    priceWithOne : 25
-  },
-  {
-    id : 6,
-    img : 'img/img-item.png',
-    title : 'Lavazza Crema e Aroma Espresso Blue',
-    properties : ['капсульна','капсульна'],
-    countItem : 5,
-    priceWithOne : 25
-  },
-  {
-    id : 7,
-    img : 'img/img-item.png',
-    title : 'Lavazza Crema e Aroma Espresso Blue',
-    properties : ['капсульна','капсульна'],
-    countItem : 5,
-    priceWithOne : 25
-  }
-];
 
 class Basket extends React.Component {
+  static propTypes = {
+    items : PropTypes.array,
+    allPrice : PropTypes.number,
+    discount : PropTypes.number
+  };
+
   state = {
-    percent: 0,
-    allPrice: 0
+    percent: 0
   };
 
   componentDidMount() {
@@ -85,16 +30,16 @@ class Basket extends React.Component {
     return price * count;
   };
 
-  _getDiscountPrice = () => {
-    const {allPrice, percent} = this.state;
-    if (allPrice !== 0 && percent !== 0) {
-      return allPrice * percent / 100;
+  _getDiscountPrice = (price, percent) => {
+    if (price !== 0 && percent !== 0) {
+      return price * percent / 100;
     }
     return 0
   };
 
   _getContent = () => {
-    const {allPrice,percent} = this.state;
+    const {percent} = this.state;
+    const {items, allPrice} = this.props;
 
     if (DeviceSizeService.size.width > 768) {
       return (
@@ -120,10 +65,10 @@ class Basket extends React.Component {
                         id={item.id}
                         img={item.img}
                         title={item.title}
-                        countItem={item.countItem}
+                        count={item.count}
                         properties={item.properties}
                         getAllPrice={this.getAllPrice}
-                        priceWithOne={item.priceWithOne}
+                        price={item.price}
                       />
                     );
                   })
@@ -182,10 +127,10 @@ class Basket extends React.Component {
                    id={item.id}
                    img={item.img}
                    title={item.title}
-                   countItem={item.countItem}
+                   count={item.count}
                    properties={item.properties}
                    getAllPrice={this.getAllPrice}
-                   priceWithOne={item.priceWithOne}
+                   price={item.price}
                  />
                );
              })
@@ -209,14 +154,10 @@ class Basket extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth.isAuthorized,
+    items: state.basket.items,
+    allPrice : state.basket.price,
+    discount : state.userProfile.discount
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    loginAction,
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Basket)
+export default connect(mapStateToProps)(Basket)

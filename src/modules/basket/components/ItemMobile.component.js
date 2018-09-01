@@ -9,8 +9,14 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 export default class ItemMobile extends Item {
 
   getContent = () => {
-    const {id,img, title,properties,getAllPrice} = this.props;
-    const {countItem, priceWithOne} = this.state;
+    const {
+      id,
+      img,
+      title,
+      getAllPrice,
+      properties,
+    } = this.props;
+    const {count, price} = this.state;
 
     return (
       <div className="item-wrap-mobile">
@@ -37,14 +43,14 @@ export default class ItemMobile extends Item {
             </button>
             <input type="number" min={1} className="count-item"
                    onChange={(value) => this.changeCountItem(value)}
-                   value={countItem}/>
+                   value={count}/>
             <button className="decrement-item" onClick={this.incrementOrDecrementItem(true)}>
               <KeyboardArrowRightIcon className="icon"/>
             </button>
           </div>
 
           <div className="all-price">
-            {getAllPrice(priceWithOne, countItem)}
+            {getAllPrice(price, count)}
             {euroSymbol}
           </div>
 
@@ -52,6 +58,7 @@ export default class ItemMobile extends Item {
             <button onClick={this.copyOrRemoveItem('remove', id)} className="remove-item"><ClearIcon className="icon"/></button>
             <button onClick={this.copyOrRemoveItem('copy', id)} className="copy-item"><FileCopyIcon className="icon"/></button>
           </div>
+
         </div>
 
       </div>

@@ -12,13 +12,13 @@ export default class ItemWithPrice extends ItemGoods {
 
         <input
           type="number" min="1" className="count"
-          value={this.state.countItem}
-          onChange={(value) => this.countItem(value)}/>
+          value={this.state.count}
+          onChange={(value) => this.count(value)}/>
         <span className="total-price">= {this.getTotalCost()} {euroSymbol}</span>
 
       </div>,
 
-      <Button key={2} onClick={this._addToBasket(this.props.id, this.state.countItem)} className="add-to-basket">додати в кошик</Button>
+      <Button key={2} onClick={this._addToBasket(this.props)} className="add-to-basket">додати в кошик</Button>
     ];
   }
 }

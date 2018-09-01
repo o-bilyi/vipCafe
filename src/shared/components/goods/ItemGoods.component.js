@@ -13,23 +13,25 @@ export default class ItemGoods extends React.Component {
     id : PropTypes.number,
     img : PropTypes.string,
     title : PropTypes.string,
-    number : PropTypes.number,
-    priceWithOne : PropTypes.number,
+    price : PropTypes.number,
+    count : PropTypes.number,
+    properties : PropTypes.array,
+    numberInPackage : PropTypes.number,
   };
 
   state = {
-    countItem : '1',
+    count : this.props.count,
     openDescriptionModal : false,
   };
 
   countItem = (value) => {
     this.setState({
-      countItem : value.target.value
+      count : Number(value.target.value)
     })
   };
 
   getTotalCost = () => {
-    return this.state.countItem * this.props.priceWithOne;
+    return this.state.count * this.props.price;
   };
 
   _handleOpenDescriptionModal = () => {
@@ -38,12 +40,15 @@ export default class ItemGoods extends React.Component {
     })
   };
 
-  _addToBasket = (id, count) => () => {
-    store.dispatch(addToBasket({id, count}))
+  _addToBasket = (item) => () => {
+    store.dispatch(addToBasket({
+      ...item,
+      count : this.state.count
+    }))
   };
 
   _getTopContent = () => {
-    const {img,title,number} = this.props;
+    const {img,title,numberInPackage,properties} = this.props;
 
     return [
       <div key={1} className='item-image-wrap'>
@@ -55,20 +60,22 @@ export default class ItemGoods extends React.Component {
       <div key={3} className='item-properties-wrap'>
 
         <div className="item-types">
-          <div className='item-properties'>
-            <ADBIcon className='icon'/>
-            <span className='text'>капсульна</span>
-          </div>
-          <div className='item-properties'>
-            <ADBIcon className='icon'/>
-            <span className='text'>капсульна</span>
-          </div>
+          {
+           properties.map((item, key) => {
+             return (
+               <div className='item-properties' key={key}>
+                 <ADBIcon className='icon'/>
+                 <span className='text'>{item}</span>
+               </div>
+             )
+           })
+          }
         </div>
 
         <div className="in-the-package">
           <div className='item-properties'>
             <ADBIcon className='icon'/>
-            <span className='text'>в упаковці {number} капсул</span>
+            <span className='text'>в упаковці {numberInPackage} капсул</span>
           </div>
         </div>
 

@@ -24,7 +24,8 @@ export const firstMenuItems = [
   {
     to: navigationScheme.newArrivals,
     icon: TransformIcon,
-    text: 'нові поступлення'
+    text: 'нові поступлення',
+    number: <CountItem storageTarget="newArrivals"/>,
   },
 ];
 
@@ -33,7 +34,7 @@ export const secondMenuItems = [
     to: navigationScheme.archiveOfOrders,
     icon: ArchiveIcon,
     text: 'архів замовлень',
-    number: <CountItem storageTarget="archiveOfOrders"/>,
+    number: <CountItem storageTarget="archive"/>,
   },
   {
     to: navigationScheme.basket,

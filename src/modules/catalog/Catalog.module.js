@@ -10,63 +10,6 @@ import ItemGoods from 'shared/components/goods/ItemGoods.component';
 import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
 import {MenuItem, Button, Select, InputLabel, FormControl,Dialog,withStyles} from '@material-ui/core';
 
-const item = [
-  {
-    id: 1,
-    title: 'Lavazza Crema e Aroma Espresso Blue',
-    img: '/img/img-item.png',
-    type: 'capsule',
-    number: 100,
-    priceWithOne: 12,
-    numberInPackage: 10000,
-  },
-  {
-    id: 2,
-    title: 'Lavazza Crema e Aroma Espresso Blue',
-    img: '/img/img-item.png',
-    type: 'grounded',
-    number: 20,
-    priceWithOne: 12,
-    numberInPackage: 1000,
-  },
-  {
-    id: 3,
-    title: 'Lavazza Crema e Aroma Espresso Blue',
-    img: '/img/img-item.png',
-    type: 'cereal',
-    number: 20,
-    priceWithOne: 12,
-    numberInPackage: 1000,
-  },
-  {
-    id: 4,
-    title: 'Lavazza Crema e Aroma Espresso Blue',
-    img: '/img/img-item.png',
-    type: 'capsule',
-    number: 100,
-    priceWithOne: 12,
-    numberInPackage: 10000,
-  },
-  {
-    id: 5,
-    title: 'Lavazza Crema e Aroma Espresso Blue',
-    img: '/img/img-item.png',
-    type: 'grounded',
-    number: 20,
-    priceWithOne: 12,
-    numberInPackage: 1000,
-  },
-  {
-    id: 6,
-    title: 'Lavazza Crema e Aroma Espresso Blue',
-    img: '/img/img-item.png',
-    type: 'cereal',
-    number: 20,
-    priceWithOne: 12,
-    numberInPackage: 1000,
-  },
-];
-
 const cheeseSelect = ['СИР', 'М\'ЯСО'];
 const sortSelect = ['ВІД ДОРОГИХ ДО ДЕШЕВИХ', 'ВІД ДЕШЕВИХ ДО ДОРОГИХ'];
 const brandSelect = ['РОСІЙСЬКИЙ', 'МАЦАРЕЛЛА'];
@@ -93,6 +36,7 @@ const styles = {
 
 class Catalog extends React.Component {
   static propTypes = {
+    items : PropTypes.array,
     isAuthorized: PropTypes.bool
   };
 
@@ -377,7 +321,7 @@ class Catalog extends React.Component {
 
           <div className="goods-wrap">
             {
-              item.map((item, key) => {
+              this.props.items.map((item, key) => {
                 return this.getGoodsItem(item, key);
               })
             }
@@ -509,7 +453,8 @@ class Catalog extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    isAuthorized: state.auth.isAuthorized
+    isAuthorized: state.auth.isAuthorized,
+    items : state.catalog.items
   };
 };
 
