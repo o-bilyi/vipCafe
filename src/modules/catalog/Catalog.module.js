@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import CakeIcon from '@material-ui/icons/Cake';
+
+import SteakIcon from 'assets/svg/steak.svg';
+import CoffeeIcon from 'assets/svg/coffee.svg';
+import CheeseIcon from 'assets/svg/cheese.svg';
+import GroceryIcon from 'assets/svg/grocery.svg';
+import ChocolateIcon from 'assets/svg/chocolate.svg';
+
 import {DeviceSizeService} from 'utilits/index';
 import ArrowIcon from '@material-ui/icons/ArrowBack';
 import connect from 'react-redux/es/connect/connect';
@@ -292,25 +298,30 @@ class Catalog extends React.Component {
             <Button onClick={() => this.handleChangeGoods('coffee')}
                     classes={{label: 'tab-item-wrap'}}
                     className={classNames('tab-item coffee', coffee && 'active')}>
-              <CakeIcon className="tab-icon"/>
+              <CoffeeIcon className="tab-icon"/>
               <span className="text">кава</span>
             </Button>
             <Button onClick={() => this.handleChangeGoods('cheeseAndMeat')}
                     classes={{label: 'tab-item-wrap'}}
                     className={classNames('tab-item cheeseAndMeat', cheeseAndMeat && 'active')}>
-              <CakeIcon className="tab-icon"/>
+              <span className="tab-icon">
+                <SteakIcon className="steak-icon"/>
+                <CheeseIcon className="cheese-icon"/>
+              </span>
               <span className="text">сир/м'ясо</span>
             </Button>
             <Button onClick={() => this.handleChangeGoods('grocery')}
                     classes={{label: 'tab-item-wrap'}}
                     className={classNames('tab-item grocery', grocery && 'active')}>
-              <CakeIcon className="tab-icon"/>
+              <GroceryIcon className="tab-icon"/>
               <span className="text">бакалія</span>
             </Button>
             <Button onClick={() => this.handleChangeGoods('chocolate')}
                     classes={{label: 'tab-item-wrap'}}
                     className={classNames('tab-item chocolate', chocolate && 'active')}>
-              <CakeIcon className="tab-icon"/>
+              <span className="tab-icon">
+                <ChocolateIcon className="chocolate-icon"/>
+              </span>
               <span className="text">шоколад</span>
             </Button>
           </div>

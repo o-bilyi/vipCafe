@@ -13,7 +13,7 @@ export default class ItemWithPrice extends ItemGoods {
         <input
           type="number" min="1" className="count"
           value={this.state.count}
-          onChange={(value) => this.count(value)}/>
+          onChange={(value) => this.countItem(value)}/>
         <span className="total-price">= {this.getTotalCost()} {euroSymbol}</span>
 
       </div>,

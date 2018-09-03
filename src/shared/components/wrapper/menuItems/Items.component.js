@@ -1,14 +1,14 @@
 import React from 'react';
 import {navigationScheme} from 'core';
 import CountItem from './CountItem.component';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import {ListItem,ListItemIcon} from '@material-ui/core';
 
-import StoreIcon from '@material-ui/icons/Store';
-import ArchiveIcon from '@material-ui/icons/Archive';
-import TransformIcon from '@material-ui/icons/Transform';
-import DescriptionIcon from '@material-ui/icons/Description';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import StoreIcon from 'assets/svg/navigation-menu/store.svg';
+import DraftsIcon from 'assets/svg/navigation-menu/envelope.svg';
+import ArchiveIcon from 'assets/svg/navigation-menu/archive.svg';
+import TransformIcon from 'assets/svg/navigation-menu/new-item.svg';
+import ShoppingCartIcon from 'assets/svg/navigation-menu/basket.svg';
+import SharedAndOffersIcon from 'assets/svg/navigation-menu/shares-and-offers.svg';
 
 export const firstMenuItems = [
   {
@@ -18,7 +18,7 @@ export const firstMenuItems = [
   },
   {
     to: navigationScheme.sharesAndOffers,
-    icon: DescriptionIcon,
+    icon: SharedAndOffersIcon,
     text: 'акції і пропозиції'
   },
   {

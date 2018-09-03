@@ -6,6 +6,10 @@
   align-items: flex-end;
   background-color: #3c3c3c;
 
+  .search-icon {
+    width: 20px;
+  }
+
   &.open {
     width: 100%;
     padding-left: 20px;

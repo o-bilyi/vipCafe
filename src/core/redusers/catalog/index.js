@@ -7,10 +7,23 @@ const initialState = {
       id : 1,
       img : 'img/img-item.png',
       title : 'Lavazza Crema e Aroma Espresso Blue',
+      // properties : [{
+      //   grounded : {
+      //     text : 'мелена'
+      //   },
+      //   capsule : {
+      //     text : 'капсульна'
+      //   },
+      //   cereal : {
+      //     text : 'зернова'
+      //   },
+      //   numberInPackage: 10000,
+      //   numberInBox : 20
+      // }],
       properties : ['капсульна','капсульна'],
+      numberInPackage: 10000,
       count : 1,
       price : 20,
-      numberInPackage: 10000,
     },
     {
       id : 2,

@@ -64,8 +64,32 @@
     .tab-icon {
       width: 32px;
       margin-right: 15px;
+      align-items: center;
+      display: inline-flex;
+      flex-direction: column;
       vertical-align: middle;
+      justify-content: center;
       fill: rgba(86, 86, 86, 0.8);
+    }
+
+    .steak-icon,
+    .cheese-icon {
+      width: 20px;
+      position: relative;
+    }
+
+    .steak-icon {
+      top: 4px;
+      right: -8px;
+    }
+
+    .cheese-icon {
+      left: -8px;
+      bottom: 4px;
+    }
+
+    .chocolate-icon {
+      transform: rotate(90deg);
     }
 
     .text {

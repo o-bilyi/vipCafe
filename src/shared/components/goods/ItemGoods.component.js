@@ -1,12 +1,16 @@
 import React from 'react';
+import {store} from 'index';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {navigationScheme} from 'core';
-import ADBIcon from '@material-ui/icons/Adb';
+import BoxIcon from 'assets/svg/goods-icon/box.svg';
+import GrainsIcon from 'assets/svg/goods-icon/grains.svg';
+import WeightIcon from 'assets/svg/goods-icon/weight-icon.svg';
+import TechnologyIcon from 'assets/svg/goods-icon/technology.svg';
+
 import Dialog from '@material-ui/core/Dialog';
-import WarningIcon from '@material-ui/icons/ErrorOutline';
-import {store} from 'index';
 import {addToBasket} from 'core/actions/basket';
+import WarningIcon from 'assets/svg/warning.svg';
 
 export default class ItemGoods extends React.Component {
   static propTypes = {
@@ -64,7 +68,7 @@ export default class ItemGoods extends React.Component {
            properties.map((item, key) => {
              return (
                <div className='item-properties' key={key}>
-                 <ADBIcon className='icon'/>
+                 <TechnologyIcon className='icon'/>
                  <span className='text'>{item}</span>
                </div>
              )
@@ -74,7 +78,7 @@ export default class ItemGoods extends React.Component {
 
         <div className="in-the-package">
           <div className='item-properties'>
-            <ADBIcon className='icon'/>
+            <BoxIcon className='icon'/>
             <span className='text'>в упаковці {numberInPackage} капсул</span>
           </div>
         </div>

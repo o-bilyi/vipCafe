@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from 'assets/svg/search.svg';
 import {Button, TextField} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 

@@ -6,8 +6,9 @@ import {logoutAction} from 'core/actions';
 import {navigationScheme} from 'core/index';
 import {Dialog,Button} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
-import SettingsIcon from '@material-ui/icons/Settings';
-import PowerIcon from '@material-ui/icons/PowerSettingsNew';
+
+import SettingsIcon from 'assets/svg/settings.svg';
+import PowerIcon from 'assets/svg/shut-down.svg';
 
 class AccountInfo extends React.Component {
   static propTypes = {
