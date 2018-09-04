@@ -1,35 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import 'moment/locale/uk';
+import {Input, Button} from '@material-ui/core';
+import MomentLocaleUtils from 'react-day-picker/moment';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 
-import {Input, TextField, Button, withStyles} from '@material-ui/core';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-});
-
-class ArchiveOfOrders extends React.Component {
+export default class ArchiveOfOrders extends React.Component {
   state = {
-    firstDate : '',
-    secondDate : '',
+    from: null,
+    to: null,
   };
-  handleDateChange = (date,firstDate) => {
-    if(firstDate){
-      this.setState({ firstDate: date.target.value });
-    }else {
-      this.setState({ secondDate: date.target.value });
-    }
+
+  handleChange = (direction) => (value) => {
+    this.setState({
+      [direction] : value
+    });
   };
 
   render() {
+    const { from, to } = this.state;
+    const modifiers = { start: from, end: to };
+
     return (
       <Wrapper>
         <div className="archive-page">
@@ -45,31 +38,45 @@ class ArchiveOfOrders extends React.Component {
               </div>
               <div className="date-wrap">
                 <span className="label">Пошук за період:</span>
-                <div className="first-date">
-                  <TextField
-                    type="date"
-                    id="first-date"
-                    InputProps={{
-                      classes: {
-                        root: 'date-input-wrap',
-                        input: 'date-input',
-                      },
+                <div className="InputFromTo">
+                  <DayPickerInput
+                    value={from}
+                    placeholder="From"
+                    format="LL"
+                    dayPickerProps={{
+                      selectedDays: [from, {from, to}],
+                      disabledDays: {after: to},
+                      toMonth: to,
+                      modifiers,
+                      numberOfMonths: 1,
+                      locale: 'uk',
+                      localeUtils: MomentLocaleUtils,
                     }}
-                    onChange={date => this.handleDateChange(date, true)}
+                    onDayChange={this.handleChange("from")}
                   />
-                </div>
-                <div className="second-date">
-                  <TextField
-                    type="date"
-                    id="second-date"
-                    InputProps={{
-                      classes: {
-                        root: 'date-input-wrap',
-                        input: 'date-input',
-                      },
-                    }}
-                    onChange={date => this.handleDateChange(date, false)}
-                  />
+
+                  <span className="arrow">/</span>
+
+                  <span className="InputFromTo-to">
+                    <DayPickerInput
+                      ref={el => (this.to = el)}
+                      value={to}
+                      placeholder="To"
+                      format="LL"
+                      dayPickerProps={{
+                        selectedDays: [from, {from, to}],
+                        disabledDays: {before: from},
+                        modifiers,
+                        month: from,
+                        fromMonth: from,
+                        numberOfMonths: 1,
+                        locale: 'uk',
+                        localeUtils: MomentLocaleUtils,
+                      }}
+                      onDayChange={this.handleChange("to")}
+                    />
+                  </span>
+
                 </div>
                 <Button className="reset-date">очистити дату</Button>
               </div>
@@ -77,12 +84,6 @@ class ArchiveOfOrders extends React.Component {
           </div>
         </div>
       </Wrapper>
-    )
+    );
   }
 }
-
-ArchiveOfOrders.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ArchiveOfOrders);
