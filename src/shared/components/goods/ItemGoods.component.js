@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {navigationScheme} from 'core';
 import BoxIcon from 'assets/svg/goods-icon/box.svg';
-import GrainsIcon from 'assets/svg/goods-icon/grains.svg';
-import WeightIcon from 'assets/svg/goods-icon/weight-icon.svg';
+// import GrainsIcon from 'assets/svg/goods-icon/grains.svg';
+// import WeightIcon from 'assets/svg/goods-icon/weight-icon.svg';
 import TechnologyIcon from 'assets/svg/goods-icon/technology.svg';
 
 import Dialog from '@material-ui/core/Dialog';

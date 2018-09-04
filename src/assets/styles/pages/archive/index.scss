@@ -1,0 +1,49 @@
+.archive-page {
+  display: flex;
+  min-height: 100vh;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #393939;
+}
+
+.archive-wrap {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1230px;
+  padding: 60px 20px;
+
+  .archive-head {
+    display: flex;
+    padding: 12px 10px;
+    align-items: center;
+
+    .label {
+      font-size: 14px;
+      margin-right: 15px;
+      color: rgba(250, 250, 250, 0.6);
+    }
+  }
+
+  .search {
+    margin-right: 40px;
+  }
+
+  .date-wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  .date-input-wrap {
+    width: 108px;
+
+    &:after,&:before {
+      border-bottom-width: 1px;
+      border-bottom-color: #b8b8b8 !important;
+    }
+  }
+
+  .date-input{
+    color: #fafafa;
+    font-size: 11px;
+  }
+}

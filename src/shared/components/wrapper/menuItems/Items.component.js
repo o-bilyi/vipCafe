@@ -31,7 +31,7 @@ export const firstMenuItems = [
 
 export const secondMenuItems = [
   {
-    to: navigationScheme.archiveOfOrders,
+    to: navigationScheme.archive,
     icon: ArchiveIcon,
     text: 'архів замовлень',
     number: <CountItem storageTarget="archive"/>,

@@ -11,11 +11,11 @@ export const navigationScheme = {
 
   basket : '/basket',
   catalog : '/catalog',
+  archive : '/archive',
   dashboard: '/dashboard',
   newArrivals : '/new-arrivals',
   privacyPolicy : '/privacy-policy',
   sharesAndOffers : '/shares-and-offers',
-  archiveOfOrders : '/archive-of-orders',
 };
 
 const Loading = () => <div className="loader"><CircularProgress style={{color : green[500]}}/></div>;
@@ -59,12 +59,17 @@ export const MAIN_ROUTES = [
   {
     path: navigationScheme.newArrivals,
     exact: true,
-    component: () => import('../modules/basket/Basket.module')
+    component: () => import('../modules/new-arrivals/NewArrivals.module')
   },
   {
     path: navigationScheme.sharesAndOffers,
     exact: true,
     component: () => import('../modules/shared-and-offers/SharesAndOffers.module')
+  },
+  {
+    path: navigationScheme.archive,
+    exact: true,
+    component: () => import('../modules/archive/Archive.module')
   }
 ];
 
