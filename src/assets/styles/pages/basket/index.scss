@@ -2,14 +2,23 @@
   display: flex;
   color: #2d2b2b;
   min-height: 100vh;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: #393939;
+
+  &.is-empty {
+    align-items: center;
+  }
 
   .basket-title {
     color: #fafafa;
     font-size: 11px;
     padding-bottom: 25px;
+  }
+
+  .basket-is-empty {
+    color: #fafafa;
+    font-size: 26px;
   }
 
   .title-and-count {
@@ -20,7 +29,7 @@
 
   .width-container {
     width: 100%;
-    margin: auto;
+    margin: 60px auto 0;
     max-width: 940px;
     padding: 25px 10px;
   }

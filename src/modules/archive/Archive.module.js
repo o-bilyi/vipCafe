@@ -1,26 +1,222 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import 'moment/locale/uk';
-import {Input, Button} from '@material-ui/core';
+import classNames from 'classnames';
+import {Button} from '@material-ui/core';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
+const initialState = {
+  date : {
+    from: undefined,
+    to: undefined,
+  },
+  selectItem : 0
+};
+
+const items = [
+  {
+    id : 0,
+    date : '28.05.18',
+    num : 14176,
+    title : 'Lavazza Crema e Aroma Espresso Blue',
+    orderAddress : 'Замовлення для Віктора з Вінниці',
+    orders : [
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 1,
+        price : 12
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 10,
+        price : 23
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 20,
+        price : 50
+      }
+    ]
+  },
+  {
+    id : 1,
+    date : '28.06.18',
+    num : 14177,
+    title : 'Lavazza Crema e Aroma Espresso Blue',
+    orderAddress : 'Замовлення для Віктора з Вінниці',
+    orders : [
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 1,
+        price : 12
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 10,
+        price : 23
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 20,
+        price : 50
+      }
+    ]
+  },
+  {
+    id : 2,
+    date : '28.07.18',
+    num : 14178,
+    title : 'Lavazza Crema e Aroma Espresso Blue',
+    orderAddress : 'Замовлення для Віктора з Вінниці',
+    orders : [
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 1,
+        price : 12
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 10,
+        price : 23
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 20,
+        price : 50
+      }
+    ]
+  },
+  {
+    id : 3,
+    date : '28.06.18',
+    num : 14178,
+    title : 'Lavazza Crema e Aroma Espresso Blue',
+    orderAddress : 'Замовлення для Віктора з Вінниці',
+    orders : [
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 1,
+        price : 12
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 10,
+        price : 23
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 20,
+        price : 50
+      }
+    ]
+  },
+  {
+    id : 4,
+    date : '28.05.18',
+    num : 14178,
+    title : 'Lavazza Crema e Aroma Espresso Blue',
+    orderAddress : 'Замовлення для Віктора з Вінниці',
+    orders : [
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 1,
+        price : 12
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 10,
+        price : 23
+      },
+      {
+        img : 'img/img-item.png',
+        title : 'Lavazza Crema e Aroma Espresso Blue',
+        count : 20,
+        price : 50
+      }
+    ]
+  }
+];
+
 export default class ArchiveOfOrders extends React.Component {
-  state = {
-    from: null,
-    to: null,
-  };
+  state = initialState;
 
   handleChange = (direction) => (value) => {
     this.setState({
-      [direction] : value
+      date : {
+        ...this.state.date,
+        [direction] : value
+      }
     });
   };
 
+  _resetDateFilter = () => {
+    this.setState(initialState)
+  };
+
+  _selectItem = (id) => () => {
+    this.setState({
+      selectItem : id
+    })
+  };
+
+  _getContentTab = () => {
+    const selectItem = items.find((item) => item.id === this.state.selectItem);
+
+    return selectItem.orders.map((item,key) => {
+      return (
+        <div className="tab-body">
+          <div className="order-number-wrap">
+            <div className="order-number-and-who-order">
+              <p className="orderNumber">{selectItem.num}</p>
+              <p className="orderAddress">{selectItem.orderAddress}</p>
+            </div>
+          </div>
+          <div className="item" key={key}>
+            {item.img}
+            {item.title}
+            {item.count}
+            {item.price}
+          </div>
+        </div>
+      )
+    });
+  };
+
+  _getHeadTab = () => {
+    return items.map((item, key) => {
+      const itemDate = <li className="list-date-wrap"><span className="list-date">{item.date}</span></li>;
+      return (
+        <ul className="list" key={key}>
+          {itemDate}
+          <li className={classNames("list-item", this.state.selectItem === item.id ? 'active' : '')}
+              onClick={this._selectItem(key)}>
+            <p className="number">№ {item.num}</p>
+            <p className="title">{item.title}</p>
+            <p className="order-address">{item.orderAddress}</p>
+          </li>
+        </ul>
+      )
+    })
+  };
+
   render() {
-    const { from, to } = this.state;
+    const { from, to } = this.state.date;
     const modifiers = { start: from, end: to };
 
     return (
@@ -30,7 +226,7 @@ export default class ArchiveOfOrders extends React.Component {
             <div className="archive-head">
               <div className="search">
                 <label htmlFor="search" className="label">Пошук по номеру чи назві:</label>
-                <Input
+                <input
                   placeholder="141"
                   type="search"
                   className="search-input"
@@ -38,11 +234,12 @@ export default class ArchiveOfOrders extends React.Component {
               </div>
               <div className="date-wrap">
                 <span className="label">Пошук за період:</span>
-                <div className="InputFromTo">
+
+                <div className="date-input-wrap">
                   <DayPickerInput
                     value={from}
-                    placeholder="From"
                     format="LL"
+                    placeholder="--  --  --"
                     dayPickerProps={{
                       selectedDays: [from, {from, to}],
                       disabledDays: {after: to},
@@ -54,15 +251,16 @@ export default class ArchiveOfOrders extends React.Component {
                     }}
                     onDayChange={this.handleChange("from")}
                   />
+                </div>
 
-                  <span className="arrow">/</span>
+                <span className="arrow">/</span>
 
-                  <span className="InputFromTo-to">
+                <div className="date-input-wrap">
                     <DayPickerInput
-                      ref={el => (this.to = el)}
                       value={to}
-                      placeholder="To"
                       format="LL"
+                      placeholder="--  --  --"
+                      ref={el => (this.to = el)}
                       dayPickerProps={{
                         selectedDays: [from, {from, to}],
                         disabledDays: {before: from},
@@ -75,10 +273,21 @@ export default class ArchiveOfOrders extends React.Component {
                       }}
                       onDayChange={this.handleChange("to")}
                     />
-                  </span>
-
                 </div>
-                <Button className="reset-date">очистити дату</Button>
+
+              </div>
+              <Button onClick={this._resetDateFilter} className="reset-date">очистити дату</Button>
+            </div>
+            <div className="archive-body">
+              <div className="tab-head">
+                {
+                  this._getHeadTab()
+                }
+              </div>
+              <div className="tab-body">
+                {
+                  this._getContentTab()
+                }
               </div>
             </div>
           </div>

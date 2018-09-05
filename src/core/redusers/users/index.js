@@ -16,7 +16,7 @@ const initialState = {
   sitePage : null,
   telegram : null,
   viber : null,
-  discount : null,
+  discount : 0,
 };
 
 export const userProfile = generateReducer(initialState, {
