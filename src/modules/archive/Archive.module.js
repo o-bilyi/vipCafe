@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import 'moment/locale/uk';
 import classNames from 'classnames';
+import {euroSymbol} from 'utilits';
 import {Button} from '@material-ui/core';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -21,7 +22,7 @@ const items = [
     date : '28.05.18',
     num : 14176,
     title : 'Lavazza Crema e Aroma Espresso Blue',
-    orderAddress : 'Замовлення для Віктора з Вінниці',
+    orderAddress : 'для Віктора з Вінниці',
     orders : [
       {
         img : 'img/img-item.png',
@@ -175,29 +176,6 @@ export default class ArchiveOfOrders extends React.Component {
     })
   };
 
-  _getContentTab = () => {
-    const selectItem = items.find((item) => item.id === this.state.selectItem);
-
-    return selectItem.orders.map((item,key) => {
-      return (
-        <div className="tab-body">
-          <div className="order-number-wrap">
-            <div className="order-number-and-who-order">
-              <p className="orderNumber">{selectItem.num}</p>
-              <p className="orderAddress">{selectItem.orderAddress}</p>
-            </div>
-          </div>
-          <div className="item" key={key}>
-            {item.img}
-            {item.title}
-            {item.count}
-            {item.price}
-          </div>
-        </div>
-      )
-    });
-  };
-
   _getHeadTab = () => {
     return items.map((item, key) => {
       const itemDate = <li className="list-date-wrap"><span className="list-date">{item.date}</span></li>;
@@ -208,16 +186,33 @@ export default class ArchiveOfOrders extends React.Component {
               onClick={this._selectItem(key)}>
             <p className="number">№ {item.num}</p>
             <p className="title">{item.title}</p>
-            <p className="order-address">{item.orderAddress}</p>
+            <p className="order-address">Замовлення {item.orderAddress}</p>
           </li>
         </ul>
       )
     })
   };
 
+  _getContentTab = () => {
+    const selectItem = items.find((item) => item.id === this.state.selectItem);
+
+    return selectItem.orders.map((item,key) => {
+      return (
+        <div className="item" key={key}>
+          <div className="count-items">Товарів в замовленні: {items.length}</div>
+          {item.img}
+          {item.title}
+          {item.count}
+          {item.price}
+        </div>
+      )
+    });
+  };
+
   render() {
     const { from, to } = this.state.date;
     const modifiers = { start: from, end: to };
+    const selectItem = items.find((item) => item.id === this.state.selectItem);
 
     return (
       <Wrapper>
@@ -285,6 +280,24 @@ export default class ArchiveOfOrders extends React.Component {
                 }
               </div>
               <div className="tab-body">
+
+                <div className="order-number-wrap">
+
+                  <div className="order-number-and-who-order">
+                    <p className="title-order-number">Замовлення №: {selectItem.num}</p>
+                    <p className="order-address">{selectItem.orderAddress}</p>
+                  </div>
+
+                  <div className="border"/>
+
+                  <div className="all-price-wrap">
+                    <p className="all-price-title">Сума замовлення:</p>
+                    <p className="all-price-number">{'12 430'}{euroSymbol}</p>
+                  </div>
+
+                  <Button className="repeat-order">Повторити замовлення</Button>
+                </div>
+
                 {
                   this._getContentTab()
                 }
