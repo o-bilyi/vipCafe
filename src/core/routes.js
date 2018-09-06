@@ -16,6 +16,8 @@ export const navigationScheme = {
   newArrivals : '/new-arrivals',
   privacyPolicy : '/privacy-policy',
   sharesAndOffers : '/shares-and-offers',
+
+  archiveOrder : '/archive-order'
 };
 
 const Loading = () => <div className="loader"><CircularProgress style={{color : green[500]}}/></div>;
@@ -70,6 +72,13 @@ export const MAIN_ROUTES = [
     path: navigationScheme.archive,
     exact: true,
     component: () => import('../modules/archive/Archive.module')
+  },
+  {
+    path: navigationScheme.archiveOrder,
+    component: () => import('../modules/archive/components/ArchiveOrder.component')
+  },
+  {
+    component: () => import('../modules/404/Error.module')
   }
 ];
 

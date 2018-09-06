@@ -313,8 +313,6 @@
     }
   }
 
-  //mobile-style ===============>
-
   .left-block {
     margin-right: 40px;
   }
@@ -324,28 +322,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-
-    .item-title {
-      width: 100%;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .item-count,
-    .item-price,
-    .item-all-price {
-      margin-left: 0;
-      font-size: 14px;
-      color: rgba(57, 57, 57, 0.8);
-    }
-
-    .item-price {
-      margin: 0 3%;
-      padding: 0 10px;
-      border-left: 1px solid #e8e8e8;
-      border-right: 1px solid #e8e8e8;
-    }
   }
 
-  //mobile-style ===============>
 }

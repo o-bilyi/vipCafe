@@ -3,17 +3,20 @@ import React from 'react';
 import 'moment/locale/uk';
 import classNames from 'classnames';
 import {Button} from '@material-ui/core';
-import {DeviceSizeService,euroSymbol} from 'utilits';
+import {DeviceSizeService, euroSymbol} from 'utilits';
 import MomentLocaleUtils from 'react-day-picker/moment';
+import OrderHeader from './components/OrderHeader.component';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
+import RouterService from 'shared/services/RourerService';
+import {navigationScheme} from 'core';
 
 const initialState = {
   date: {
     from: undefined,
     to: undefined,
   },
-  selectItem: 0
+  selectItem: 0,
 };
 
 const items = [
@@ -268,17 +271,28 @@ export default class ArchiveOfOrders extends React.Component {
     this.setState(initialState);
   };
 
-  _selectItem = (id) => () => {
+  _selectItem = (index) => () => {
+    if (DeviceSizeService.size.width < 680) {
+      RouterService.navigateTo({
+        pathname: navigationScheme.archiveOrder,
+        state: items[index],
+      });
+      return;
+    }
     this.setState({
-      selectItem: id,
+      selectItem: index,
     });
+  };
+
+  onRepeatOrderClick = () => {
+    console.warn('repeat order ', this.state.selectItem);
   };
 
   _getHeadTab = () => {
     return items.map((item, key) => {
       const itemDate = <li className="list-date-wrap"><span className="list-date">{item.date}</span></li>;
       return (
-        <ul className="list" key={key}>
+        <ul className="list" key={item.id}>
           {itemDate}
           <li className={classNames('list-item', this.state.selectItem === item.id ? 'active' : '')}
               onClick={this._selectItem(key)}>
@@ -291,23 +305,10 @@ export default class ArchiveOfOrders extends React.Component {
     });
   };
 
-  _getContentTab = () => {
-    const selectItem = items.find((item) => item.id === this.state.selectItem);
+  _getItemsTab = () => {
+    const selectItem = items[this.state.selectItem];
 
     return selectItem.orders.map((item, key) => {
-      if(DeviceSizeService.size.width > 1180) {
-        return (
-          <div className="item animated fadeInDown" key={key}>
-            <div className="item-img-container">
-              <img src={item.img} alt="item img" className="item-img"/>
-            </div>
-            <h2 className="item-title">{item.title}</h2>
-            <p className="item-count">{item.count} шт.</p>
-            <p className="item-price">{item.price}{euroSymbol}\шт.</p>
-            <p className="item-all-price">{item.price}{euroSymbol}</p>
-          </div>
-        );
-      }
       return (
         <div className="item animated fadeInDown" key={key}>
           <div className="left-block">
@@ -324,10 +325,36 @@ export default class ArchiveOfOrders extends React.Component {
     });
   };
 
+  _getContent = () => {
+    const selectItem = items[this.state.selectItem];
+    if(DeviceSizeService.size.width < 680) {
+      return;
+    }
+    return (
+      <div className="tab-right-column">
+        {
+          <OrderHeader
+            allPrice={123}
+            num={selectItem.num}
+            orderAddress={selectItem.orderAddress}
+            onRepeatOrderClick={this.onRepeatOrderClick}
+          />
+        }
+        <div className="goods-count">Товарів в замовленні: {items.length}</div>
+        <div className="items-wrap">
+          <div className="scroll-container">
+            {
+              this._getItemsTab()
+            }
+          </div>
+        </div>
+      </div>
+    )
+  };
+
   render() {
     const {from, to} = this.state.date;
     const modifiers = {start: from, end: to};
-    const selectItem = items.find((item) => item.id === this.state.selectItem);
 
     return (
       <Wrapper>
@@ -394,33 +421,9 @@ export default class ArchiveOfOrders extends React.Component {
                   this._getHeadTab()
                 }
               </div>
-              <div className="tab-right-column">
-                <div className="tab-right-column-head">
-                  <div className="order-number-wrap">
-                    <div className="order-number-and-who-order">
-                      <p className="title-order-number">Замовлення №: {selectItem.num}</p>
-                      <p className="order-address">{selectItem.orderAddress}</p>
-                    </div>
-                    <div className="border"/>
-                    <div className="all-price-wrap">
-                      <p className="all-price-title">Сума замовлення:</p>
-                      <p className="all-price-number">{'12 430'}{euroSymbol}</p>
-                    </div>
-                  </div>
-                  <Button className="repeat-order">Повторити замовлення</Button>
-                </div>
-
-                <div className="goods-count">Товарів в замовленні: {items.length}</div>
-
-                <div className="items-wrap">
-                  <div className="scroll-container">
-                    {
-                      this._getContentTab()
-                    }
-                  </div>
-                </div>
-
-              </div>
+              {
+                this._getContent()
+              }
             </div>
           </div>
         </div>
