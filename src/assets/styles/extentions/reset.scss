@@ -26,7 +26,9 @@ body {
   background-color: #3e3e3e;
   font-family: 'Roboto', sans-serif;
   padding-right: 0 !important;
+}
 
+*{
   &::-webkit-scrollbar {
     width: 6px;
     border-radius: 3px;
