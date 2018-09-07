@@ -2,14 +2,14 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import 'moment/locale/uk';
 import classNames from 'classnames';
+import {navigationScheme} from 'core';
 import {Button} from '@material-ui/core';
 import {DeviceSizeService, euroSymbol} from 'utilits';
 import MomentLocaleUtils from 'react-day-picker/moment';
+import RouterService from 'shared/services/RourerService';
 import OrderHeader from './components/OrderHeader.component';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
-import RouterService from 'shared/services/RourerService';
-import {navigationScheme} from 'core';
 
 const initialState = {
   date: {
@@ -275,7 +275,10 @@ export default class ArchiveOfOrders extends React.Component {
     if (DeviceSizeService.size.width < 680) {
       RouterService.navigateTo({
         pathname: navigationScheme.archiveOrder,
-        state: items[index],
+        state: {
+          items : items[index],
+          onRepeatOrderClick : this.onRepeatOrderClick()
+        }
       });
       return;
     }

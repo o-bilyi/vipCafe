@@ -8,19 +8,20 @@ export default class MobileItem extends React.Component {
   static propTypes = {
     location : PropTypes.shape({
       state : PropTypes.shape({
-        id: PropTypes.string,
+        id: PropTypes.any,
         num: PropTypes.number,
         date: PropTypes.string,
         title: PropTypes.string,
         orders: PropTypes.array,
-        orderAddress: PropTypes.string
+        orderAddress: PropTypes.string,
+        onRepeatOrderClick: PropTypes.func
       })
     })
   };
   constructor(props) {
     super(props);
 
-    this.items = props.location.state;
+    this.items = props.location.state.items;
   }
 
   _getContentTab = () => {
@@ -42,8 +43,7 @@ export default class MobileItem extends React.Component {
   };
 
   render() {
-    console.log(1);
-    const {onRepeatOrderClick} = this.props.location;
+    const {onRepeatOrderClick} = this.props.location.state;
     return (
       <Wrapper>
         <div className="archive-page">
