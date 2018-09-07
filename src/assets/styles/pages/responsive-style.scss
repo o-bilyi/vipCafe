@@ -162,9 +162,12 @@
       flex-shrink: unset;
     }
 
-    .label {
-      width: 100%;
-      margin-bottom: 14px;
+    .archive-head {
+      .label {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 14px;
+      }
     }
 
     .tab-left-column {
@@ -292,12 +295,14 @@
       }
     }
   }
+
   .thanks-modal-wrap {
     .title-page {
       font-size: 48px;
       margin-bottom: 30px;
     }
   }
+
   .catalog-page {
     padding: 40px 15px;
 
@@ -310,6 +315,31 @@
         min-width: auto;
       }
     }
+  }
+
+  .account-info-wrap {
+    .go-to-dashboard,
+    .log-aut {
+      padding: 0 11px;
+      font-size: 12px;
+    }
+
+    .user-info {
+      text-align: left;
+      align-items : flex-start;
+    }
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 300;
+      margin-bottom: 4px;
+    }
+
+    .user-email {
+      font-size: 10px;
+      font-weight: 300;
+    }
+
   }
 
   .filters {
@@ -336,6 +366,26 @@
   }
 
   .wrapper {
+
+    .content {
+      margin-top: 40px;
+    }
+
+    .header,
+    .open-menu-btn {
+      height: 40px;
+    }
+
+    .open-menu-btn {
+      width: 40px;
+      min-width: 40px;
+
+      .menu-icon {
+        width: 27px;
+        height: 27px;
+      }
+    }
+
     .clever-img {
       display: none;
     }
@@ -347,14 +397,16 @@
     }
 
     .reset-date {
-      width: 125px;
+      width: 120px;
     }
   }
 }
 
 @media (max-width: 680px) {
+
   .thanks-modal-wrap {
     padding: 60px 30px;
+
     .title-page {
       font-size: 18px;
       margin-bottom: 30px;
@@ -364,13 +416,16 @@
         right: -10px;
       }
     }
+
     .short-description {
       font-size: 12px;
       line-height: 1.5;
     }
+
     .separate {
       margin: 20px auto;
     }
+
     .go-to-platform {
       @include button(190px, 32px, 30px, 12px);
     }
@@ -378,8 +433,30 @@
 
   .archive-wrap {
 
+    .tab-right-column {
+      padding:  0 0 5px;
+    }
+
+    .all-price-wrap {
+      margin-bottom: 30px;
+    }
+
+    .left-block {
+      margin-right: 20px;
+    }
+
+    .right-block {
+      .item-title {
+        font-size: 12px;
+      }
+    }
+
     .items-wrap {
       padding: 30px 15px;
+
+      .scroll-container {
+        padding-right: 15px;
+      }
     }
 
     .tab-right-column {
@@ -390,27 +467,32 @@
       flex-wrap: wrap;
       padding-bottom: 20px;
     }
+
     .search {
       width: 100%;
       max-width: 100%;
       margin: 0 0 25px;
     }
+
     .reset-date {
       padding: 0;
+      width: 95px;
       height: 25px;
       font-size: 10px;
       min-height: 100%;
       margin-left: auto;
     }
+
     .archive-head {
       padding: 0 20px 20px;
     }
+
     .archive-body {
-      padding: 0 20px;
+      padding: 0 10px;
     }
 
     .tab-right-column-head {
-      padding: 0 0 30px;
+      padding: 0 20px 30px;
       flex-direction: column;
     }
 

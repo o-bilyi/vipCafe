@@ -49,9 +49,8 @@
   }
 
   .date-wrap {
+    width: 100%;
     display: flex;
-    flex-shrink: 0;
-    margin-right: 28px;
     align-items: center;
 
     .arrow {
@@ -79,6 +78,7 @@
   .reset-date {
     @include button(140px, 30px, 22px, 11px, #404040);
     background-color: rgba(248, 243, 240, 0.6);
+    margin-left: auto;
     flex-shrink: 0;
 
     &:hover {
@@ -301,6 +301,7 @@
     .item-title {
       color: #2d2b2b;
       font-size: 14px;
+      font-weight: bold;
       text-transform: uppercase;
     }
 

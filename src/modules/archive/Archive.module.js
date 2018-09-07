@@ -6,7 +6,7 @@ import {navigationScheme} from 'core';
 import {Button} from '@material-ui/core';
 import {DeviceSizeService, euroSymbol} from 'utilits';
 import MomentLocaleUtils from 'react-day-picker/moment';
-import RouterService from 'shared/services/RourerService';
+import RouterService from 'shared/services/RouterService';
 import OrderHeader from './components/OrderHeader.component';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
@@ -245,7 +245,15 @@ const items = [
       },
     ],
   },
-];
+].map(i => {
+  i.id = new Date().getTime();
+  return i;
+});
+
+
+export const onRepeatOrderClick = (item) => {
+  console.warn('repeat order ', item);
+};
 
 export default class ArchiveOfOrders extends React.Component {
   state = initialState;
@@ -275,10 +283,7 @@ export default class ArchiveOfOrders extends React.Component {
     if (DeviceSizeService.size.width < 680) {
       RouterService.navigateTo({
         pathname: navigationScheme.archiveOrder,
-        state: {
-          items : items[index],
-          onRepeatOrderClick : this.onRepeatOrderClick()
-        }
+        state: items[index],
       });
       return;
     }
@@ -287,17 +292,17 @@ export default class ArchiveOfOrders extends React.Component {
     });
   };
 
-  onRepeatOrderClick = () => {
-    console.warn('repeat order ', this.state.selectItem);
-  };
-
   _getHeadTab = () => {
+    const isNotMobile = DeviceSizeService.size.width > 680;
     return items.map((item, key) => {
       const itemDate = <li className="list-date-wrap"><span className="list-date">{item.date}</span></li>;
+      const classes = classNames('list-item', {
+        active : isNotMobile && this.state.selectItem === key
+      });
       return (
         <ul className="list" key={item.id}>
           {itemDate}
-          <li className={classNames('list-item', this.state.selectItem === item.id ? 'active' : '')}
+          <li className={classes}
               onClick={this._selectItem(key)}>
             <p className="number">№ {item.num}</p>
             <p className="title">{item.title}</p>
@@ -308,12 +313,17 @@ export default class ArchiveOfOrders extends React.Component {
     });
   };
 
+  _key = 0;
+  get uniqueKey() {
+    return this._key++;
+  }
+
   _getItemsTab = () => {
     const selectItem = items[this.state.selectItem];
 
-    return selectItem.orders.map((item, key) => {
+    return selectItem.orders.map((item) => {
       return (
-        <div className="item animated fadeInDown" key={key}>
+        <div className="item animated fadeInDown" key={this.uniqueKey}>
           <div className="left-block">
             <img src={item.img} alt="item img" className="item-img"/>
           </div>
@@ -330,7 +340,7 @@ export default class ArchiveOfOrders extends React.Component {
 
   _getContent = () => {
     const selectItem = items[this.state.selectItem];
-    if(DeviceSizeService.size.width < 680) {
+    if (DeviceSizeService.size.width < 680) {
       return;
     }
     return (
@@ -340,7 +350,7 @@ export default class ArchiveOfOrders extends React.Component {
             allPrice={123}
             num={selectItem.num}
             orderAddress={selectItem.orderAddress}
-            onRepeatOrderClick={this.onRepeatOrderClick}
+            onRepeatOrderClick={() => onRepeatOrderClick(items[this.state.selectItem])}
           />
         }
         <div className="goods-count">Товарів в замовленні: {items.length}</div>
@@ -352,7 +362,7 @@ export default class ArchiveOfOrders extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   };
 
   render() {
@@ -414,9 +424,8 @@ export default class ArchiveOfOrders extends React.Component {
                     onDayChange={this.handleChange('to')}
                   />
                 </div>
-
+                <Button onClick={this._resetDateFilter} className="reset-date">очистити дату</Button>
               </div>
-              <Button onClick={this._resetDateFilter} className="reset-date">очистити дату</Button>
             </div>
             <div className="archive-body">
               <div className="tab-left-column">

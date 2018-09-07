@@ -1,21 +1,14 @@
 import React from 'react';
 import {euroSymbol} from 'utilits';
 import PropTypes from 'prop-types';
-import {navigationScheme} from 'core';
 import {Button} from '@material-ui/core';
+import RouterService from 'shared/services/RouterService';
 import ArrowBackIcon from '@material-ui/icons/KeyboardBackspace';
 
 export default function OrderHeader(props) {
-
-  const goBack = () => () => {
-    console.warn("click back");
-    return navigationScheme.archive;
-  };
-
-  console.warn(props);
   return (
     <div className="tab-right-column-head">
-      <button className="back-btn" onClick={goBack}>
+      <button className="back-btn" onClick={RouterService.goBack}>
         <ArrowBackIcon className="arrow-back-icon"/>
       </button>
       <div className="order-number-wrap">

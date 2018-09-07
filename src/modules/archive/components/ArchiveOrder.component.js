@@ -2,30 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {euroSymbol} from 'utilits';
 import OrderHeader from './OrderHeader.component';
+import {onRepeatOrderClick} from '../Archive.module';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
 export default class MobileItem extends React.Component {
   static propTypes = {
-    location : PropTypes.shape({
-      state : PropTypes.shape({
+    location: PropTypes.shape({
+      state: PropTypes.shape({
         id: PropTypes.any,
         num: PropTypes.number,
         date: PropTypes.string,
         title: PropTypes.string,
         orders: PropTypes.array,
         orderAddress: PropTypes.string,
-        onRepeatOrderClick: PropTypes.func
-      })
-    })
+      }),
+    }),
   };
+
   constructor(props) {
     super(props);
 
-    this.items = props.location.state.items;
+    this.item = props.location.state;
   }
 
   _getContentTab = () => {
-    return this.items.orders.map((item, key) => {
+    return this.item.orders.map((item, key) => {
       return (
         <div className="item animated fadeInDown" key={key}>
           <div className="left-block">
@@ -43,7 +44,6 @@ export default class MobileItem extends React.Component {
   };
 
   render() {
-    const {onRepeatOrderClick} = this.props.location.state;
     return (
       <Wrapper>
         <div className="archive-page">
@@ -53,13 +53,13 @@ export default class MobileItem extends React.Component {
               {
                 <OrderHeader
                   allPrice={123}
-                  num={this.items.num}
-                  orderAddress={this.items.orderAddress}
-                  onRepeatOrderClick={onRepeatOrderClick}
+                  num={this.item.num}
+                  orderAddress={this.item.orderAddress}
+                  onRepeatOrderClick={() => onRepeatOrderClick(this.item)}
                 />
               }
 
-              <div className="goods-count">Товарів в замовленні: {this.items.length}</div>
+              <div className="goods-count">Товарів в замовленні: {this.item.length}</div>
 
               <div className="items-wrap">
                 <div className="scroll-container">
@@ -73,6 +73,6 @@ export default class MobileItem extends React.Component {
           </div>
         </div>
       </Wrapper>
-    )
+    );
   }
 }
