@@ -34,7 +34,7 @@ export default class Wrapper extends React.Component {
   };
 
   /**
-   * get select items
+   * get customSelect items
    * @param array
    * @returns {*}
    * @private

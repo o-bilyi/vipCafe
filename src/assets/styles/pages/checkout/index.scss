@@ -49,4 +49,61 @@
   .user-shop-name {
     margin-top: 5px;
   }
+
+  .left-block {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 540px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .input-container,
+  .custom-filter {
+    width: 100%;
+    max-width: 260px;
+    margin-bottom: 20px;
+  }
+
+  .filter-select {
+    &:before,
+    &:after {
+      content: none;
+    }
+  }
+
+  .form-input {
+    .input-style {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:before,
+    &:after {
+      content: none;
+    }
+  }
+
+  .custom-filter {
+    font-size: 12px;
+    color: rgba(63, 63, 63, 0.3);
+
+    .select-container {
+      margin: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .filter-select {
+      margin-top: 0;
+    }
+
+    .filter-label {
+      color: #868686;
+      display: block;
+      text-align: left;
+      margin-right: 0;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+  }
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
-import {FormControlLabel, TextField,Checkbox,Select, MenuItem, withStyles} from '@material-ui/core';
+import CustomSelect from 'shared/components/customSelect/Select.component';
+import {FormControlLabel, TextField,Checkbox, withStyles} from '@material-ui/core';
 import AllPriceAndButtons from 'shared/components/all-price-and-buttons/AllPriceAndButtons.component';
 
 import PhoneIcon from 'assets/svg/other/phone.svg';
@@ -19,10 +20,6 @@ const initialState = {
   city: '',
   delivery: '',
   department: '',
-
-  openCitySelect: false,
-  openDeliverySelect: false,
-  openDepartmentSelect: false,
 
   error: {
     name: null,
@@ -136,22 +133,15 @@ class CheckoutPage extends React.Component {
   };
 
   /**
-   * select functionality
+   * customSelect functionality
    */
-
-  _getSelectItems = items => items.map((item, key) => {
-    return <MenuItem
-      key={key}
-      style={styles.menuItemStyle}
-      value={item}>{item}</MenuItem>;
-  });
 
   handleChangeSelect = name => event => {
     this.setState({[name]: event.target.value});
   };
 
   /**
-   * select functionality
+   * customSelect functionality
    */
 
   /**
@@ -178,9 +168,6 @@ class CheckoutPage extends React.Component {
       delivery,
       department,
 
-      openCitySelect,
-      openDeliverySelect,
-      openDepartmentSelect,
       error,
     } = this.state;
 
@@ -270,59 +257,26 @@ class CheckoutPage extends React.Component {
                   {error.lastName && <p className="error-text">{error.lastName}</p>}
                 </div>
 
-                <div className="input-container input-container-delivery">
-                  <label className="form-label" htmlFor="#tradeFormat">Спосіб доставки:*</label>
-                  <Select
-                    value={delivery}
-                    aria-haspopup="true"
-                    className="form-input"
-                    style={styles.selectStyle}
-                    open={openDeliverySelect}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onChange={this.handleChangeSelect('delivery')}
-                    onOpen={() => this.handleOpenSelect('openDeliverySelect')}
-                    onClose={() => this.handleCloseSelect('openDeliverySelect')}>
-                    {
-                      this._getSelectItems(deliveryItems)
-                    }
-                  </Select>
-                </div>
+                <CustomSelect
+                  items={deliveryItems}
+                  labelText="Спосіб доставки:*"
+                  selectedItem={this.state.delivery}
+                  handleChangeSelect={this.handleChangeSelect("delivery")}
+                />
 
-                <div className="input-container input-container-delivery">
-                  <label className="form-label" htmlFor="#tradeFormat">Місто отримувача:*</label>
-                  <Select
-                    value={city}
-                    aria-haspopup="true"
-                    className="form-input"
-                    style={styles.selectStyle}
-                    open={openCitySelect}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onChange={this.handleChangeSelect('city')}
-                    onOpen={() => this.handleOpenSelect('openCitySelect')}
-                    onClose={() => this.handleCloseSelect('openCitySelect')}>
-                    {
-                      this._getSelectItems(cityItems)
-                    }
-                  </Select>
-                </div>
+                <CustomSelect
+                  items={cityItems}
+                  labelText="Місто отримувача:*"
+                  selectedItem={this.state.city}
+                  handleChangeSelect={this.handleChangeSelect("city")}
+                />
 
-                <div className="input-container input-container-department">
-                  <label className="form-label" htmlFor="#tradeFormat">Відділення:*</label>
-                  <Select
-                    value={department}
-                    aria-haspopup="true"
-                    className="form-input"
-                    style={styles.selectStyle}
-                    open={openDepartmentSelect}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onChange={this.handleChangeSelect('department')}
-                    onOpen={() => this.handleOpenSelect('openDepartmentSelect')}
-                    onClose={() => this.handleCloseSelect('openDepartmentSelect')}>
-                    {
-                      this._getSelectItems(departmentItems)
-                    }
-                  </Select>
-                </div>
+                <CustomSelect
+                  items={departmentItems}
+                  labelText="Відділення:*"
+                  selectedItem={this.state.department}
+                  handleChangeSelect={this.handleChangeSelect("department")}
+                />
 
               </div>
 

@@ -212,7 +212,7 @@ class SignUp extends React.Component {
    */
 
   /**
-   * select functionality
+   * customSelect functionality
    */
 
   handleChangeSelect = name => event => {
@@ -235,7 +235,7 @@ class SignUp extends React.Component {
   });
 
   /**
-   * select functionality
+   * customSelect functionality
    */
 
   /**
@@ -436,7 +436,7 @@ class SignUp extends React.Component {
                   open={openDeliverySelect}
                   style={styles.selectStyle}
                   onChange={this.handleChangeSelect('delivery')}
-                  SelectDisplayProps={{className: 'select-label'}}
+                  SelectDisplayProps={{className: 'customSelect-label'}}
                   onOpen={() => this.handleOpenSelect('openDeliverySelect')}
                   onClose={() => this.handleCloseSelect('openDeliverySelect')}
                 >
@@ -454,7 +454,7 @@ class SignUp extends React.Component {
                   className="form-input"
                   style={styles.selectStyle}
                   open={openTradeFormatSelect}
-                  SelectDisplayProps={{className: 'select-label'}}
+                  SelectDisplayProps={{className: 'customSelect-label'}}
                   onChange={this.handleChangeSelect('tradeFormat')}
                   onOpen={() => this.handleOpenSelect('openTradeFormatSelect')}
                   onClose={() => this.handleCloseSelect('openTradeFormatSelect')}>
@@ -744,7 +744,7 @@ class SignUp extends React.Component {
                 open={openDeliverySelect}
                 style={styles.selectStyle}
                 onChange={this.handleChangeSelect('delivery')}
-                SelectDisplayProps={{className: 'select-label'}}
+                SelectDisplayProps={{className: 'customSelect-label'}}
                 onOpen={() => this.handleOpenSelect('openDeliverySelect')}
                 onClose={() => this.handleCloseSelect('openDeliverySelect')}
               >
@@ -762,7 +762,7 @@ class SignUp extends React.Component {
                 className="form-input"
                 style={styles.selectStyle}
                 open={openTradeFormatSelect}
-                SelectDisplayProps={{className: 'select-label'}}
+                SelectDisplayProps={{className: 'customSelect-label'}}
                 onChange={this.handleChangeSelect('tradeFormat')}
                 onOpen={() => this.handleOpenSelect('openTradeFormatSelect')}
                 onClose={() => this.handleCloseSelect('openTradeFormatSelect')}>

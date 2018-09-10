@@ -22,6 +22,15 @@ export function changeBasket(item) {
   };
 }
 
+export function setSale(sale) {
+  return {
+    type: basketActionTypes.SATE_BASKET_SALE_ACTION,
+    payload: {
+      sale
+    }
+  }
+}
+
 export function clearBasket() {
   return {
     type: basketActionTypes.REMOVE_ALL_BASKET_ITEMS_ACTION

@@ -26,8 +26,17 @@ const changeAndAddHandler = (state, action) => {
 };
 
 export const basket = generateReducer(initialState, {
-  [basketActionTypes.REMOVE_ALL_BASKET_ITEMS_ACTION]: () => {
-    return initialState;
+  [basketActionTypes.REMOVE_ALL_BASKET_ITEMS_ACTION]: (state) => {
+    return {
+      ...initialState,
+      sale : state.sale
+    };
+  },
+  [basketActionTypes.SATE_BASKET_SALE_ACTION]: (state, action) => {
+    return {
+      ...state,
+      sale : action.payload.sale
+    }
   },
   [basketActionTypes.ADD_BASKET_ITEM_ACTION]: changeAndAddHandler,
   [basketActionTypes.CHANGE_BASKET_ITEM_ACTION]: changeAndAddHandler,

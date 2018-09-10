@@ -57,7 +57,7 @@ class Catalog extends React.Component {
       chocolate: false,
     },
     /**
-     * select value
+     * customSelect value
      */
     product: '',
     sort: '',
@@ -165,8 +165,7 @@ class Catalog extends React.Component {
               onChange={this.handleChangeSelect('product')}
               SelectDisplayProps={{className: 'select-label'}}
               onOpen={() => this.handleOpenSelect('openCheeseSelect')}
-              onClose={() => this.handleCloseSelect('openCheeseSelect')}
-            >
+              onClose={() => this.handleCloseSelect('openCheeseSelect')}>
               {
                 this._getSelectItems(cheeseSelect)
               }

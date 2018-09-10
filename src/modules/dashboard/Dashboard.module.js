@@ -148,7 +148,7 @@ class Dashboard extends React.Component {
    */
 
   /**
-   * select functionality
+   * customSelect functionality
    */
 
   handleChangeSelect = name => event => {
@@ -171,7 +171,7 @@ class Dashboard extends React.Component {
   });
 
   /**
-   * select functionality
+   * customSelect functionality
    */
 
   _getContent = () => {

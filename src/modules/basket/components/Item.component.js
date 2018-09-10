@@ -29,29 +29,22 @@ export default class Item extends React.Component {
     console.warn(id);
   };
 
-  incrementOrDecrementItem = (increment) => () => {
-    if(increment) {
-      this.setState({
-        count : this.state.count + 1
-      },() => () => this.updateBasket());
-    }else {
-      this.setState({
-        count : this.state.count > 1 ? this.state.count - 1 : this.state.count
-      },() => this.updateBasket())
-    }
-  };
+  incrementItem = () => this.updateBasket(this.state.count + 1);
+  decrementItem = () => this.updateBasket(this.state.count < 2 ? 1 : this.state.count - 1);
 
   changeCountItem = (value) => {
-    this.setState({
-      count : Number(value.target.value)
-    },() => this.updateBasket())
+    this.updateBasket(Number(value.target.value))
   };
 
-  updateBasket = () => {
-    store.dispatch(changeBasket({
-      ...this.props,
-      count : this.state.count
-    }));
+  updateBasket = (newCount) => {
+    this.setState({
+      count : newCount
+    }, () => {
+      store.dispatch(changeBasket({
+        ...this.props,
+        count : newCount
+      }));
+    });
   };
 
   getContent = () => {
@@ -82,13 +75,13 @@ export default class Item extends React.Component {
         </td>
         <td className="border-right">
           <div className="count-item-wrap">
-            <button className="increment-item" onClick={this.incrementOrDecrementItem(false)}>
+            <button className="increment-item" onClick={this.decrementItem}>
               <KeyboardArrowLeftIcon className="icon"/>
             </button>
             <input type="number" min={1} className="count-item"
                    onChange={(value) => this.changeCountItem(value)}
                    value={count}/>
-            <button className="decrement-item" onClick={this.incrementOrDecrementItem(true)}>
+            <button className="decrement-item" onClick={this.incrementItem}>
               <KeyboardArrowRightIcon className="icon"/>
             </button>
           </div>
