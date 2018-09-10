@@ -246,7 +246,7 @@ const items = [
     ],
   },
 ].map(i => {
-  i.id = new Date().getTime();
+  i.id = Math.random();
   return i;
 });
 

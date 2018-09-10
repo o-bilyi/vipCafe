@@ -17,7 +17,8 @@ export const navigationScheme = {
   privacyPolicy : '/privacy-policy',
   sharesAndOffers : '/shares-and-offers',
 
-  archiveOrder : '/archive-order'
+  archiveOrder : '/archive-order',
+  checkoutOrder : '/checkout-order',
 };
 
 const Loading = () => <div className="loader"><CircularProgress style={{color : green[500]}}/></div>;
@@ -66,7 +67,7 @@ export const MAIN_ROUTES = [
   {
     path: navigationScheme.sharesAndOffers,
     exact: true,
-    component: () => import('../modules/shared-and-offers/SharesAndOffers.module')
+    component: () => import('../modules/shared-and-offers/SharedAndOffers.module')
   },
   {
     path: navigationScheme.archive,
@@ -75,7 +76,13 @@ export const MAIN_ROUTES = [
   },
   {
     path: navigationScheme.archiveOrder,
+    exact: true,
     component: () => import('../modules/archive/components/ArchiveOrder.component')
+  },
+  {
+    path: navigationScheme.checkoutOrder,
+    exact: true,
+    component: () => import('../modules/checkout-page/CheckoutPage.module')
   },
   {
     component: () => import('../modules/404/Error.module')

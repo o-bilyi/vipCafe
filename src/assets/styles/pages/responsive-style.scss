@@ -391,6 +391,35 @@
     }
   }
 
+  .basket-wrap {
+    .width-container {
+      margin-top: 0;
+    }
+  }
+
+  .all-price-and-buttons {
+    padding-top: 0;
+    margin-bottom: 50px;
+    flex-direction: column-reverse;
+
+    &:before {
+      content: none;
+    }
+
+    .buttons-wrap {
+      max-width: 240px;
+    }
+
+    .clear-btn {
+      margin-bottom: 10px;
+    }
+
+    .clear-btn,
+    .to-order {
+      width: 100%;
+    }
+  }
+
   .archive-wrap {
     .tab-left-column {
       width: 220px;

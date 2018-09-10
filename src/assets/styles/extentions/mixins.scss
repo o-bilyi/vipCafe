@@ -5,8 +5,12 @@
   width: $width;
   color: $color;
   height: $height;
+  display: inline-flex;
+  align-items: center;
   font-size: $font-size;
+  text-decoration: none;
   border-radius: $radius;
+  justify-content: center;
   text-transform: $text-transform;
 }
 

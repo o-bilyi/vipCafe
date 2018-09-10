@@ -5,6 +5,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import {store} from '../../../index';
+import {changeBasket} from 'core/actions';
 
 export default class Item extends React.Component {
   static propTypes = {
@@ -31,18 +33,25 @@ export default class Item extends React.Component {
     if(increment) {
       this.setState({
         count : this.state.count + 1
-      })
+      },() => () => this.updateBasket());
     }else {
       this.setState({
         count : this.state.count > 1 ? this.state.count - 1 : this.state.count
-      })
+      },() => this.updateBasket())
     }
   };
 
   changeCountItem = (value) => {
     this.setState({
-      count : value
-    })
+      count : Number(value.target.value)
+    },() => this.updateBasket())
+  };
+
+  updateBasket = () => {
+    store.dispatch(changeBasket({
+      ...this.props,
+      count : this.state.count
+    }));
   };
 
   getContent = () => {

@@ -432,7 +432,6 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    console.warn(this.props.userProfile);
     return (
       <Wrapper>
         <div className="dashboard-page">

@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Button} from '@material-ui/core';
 import Item from './components/Item.component';
+import {DeviceSizeService} from 'utilits/index';
 import ItemMobile from './components/ItemMobile.component';
-import {DeviceSizeService, euroSymbol} from 'utilits/index';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
+import AllPriceAndButtons from 'shared/components/all-price-and-buttons/AllPriceAndButtons.component';
 
 class Basket extends React.Component {
   static propTypes = {
@@ -24,13 +24,6 @@ class Basket extends React.Component {
 
   getAllPrice = (price, count) => {
     return price * count;
-  };
-
-  _getDiscountPrice = () => {
-    if (this.props.allPrice !== 0) {
-      return this.props.allPrice * this.props.discount / 100;
-    }
-    return 0
   };
 
   _getContent = () => {
@@ -74,22 +67,15 @@ class Basket extends React.Component {
                   </tbody>
                 </table>
               </div>
-              <div className="buttons-and-all-price-wrap">
-                <div className="buttons-wrap">
-                  <Button className="clear-basket">очистити кошик</Button>
-                  <Button className="to-order">оформити замовлення</Button>
-                </div>
-                <div className="price-wrap">
-                  <h5 className="discount">
-                    <span className="discount-text">Ваша знижка: <span className="percent">{discount}%</span></span>
-                    <span className="discount-in-euro">{this._getDiscountPrice()}{euroSymbol}</span>
-                  </h5>
-                  <h2 className="all-price-wrap">
-                    <span className="all-price-text">Всього до оплати:</span>
-                    <span className="all-price-number">{allPrice}{euroSymbol}</span>
-                  </h2>
-                </div>
-              </div>
+
+              {
+                <AllPriceAndButtons
+                  allPrice={allPrice}
+                  discount={discount}
+                  checkOrder
+                />
+              }
+
             </div>
           </div>
         );
@@ -98,22 +84,14 @@ class Basket extends React.Component {
         return (
           <div className="basket-wrap basket-mobile-wrap">
             <div className="width-container">
-              <div className="buttons-and-all-price-wrap">
-                <div className="price-wrap">
-                  <h5 className="discount">
-                    <span className="discount-text">Ваша знижка: <span className="percent">{discount}%</span></span>
-                    <span className="discount-in-euro">{this._getDiscountPrice()}{euroSymbol}</span>
-                  </h5>
-                  <h2 className="all-price-wrap">
-                    <span className="all-price-text">Всього до оплати:</span>
-                    <span className="all-price-number">{allPrice}{euroSymbol}</span>
-                  </h2>
-                </div>
-                <div className="buttons-wrap">
-                  <Button className="clear-basket">очистити кошик</Button>
-                  <Button className="to-order">оформити замовлення</Button>
-                </div>
-              </div>
+
+              {
+                <AllPriceAndButtons
+                  allPrice={allPrice}
+                  discount={discount}
+                  checkOrder
+                />
+              }
 
               <div className="mobile-basket">
                 <h3 className="basket-title title-and-count">В кошику: {items.length}</h3>
