@@ -11,17 +11,13 @@ const styles = {
   },
 
   selected: {},
-
-  selectStyle: {
-    alignItems: 'center',
-    height: '40px',
-  },
 };
 
 class CustomSelect extends React.Component {
   static propTypes = {
     items : PropTypes.array,
     labelText : PropTypes.string,
+    requiredFiled : PropTypes.bool,
     selectedItem : PropTypes.string,
     handleChangeSelect : PropTypes.func
   };
@@ -54,15 +50,25 @@ class CustomSelect extends React.Component {
       items,
       selectedItem,
       labelText,
+      requiredFiled,
       handleChangeSelect} = this.props;
 
     const  {openSelect} = this.state;
 
     return (
       <div className="filters custom-filter">
-        <InputLabel
-          className="filter-label"
-          htmlFor={"#" + labelText}>{labelText}</InputLabel>
+        {
+          labelText &&
+          <InputLabel
+            className="filter-label"
+            htmlFor={"#" + labelText}>
+            {labelText}
+            {
+              requiredFiled && <sup className='required-field'>*</sup>
+            }
+          </InputLabel>
+        }
+
         <FormControl className="select-container">
 
           <Select
@@ -70,12 +76,11 @@ class CustomSelect extends React.Component {
             open={openSelect}
             value={selectedItem}
             aria-haspopup="true"
-            style={styles.selectStyle}
+            className="filter-select"
             onChange={handleChangeSelect}
             onOpen={this.handleOpenSelect}
             onClose={this.handleCloseSelect}
             MenuProps={{className: 'filter-ul'}}
-            className="filter-select product-select"
             SelectDisplayProps={{className: 'select-label'}}
           >
             {

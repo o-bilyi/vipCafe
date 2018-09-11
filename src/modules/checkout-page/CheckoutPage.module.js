@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import CustomSelect from 'shared/components/customSelect/Select.component';
-import {FormControlLabel, TextField,Checkbox, withStyles} from '@material-ui/core';
+import {FormControlLabel,TextField,Checkbox, withStyles} from '@material-ui/core';
 import AllPriceAndButtons from 'shared/components/all-price-and-buttons/AllPriceAndButtons.component';
 
 import PhoneIcon from 'assets/svg/other/phone.svg';
@@ -14,6 +14,8 @@ const initialState = {
   name: '',
   surName: '',
   lastName: '',
+  comment: '',
+  orderName: '',
 
   userDataIsSimilarToTheRecipient: false,
 
@@ -39,38 +41,29 @@ const validation = {
     }
     return null;
   },
-  mobile: (val) => {
-    if (val.length < 10 || val.length > 13) {
-      return 'Не менше 4 символів та не більше 13!';
+  surName: (val) => {
+    if (val.length < 3) {
+      return 'Не менше 3 символів!';
     }
     return null;
   },
-  city: (val) => {
-    if (val.length.length < 3) {
-      return 'Введіть місто';
+  lastName: (val) => {
+    if (val.length < 3) {
+      return 'Не менше 3 символів!';
     }
     return null;
-  },
+  }
 };
 
 const styles = {
-  root: {
-    borderRadius: 0,
-    '&$selected': {
-      color: '#fff',
-      backgroundColor: '#78ae59',
-    },
-  },
-
-  selected: {},
 
   checked: {},
 
   checkbox: {
-    color: '#fff',
+    color: '#4d4d4d',
 
     '&$checked': {
-      color: '#fff',
+      color: '#f8f8f8',
     },
 
     width: 20,
@@ -84,11 +77,6 @@ const styles = {
   menuItemStyle: {
     fontSize: '13px',
     color: '#494949',
-  },
-
-  selectStyle: {
-    alignItems: 'center',
-    height: '40px',
   },
 };
 
@@ -133,7 +121,7 @@ class CheckoutPage extends React.Component {
   };
 
   /**
-   * customSelect functionality
+   * handleChangeSelect functionality
    */
 
   handleChangeSelect = name => event => {
@@ -141,7 +129,7 @@ class CheckoutPage extends React.Component {
   };
 
   /**
-   * customSelect functionality
+   * handleChangeSelect functionality
    */
 
   /**
@@ -161,12 +149,10 @@ class CheckoutPage extends React.Component {
       name,
       surName,
       lastName,
+      comment,
+      orderName,
 
       userDataIsSimilarToTheRecipient,
-
-      city,
-      delivery,
-      department,
 
       error,
     } = this.state;
@@ -179,6 +165,7 @@ class CheckoutPage extends React.Component {
       <Wrapper>
         <div className="checkout-order-page">
           <div className="width-container">
+
             <div className="user-information">
               <div className="name-wrap">
                 <p className="user-name">Тарасенко Петро</p>
@@ -197,11 +184,12 @@ class CheckoutPage extends React.Component {
                 <span className="location-text">Городенка, Тернопільська обл.</span>
               </div>
             </div>
-            <form className="checkout-form">
+
+            <div className="checkout-fields">
 
               <div className="left-block">
                 <div className="input-container input-container-name">
-                  <label className="form-label" htmlFor="#name">Ім’я отримувача:*</label>
+                  <label className="form-label" htmlFor="#name">Ім’я отримувача:<sup className='required-field'>*</sup></label>
                   <TextField
                     onChange={this.requiredFields}
                     required
@@ -220,7 +208,10 @@ class CheckoutPage extends React.Component {
                 </div>
 
                 <div className="input-container input-container-surName">
-                  <label className="form-label" htmlFor="#surName">Прізвище отримувача:*</label>
+                  <label className="form-label"
+                         htmlFor="#surName">Прізвище отримувача:
+                      <sup className='required-field'>*</sup>
+                  </label>
                   <TextField
                     onChange={this.requiredFields}
                     required
@@ -239,7 +230,7 @@ class CheckoutPage extends React.Component {
                 </div>
 
                 <div className="input-container input-container-lastName">
-                  <label className="form-label" htmlFor="#lastName">По-батькові отримувача:*</label>
+                  <label className="form-label" htmlFor="#lastName">По-батькові отримувача:<sup className='required-field'>*</sup></label>
                   <TextField
                     onChange={this.requiredFields}
                     required
@@ -258,22 +249,25 @@ class CheckoutPage extends React.Component {
                 </div>
 
                 <CustomSelect
+                  requiredFiled
                   items={deliveryItems}
-                  labelText="Спосіб доставки:*"
+                  labelText="Спосіб доставки:"
                   selectedItem={this.state.delivery}
                   handleChangeSelect={this.handleChangeSelect("delivery")}
                 />
 
                 <CustomSelect
+                  requiredFiled
                   items={cityItems}
-                  labelText="Місто отримувача:*"
+                  labelText="Місто отримувача:"
                   selectedItem={this.state.city}
                   handleChangeSelect={this.handleChangeSelect("city")}
                 />
 
                 <CustomSelect
+                  requiredFiled
                   items={departmentItems}
-                  labelText="Відділення:*"
+                  labelText="Відділення:"
                   selectedItem={this.state.department}
                   handleChangeSelect={this.handleChangeSelect("department")}
                 />
@@ -282,7 +276,7 @@ class CheckoutPage extends React.Component {
 
               <div className="right-block">
                 <FormControlLabel
-                  className="checkbox-label viber"
+                  className="checkbox-label"
                   control={
                     <Checkbox
                       checked={userDataIsSimilarToTheRecipient}
@@ -298,9 +292,38 @@ class CheckoutPage extends React.Component {
                     label: 'label',
                   }}
                 />
+
+                <div className="text-area-container">
+                  <label className="form-label" htmlFor="#comment">Коментар до замовлення:</label>
+                  <textarea
+                    id="comment"
+                    name="comment"
+                    value={comment}
+                    className="text-area-style"
+                    onChange={this.fieldsChange}
+                  />
+                </div>
               </div>
 
-            </form>
+            </div>
+
+            <div className="create-order-name">
+              <TextField
+                onChange={this.fieldsChange}
+                value={orderName}
+                type="text"
+                label="Підписати замовлення для зручного пошуку в «Архіві замовлень»"
+                name="order-name"
+                id="order-name"
+                className="order-name-wrap"
+                InputProps={{
+                  classes: {
+                    root: 'input',
+                    input: 'order-name-input'
+                  },
+                }}
+              />
+            </div>
 
             {
               <AllPriceAndButtons

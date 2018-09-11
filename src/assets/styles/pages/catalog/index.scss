@@ -97,6 +97,66 @@
       vertical-align: middle;
     }
   }
+
+  .filter-label,
+  .select-label,
+  .filter-label-of-goods {
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    color: rgba(76, 71, 67, 0.6);
+  }
+
+  .filters {
+    text-align: center;
+    margin-bottom: 20px;
+
+    .filter-product {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .animate-label {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .filter-label {
+      margin-right: 24px;
+      font-style: italic;
+    }
+
+    .filter-select {
+      cursor: pointer;
+      margin-top: 8px;
+      min-width: 120px;
+
+      &:after {
+        border-bottom: 1px solid rgba(76, 71, 67, 0.6);
+      }
+    }
+
+    .show-filters {
+      width: 100%;
+      color: #fff;
+      height: 40px;
+      max-width: 280px;
+      border-radius: 3px;
+      background-color: #373737;
+    }
+
+    .select-container {
+      margin-right: 30px;
+
+      &:hover {
+        .filter-label,
+        .select-label {
+          color: #787878;
+        }
+      }
+    }
+  }
 }
 
 .filters-mobile-modal {
@@ -119,54 +179,12 @@
 }
 
 .filters {
-  text-align: center;
-  margin-bottom: 20px;
-
-  .show-filters {
-    width: 100%;
-    color: #fff;
-    height: 40px;
-    max-width: 280px;
-    border-radius: 3px;
-    background-color: #373737;
-  }
-
-  .filter-product {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: center;
-  }
-
-  .select-container {
-    margin-right: 30px;
-
-    &:hover {
-      .filter-label,
-      .select-label {
-        color: #787878;
-      }
-
-    }
-
-  }
-
-  .filter-label {
-    margin-right: 24px;
-    font-style: italic;
-  }
-
-  .animate-label {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
 
   .filter-label,
   .select-label,
   .filter-label-of-goods {
     font-size: 12px;
     letter-spacing: 0.6px;
-    color: rgba(76, 71, 67, 0.6);
   }
 
   .custom-label {
@@ -178,19 +196,14 @@
   }
 
   .select-label {
+    height: 40px;
+    display: flex;
+    cursor: pointer;
     text-align: left;
     margin-right: 24px;
+    align-items: center;
   }
 
-  .filter-select {
-    cursor: pointer;
-    margin-top: 8px;
-    min-width: 120px;
-
-    &:after {
-      border-bottom: 1px solid rgba(76, 71, 67, 0.6);
-    }
-  }
 }
 
 .filter-ul {
