@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {DeviceSizeService} from 'utilits';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import CustomSelect from 'shared/components/customSelect/Select.component';
 import {FormControlLabel,TextField,Checkbox, withStyles} from '@material-ui/core';
 import AllPriceAndButtons from 'shared/components/all-price-and-buttons/AllPriceAndButtons.component';
 
+import PenIcon from 'assets/svg/other/pen.svg';
 import PhoneIcon from 'assets/svg/other/phone.svg';
 import PointIcon from 'assets/svg/other/point.svg';
 import EmailIcon from 'assets/svg/navigation-menu/envelope.svg';
@@ -95,6 +97,14 @@ class CheckoutPage extends React.Component {
 
   state = initialState;
 
+  componentDidMount() {
+    this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    DeviceSizeService.unsubscribe(this.deviceServiceId);
+  }
+
   /**
    * check required fields functionality
    */
@@ -161,6 +171,24 @@ class CheckoutPage extends React.Component {
 
     const discount = this.props.userProfile.discount;
 
+    const checkBox = <FormControlLabel
+      className="checkbox-label"
+      control={
+        <Checkbox
+          checked={userDataIsSimilarToTheRecipient}
+          onChange={this.handleChange('userDataIsSimilarToTheRecipient')}
+          classes={{
+            root: classes.checkbox,
+            checked: classes.checked,
+          }}
+        />
+      }
+      label="Дані користувача аналогічні для отримувача"
+      classes={{
+        label: 'label',
+      }}
+    />;
+
     return (
       <Wrapper>
         <div className="checkout-order-page">
@@ -188,6 +216,11 @@ class CheckoutPage extends React.Component {
             <div className="checkout-fields">
 
               <div className="left-block">
+
+                {
+                  DeviceSizeService.size.width < 480 && checkBox
+                }
+
                 <div className="input-container input-container-name">
                   <label className="form-label" htmlFor="#name">Ім’я отримувача:<sup className='required-field'>*</sup></label>
                   <TextField
@@ -275,23 +308,10 @@ class CheckoutPage extends React.Component {
               </div>
 
               <div className="right-block">
-                <FormControlLabel
-                  className="checkbox-label"
-                  control={
-                    <Checkbox
-                      checked={userDataIsSimilarToTheRecipient}
-                      onChange={this.handleChange('userDataIsSimilarToTheRecipient')}
-                      classes={{
-                        root: classes.checkbox,
-                        checked: classes.checked,
-                      }}
-                    />
-                  }
-                  label="Дані користувача аналогічні для отримувача"
-                  classes={{
-                    label: 'label',
-                  }}
-                />
+
+                {
+                  DeviceSizeService.size.width > 480 && checkBox
+                }
 
                 <div className="text-area-container">
                   <label className="form-label" htmlFor="#comment">Коментар до замовлення:</label>
@@ -309,20 +329,21 @@ class CheckoutPage extends React.Component {
 
             <div className="create-order-name">
               <TextField
-                onChange={this.fieldsChange}
-                value={orderName}
                 type="text"
-                label="Підписати замовлення для зручного пошуку в «Архіві замовлень»"
-                name="order-name"
                 id="order-name"
-                className="order-name-wrap"
+                value={orderName}
+                name="orderName"
                 InputProps={{
                   classes: {
                     root: 'input',
                     input: 'order-name-input'
                   },
                 }}
+                className="order-name-wrap"
+                onChange={this.fieldsChange}
+                label="Підписати замовлення для зручного пошуку в «Архіві замовлень»"
               />
+              <PenIcon className="icon-pen"/>
             </div>
 
             {

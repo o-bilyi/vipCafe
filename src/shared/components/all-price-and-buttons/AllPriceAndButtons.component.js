@@ -33,7 +33,7 @@ export default function AllPriceAndButtons(props) {
     }
     return (
       <div className="buttons-wrap">
-        <Button className="clear-btn" onClick={() => navigationScheme.basket}>редагувати кошик</Button>
+        <Link to={navigationScheme.basket} className="clear-btn">редагувати кошик</Link>
         <Button className="to-order" onClick={submitBasketAction}>підтвердити замовлення</Button>
       </div>
     )

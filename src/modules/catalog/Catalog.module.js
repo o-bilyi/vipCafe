@@ -144,13 +144,13 @@ class Catalog extends React.Component {
 
     if(DeviceSizeService.size.width < 768) {
       return (
-        <div className='filters'>
+        <div className='custom-filter'>
           <Button className="show-filters" onClick={this._toggleFilterModal}>фільтр і сортування</Button>
         </div>
       )
     }
     return (
-      <div className="filters">
+      <div className="custom-filter">
         <div className="filter-product">
 
           <FormControl className="select-container">
@@ -342,7 +342,7 @@ class Catalog extends React.Component {
             onClose={this._handleOpenDescriptionModal}
             className="filters-mobile-modal"
           >
-            <div className="filters">
+            <div className="catalog-mobile-filters">
               <button className="back-btn" onClick={this._toggleFilterModal}><ArrowIcon className="back-icon"/></button>
               <div className="filter-product">
 

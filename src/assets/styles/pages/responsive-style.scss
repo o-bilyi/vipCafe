@@ -63,6 +63,39 @@
       }
     }
   }
+
+  .checkout-order-page {
+    padding: 40px;
+
+    .width-container {
+      max-width: 100%;
+    }
+
+    .name-wrap {
+      width: 100%;
+      border-right: none;
+    }
+
+    .left-block,
+    .right-block {
+      max-width: 100%;
+    }
+
+    .checkout-fields {
+      margin: 0 auto;
+      max-width: 540px;
+      flex-direction: column;
+    }
+
+    .create-order-name {
+      margin-top: 20px;
+    }
+
+    .all-price-and-buttons {
+      padding-top: 50px;
+      margin-bottom: 0;
+    }
+  }
 }
 
 @media (max-width: 1080px) {
@@ -326,7 +359,7 @@
 
     .user-info {
       text-align: left;
-      align-items : flex-start;
+      align-items: flex-start;
     }
 
     .user-name {
@@ -342,7 +375,7 @@
 
   }
 
-  .filters {
+  .catalog-mobile-filters {
     padding: 0 20px;
     .select-container {
       width: 100%;
@@ -401,6 +434,10 @@
     padding-top: 0;
     margin-bottom: 50px;
     flex-direction: column-reverse;
+
+    .price-wrap {
+      margin-bottom: 30px;
+    }
 
     &:before {
       content: none;
@@ -463,7 +500,7 @@
   .archive-wrap {
 
     .tab-right-column {
-      padding:  0 0 5px;
+      padding: 0 0 5px;
     }
 
     .all-price-wrap {
@@ -541,17 +578,63 @@
       width: 100%;
     }
   }
+
+  .checkout-order-page {
+    padding: 30px 20px;
+
+    .checkout-fields {
+      max-width: 100%;
+    }
+
+    .name-wrap,
+    .phone-wrap,
+    .email-wrap,
+    .location-wrap {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid rgba(250, 250, 250, 0.3);
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
 }
 
 @media (max-width: 480px) {
   .shared-form-wrap {
     padding: 0;
   }
+
   .shared-form-container {
     .input-container {
       width: 100%;
       max-width: 100%;
       margin-bottom: 20px;
+    }
+  }
+
+  .checkout-order-page {
+
+    .right-block {
+      padding-top: 0;
+    }
+
+    .input-container,
+    .custom-filter {
+      max-width: 100%;
+    }
+
+    .create-order-name {
+      margin-top: 0;
+
+      label {
+        font-size: 12px;
+      }
+    }
+
+    .order-name-input {
+      padding-top: 15px;
     }
   }
 }

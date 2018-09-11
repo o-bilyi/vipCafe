@@ -56,7 +56,7 @@ class CustomSelect extends React.Component {
     const  {openSelect} = this.state;
 
     return (
-      <div className="filters custom-filter">
+      <div className="custom-filter">
         {
           labelText &&
           <InputLabel
