@@ -3,6 +3,20 @@ import {catalogActionTypes} from '../../models/catalog';
 
 const initialState = {
   items: [
+    // {
+    //   category : "coffee",
+    //   id : 1,
+    //   img : 'img/img-item.png',
+    //   title : 'Lavazza Crema e Aroma Espresso Blue',
+    //   properties : [{
+    //     name : "капсульна",
+    //     numberInPackage: 10000,
+    //     numberInBox : 20
+    //   }],
+    //   numberInPackage: 10000,
+    //   count : 1,
+    //   price : 20,
+    // },
     {
       id : 1,
       img : 'img/img-item.png',
