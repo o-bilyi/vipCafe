@@ -142,7 +142,7 @@ const items = [
     date: '28.06.18',
     num: 14177,
     title: 'Lavazza Crema e Aroma Espresso Blue',
-    orderAddress: 'Замовлення для Віктора з Вінниці',
+    orderAddress: ' для Віктора з Вінниці',
     orders: [
       {
         img: 'img/img-item.png',
@@ -169,7 +169,7 @@ const items = [
     date: '28.07.18',
     num: 14178,
     title: 'Lavazza Crema e Aroma Espresso Blue',
-    orderAddress: 'Замовлення для Віктора з Вінниці',
+    orderAddress: 'для Віктора з Вінниці',
     orders: [
       {
         img: 'img/img-item.png',
@@ -196,7 +196,7 @@ const items = [
     date: '28.06.18',
     num: 14178,
     title: 'Lavazza Crema e Aroma Espresso Blue',
-    orderAddress: 'Замовлення для Віктора з Вінниці',
+    orderAddress: 'для Віктора з Вінниці',
     orders: [
       {
         img: 'img/img-item.png',
@@ -223,7 +223,7 @@ const items = [
     date: '28.05.18',
     num: 14178,
     title: 'Lavazza Crema e Aroma Espresso Blue',
-    orderAddress: 'Замовлення для Віктора з Вінниці',
+    orderAddress: ' для Віктора з Вінниці',
     orders: [
       {
         img: 'img/img-item.png',

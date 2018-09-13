@@ -13,7 +13,6 @@ export const navigationScheme = {
   catalog : '/catalog',
   archive : '/archive',
   dashboard: '/dashboard',
-  newArrivals : '/new-arrivals',
   privacyPolicy : '/privacy-policy',
   sharesAndOffers : '/shares-and-offers',
 
@@ -58,11 +57,6 @@ export const MAIN_ROUTES = [
     path: navigationScheme.basket,
     exact: true,
     component: () => import('../modules/basket/Basket.module')
-  },
-  {
-    path: navigationScheme.newArrivals,
-    exact: true,
-    component: () => import('../modules/new-arrivals/NewArrivals.module')
   },
   {
     path: navigationScheme.sharesAndOffers,

@@ -9,6 +9,7 @@ import ArchiveIcon from 'assets/svg/navigation-menu/archive.svg';
 import TransformIcon from 'assets/svg/navigation-menu/new-item.svg';
 import ShoppingCartIcon from 'assets/svg/navigation-menu/basket.svg';
 import SharedAndOffersIcon from 'assets/svg/navigation-menu/shares-and-offers.svg';
+import RouterService from '../../../services/RouterService';
 
 export const firstMenuItems = [
   {
@@ -18,14 +19,22 @@ export const firstMenuItems = [
   },
   {
     to: navigationScheme.sharesAndOffers,
+    setProperties : RouterService.navigateTo({
+      pathname: navigationScheme.sharesAndOffers,
+      state: "shared",
+    }),
     icon: SharedAndOffersIcon,
     text: 'акції і пропозиції'
   },
   {
-    to: navigationScheme.newArrivals,
+    to: navigationScheme.sharesAndOffers,
+    setProperties : RouterService.navigateTo({
+      pathname: navigationScheme.sharesAndOffers,
+      state: "offers",
+    }),
     icon: TransformIcon,
     text: 'нові поступлення',
-    number: <CountItem storageTarget="newArrivals"/>,
+    number: <CountItem storageTarget="sharesAndOffers"/>,
   },
 ];
 

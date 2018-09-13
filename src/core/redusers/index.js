@@ -4,7 +4,7 @@ import {archive} from './archive';
 import {catalog} from './catalog';
 import {userProfile} from './users';
 import {combineReducers} from 'redux';
-import {newArrivals} from './newArrivals';
+import {sharesAndOffers} from './shares-and-offers';
 import {routerReducer as routing} from 'react-router-redux';
 import {reducer as toastrReducer} from 'react-redux-toastr';
 
@@ -13,7 +13,7 @@ export default combineReducers({
   auth,
   userProfile,
   catalog,
-  newArrivals,
+  sharesAndOffers,
   basket,
   archive,
   toastr : toastrReducer

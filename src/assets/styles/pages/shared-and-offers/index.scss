@@ -1,7 +1,138 @@
 .shared-and-offers-page {
+  min-height: 100vh;
+  background-color: #f4f4f4;
 
   .width-container {
-    padding: 20px;
+    margin: auto;
     max-width: 1370px;
+    padding: 40px 20px 20px;
   }
+
+  .header-tab {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    justify-content: center;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .header-tab-item {
+    width: 120px;
+
+    &.active {
+      .header-tab-btn{
+        color: #2e3031;
+        &:after {
+          background-color: #6b9b50;
+        }
+      }
+    }
+  }
+  
+  .header-tab-btn {
+    color: #a1a1a1;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:after {
+      content: '';
+      width: 100%;
+      height: 3px;
+      display: block;
+      margin-top: 14px;
+      background-color: transparent;
+    }
+  }
+
+  .tab-content {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .item {
+    margin: 0 10px;
+    max-width: 31%;
+    color: #484848;
+  }
+
+  .item-wrap {
+    background-color: #fafafa;
+    box-shadow: 0 0 26px 2px rgba(135, 135, 135, 0.19);
+  }
+
+  .start-date {
+    color: #cfcfcf;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    letter-spacing: 0.4px;
+  }
+
+  .item-image-wrap {
+    height: 200px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .finish-date {
+    top: 13px;
+    right: -5px;
+    color: #fafafa;
+    font-size: 14px;
+    padding: 8px 14px;
+    position: absolute;
+    font-style: italic;
+    letter-spacing: 0.4px;
+    background-color: #c93f3f;
+  }
+
+  .item-content {
+    padding: 26px 28px 30px 40px;
+  }
+
+  .item-title {
+    font-weight: bold;
+  }
+
+  .item-title,
+  .item-description {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+  }
+
+  .item-description {
+    padding: 20px 0;
+    line-height: 1.5;
+  }
+
+  .item-link {
+    color: #2e3031;
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+
+      .arrow-icon {
+        transform: translateX(20px);
+        opacity: 0;
+      }
+    }
+  }
+
+  .arrow-icon {
+    width: 12px;
+    margin-left: 10px;
+    vertical-align: middle;
+    fill: rgba(42, 46, 46, 0.21);
+
+    transition:transform .3s, opacity .5s ease-in;
+  }
+
 }

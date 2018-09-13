@@ -22,7 +22,7 @@ const mapStateToProps = state => {
   return {
     basket: state.basket.items,
     archive: state.archive.items,
-    newArrivals: state.newArrivals.items
+    sharesAndOffers: state.sharesAndOffers.items
   };
 };
 
