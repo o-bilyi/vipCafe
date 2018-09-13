@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import {Link} from 'react-router-dom';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
 import ArrowIcon from 'assets/svg/arrows.svg';
+import RouterService from 'shared/services/RouterService';
+import {navigationScheme} from '../../core';
 
 const tabName = {
   shared : 'shared',
@@ -14,25 +15,43 @@ const tabName = {
 
 class SharedAndOffers extends React.Component {
   static propTypes = {
-    selectTab : PropTypes.string,
+    auth: PropTypes.bool,
+
     sharedAndOffers: PropTypes.object,
+
     location: PropTypes.shape({
       state: PropTypes.string,
-    }),
-  };
+    })
 
-  static defaultProps = {
-    selectTab : tabName.shared
   };
 
   state = {
-    selectTab : this.props.selectTab
+    selectTab : this.props.location.state || tabName.shared
   };
+
+  componentWillReceiveProps(newProps) {
+    if(newProps.location.state !== this.props.location.state) {
+      this.setState({
+        selectTab : newProps.location.state || tabName.shared
+      })
+    }
+  }
 
   _selectTab = (name) => {
     this.setState({
       selectTab :  name
     });
+  };
+
+  _openSingleItem = (item) => {
+    const auth = this.props.auth;
+    RouterService.navigateTo({
+      pathname : navigationScheme.sharedAndOffersSingleItem,
+      state : {
+        auth,
+        ...item
+      }
+    })
   };
 
   _getTabContent = (selectItem) => {
@@ -43,12 +62,12 @@ class SharedAndOffers extends React.Component {
             <p className="start-date">{item.date.start}</p>
             <div className="item-wrap">
               <div className="item-image-wrap" style={{backgroundImage : `url(${item.img})`}}>
-                <span className="finish-date">до {item.date.and}</span>
+                <span className="finish-date">до {item.date.end}</span>
               </div>
               <div className="item-content">
                 <h2 className="item-title">{item.title}</h2>
                 <p className="item-description">{item.description}</p>
-                <Link className="item-link" to="sing-item">Детальніше <ArrowIcon className='arrow-icon'/></Link>
+                <button className="item-link" onClick={() => this._openSingleItem(item)}>Детальніше <ArrowIcon className='arrow-icon'/></button>
               </div>
             </div>
           </div>
@@ -58,7 +77,6 @@ class SharedAndOffers extends React.Component {
   };
 
   render() {
-    console.warn(this.props.location);
     return(
       <Wrapper>
         <div className="shared-and-offers-page">
@@ -85,6 +103,7 @@ class SharedAndOffers extends React.Component {
 
 const mapStateProps = state => {
   return {
+    auth : state.auth.isAuthorized,
     sharedAndOffers : state.sharesAndOffers
   }
 };

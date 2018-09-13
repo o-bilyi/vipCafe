@@ -18,6 +18,8 @@ export const navigationScheme = {
 
   archiveOrder : '/archive-order',
   checkoutOrder : '/checkout-order',
+
+  sharedAndOffersSingleItem : '/single-item',
 };
 
 const Loading = () => <div className="loader"><CircularProgress style={{color : green[500]}}/></div>;
@@ -62,6 +64,11 @@ export const MAIN_ROUTES = [
     path: navigationScheme.sharesAndOffers,
     exact: true,
     component: () => import('../modules/shared-and-offers/SharedAndOffers.module')
+  },
+  {
+    path: navigationScheme.sharedAndOffersSingleItem,
+    exact: true,
+    component: () => import('../modules/shared-and-offers/components/SingleItem.component')
   },
   {
     path: navigationScheme.archive,

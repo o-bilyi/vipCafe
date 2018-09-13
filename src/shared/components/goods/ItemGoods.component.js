@@ -19,8 +19,7 @@ export default class ItemGoods extends React.Component {
     title : PropTypes.string,
     price : PropTypes.number,
     count : PropTypes.number,
-    properties : PropTypes.array,
-    numberInPackage : PropTypes.number,
+    properties : PropTypes.arrayOf(PropTypes.object)
   };
 
   state = {
@@ -69,7 +68,7 @@ export default class ItemGoods extends React.Component {
              return (
                <div className='item-properties' key={key}>
                  <TechnologyIcon className='icon'/>
-                 <span className='text'>{item}</span>
+                 <span className='text'>{item.name}</span>
                </div>
              )
            })

@@ -18,20 +18,18 @@ export const firstMenuItems = [
     text: 'каталог товарів'
   },
   {
-    to: navigationScheme.sharesAndOffers,
-    setProperties : RouterService.navigateTo({
+    to: {
       pathname: navigationScheme.sharesAndOffers,
       state: "shared",
-    }),
+    },
     icon: SharedAndOffersIcon,
     text: 'акції і пропозиції'
   },
   {
-    to: navigationScheme.sharesAndOffers,
-    setProperties : RouterService.navigateTo({
+    to: {
       pathname: navigationScheme.sharesAndOffers,
       state: "offers",
-    }),
+    },
     icon: TransformIcon,
     text: 'нові поступлення',
     number: <CountItem storageTarget="sharesAndOffers"/>,

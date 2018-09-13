@@ -8,7 +8,7 @@ const initialState = {
       type: 'shared',
       date: {
         start: '15.06.18',
-        and: '15.07.18',
+        end: '15.07.18',
       },
       img: 'img/auth-page-bg.png',
       title: 'Lorem ipsum',
@@ -59,7 +59,7 @@ const initialState = {
       type: 'shared',
       date: {
         start: '15.06.18',
-        and: '15.07.18',
+        end: '15.07.18',
       },
       img: 'img/auth-page-bg.png',
       title: 'Lorem ipsum',
@@ -113,7 +113,7 @@ const initialState = {
       type: 'shared',
       date: {
         start: '15.06.18',
-        and: '15.07.18',
+        end: '15.07.18',
       },
       img: 'img/auth-page-bg.png',
       title: 'Lorem ipsum',
@@ -167,7 +167,7 @@ const initialState = {
       type: 'offers',
       date: {
         start: '15.06.18',
-        and: '15.07.18',
+        end: '15.07.18',
       },
       img: 'img/auth-page-bg.png',
       title: 'Lavazza Crema e Aroma Espresso Blue',
@@ -221,7 +221,7 @@ const initialState = {
       type: 'offers',
       date: {
         start: '15.06.18',
-        and: '15.07.18',
+        end: '15.07.18',
       },
       img: 'img/auth-page-bg.png',
       title: 'Lavazza Crema e Aroma Espresso Blue',
@@ -275,7 +275,7 @@ const initialState = {
       type: 'offers',
       date: {
         start: '15.06.18',
-        and: '15.07.18',
+        end: '15.07.18',
       },
       img: 'img/auth-page-bg.png',
       title: 'Lavazza Crema e Aroma Espresso Blue',

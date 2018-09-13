@@ -46,7 +46,7 @@ export default class Wrapper extends React.Component {
         <ListItem key={key} button className="menu-item">
           <NavLink
             className="menu-link"
-            to={item.to} activeClassName="active" onClick={item.setProperties && item.setProperties}>
+            to={item.to} activeClassName="active">
             <ListItemIcon>
               <item.icon className="menu-icon"/>
             </ListItemIcon>
