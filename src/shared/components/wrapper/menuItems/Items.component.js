@@ -9,7 +9,6 @@ import ArchiveIcon from 'assets/svg/navigation-menu/archive.svg';
 import TransformIcon from 'assets/svg/navigation-menu/new-item.svg';
 import ShoppingCartIcon from 'assets/svg/navigation-menu/basket.svg';
 import SharedAndOffersIcon from 'assets/svg/navigation-menu/shares-and-offers.svg';
-import RouterService from '../../../services/RouterService';
 
 export const firstMenuItems = [
   {

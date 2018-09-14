@@ -599,6 +599,21 @@
       }
     }
   }
+
+  .shared-and-offers-single-item {
+    .single-item-wrap {
+      padding: 0 20px;
+    }
+
+    .single-item-title {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .single-item-description {
+      font-size: 14px;
+    }
+  }
 }
 
 @media (max-width: 480px) {

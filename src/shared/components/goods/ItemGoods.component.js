@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {navigationScheme} from 'core';
 import BoxIcon from 'assets/svg/goods-icon/box.svg';
-// import GrainsIcon from 'assets/svg/goods-icon/grains.svg';
-// import WeightIcon from 'assets/svg/goods-icon/weight-icon.svg';
+import GrainsIcon from 'assets/svg/goods-icon/grains.svg';
+import WeightIcon from 'assets/svg/goods-icon/weight-icon.svg';
 import TechnologyIcon from 'assets/svg/goods-icon/technology.svg';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -14,23 +14,23 @@ import WarningIcon from 'assets/svg/warning.svg';
 
 export default class ItemGoods extends React.Component {
   static propTypes = {
-    id : PropTypes.number,
-    img : PropTypes.string,
-    title : PropTypes.string,
-    price : PropTypes.number,
-    count : PropTypes.number,
-    properties : PropTypes.arrayOf(PropTypes.object)
+    id: PropTypes.number,
+    img: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    count: PropTypes.number,
+    properties: PropTypes.arrayOf(PropTypes.object),
   };
 
   state = {
-    count : this.props.count,
-    openDescriptionModal : false,
+    count: this.props.count,
+    openDescriptionModal: false,
   };
 
   countItem = (value) => {
     this.setState({
-      count : Number(value.target.value)
-    })
+      count: Number(value.target.value),
+    });
   };
 
   getTotalCost = () => {
@@ -39,19 +39,31 @@ export default class ItemGoods extends React.Component {
 
   _handleOpenDescriptionModal = () => {
     this.setState({
-      openDescriptionModal : !this.state.openDescriptionModal
-    })
+      openDescriptionModal: !this.state.openDescriptionModal,
+    });
   };
 
   _addToBasket = (item) => () => {
     store.dispatch(addToBasket({
       ...item,
-      count : this.state.count
-    }))
+      count: this.state.count,
+    }));
+  };
+
+  _getIconForGoods = (name) => {
+    switch (name) {
+      case 'капсульна' :
+        return  <TechnologyIcon className='icon'/>;
+      case 'мелена' :
+        return  <TechnologyIcon className='icon'/>;
+      case 'зернова' :
+        return <GrainsIcon className='icon'/>;
+      default : return <TechnologyIcon className='icon'/>;
+    }
   };
 
   _getTopContent = () => {
-    const {img,title,numberInPackage,properties} = this.props;
+    const {img, title, properties} = this.props;
 
     return [
       <div key={1} className='item-image-wrap'>
@@ -64,25 +76,54 @@ export default class ItemGoods extends React.Component {
 
         <div className="item-types">
           {
-           properties.map((item, key) => {
-             return (
-               <div className='item-properties' key={key}>
-                 <TechnologyIcon className='icon'/>
-                 <span className='text'>{item.name}</span>
-               </div>
-             )
-           })
+            properties.map((item, key) => {
+              return [
+                <div className='item-properties' key={key}>
+                  {
+                    this._getIconForGoods(item.name)
+                  }
+                  <span className='text'>{item.name}</span>
+                </div>,
+
+                item.weight &&
+                <div className='item-properties' key={key + 1}>
+                  <WeightIcon className='icon'/>
+                  <span className='text'>{item.weight} г</span>
+                </div>
+              ];
+            })
           }
         </div>
 
         <div className="in-the-package">
           <div className='item-properties'>
-            <BoxIcon className='icon'/>
-            <span className='text'>в упаковці {numberInPackage} капсул</span>
+            {
+              properties.map((item, key) => {
+                return (
+                  <div className='item-properties' key={key}>
+                    {
+                      item.numberInBox &&
+                      [
+                        <BoxIcon key={1} className='icon'/>,
+                        <span key={2} className='text'>в ящику {item.numberInBox} штук</span>,
+                      ]
+                    }
+                    {
+
+                      item.numberInPackage &&
+                        [
+                          <BoxIcon key={3} className='icon'/>,
+                          <span key={4} className='text'>в упаковці {item.numberInPackage} капсул</span>
+                        ]
+                    }
+                  </div>
+                );
+              })
+            }
           </div>
         </div>
 
-      </div>
+      </div>,
     ];
   };
 
@@ -119,10 +160,11 @@ export default class ItemGoods extends React.Component {
           className="goods-description-modal"
         >
           <div className="description-warning-item">Кількість штук в упаковці або ящику вказана у характеристиці товару.
-            Якщо такої інформації немає, то товар можна замовляти поштучно.</div>
+            Якщо такої інформації немає, то товар можна замовляти поштучно.
+          </div>
         </Dialog>
 
       </div>
-    )
+    );
   }
 }

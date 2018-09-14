@@ -67,7 +67,7 @@ export default class Item extends React.Component {
             <div className="properties">
               {
                 properties.map((item, key) => {
-                  return  <p className="item-props" key={key}>icon {item}</p>
+                  return  <p className="item-props" key={key}>icon {item.name}</p>
                 })
               }
             </div>

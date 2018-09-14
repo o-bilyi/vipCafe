@@ -17,38 +17,38 @@ const initialState = {
       sharedItems: [
         {
           id: 1,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [{
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,}],
+          properties: [
+            {
+              name : "капсульна",
+              numberInPackage: 100,
+            }
+          ],
           count: 1,
           price: 20,
         },
         {
           id: 2,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "мелена",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
         {
           id: 3,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "зернова",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
@@ -68,13 +68,12 @@ const initialState = {
       sharedItems: [
         {
           id: 1,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
           properties: [
             {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
+              name : "капсульна",
+              numberInPackage: 100,
             }
           ],
           count: 1,
@@ -82,27 +81,25 @@ const initialState = {
         },
         {
           id: 2,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "мелена",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
         {
           id: 3,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "зернова",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
@@ -122,13 +119,12 @@ const initialState = {
       sharedItems: [
         {
           id: 1,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
           properties: [
             {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
+              name : "капсульна",
+              numberInPackage: 100,
             }
           ],
           count: 1,
@@ -136,27 +132,25 @@ const initialState = {
         },
         {
           id: 2,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "мелена",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
         {
           id: 3,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "зернова",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
@@ -176,13 +170,12 @@ const initialState = {
       sharedItems: [
         {
           id: 1,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
           properties: [
             {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
+              name : "капсульна",
+              numberInPackage: 100,
             }
           ],
           count: 1,
@@ -190,27 +183,25 @@ const initialState = {
         },
         {
           id: 2,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "мелена",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
         {
           id: 3,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "зернова",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
@@ -230,13 +221,12 @@ const initialState = {
       sharedItems: [
         {
           id: 1,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
           properties: [
             {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
+              name : "капсульна",
+              numberInPackage: 100,
             }
           ],
           count: 1,
@@ -244,27 +234,25 @@ const initialState = {
         },
         {
           id: 2,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "мелена",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
         {
           id: 3,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "зернова",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
@@ -284,13 +272,12 @@ const initialState = {
       sharedItems: [
         {
           id: 1,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
           properties: [
             {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
+              name : "капсульна",
+              numberInPackage: 100,
             }
           ],
           count: 1,
@@ -298,27 +285,25 @@ const initialState = {
         },
         {
           id: 2,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "мелена",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },
         {
           id: 3,
-          img: 'img/auth-page-bg.png',
+          img: 'img/img-item.png',
           title: 'Lavazza Crema e Aroma Espresso Blue',
-          properties: [
-            {
-              name: 'капсульна',
-              numberInPackage: 10000,
-              numberInBox: 20,
-            }],
+          properties : [{
+            name : "зернова",
+            weight : 1000,
+            numberInBox : 20
+          }],
           count: 1,
           price: 20,
         },

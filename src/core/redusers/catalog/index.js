@@ -3,83 +3,83 @@ import {catalogActionTypes} from '../../models/catalog';
 
 const initialState = {
   items: [
-    // {
-    //   category : "coffee",
-    //   id : 1,
-    //   img : 'img/img-item.png',
-    //   title : 'Lavazza Crema e Aroma Espresso Blue',
-    //   properties : [{
-    //     name : "капсульна",
-    //     numberInPackage: 10000,
-    //     numberInBox : 20
-    //   }],
-    //   numberInPackage: 10000,
-    //   count : 1,
-    //   price : 20,
-    // },
     {
+      category : "coffee",
       id : 1,
       img : 'img/img-item.png',
       title : 'Lavazza Crema e Aroma Espresso Blue',
-      properties : ['капсульна','капсульна'],
-      numberInPackage: 10000,
+      properties : [{
+        name : "капсульна",
+        numberInPackage: 100,
+      }],
       count : 1,
       price : 20,
     },
     {
+      category : "coffee",
       id : 2,
       img : 'img/img-item.png',
       title : 'Lavazza Crema e Aroma Espresso Blue',
-      properties : ['капсульна','капсульна'],
-      count : 3,
-      price : 40,
-      numberInPackage: 10000,
+      properties : [{
+        name : "мелена",
+        weight : 1000,
+        numberInBox : 20
+      }],
+      count : 1,
+      price : 20,
     },
     {
+      category : "coffee",
       id : 3,
       img : 'img/img-item.png',
       title : 'Lavazza Crema e Aroma Espresso Blue',
-      properties : ['капсульна','капсульна'],
-      count : 5,
-      price : 25,
-      numberInPackage: 10000,
+      properties : [{
+        name : "зернова",
+        weight : 1000,
+        numberInBox : 20
+      }],
+      count : 1,
+      price : 20,
     },
     {
+      category : "coffee",
       id : 4,
       img : 'img/img-item.png',
       title : 'Lavazza Crema e Aroma Espresso Blue',
-      properties : ['капсульна','капсульна'],
-      count : 5,
-      price : 25,
-      numberInPackage: 10000,
+      properties : [{
+        name : "зернова",
+        weight : 1000,
+        numberInBox : 20
+      }],
+      count : 1,
+      price : 20,
     },
     {
+      category : "coffee",
       id : 5,
       img : 'img/img-item.png',
       title : 'Lavazza Crema e Aroma Espresso Blue',
-      properties : ['капсульна','капсульна'],
-      count : 5,
-      price : 25,
-      numberInPackage: 10000,
+      properties : [{
+        name : "зернова",
+        weight : 1000,
+        numberInBox : 20
+      }],
+      count : 1,
+      price : 20,
     },
     {
+      category : "coffee",
       id : 6,
       img : 'img/img-item.png',
       title : 'Lavazza Crema e Aroma Espresso Blue',
-      properties : ['капсульна','капсульна'],
-      count : 5,
-      price : 25,
-      numberInPackage: 10000,
+      properties : [{
+        name : "зернова",
+        weight : 1000,
+        numberInBox : 20
+      }],
+      count : 1,
+      price : 20,
     },
-    {
-      id : 7,
-      img : 'img/img-item.png',
-      title : 'Lavazza Crema e Aroma Espresso Blue',
-      properties : ['капсульна','капсульна'],
-      count : 5,
-      price : 25,
-      numberInPackage: 10000,
-    }
   ]
 };
 

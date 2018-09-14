@@ -131,8 +131,72 @@
     margin-left: 10px;
     vertical-align: middle;
     fill: rgba(42, 46, 46, 0.21);
-
     transition:transform .3s, opacity .5s ease-in;
   }
 
+}
+
+.shared-and-offers-single-item {
+  background-color: #fafafa;
+
+  .back-btn {
+    width: 50px;
+    height: 50px;
+    fill:  #484848;
+
+    .arrow-back-icon {
+      transition:transform .3s ease-in;
+    }
+
+    &:hover {
+      .arrow-back-icon {
+        transform: translateX(-10px);
+      }
+    }
+  }
+
+  .img-container {
+    margin-bottom: 25px;
+  }
+
+  .start-date {
+    color: #cfcfcf;
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  .finish-date {
+    color: #fafafa;
+    font-size: 14px;
+    padding: 10px 30px;
+    font-style: italic;
+    display: inline-block;
+    letter-spacing: 0.4px;
+    background-color: #c93f3f;
+  }
+
+  .single-item-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .single-item-description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 19px;
+  }
+
+  .single-item-items {
+    margin-top: 30px;
+  }
+
+  .single-item-wrap {
+    margin: auto;
+    color: #484848;
+    padding: 0 40px;
+    max-width: 980px;
+    letter-spacing: 0.3px;
+  }
 }

@@ -2,11 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  padding: 20px 30px;
   align-items: flex-start;
-  background-color: #fafafa;
   justify-content: space-between;
-  box-shadow: 0 0 26px 2px rgba(135, 135, 135, 0.19);
 
   .item-wrap {
     flex-grow: 1;

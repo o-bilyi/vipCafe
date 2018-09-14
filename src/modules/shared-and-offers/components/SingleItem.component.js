@@ -6,7 +6,7 @@ import PriceItem from 'shared/components/goods/ItemWithPrice.component';
 
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
-import ArrowBackIcon from 'assets/svg/arrows.svg';
+import ArrowBackIcon from '@material-ui/icons/KeyboardBackspace';
 
 export default function SingItem(props) {
   const {auth, img, date, title, description, sharedItems} = props.location.state;
@@ -14,7 +14,8 @@ export default function SingItem(props) {
 
   return (
     <Wrapper>
-      <div className='single-item'>
+      <div className='shared-and-offers-single-item'>
+
         <button className="back-btn" onClick={RouterService.goBack}>
           <ArrowBackIcon className="arrow-back-icon"/>
         </button>
@@ -28,7 +29,7 @@ export default function SingItem(props) {
 
           <h1 className="single-item-title">{title}</h1>
 
-          <p className="description">{description}</p>
+          <p className="single-item-description">{description}</p>
 
           <p className="finish-date">{date.end}</p>
 
