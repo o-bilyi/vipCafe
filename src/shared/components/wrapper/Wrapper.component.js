@@ -1,20 +1,22 @@
 import React from 'react';
 import classNames from 'classnames';
-import Logo from 'assets/svg/logo.svg';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import {DeviceSizeService} from 'utilits/index';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import SearchComponent from 'shared/components/search/Search.component';
 import AccountInfo from 'shared/components/account-info/AccountInfo.component';
 import {ListItem,IconButton, Button, AppBar, Drawer, List} from '@material-ui/core';
 import {firstMenuItems, secondMenuItems, managerBlock} from './menuItems/Items.component';
 
+import Logo from 'assets/svg/logo.svg';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import {navigationScheme} from '../../../core';
+
 export default class Wrapper extends React.Component {
   state = {
-    open: false,
+    open: true,
   };
 
   componentDidMount() {
@@ -61,11 +63,13 @@ export default class Wrapper extends React.Component {
   _getToolbar = () => {
     if (DeviceSizeService.size.width < 1024) {
       return (
-        <div className={classNames('menu-toolbar')}>
+        <div className='menu-toolbar'>
           <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
             <ArrowBackIcon className="arrow-back-icon"/>
           </IconButton>
-          <Logo className="icon-logo"/>
+          <Link to={navigationScheme.login}>
+            <Logo className="icon-logo"/>
+          </Link>
           <SearchComponent/>
         </div>
       );
@@ -75,7 +79,9 @@ export default class Wrapper extends React.Component {
         <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
           <ArrowBackIcon className="arrow-back-icon"/>
         </IconButton>
-        <Logo className="icon-logo"/>
+        <Link to={navigationScheme.login}>
+          <Logo className="icon-logo"/>
+        </Link>
       </div>
     );
   };

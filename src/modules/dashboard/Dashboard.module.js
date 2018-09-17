@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {toastr} from 'react-redux-toastr';
-import {withStyles} from '@material-ui/core/styles';
 import connect from 'react-redux/es/connect/connect';
 import {userIsAuthenticated} from 'core/auth-redirect';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
-import {Button,Select,MenuItem,Checkbox,FormControlLabel, TextField} from '@material-ui/core';
+import CustomSelect from 'shared/components/customSelect/Select.component';
+import CustomCheckbox from 'shared/components/custom-checkbox/CustomCheckbox.component';
+import {Button, TextField} from '@material-ui/core';
 
 const initialState = {
   name: '',
@@ -14,58 +15,26 @@ const initialState = {
   mobile: '',
   email: '',
   nameCompany: '',
+
   city: '',
   delivery: '',
   tradeFormat: '',
+
   sitePage: '',
   telegram: false,
   viber: false,
   openThanksModal: false,
-  openDeliverySelect: false,
-  openTradeFormatSelect: false
 };
 
-const styles = {
-  root: {
-    borderRadius: 0,
-  },
+const deliveryItems = ['Нова Пошта', 'Міст Експрес'];
 
-  checked: {},
+const cityItems = ['Чернівці', 'Львів', 'Київ'];
 
-  checkbox: {
-    color: '#fff',
-
-    '&$checked': {
-      color: '#fff',
-    },
-
-    width: 20,
-    height: 20,
-  },
-
-  sizeIcon: {
-    fontSize: 20,
-  },
-
-  menuItemStyle: {
-    fontSize: '13px',
-    color: '#494949',
-  },
-
-  selectStyle: {
-    alignItems: 'center',
-    height: '40px',
-  },
-};
-
-const deliveryItems = [];
-
-const tradeFormatItems = [];
+const tradeFormatSelect = ['Ларьок', 'Бокс', 'Прилавок'];
 
 class Dashboard extends React.Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
-    userProfile: PropTypes.object,
+    userProfile: PropTypes.object
   };
 
   state = initialState;
@@ -139,7 +108,7 @@ class Dashboard extends React.Component {
    * checkbox functionality
    */
 
-  handleChange = name => event => {
+  handleChangeCheckbox = name => event => {
     this.setState({[name]: event.target.checked});
   };
 
@@ -148,44 +117,31 @@ class Dashboard extends React.Component {
    */
 
   /**
-   * customSelect functionality
+   * handleChangeSelect functionality
    */
 
   handleChangeSelect = name => event => {
     this.setState({[name]: event.target.value});
   };
 
-  handleCloseSelect = name => {
-    this.setState({[name]: false});
-  };
-
-  handleOpenSelect = name => {
-    this.setState({[name]: true});
-  };
-
-  _getSelectItems = items => items.map((item, key) => {
-    return <MenuItem
-      key={key}
-      style={styles.menuItemStyle}
-      value={item}>{item}</MenuItem>;
-  });
-
   /**
-   * customSelect functionality
+   * handleChangeSelect functionality
    */
 
-  _getContent = () => {
-    const {classes} = this.props;
 
+  _getContent = () => {
     const {
       name, surName,
       lastName, mobile,
       email, nameCompany,
-      city, delivery,
-      tradeFormat, sitePage,
-      telegram, viber,
-      openDeliverySelect,
-      openTradeFormatSelect
+
+      city,
+      delivery,
+      tradeFormat,
+
+      sitePage,
+      telegram,
+      viber,
     } = this.state;
 
     return (
@@ -305,59 +261,30 @@ class Dashboard extends React.Component {
             </div>
 
             <div className='input-container input-container-city'>
-              <label className="form-label" htmlFor="#city">Місто:</label>
-              <TextField
-                required
-                id="city"
-                type="text"
-                name="city"
-                value={city}
-                placeholder="Чернівці"
-                className="form-input-wrap"
-                onChange={this.fieldsChange}
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
+              <CustomSelect
+                items={cityItems}
+                labelText="Місто"
+                selectedItem={city}
+                handleChangeSelect={this.handleChangeSelect("city")}
+              />
             </div>
 
             <div className="input-container input-container-delivery">
-              <label className="form-label" htmlFor="#delivery">Доставка:</label>
-              <Select
-                value={delivery}
-                aria-haspopup="true"
-                className="form-input"
-                open={openDeliverySelect}
-                style={styles.selectStyle}
-                onChange={this.handleChangeSelect('delivery')}
-                SelectDisplayProps={{className: 'select-label'}}
-                onOpen={() => this.handleOpenSelect('openDeliverySelect')}
-                onClose={() => this.handleCloseSelect('openDeliverySelect')}
-              >
-                {
-                  this._getSelectItems(deliveryItems)
-                }
-              </Select>
+              <CustomSelect
+                items={deliveryItems}
+                labelText="Доставка:"
+                selectedItem={delivery}
+                handleChangeSelect={this.handleChangeSelect("delivery")}
+              />
             </div>
 
             <div className="input-container input-container-tradeFormat">
-              <label className="form-label" htmlFor="#tradeFormat">Формат торгівлі:</label>
-              <Select
-                value={tradeFormat}
-                aria-haspopup="true"
-                className="form-input"
-                style={styles.selectStyle}
-                open={openTradeFormatSelect}
-                SelectDisplayProps={{className: 'select-label'}}
-                onChange={this.handleChangeSelect('tradeFormat')}
-                onOpen={() => this.handleOpenSelect('openTradeFormatSelect')}
-                onClose={() => this.handleCloseSelect('openTradeFormatSelect')}>
-                {
-                  this._getSelectItems(tradeFormatItems)
-                }
-              </Select>
+              <CustomSelect
+                items={tradeFormatSelect}
+                labelText="Формат торгівлі:"
+                selectedItem={tradeFormat}
+                handleChangeSelect={this.handleChangeSelect("tradeFormat")}
+              />
             </div>
 
             <div className="input-container input-container-sitePage">
@@ -380,39 +307,18 @@ class Dashboard extends React.Component {
 
             <div className="input-container-telegram-and-viber">
               <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
-              <FormControlLabel
-                className="checkbox-label telegram"
-                control={
-                  <Checkbox
-                    checked={telegram}
-                    onChange={this.handleChange('telegram')}
-                    classes={{
-                      root: classes.checkbox,
-                      checked: classes.checked,
-                    }}
-                  />
-                }
-                label="Telegram"
-                classes={{
-                  label: 'label',
-                }}
+              <CustomCheckbox
+                handleChangeCheckbox={this.handleChangeCheckbox('viber')}
+                checked={viber}
+                className='viber'
+                labelText='Viber'
               />
-              <FormControlLabel
-                className="checkbox-label viber"
-                control={
-                  <Checkbox
-                    checked={viber}
-                    onChange={this.handleChange('viber')}
-                    classes={{
-                      root: classes.checkbox,
-                      checked: classes.checked,
-                    }}
-                  />
-                }
-                label="Viber"
-                classes={{
-                  label: 'label',
-                }}
+
+              <CustomCheckbox
+                handleChangeCheckbox={this.handleChangeCheckbox('telegram')}
+                checked={telegram}
+                className='telegram'
+                labelText='Telegram'
               />
             </div>
           </div>
@@ -450,4 +356,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default  connect(mapStateToProps)(userIsAuthenticated(withStyles(styles)(Dashboard)));
+export default connect(mapStateToProps)(userIsAuthenticated((Dashboard)));
