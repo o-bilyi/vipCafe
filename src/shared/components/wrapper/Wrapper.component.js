@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import {navigationScheme} from 'core';
 import {NavLink, Link} from 'react-router-dom';
-import MenuIcon from '@material-ui/icons/Menu';
 import {DeviceSizeService} from 'utilits/index';
 import SearchComponent from 'shared/components/search/Search.component';
 import AccountInfo from 'shared/components/account-info/AccountInfo.component';
@@ -9,14 +9,15 @@ import {ListItem,IconButton, Button, AppBar, Drawer, List} from '@material-ui/co
 import {firstMenuItems, secondMenuItems, managerBlock} from './menuItems/Items.component';
 
 import Logo from 'assets/svg/logo.svg';
+import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import {navigationScheme} from '../../../core';
+
 
 export default class Wrapper extends React.Component {
   state = {
-    open: true,
+    open: false,
   };
 
   componentDidMount() {
@@ -142,8 +143,8 @@ export default class Wrapper extends React.Component {
 
             <List className="menu-item-wrap">
               {this._getMenuItems(secondMenuItems)}
-              <Button className={classNames('to-order',
-                !this.state.open && 'hidden')}>ОФОРМИТИ ЗАМОВЛЕННЯ</Button>
+              <Link to={navigationScheme.basket} className={classNames('to-order',
+                !this.state.open && 'hidden')}>ОФОРМИТИ ЗАМОВЛЕННЯ</Link>
             </List>
           </div>
 

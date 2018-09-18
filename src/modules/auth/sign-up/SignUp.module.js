@@ -1,14 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
 import {DeviceSizeService} from 'utilits';
 import {toastr} from 'react-redux-toastr';
-import {Dialog,Button, Checkbox, FormControlLabel, TextField, withStyles} from '@material-ui/core';
+import {Dialog, Button, TextField} from '@material-ui/core';
 
 import LogoIconSVG from 'assets/svg/logo.svg';
 
 import CustomSelect from 'shared/components/customSelect/Select.component';
+import CustomCheckbox from '../../../shared/components/custom-checkbox/CustomCheckbox.component';
 
 const initialState = {
   name: '',
@@ -55,36 +55,13 @@ const validation = {
   },
 };
 
-const styles = {
-  checked: {},
-
-  checkbox: {
-    color: '#fff',
-
-    '&$checked': {
-      color: '#fff',
-    },
-
-    width: 20,
-    height: 20,
-  },
-
-  sizeIcon: {
-    fontSize: 20,
-  },
-};
-
 const deliveryItems = ['Нова Пошта', 'Міст Експрес'];
 
 const cityItems = ['Чернівці', 'Львів', 'Київ'];
 
 const tradeFormatSelect = ['Ларьок', 'Бокс', 'Прилавок'];
 
-class SignUp extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-
+export default class SignUp extends React.Component {
   state = initialState;
 
   componentDidMount() {
@@ -180,18 +157,6 @@ class SignUp extends React.Component {
   };
 
   /**
-   * checkbox functionality
-   */
-
-  handleChange = name => event => {
-    this.setState({[name]: event.target.checked});
-  };
-
-  /**
-   * checkbox functionality
-   */
-
-  /**
    * handleChangeSelect functionality
    */
 
@@ -219,11 +184,20 @@ class SignUp extends React.Component {
    * thanks modal functionality
    */
 
-  _goToPlatform = () => navigationScheme.catalog;
+  /**
+   * checkbox functionality
+   */
+
+  handleChangeCheckbox = name => event => {
+    this.setState({[name]: event.target.checked});
+  };
+
+  /**
+   * checkbox functionality
+   */
+
 
   _getContent = () => {
-    const {classes} = this.props;
-
     const {
       name,
       surName,
@@ -231,9 +205,11 @@ class SignUp extends React.Component {
       mobile,
       email,
       nameCompany,
+
       city,
       delivery,
       tradeFormat,
+
       sitePage,
       telegram,
       viber,
@@ -381,7 +357,7 @@ class SignUp extends React.Component {
                 items={cityItems}
                 labelText="Місто"
                 selectedItem={city}
-                handleChangeSelect={this.handleChangeSelect("city")}
+                handleChangeSelect={this.handleChangeSelect('city')}
               />
             </div>
 
@@ -390,7 +366,7 @@ class SignUp extends React.Component {
                 items={deliveryItems}
                 labelText="Доставка:"
                 selectedItem={delivery}
-                handleChangeSelect={this.handleChangeSelect("delivery")}
+                handleChangeSelect={this.handleChangeSelect('delivery')}
               />
             </div>
 
@@ -399,7 +375,7 @@ class SignUp extends React.Component {
                 items={tradeFormatSelect}
                 labelText="Формат торгівлі:"
                 selectedItem={tradeFormat}
-                handleChangeSelect={this.handleChangeSelect("tradeFormat")}
+                handleChangeSelect={this.handleChangeSelect('tradeFormat')}
               />
             </div>
 
@@ -423,39 +399,18 @@ class SignUp extends React.Component {
 
             <div className="input-container-telegram-and-viber">
               <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
-              <FormControlLabel
-                className="checkbox-label telegram"
-                control={
-                  <Checkbox
-                    checked={telegram}
-                    onChange={this.handleChange('telegram')}
-                    classes={{
-                      root: classes.checkbox,
-                      checked: classes.checked,
-                    }}
-                  />
-                }
-                label="Telegram"
-                classes={{
-                  label: 'label',
-                }}
+              <CustomCheckbox
+                handleChangeCheckbox={this.handleChangeCheckbox('viber')}
+                checked={viber}
+                className='viber'
+                labelText='Viber'
               />
-              <FormControlLabel
-                className="checkbox-label viber"
-                control={
-                  <Checkbox
-                    checked={viber}
-                    onChange={this.handleChange('viber')}
-                    classes={{
-                      root: classes.checkbox,
-                      checked: classes.checked,
-                    }}
-                  />
-                }
-                label="Viber"
-                classes={{
-                  label: 'label',
-                }}
+
+              <CustomCheckbox
+                handleChangeCheckbox={this.handleChangeCheckbox('telegram')}
+                checked={telegram}
+                className='telegram'
+                labelText='Telegram'
               />
             </div>
           </div>
@@ -617,7 +572,7 @@ class SignUp extends React.Component {
               items={cityItems}
               labelText="Місто"
               selectedItem={city}
-              handleChangeSelect={this.handleChangeSelect("city")}
+              handleChangeSelect={this.handleChangeSelect('city')}
             />
           </div>
 
@@ -626,7 +581,7 @@ class SignUp extends React.Component {
               items={deliveryItems}
               labelText="Доставка:"
               selectedItem={delivery}
-              handleChangeSelect={this.handleChangeSelect("delivery")}
+              handleChangeSelect={this.handleChangeSelect('delivery')}
             />
           </div>
 
@@ -635,7 +590,7 @@ class SignUp extends React.Component {
               items={tradeFormatSelect}
               labelText="Формат торгівлі:"
               selectedItem={tradeFormat}
-              handleChangeSelect={this.handleChangeSelect("tradeFormat")}
+              handleChangeSelect={this.handleChangeSelect('tradeFormat')}
             />
           </div>
 
@@ -659,39 +614,18 @@ class SignUp extends React.Component {
 
           <div className="input-container-telegram-and-viber">
             <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
-            <FormControlLabel
-              className="checkbox-label telegram"
-              control={
-                <Checkbox
-                  checked={telegram}
-                  onChange={this.handleChange('telegram')}
-                  classes={{
-                    root: classes.checkbox,
-                    checked: classes.checked,
-                  }}
-                />
-              }
-              label="Telegram"
-              classes={{
-                label: 'label',
-              }}
+            <CustomCheckbox
+              handleChangeCheckbox={this.handleChangeCheckbox('viber')}
+              checked={viber}
+              className='viber'
+              labelText='Viber'
             />
-            <FormControlLabel
-              className="checkbox-label viber"
-              control={
-                <Checkbox
-                  checked={viber}
-                  onChange={this.handleChange('viber')}
-                  classes={{
-                    root: classes.checkbox,
-                    checked: classes.checked,
-                  }}
-                />
-              }
-              label="Viber"
-              classes={{
-                label: 'label',
-              }}
+
+            <CustomCheckbox
+              handleChangeCheckbox={this.handleChangeCheckbox('telegram')}
+              checked={telegram}
+              className='telegram'
+              labelText='Telegram'
             />
           </div>
         </div>
@@ -715,25 +649,25 @@ class SignUp extends React.Component {
 
       <div key={2} className="continue-without-authorization">
         <Link
-      to={navigationScheme.catalog}
-    className="continue-without-authorization-link">
-      Продовжити без авторизації</Link>
-  </div>,
+          to={navigationScheme.catalog}
+          className="continue-without-authorization-link">
+          Продовжити без авторизації</Link>
+      </div>,
 
       <div key={3} className="contacts-block">
-          <div className="logo">
+        <div className="logo">
           <LogoIconSVG className="logo-icon-svg"/>
-          </div>
+        </div>
         <div className="separator"/>
         <div className="email-and-number">
           <a
-        className="email-link"
-        href="mailto:vipcafe@info">vipcafe@info</a>
-        <a
-          className="number-link"
-          href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+            className="email-link"
+            href="mailto:vipcafe@info">vipcafe@info</a>
+          <a
+            className="number-link"
+            href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
         </div>
-      </div>
+      </div>,
     ];
 
   };
@@ -785,5 +719,3 @@ class SignUp extends React.Component {
     );
   }
 }
-
-export default withStyles(styles)(SignUp);
