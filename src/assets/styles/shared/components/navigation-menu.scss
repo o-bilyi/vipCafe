@@ -101,6 +101,16 @@
       text-align: center;
     }
 
+    .pointer-events {
+      .to-order {
+        pointer-events: auto;
+      }
+
+      .menu-item {
+        opacity: .6;
+      }
+    }
+
     .menu-item {
       padding: 0;
     }

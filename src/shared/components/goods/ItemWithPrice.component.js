@@ -18,7 +18,7 @@ export default class ItemWithPrice extends ItemGoods {
 
       </div>,
 
-      <Button key={2} onClick={this._addToBasket(this.props)} className="add-to-basket">додати в кошик</Button>
+      <Button key={2} onClick={this._addToBasket(this.props)} disabled={this.state.count === 0} className="add-to-basket">додати в кошик</Button>
     ];
   }
 }

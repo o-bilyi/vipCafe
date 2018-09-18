@@ -15,7 +15,7 @@ export const userIsAuthenticated = connectedRouterRedirect({
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
   // The url to redirect user to if they fail
-  redirectPath: navigationScheme.dashboard,
+  redirectPath: navigationScheme.catalog,
   authenticatingSelector: state => state.auth.fetching,
   allowRedirectBack: false,
   // If selector is true, wrapper will not redirect

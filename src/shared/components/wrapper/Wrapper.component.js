@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {navigationScheme} from 'core';
 import {NavLink, Link} from 'react-router-dom';
@@ -13,9 +14,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import connect from 'react-redux/es/connect/connect';
 
+class Wrapper extends React.Component {
+  static propTypes = {
+    auth: PropTypes.bool
+  };
 
-export default class Wrapper extends React.Component {
   state = {
     open: false,
   };
@@ -87,6 +92,25 @@ export default class Wrapper extends React.Component {
     );
   };
 
+  _getOrderButtons = () => {
+     if(this.props.auth) {
+       return (
+         <List className="menu-item-wrap">
+           {this._getMenuItems(secondMenuItems)}
+           <Link to={navigationScheme.basket} className={classNames('to-order',
+             !this.state.open && 'hidden')}>ОФОРМИТИ ЗАМОВЛЕННЯ</Link>
+         </List>
+       )
+    }
+    return (
+      <List className="menu-item-wrap pointer-events">
+        {this._getMenuItems(secondMenuItems)}
+        <Link to={navigationScheme.login} className={classNames('to-order',
+          !this.state.open && 'hidden')}>Зайти</Link>
+      </List>
+    )
+  };
+
   render() {
     return (
       <div className='wrapper'>
@@ -141,11 +165,10 @@ export default class Wrapper extends React.Component {
             <h2 className={classNames('menu-title',
               !this.state.open && 'hidden')}>Ваші замовлення:</h2>
 
-            <List className="menu-item-wrap">
-              {this._getMenuItems(secondMenuItems)}
-              <Link to={navigationScheme.basket} className={classNames('to-order',
-                !this.state.open && 'hidden')}>ОФОРМИТИ ЗАМОВЛЕННЯ</Link>
-            </List>
+            {
+              this._getOrderButtons()
+            }
+
           </div>
 
           {
@@ -180,3 +203,11 @@ export default class Wrapper extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth : state.auth.isAuthorized
+  };
+};
+
+export default connect(mapStateToProps)(Wrapper)

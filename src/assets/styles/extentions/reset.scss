@@ -127,3 +127,7 @@ select:-webkit-autofill:focus {
 .required-field {
   color: #d24a43;
 }
+
+.pointer-events {
+  pointer-events: none;
+}
