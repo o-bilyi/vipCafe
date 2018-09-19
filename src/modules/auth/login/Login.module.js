@@ -71,12 +71,9 @@ class Login extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const inputs = {
-      email: this.state.email,
-      password: this.state.password,
-    };
-
-    this.props.loginAction(inputs.email, inputs.password);
+    this.setState({
+      onAnimation : true
+    })
 
     // function status(response) {
     //   if (response.ok) {
@@ -104,17 +101,20 @@ class Login extends React.Component {
     //   });
   };
 
-  _onAnimation = () => {
-    this.setState({
-      onAnimation : true
-    })
+  onTransitionEnd = () => {
+    if(this.state.onAnimation) {
+      console.warn("login animation end");
+      this.props.loginAction(this.state.email, this.state.password);
+    }
+
   };
 
   _getContent = () => {
     const {email, password, error} = this.state;
+    const classes = classNames("auth-page login shared-form-wrap", this.state.onAnimation ? "login-animation" : "");
     if (DeviceSizeService.size.width < 1025) {
       return (
-        <div onTransitionEnd={this.handleSubmit} className={classNames("auth-page login shared-form-wrap", this.state.onAnimation && "login-animation")}>
+        <div onTransitionEnd={this.onTransitionEnd} className={classes}>
           <div className="auth-header-mobile">
             <div className="logo">
               <LogoIconSVG className="logo-icon-svg"/>
@@ -129,7 +129,7 @@ class Login extends React.Component {
                 href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
             </div>
           </div>
-          <form autoComplete="off" method="post" className="auth-form shared-form">
+          <form autoComplete="off" method="post" onSubmit={this.handleSubmit} className="auth-form shared-form">
             <h1 className="title-page">Вхід в акаунт</h1>
             <div className="input-container input-container-email">
               <label className="form-label" htmlFor="#email">Телефон (або електронна адреса):</label>
@@ -191,8 +191,8 @@ class Login extends React.Component {
       );
     }
     return (
-      <div onTransitionEnd={this.handleSubmit} className="auth-page login shared-form-wrap">
-        <form autoComplete="off" method="post" className="auth-form shared-form">
+      <div onTransitionEnd={this.onTransitionEnd} className={classes}>
+        <form onSubmit={this.handleSubmit} autoComplete="off" method="post" className="auth-form shared-form">
           <img src="/img/clover.png" className="auth-form-clover" alt="clover"/>
           <h1 className="title-page">Вхід в акаунт</h1>
           <div className="input-container input-container-email">
