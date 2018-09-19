@@ -1,19 +1,22 @@
 import React from 'react';
-import {navigationScheme} from 'core';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
-import {DeviceSizeService} from 'utilits';
 import {bindActionCreators} from 'redux';
+import {DeviceSizeService} from 'utilits';
 // import {toastr} from 'react-redux-toastr';
-import LogoIconSVG from 'assets/svg/logo.svg';
 import {loginAction} from 'core/actions/index';
 import {TextField, Button} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
 import {userIsNotAuthenticated} from 'core/auth-redirect';
 
+import LogoIconSVG from 'assets/svg/logo.svg';
+
 const initialState = {
   email: '',
   password: '',
+  onAnimation : false,
   error: {
     email: null,
     password: null,
@@ -101,11 +104,17 @@ class Login extends React.Component {
     //   });
   };
 
+  _onAnimation = () => {
+    this.setState({
+      onAnimation : true
+    })
+  };
+
   _getContent = () => {
     const {email, password, error} = this.state;
     if (DeviceSizeService.size.width < 1025) {
       return (
-        <div className="auth-page login shared-form-wrap">
+        <div onTransitionEnd={this.handleSubmit} className={classNames("auth-page login shared-form-wrap", this.state.onAnimation && "login-animation")}>
           <div className="auth-header-mobile">
             <div className="logo">
               <LogoIconSVG className="logo-icon-svg"/>
@@ -120,7 +129,7 @@ class Login extends React.Component {
                 href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
             </div>
           </div>
-          <form autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
+          <form autoComplete="off" method="post" className="auth-form shared-form">
             <h1 className="title-page">Вхід в акаунт</h1>
             <div className="input-container input-container-email">
               <label className="form-label" htmlFor="#email">Телефон (або електронна адреса):</label>
@@ -160,7 +169,10 @@ class Login extends React.Component {
               <Link className="forgot-password-link" to={navigationScheme.forgotPassword}>Забули пароль?</Link>
             </p>
             <div className="button-container">
-              <Button className="submit-button" type="submit">Увійти</Button>
+              <Button
+                onClick={() => this._onAnimation}
+                className="submit-button"
+                type="submit">Увійти</Button>
             </div>
             <div className="registered-link-wrap">
               <Link
@@ -179,8 +191,8 @@ class Login extends React.Component {
       );
     }
     return (
-      <div className="auth-page login shared-form-wrap">
-        <form autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
+      <div onTransitionEnd={this.handleSubmit} className="auth-page login shared-form-wrap">
+        <form autoComplete="off" method="post" className="auth-form shared-form">
           <img src="/img/clover.png" className="auth-form-clover" alt="clover"/>
           <h1 className="title-page">Вхід в акаунт</h1>
           <div className="input-container input-container-email">
@@ -221,7 +233,10 @@ class Login extends React.Component {
             <Link className="forgot-password-link" to={navigationScheme.forgotPassword}>Забули пароль?</Link>
           </p>
           <div className="button-container">
-            <Button className="submit-button" type="submit">Увійти</Button>
+            <Button
+              onClick={() => this._onAnimation}
+              className="submit-button"
+              type="submit">Увійти</Button>
           </div>
           <div className="registered-link-wrap">
             <Link

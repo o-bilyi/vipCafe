@@ -25,6 +25,7 @@ export default class ItemGoods extends React.Component {
   state = {
     count: this.props.count,
     openDescriptionModal: false,
+    wasAddedItem: null,
   };
 
   countItem = (value) => {
@@ -48,6 +49,9 @@ export default class ItemGoods extends React.Component {
       ...item,
       count: this.state.count,
     }));
+    this.setState({
+      wasAddedItem : item.id
+    })
   };
 
   _getIconForGoods = (name) => {

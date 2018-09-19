@@ -1,5 +1,7 @@
 import React from 'react';
-import {Button} from '@material-ui/core';
+import classNames from 'classnames';
+import {navigationScheme} from 'core';
+import {Link} from 'react-router-dom';
 import {euroSymbol} from 'utilits/index';
 import ItemGoods from './ItemGoods.component';
 
@@ -18,7 +20,11 @@ export default class ItemWithPrice extends ItemGoods {
 
       </div>,
 
-      <Button key={2} onClick={this._addToBasket(this.props)} disabled={this.state.count === 0} className="add-to-basket">додати в кошик</Button>
+      <button key={2} onClick={this._addToBasket(this.props)} disabled={this.state.count === 0} className={classNames("add-to-basket",
+        this.props.id === this.state.wasAddedItem ? "success" : "")}>
+        <span className="add-to-basket-text">додати в кошик</span>
+        <Link to={navigationScheme.basket} className="open-basket-text">відкрити в кошику</Link>
+      </button>
     ];
   }
 }
