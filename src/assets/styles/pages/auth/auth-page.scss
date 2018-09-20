@@ -1,10 +1,11 @@
 .auth-page {
   height: 100vh;
-  transition: all .3s ease-in;
-  background: #3e3e3e url("/img/auth-page-bg.png") no-repeat center/cover;
+  transition: all .7s ease-in;
+
 
   &.login-animation {
-    transform: translate(-50%, -50%) scale(0.2);
+    transform: translate(-50%, -50%) scale(0);
+    //transform: scale(0);
   }
 
   .auth-form {

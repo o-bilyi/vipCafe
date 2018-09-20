@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {store} from '../../../index';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
-import {logoutAction} from 'core/actions';
 import {navigationScheme} from 'core/index';
 import {Dialog,Button} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
+import {clearBasket, logoutAction} from 'core/actions';
 
 import SettingsIcon from 'assets/svg/settings.svg';
 import PowerIcon from 'assets/svg/shut-down.svg';
@@ -29,6 +30,7 @@ class AccountInfo extends React.Component {
 
   _logOut = () => {
     this.props.logoutAction();
+    store.dispatch(clearBasket());
   };
 
   _getContent = () => {
