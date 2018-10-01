@@ -15,6 +15,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import connect from 'react-redux/es/connect/connect';
+import Dialog from '@material-ui/core/Dialog/Dialog';
 
 class Wrapper extends React.Component {
   static propTypes = {
@@ -23,6 +24,8 @@ class Wrapper extends React.Component {
 
   state = {
     open: false,
+    openWarningModal: false,
+    openManagerModal: false,
   };
 
   componentDidMount() {
@@ -32,6 +35,18 @@ class Wrapper extends React.Component {
   componentWillUnmount() {
     DeviceSizeService.unsubscribe(this.deviceServiceId);
   }
+
+  _handleOpenWarningModal = () => {
+    this.setState({
+      openWarningModal: !this.state.openWarningModal,
+    });
+  };
+
+  _handleOpenManagerModal = () => {
+    this.setState({
+      openManagerModal: !this.state.openManagerModal,
+    });
+  };
 
   handleDrawerOpen = () => {
     this.setState({open: true});
@@ -73,7 +88,7 @@ class Wrapper extends React.Component {
           <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
             <ArrowBackIcon className="arrow-back-icon"/>
           </IconButton>
-          <Link to={navigationScheme.login}>
+          <Link to={navigationScheme.login} className="logo-link">
             <Logo className="icon-logo"/>
           </Link>
           <SearchComponent/>
@@ -85,7 +100,7 @@ class Wrapper extends React.Component {
         <IconButton className="hidden-menu-btn" onClick={this.handleDrawerClose}>
           <ArrowBackIcon className="arrow-back-icon"/>
         </IconButton>
-        <Link to={navigationScheme.login}>
+        <Link to={navigationScheme.login} className="logo-link">
           <Logo className="icon-logo"/>
         </Link>
       </div>
@@ -103,10 +118,12 @@ class Wrapper extends React.Component {
        )
     }
     return (
-      <List className="menu-item-wrap pointer-events">
-        {this._getMenuItems(secondMenuItems)}
-        <Link to={navigationScheme.login} className={classNames('to-order',
-          !this.state.open && 'hidden')}>Зайти</Link>
+      <List className="menu-item-wrap" onClick={this._handleOpenWarningModal}>
+        <div className="pointer-events">
+          {this._getMenuItems(secondMenuItems)}
+          <Link to={navigationScheme.login} className={classNames('to-order',
+            !this.state.open && 'hidden')}>Зайти</Link>
+        </div>
       </List>
     )
   };
@@ -184,10 +201,10 @@ class Wrapper extends React.Component {
                   <a className="phone-link" href="tel:+38 (095) 313 13 13">+38 (095) 313 13 13</a>
                 </div>
 
-                <Button className="send-to-manager">НАПИСАТИ МЕНЕДЖЕРУ</Button>
+                <Button className="send-to-manager" onClick={this._handleOpenManagerModal}>НАПИСАТИ МЕНЕДЖЕРУ</Button>
               </div>
               :
-              <List className="menu-item-wrap">
+              <List className="menu-item-wrap" onClick={this._handleOpenManagerModal}>
                 {managerBlock}
               </List>
           }
@@ -198,6 +215,32 @@ class Wrapper extends React.Component {
         </main>
 
         <img src="/img/clover.png" alt="clever" className="clever-img"/>
+
+        <Dialog
+          scroll={'body'}
+          open={this.state.openWarningModal}
+          onClose={this._handleOpenWarningModal}
+          className="goods-description-modal"
+        >
+          <div className="description-warning-item">
+            Потрібно залогінитись.
+            <Link to={navigationScheme.login}>Увійти</Link>
+          </div>
+        </Dialog>
+
+        <Dialog
+          scroll={'body'}
+          open={this.state.openManagerModal}
+          onClose={this._handleOpenManagerModal}
+          className="goods-description-modal"
+        >
+          <div className="description-warning-item">
+            <form action="feedback">
+              <input type="text" placeholder="ваше ім'я"/>
+              <Button className="send-to-manager">відправити</Button>
+            </form>
+          </div>
+        </Dialog>
 
       </div>
     );

@@ -1,54 +1,10 @@
 .shared-form-wrap {
-  height: 100%;
+  width: 100%;
   display: flex;
   padding: 40px 0;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-
-  .input-container-delivery,
-  .input-container-tradeFormat {
-    .form-input {
-      border: none;
-      padding: 0 16px;
-      background-color: #fff;
-    }
-  }
-
-  .input-container-telegram-and-viber {
-    height: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 4px 10px;
-    align-items: flex-end;
-
-    .telegram-and-viber-title {
-      padding: 2px 0;
-      font-size: 12px;
-      margin-right: 20px;
-    }
-
-    .checkbox-label {
-      margin: 0;
-      align-items: center;
-
-      &.viber {
-        margin-right: 20px;
-      }
-    }
-
-    .label {
-      color: #fff;
-      font-size: 14px;
-      margin-left: 10px;
-      line-height: normal;
-      font-family: 'Roboto', sans-serif;
-    }
-  }
-
-  .telegram-and-viber-title {
-    color: #fff;
-  }
 }
 
 .input-container {
@@ -86,15 +42,11 @@
       color: #494949;
       padding: 0 16px;
       background-color: #fff;
-      font: normal normal 13px'Roboto', sans-serif;
+      font: normal normal 13px 'Open Sans', sans-serif;
     }
 
-    &:after,&:before {
-      border-bottom-color: #008b00 !important;
-    }
-
-    &:after {
-      border-bottom-width: 3px;
+    &:after, &:before {
+      content: none !important;
     }
   }
 
@@ -109,10 +61,10 @@
 
 .shared-form {
   width: 100%;
+  margin-top: auto;
   max-width: 980px;
   position: relative;
   padding: 30px 50px 30px;
-
 
   .button-container {
     display: flex;
@@ -143,4 +95,58 @@
     }
   }
 
+
+  .input-container-delivery,
+  .input-container-tradeFormat {
+    .form-input {
+      border: none;
+      padding: 0 16px;
+      background-color: #fff;
+    }
+  }
+
+  .input-container-telegram-and-viber {
+    height: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4px 10px;
+    align-items: flex-end;
+
+    .telegram-and-viber-title {
+      padding: 2px 0;
+      font-size: 12px;
+      margin-right: 20px;
+    }
+
+    .checkbox-label {
+      margin: 0;
+      align-items: center;
+
+      &.viber {
+        margin-right: 20px;
+      }
+    }
+
+    .label {
+      color: #fff;
+      font-size: 14px;
+      margin-left: 10px;
+      line-height: normal;
+      font-family: 'Open Sans', sans-serif;
+    }
+  }
+
+  .telegram-and-viber-title {
+    color: #fff;
+  }
+}
+
+.custom-filter {
+
+  .filter-select {
+    &:after,
+    &:before {
+      content: none !important;
+    }
+  }
 }

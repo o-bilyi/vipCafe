@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
+import {navigationScheme} from 'core';
+import RouterService from 'shared/services/RouterService';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
 import ArrowIcon from 'assets/svg/arrows.svg';
-import RouterService from 'shared/services/RouterService';
-import {navigationScheme} from '../../core';
 
 const tabName = {
   shared : 'shared',

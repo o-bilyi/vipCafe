@@ -1,15 +1,13 @@
 .dashboard-page {
   height: 100%;
+  display: flex;
   background: url("/img/account-page-bg.png") no-repeat center/cover;
 
-  .custom-filter {
+  .shared-form {
+    margin: auto;
+  }
 
-    .filter-select {
-      &:after,
-      &:before {
-        border-bottom-color: #008b00 !important;
-      }
-    }
+  .custom-filter {
 
     .select-label {
       color: #494949;
@@ -19,7 +17,6 @@
     .filter-label {
       color: #fff;
       display: block;
-      font-size: 12px;
       margin-bottom: 4px;
     }
 

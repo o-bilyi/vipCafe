@@ -132,7 +132,7 @@ export default class ItemGoods extends React.Component {
   };
 
   getBottomContent = () => {
-    return <Link to={navigationScheme.login} className="login-to-platform">зайти</Link>;
+    return <Link to={navigationScheme.login} className="login-to-platform">увійти в кабінет</Link>;
   };
 
   render() {

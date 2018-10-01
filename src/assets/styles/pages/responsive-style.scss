@@ -150,7 +150,6 @@
     }
 
     .navigation-menu {
-      width: 100vw;
 
       &.active {
         width: 0;
@@ -166,11 +165,33 @@
       }
 
       .search-wrap {
-        background-color: #66984b;
-        flex-shrink: 0;
+        background-color: #50a650;
 
         &.open {
-          padding-left: 45px;
+          padding-left: 10px;
+        }
+
+        .search-input-wrap {
+          padding-bottom: 3px;
+        }
+
+        .input-style {
+          height: 30px;
+        }
+
+        .search-btn {
+          padding: 0;
+          width: 50px;
+          min-width: 50px;
+        }
+
+        .clear-btn {
+          right: 48px;
+          background-color: #50a650;
+
+          &:hover {
+            background-color: #50a650;
+          }
         }
 
       }
@@ -182,6 +203,10 @@
           color: #fff;
         }
 
+      }
+
+      .logo-link {
+        display: none;
       }
     }
   }
@@ -282,6 +307,15 @@
   }
 }
 
+@media (max-width: 900px) {
+  .shared-and-offers-page {
+    .item {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .auth-page {
 
@@ -338,6 +372,10 @@
   .catalog-page {
     padding: 40px 15px;
 
+    .goods-wrap {
+      padding: 10px;
+    }
+
     .tab-categories {
       .tab-item {
         width: 50%;
@@ -348,7 +386,6 @@
       }
     }
   }
-
   .account-info-wrap {
     .go-to-dashboard,
     .log-aut {
@@ -403,8 +440,24 @@
       margin-top: 40px;
     }
 
+    .navigation-menu {
+      .menu-toolbar {
+        margin-bottom: 20px;
+      }
+
+      .hidden-menu-btn {
+        height: 40px;
+      }
+
+      .arrow-back-icon {
+        width: 25px;
+        height: 25px;
+      }
+
+    }
     .header,
-    .open-menu-btn {
+    .open-menu-btn,
+    .navigation-menu .menu-toolbar {
       height: 40px;
     }
 

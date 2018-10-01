@@ -5,7 +5,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import {store} from '../../../index';
+import {store} from 'index';
 import {changeBasket} from 'core/actions';
 
 export default class Item extends React.Component {

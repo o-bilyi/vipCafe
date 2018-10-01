@@ -8,7 +8,7 @@ import {Dialog, Button, TextField} from '@material-ui/core';
 import LogoIconSVG from 'assets/svg/logo.svg';
 
 import CustomSelect from 'shared/components/customSelect/Select.component';
-import CustomCheckbox from '../../../shared/components/custom-checkbox/CustomCheckbox.component';
+import CustomCheckbox from 'shared/components/custom-checkbox/CustomCheckbox.component';
 
 const initialState = {
   name: '',
@@ -237,7 +237,7 @@ export default class SignUp extends React.Component {
           <h1 className="title-page">Реєстрація акаунту</h1>
           <div className="shared-form-container">
             <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
-              <label className="form-label" htmlFor="#name">Ім’я:</label>
+              <label className="form-label" htmlFor="#name">Ім’я: <sup className="required-field">*</sup></label>
               <TextField
                 autoComplete="off"
                 onChange={this.requiredFields}
@@ -296,7 +296,7 @@ export default class SignUp extends React.Component {
             </div>
 
             <div className={`input-container input-container-mobile ${error.mobile ? 'error' : ''}`}>
-              <label className="form-label" htmlFor="#mobile">Телефон:</label>
+              <label className="form-label" htmlFor="#mobile">Телефон: <sup className="required-field">*</sup></label>
               <TextField
                 onChange={this.requiredFields}
                 required
@@ -452,7 +452,7 @@ export default class SignUp extends React.Component {
 
         <div className="shared-form-container">
           <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
-            <label className="form-label" htmlFor="#name">Ім’я:</label>
+            <label className="form-label" htmlFor="#name">Ім’я: <sup className="required-field">*</sup></label>
             <TextField
               autoComplete="off"
               onChange={this.requiredFields}
@@ -489,7 +489,6 @@ export default class SignUp extends React.Component {
                   input: 'input-style',
                 },
               }}/>
-            {error.surName && <p className="error-text">{error.surName}</p>}
           </div>
 
           <div className="input-container input-container-lastName">
@@ -511,7 +510,7 @@ export default class SignUp extends React.Component {
           </div>
 
           <div className={`input-container input-container-mobile ${error.mobile ? 'error' : ''}`}>
-            <label className="form-label" htmlFor="#mobile">Телефон:</label>
+            <label className="form-label" htmlFor="#mobile">Телефон: <sup className="required-field">*</sup></label>
             <TextField
               onChange={this.requiredFields}
               required

@@ -106,9 +106,32 @@
     color: rgba(76, 71, 67, 0.6);
   }
 
-  .custom-filter {
+  .custom-filter-container {
     text-align: center;
     margin-bottom: 20px;
+
+    .custom-label {
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+
+    .multi-input-label {
+      width: 100%;
+      display: block;
+      font-size: 12px;
+      text-align: left;
+      font-weight: bold;
+      text-transform: uppercase;
+      transform: translateY(15px);
+      color: rgba(76, 71, 67, 0.6);
+    }
+
+    .multi-select-label {
+      max-width: 90px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
 
     .filter-product {
       display: flex;
@@ -117,14 +140,13 @@
       justify-content: center;
     }
 
-    .animate-label {
+    .select-label {
       font-weight: bold;
       text-transform: uppercase;
     }
 
     .filter-label {
       margin-right: 24px;
-      font-style: italic;
       color: rgba(76, 71, 67, 0.6);
     }
 
@@ -132,10 +154,7 @@
       cursor: pointer;
       margin-top: 8px;
       min-width: 120px;
-
-      &:after {
-        border-bottom: 1px solid rgba(76, 71, 67, 0.6);
-      }
+      border-bottom: 1px solid rgba(0, 0, 0, 0.42);
     }
 
     .show-filters {
@@ -149,13 +168,6 @@
 
     .select-container {
       margin-right: 30px;
-
-      &:hover {
-        .filter-label,
-        .select-label {
-          color: #787878;
-        }
-      }
     }
   }
 
@@ -167,7 +179,7 @@
 }
 
 .filters-mobile-modal {
-  margin-top: 60px;
+  margin-top: 40px;
 
   .back-btn {
     width: 100%;
@@ -175,6 +187,7 @@
     border: none;
     outline: none;
     display: flex;
+    margin-top: 20px;
     align-items: center;
     background-color: transparent;
   }
@@ -230,20 +243,23 @@
     border-radius: 3px;
     background-color: #484848;
   }
+
   .filter-item {
     color: #494949;
+    margin: 0 14px;
     font-size: 14px;
     border-radius: 5px;
-    margin: 0 14px;
     background-color: #e8e8e8;
+    font-family: 'Open Sans', sans-serif;
 
     &:not(:last-child) {
       margin-bottom: 10px;
     }
 
-    &.selected {
-      color: #fff;
-      background-color: #78ae59;
+    &.disabled-label {
+      color: #494949;
+      cursor: not-allowed;
+      background-color: #e8e8e8;
     }
   }
 

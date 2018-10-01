@@ -1,5 +1,5 @@
 .checkout-order-page {
-  min-height: 100vh;
+  height: 100%;
   padding: 50px 55px;
   background-color: #393939;
 
@@ -179,13 +179,6 @@
       width: 10px;
       position: absolute;
       fill: rgba(255, 255, 255, 0.5);
-    }
-  }
-
-  .filter-select {
-    &:before,
-    &:after {
-      content: none;
     }
   }
 

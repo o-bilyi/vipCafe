@@ -21,9 +21,7 @@ export default function SingItem(props) {
         </button>
 
         <div className="single-item-wrap">
-          <div className="img-container">
-            <img src={img} alt="item preview"/>
-          </div>
+          <div className="img-container" style={{backgroundImage : `url(${img})`}}/>
 
           <p className="start-date">{date.start}</p>
 

@@ -7,38 +7,22 @@ import CoffeeIcon from 'assets/svg/coffee.svg';
 import CheeseIcon from 'assets/svg/cheese.svg';
 import GroceryIcon from 'assets/svg/grocery.svg';
 import ChocolateIcon from 'assets/svg/chocolate.svg';
+import ArrowIcon from '@material-ui/icons/ArrowBack';
 
 import {DeviceSizeService} from 'utilits/index';
-import ArrowIcon from '@material-ui/icons/ArrowBack';
+import {Button, Dialog} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import ItemGoods from 'shared/components/goods/ItemGoods.component';
+import CustomSelect from 'shared/components/customSelect/Select.component';
 import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
-import {MenuItem, Button, Select, InputLabel, FormControl,Dialog,withStyles} from '@material-ui/core';
+import MultiSelect from 'shared/components/customSelect/MultiSelect.component';
 
 const cheeseSelect = ['СИР', 'М\'ЯСО'];
 const sortSelect = ['ВІД ДОРОГИХ ДО ДЕШЕВИХ', 'ВІД ДЕШЕВИХ ДО ДОРОГИХ'];
 const brandSelect = ['РОСІЙСЬКИЙ', 'МАЦАРЕЛЛА'];
 const typeSelect = ['ТВЕРДИЙ', 'ПЛАВЛЕНИЙ'];
-const weightSelect = [
-  '250 г (8)', '450 г (44)', '1 кг(8)',
-  '10 кг (44)', '15 кг (8)', '20 кг (44)'];
-
-const styles = {
-  root: {
-    '&$selected': {
-      color: '#fff',
-      backgroundColor: '#78ae59',
-    },
-  },
-
-  selected: {},
-
-  selectStyle: {
-    alignItems: 'center',
-    height: '40px',
-  },
-};
+const weightSelect = ['250г (8)','450г (44)','1кг (8)','10кг (44)','15кг (8)','20кг (44)'];
 
 class Catalog extends React.Component {
   static propTypes = {
@@ -64,14 +48,6 @@ class Catalog extends React.Component {
     brand: '',
     type: '',
     weight: [],
-    /*
-    open and close selects
-     */
-    openCheeseSelect: false,
-    openSortSelect: false,
-    openBrandSelect: false,
-    openTypeSelect: false,
-    openWeightSelect: false,
 
     openFilterModal: false,
   };
@@ -84,27 +60,8 @@ class Catalog extends React.Component {
     DeviceSizeService.unsubscribe(this.deviceServiceId);
   }
 
-  _getSelectItems = items => items.map((item, key) => {
-    return <MenuItem
-      key={key}
-      classes={{
-        root: this.props.classes.root,
-        selected: this.props.classes.selected,
-      }}
-      className='filter-item'
-      value={item}>{item}</MenuItem>;
-  });
-
   handleChangeSelect = name => event => {
     this.setState({[name]: event.target.value});
-  };
-
-  handleCloseSelect = name => {
-    this.setState({[name]: false});
-  };
-
-  handleOpenSelect = name => {
-    this.setState({[name]: true});
   };
 
   handleChangeGoods = name => {
@@ -130,11 +87,6 @@ class Catalog extends React.Component {
 
   _getFilters = () => {
     const {
-      openCheeseSelect,
-      openSortSelect,
-      openBrandSelect,
-      openTypeSelect,
-      openWeightSelect,
       product,
       sort,
       brand,
@@ -144,121 +96,58 @@ class Catalog extends React.Component {
 
     if(DeviceSizeService.size.width < 768) {
       return (
-        <div className='custom-filter'>
+        <div className='custom-filter-container'>
           <Button className="show-filters" onClick={this._toggleFilterModal}>фільтр і сортування</Button>
         </div>
       )
     }
     return (
-      <div className="custom-filter">
+      <div className="custom-filter-container">
         <div className="filter-product">
 
-          <FormControl className="select-container">
-            <InputLabel className="filter-label animate-label" htmlFor="#product">Продукт:</InputLabel>
-            <Select
-              value={product}
-              aria-haspopup="true"
-              open={openCheeseSelect}
-              style={styles.selectStyle}
-              MenuProps={{className: 'filter-ul'}}
-              className="filter-select product-select"
-              onChange={this.handleChangeSelect('product')}
-              SelectDisplayProps={{className: 'select-label'}}
-              onOpen={() => this.handleOpenSelect('openCheeseSelect')}
-              onClose={() => this.handleCloseSelect('openCheeseSelect')}>
-              {
-                this._getSelectItems(cheeseSelect)
-              }
-            </Select>
-          </FormControl>
+          <CustomSelect
+            placeholder
+            labelText="Продукт"
+            items={cheeseSelect}
+            selectedItem={product}
+            handleChangeSelect={this.handleChangeSelect('product')}
+          />
 
           <label className="filter-label-of-goods custom-label">Фільтр товарів:</label>
 
-          <FormControl className="select-container">
-            <InputLabel className="filter-label animate-label">сортування</InputLabel>
-            <Select
-              value={sort}
-              aria-haspopup="true"
-              open={openSortSelect}
-              style={styles.selectStyle}
-              className="filter-select"
-              MenuProps={{className: 'filter-ul'}}
-              onChange={this.handleChangeSelect('sort')}
-              SelectDisplayProps={{className: 'select-label'}}
-              onOpen={() => this.handleOpenSelect('openSortSelect')}
-              onClose={() => this.handleCloseSelect('openSortSelect')}
-            >
-              {
-                this._getSelectItems(sortSelect)
-              }
-            </Select>
-          </FormControl>
+          <CustomSelect
+            placeholder
+            labelText="сортування"
+            items={sortSelect}
+            selectedItem={sort}
+            handleChangeSelect={this.handleChangeSelect('sort')}
+          />
 
-          <FormControl className="select-container">
-            <InputLabel className="filter-label animate-label">Бренд</InputLabel>
-            <Select
-              value={brand}
-              aria-haspopup="true"
-              open={openBrandSelect}
-              style={styles.selectStyle}
-              className="filter-select"
-              MenuProps={{className: 'filter-ul'}}
-              onChange={this.handleChangeSelect('brand')}
-              SelectDisplayProps={{className: 'select-label'}}
-              onOpen={() => this.handleOpenSelect('openBrandSelect')}
-              onClose={() => this.handleCloseSelect('openBrandSelect')}
-            >
-              {
-                this._getSelectItems(brandSelect)
-              }
-            </Select>
-          </FormControl>
+          <CustomSelect
+            placeholder
+            labelText="Бренд"
+            items={brandSelect}
+            selectedItem={brand}
+            handleChangeSelect={this.handleChangeSelect('brand')}
+          />
 
-          <FormControl className="select-container">
-            <InputLabel className="filter-label animate-label">тип сиру</InputLabel>
-            <Select
-              value={type}
-              aria-haspopup="true"
-              open={openTypeSelect}
-              style={styles.selectStyle}
-              className="filter-select"
-              MenuProps={{className: 'filter-ul'}}
-              onChange={this.handleChangeSelect('type')}
-              SelectDisplayProps={{className: 'select-label'}}
-              onOpen={() => this.handleOpenSelect('openTypeSelect')}
-              onClose={() => this.handleCloseSelect('openTypeSelect')}
-            >
-              {
-                this._getSelectItems(typeSelect)
-              }
-            </Select>
-          </FormControl>
+          <CustomSelect
+            placeholder
+            labelText="тип сиру"
+            items={typeSelect}
+            selectedItem={type}
+            handleChangeSelect={this.handleChangeSelect('type')}
+          />
 
-          <FormControl className="select-container">
-            <InputLabel className="filter-label animate-label">ВАГА</InputLabel>
-            <Select
-              multiple
-              value={weight}
-              aria-haspopup="true"
-              open={openWeightSelect}
-              style={styles.selectStyle}
-              className="filter-select"
-              MenuProps={{className: 'filter-ul'}}
-              onChange={this.handleChangeSelect('weight')}
-              SelectDisplayProps={{className: 'select-label'}}
-              onOpen={() => this.handleOpenSelect('openWeightSelect')}
-              onClose={() => this.handleCloseSelect('openWeightSelect')}
-            >
-              <li className="count-select-item-wrap">
-                <span className="count-select-item">count : {this.state.weight.length}</span>
-                <button onClick={this._resetSelectItems('weight')} className="clear-select-item">очистити</button>
-              </li>
-
-              {
-                this._getSelectItems(weightSelect)
-              }
-            </Select>
-          </FormControl>
+          <MultiSelect
+            labelText="вага"
+            countTheSelectedItem
+            items={weightSelect}
+            selectedItem={weight}
+            weightLength={this.state.weight.length}
+            resetSelectItems={this._resetSelectItems('weight')}
+            handleChangeSelect={this.handleChangeSelect('weight')}
+          />
 
         </div>
       </div>
@@ -276,11 +165,6 @@ class Catalog extends React.Component {
 
   render() {
     const {
-      openCheeseSelect,
-      openSortSelect,
-      openBrandSelect,
-      openTypeSelect,
-      openWeightSelect,
       product,
       sort,
       brand,
@@ -346,111 +230,49 @@ class Catalog extends React.Component {
               <button className="back-btn" onClick={this._toggleFilterModal}><ArrowIcon className="back-icon"/></button>
               <div className="filter-product">
 
-                <FormControl className="select-container" onClick={() => this.handleOpenSelect('openCheeseSelect')}>
-                  <InputLabel className="filter-label animate-label" htmlFor="#product">Продукт:</InputLabel>
-                  <Select
-                    value={product}
-                    aria-haspopup="true"
-                    open={openCheeseSelect}
-                    style={styles.selectStyle}
-                    MenuProps={{className: 'filter-ul'}}
-                    className="filter-select product-select"
-                    onChange={this.handleChangeSelect('product')}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onOpen={() => this.handleOpenSelect('openCheeseSelect')}
-                    onClose={() => this.handleCloseSelect('openCheeseSelect')}
-                  >
-                    {
-                      this._getSelectItems(cheeseSelect)
-                    }
-                  </Select>
-                </FormControl>
+                <CustomSelect
+                  animateLabel
+                  labelText="Продукт:"
+                  items={cheeseSelect}
+                  selectedItem={product}
+                  handleChangeSelect={this.handleChangeSelect('product')}
+                />
 
-                <FormControl className="select-container">
-                  <InputLabel className="filter-label animate-label">сортування</InputLabel>
-                  <Select
-                    value={sort}
-                    aria-haspopup="true"
-                    open={openSortSelect}
-                    style={styles.selectStyle}
-                    className="filter-select"
-                    MenuProps={{className: 'filter-ul'}}
-                    onChange={this.handleChangeSelect('sort')}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onOpen={() => this.handleOpenSelect('openSortSelect')}
-                    onClose={() => this.handleCloseSelect('openSortSelect')}
-                  >
-                    {
-                      this._getSelectItems(sortSelect)
-                    }
-                  </Select>
-                </FormControl>
+                <CustomSelect
+                  animateLabel
+                  labelText="сортування"
+                  items={sortSelect}
+                  selectedItem={sort}
+                  handleChangeSelect={this.handleChangeSelect('sort')}
+                />
 
-                <FormControl className="select-container">
-                  <InputLabel className="filter-label animate-label">Бренд</InputLabel>
-                  <Select
-                    value={brand}
-                    aria-haspopup="true"
-                    open={openBrandSelect}
-                    style={styles.selectStyle}
-                    className="filter-select"
-                    MenuProps={{className: 'filter-ul'}}
-                    onChange={this.handleChangeSelect('brand')}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onOpen={() => this.handleOpenSelect('openBrandSelect')}
-                    onClose={() => this.handleCloseSelect('openBrandSelect')}
-                  >
-                    {
-                      this._getSelectItems(brandSelect)
-                    }
-                  </Select>
-                </FormControl>
+                <CustomSelect
+                  animateLabel
+                  labelText="Бренд"
+                  items={brandSelect}
+                  selectedItem={brand}
+                  handleChangeSelect={this.handleChangeSelect('brand')}
+                />
 
-                <FormControl className="select-container">
-                  <InputLabel className="filter-label animate-label">тип сиру</InputLabel>
-                  <Select
-                    value={type}
-                    aria-haspopup="true"
-                    open={openTypeSelect}
-                    style={styles.selectStyle}
-                    className="filter-select"
-                    MenuProps={{className: 'filter-ul'}}
-                    onChange={this.handleChangeSelect('type')}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onOpen={() => this.handleOpenSelect('openTypeSelect')}
-                    onClose={() => this.handleCloseSelect('openTypeSelect')}
-                  >
-                    {
-                      this._getSelectItems(typeSelect)
-                    }
-                  </Select>
-                </FormControl>
+                <CustomSelect
+                  animateLabel
+                  labelText="тип сиру"
+                  items={typeSelect}
+                  selectedItem={type}
+                  handleChangeSelect={this.handleChangeSelect('type')}
+                />
 
-                <FormControl className="select-container">
-                  <InputLabel className="filter-label animate-label">ВАГА</InputLabel>
-                  <Select
-                    multiple
-                    value={weight}
-                    aria-haspopup="true"
-                    open={openWeightSelect}
-                    style={styles.selectStyle}
-                    className="filter-select"
-                    MenuProps={{className: 'filter-ul'}}
-                    onChange={this.handleChangeSelect('weight')}
-                    SelectDisplayProps={{className: 'select-label'}}
-                    onOpen={() => this.handleOpenSelect('openWeightSelect')}
-                    onClose={() => this.handleCloseSelect('openWeightSelect')}
-                  >
-                    <li className="count-select-item-wrap">
-                      <span className="count-select-item">count : {this.state.weight.length}</span>
-                      <button onClick={this._resetSelectItems('weight')} className="clear-select-item">очистити</button>
-                    </li>
-
-                    {
-                      this._getSelectItems(weightSelect)
-                    }
-                  </Select>
-                </FormControl>
+                <CustomSelect
+                  multiple
+                  animateLabel
+                  labelText="ВАГА"
+                  items={weightSelect}
+                  countTheSelectedItem
+                  selectedItem={weight}
+                  weightLength={this.state.weight.length}
+                  resetSelectItems={this._resetSelectItems('weight')}
+                  handleChangeSelect={this.handleChangeSelect('weight')}
+                />
 
               </div>
             </div>
@@ -468,4 +290,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Catalog));
+export default connect(mapStateToProps)(Catalog);

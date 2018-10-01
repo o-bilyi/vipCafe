@@ -13,9 +13,10 @@ const styles = {
   selected: {},
 };
 
-class CustomSelect extends React.Component {
+class MultiSelect extends React.Component {
   static propTypes = {
     items: PropTypes.array,
+    multiple: PropTypes.bool,
     placeholder: PropTypes.bool,
     labelText: PropTypes.string,
     requiredFiled: PropTypes.bool,
@@ -55,11 +56,14 @@ class CustomSelect extends React.Component {
   };
 
   render() {
+
     const {
       items,
       selectedItem,
       labelText,
       requiredFiled,
+      weightLength,
+      resetSelectItems,
       placeholder,
       handleChangeSelect,
     } = this.props;
@@ -72,9 +76,9 @@ class CustomSelect extends React.Component {
         {
           !placeholder && labelText &&
           <InputLabel
-            className="filter-label animate-label"
+            className="multi-input-label"
             htmlFor={'#' + labelText}>
-            {labelText}
+            {labelText + ` (${selectedItem.length})`}
             {
               requiredFiled && <sup className='required-field'>*</sup>
             }
@@ -84,18 +88,26 @@ class CustomSelect extends React.Component {
         <FormControl className="select-container">
 
           <Select
+            multiple
             displayEmpty
             id={labelText}
             open={openSelect}
             value={selectedItem}
             aria-haspopup="true"
             className="filter-select"
+            data-label={labelText}
             onChange={handleChangeSelect}
             onOpen={this.handleOpenSelect}
             onClose={this.handleCloseSelect}
             MenuProps={{className: 'filter-ul'}}
-            SelectDisplayProps={{className: "select-label"}}
+            renderValue={selected => selected.join(', ')}
+            SelectDisplayProps={{className: "select-label multi-select-label"}}
           >
+            <li className="count-select-item-wrap">
+              <span className="count-select-item">count : {weightLength}</span>
+              <button onClick={resetSelectItems} className="clear-select-item">очистити</button>
+            </li>
+
             {
               placeholder &&
               <MenuItem
@@ -107,6 +119,7 @@ class CustomSelect extends React.Component {
                 className='filter-item disabled-label'
                 value="">{labelText}</MenuItem>
             }
+
             {
               this._getSelectItems(items)
             }
@@ -118,4 +131,4 @@ class CustomSelect extends React.Component {
   }
 }
 
-export default withStyles(styles)(CustomSelect)
+export default withStyles(styles)(MultiSelect);

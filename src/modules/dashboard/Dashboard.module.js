@@ -145,194 +145,192 @@ class Dashboard extends React.Component {
     } = this.state;
 
     return (
-      <div className="shared-form-wrap">
-        <form autoComplete="off" method="post" className="shared-form" onSubmit={this.handleSubmit}>
-          <div className="shared-form-container">
-            <div className="input-container input-container-name">
-              <label className="form-label" htmlFor="#name">Ім’я:</label>
-              <TextField
-                autoComplete="off"
-                onChange={this.fieldsChange}
-                required
-                placeholder="Боб"
-                value={name}
-                type="text"
-                name="name"
-                id="name"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className="input-container input-container-surName">
-              <label className="form-label" htmlFor="#name">Прізвище:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                required
-                placeholder="Боб"
-                value={surName}
-                type="text"
-                name="name"
-                id="name"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className="input-container input-container-lastName">
-              <label className="form-label" htmlFor="#lastName">По-батькові:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                value={lastName}
-                placeholder="Бобіков"
-                type="text"
-                name="lastName"
-                id="lastName"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className='input-container input-container-mobile'>
-              <label className="form-label" htmlFor="#mobile">Телефон:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                required
-                value={mobile}
-                placeholder="+380"
-                type="number"
-                name="mobile"
-                id="mobile"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className="input-container input-container-email">
-              <label className="form-label" htmlFor="#mobile">Електронна адреса:</label>
-              <TextField
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                className="form-input-wrap"
-                onChange={this.fieldsChange}
-                placeholder="coffeeman@gmail.com"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className="input-container input-container-nameCompany">
-              <label className="form-label" htmlFor="#nameCompany">Назва компанії:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                value={nameCompany}
-                placeholder="lariok.com"
-                type="text"
-                name="nameCompany"
-                id="nameCompany"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className='input-container input-container-city'>
-              <CustomSelect
-                items={cityItems}
-                labelText="Місто"
-                selectedItem={city}
-                handleChangeSelect={this.handleChangeSelect("city")}
-              />
-            </div>
-
-            <div className="input-container input-container-delivery">
-              <CustomSelect
-                items={deliveryItems}
-                labelText="Доставка:"
-                selectedItem={delivery}
-                handleChangeSelect={this.handleChangeSelect("delivery")}
-              />
-            </div>
-
-            <div className="input-container input-container-tradeFormat">
-              <CustomSelect
-                items={tradeFormatSelect}
-                labelText="Формат торгівлі:"
-                selectedItem={tradeFormat}
-                handleChangeSelect={this.handleChangeSelect("tradeFormat")}
-              />
-            </div>
-
-            <div className="input-container input-container-sitePage">
-              <label className="form-label" htmlFor="#sitePage">Сайт:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                value={sitePage}
-                placeholder="LariOK"
-                type="text"
-                name="sitePage"
-                id="sitePage"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className="input-container-telegram-and-viber">
-              <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
-              <CustomCheckbox
-                handleChangeCheckbox={this.handleChangeCheckbox('viber')}
-                checked={viber}
-                className='viber'
-                labelText='Viber'
-              />
-
-              <CustomCheckbox
-                handleChangeCheckbox={this.handleChangeCheckbox('telegram')}
-                checked={telegram}
-                className='telegram'
-                labelText='Telegram'
-              />
-            </div>
+      <form autoComplete="off" method="post" className="shared-form" onSubmit={this.handleSubmit}>
+        <div className="shared-form-container">
+          <div className="input-container input-container-name">
+            <label className="form-label" htmlFor="#name">Ім’я:</label>
+            <TextField
+              autoComplete="off"
+              onChange={this.fieldsChange}
+              required
+              placeholder="Боб"
+              value={name}
+              type="text"
+              name="name"
+              id="name"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
           </div>
 
-          <div className="button-container">
-            <Button
-              onClick={this.handleOpenThanksModal}
-              className="submit-button"
-              variant="extendedFab"
-              aria-label="signUp"
-              type="submit">Зберегти зміни</Button>
+          <div className="input-container input-container-surName">
+            <label className="form-label" htmlFor="#name">Прізвище:</label>
+            <TextField
+              onChange={this.fieldsChange}
+              required
+              placeholder="Боб"
+              value={surName}
+              type="text"
+              name="name"
+              id="name"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
           </div>
-        </form>
-      </div>
+
+          <div className="input-container input-container-lastName">
+            <label className="form-label" htmlFor="#lastName">По-батькові:</label>
+            <TextField
+              onChange={this.fieldsChange}
+              value={lastName}
+              placeholder="Бобіков"
+              type="text"
+              name="lastName"
+              id="lastName"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
+          </div>
+
+          <div className='input-container input-container-mobile'>
+            <label className="form-label" htmlFor="#mobile">Телефон:</label>
+            <TextField
+              onChange={this.fieldsChange}
+              required
+              value={mobile}
+              placeholder="+380"
+              type="number"
+              name="mobile"
+              id="mobile"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
+          </div>
+
+          <div className="input-container input-container-email">
+            <label className="form-label" htmlFor="#mobile">Електронна адреса:</label>
+            <TextField
+              id="email"
+              name="email"
+              type="email"
+              value={email}
+              className="form-input-wrap"
+              onChange={this.fieldsChange}
+              placeholder="coffeeman@gmail.com"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
+          </div>
+
+          <div className="input-container input-container-nameCompany">
+            <label className="form-label" htmlFor="#nameCompany">Назва компанії:</label>
+            <TextField
+              onChange={this.fieldsChange}
+              value={nameCompany}
+              placeholder="lariok.com"
+              type="text"
+              name="nameCompany"
+              id="nameCompany"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
+          </div>
+
+          <div className='input-container input-container-city'>
+            <CustomSelect
+              items={cityItems}
+              labelText="Місто"
+              selectedItem={city}
+              handleChangeSelect={this.handleChangeSelect("city")}
+            />
+          </div>
+
+          <div className="input-container input-container-delivery">
+            <CustomSelect
+              items={deliveryItems}
+              labelText="Доставка:"
+              selectedItem={delivery}
+              handleChangeSelect={this.handleChangeSelect("delivery")}
+            />
+          </div>
+
+          <div className="input-container input-container-tradeFormat">
+            <CustomSelect
+              items={tradeFormatSelect}
+              labelText="Формат торгівлі:"
+              selectedItem={tradeFormat}
+              handleChangeSelect={this.handleChangeSelect("tradeFormat")}
+            />
+          </div>
+
+          <div className="input-container input-container-sitePage">
+            <label className="form-label" htmlFor="#sitePage">Сайт:</label>
+            <TextField
+              onChange={this.fieldsChange}
+              value={sitePage}
+              placeholder="LariOK"
+              type="text"
+              name="sitePage"
+              id="sitePage"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
+          </div>
+
+          <div className="input-container-telegram-and-viber">
+            <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
+            <CustomCheckbox
+              handleChangeCheckbox={this.handleChangeCheckbox('viber')}
+              checked={viber}
+              className='viber'
+              labelText='Viber'
+            />
+
+            <CustomCheckbox
+              handleChangeCheckbox={this.handleChangeCheckbox('telegram')}
+              checked={telegram}
+              className='telegram'
+              labelText='Telegram'
+            />
+          </div>
+        </div>
+
+        <div className="button-container">
+          <Button
+            onClick={this.handleOpenThanksModal}
+            className="submit-button"
+            variant="extendedFab"
+            aria-label="signUp"
+            type="submit">Зберегти зміни</Button>
+        </div>
+      </form>
     );
 
   };

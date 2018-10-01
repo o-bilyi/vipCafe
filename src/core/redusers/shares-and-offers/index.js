@@ -10,7 +10,7 @@ const initialState = {
         start: '15.06.18',
         end: '15.07.18',
       },
-      img: 'img/auth-page-bg.png',
+      img: 'img/shares-1.jpg',
       title: 'Lorem ipsum',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,' +
         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -61,7 +61,7 @@ const initialState = {
         start: '15.06.18',
         end: '15.07.18',
       },
-      img: 'img/auth-page-bg.png',
+      img: 'img/shares-2.jpg',
       title: 'Lorem ipsum',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,' +
         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -112,7 +112,7 @@ const initialState = {
         start: '15.06.18',
         end: '15.07.18',
       },
-      img: 'img/auth-page-bg.png',
+      img: 'img/shares-3.jpg',
       title: 'Lorem ipsum',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,' +
         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -163,7 +163,7 @@ const initialState = {
         start: '15.06.18',
         end: '15.07.18',
       },
-      img: 'img/auth-page-bg.png',
+      img: 'img/shares-2.jpg',
       title: 'Lavazza Crema e Aroma Espresso Blue',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,' +
         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -214,7 +214,7 @@ const initialState = {
         start: '15.06.18',
         end: '15.07.18',
       },
-      img: 'img/auth-page-bg.png',
+      img: 'img/shares-3.jpg',
       title: 'Lavazza Crema e Aroma Espresso Blue',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,' +
         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -265,7 +265,7 @@ const initialState = {
         start: '15.06.18',
         end: '15.07.18',
       },
-      img: 'img/auth-page-bg.png',
+      img: 'img/shares-1.jpg',
       title: 'Lavazza Crema e Aroma Espresso Blue',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,' +
         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',

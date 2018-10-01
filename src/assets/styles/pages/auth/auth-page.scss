@@ -1,11 +1,19 @@
 .auth-page {
-  height: 100vh;
-  transition: all .7s ease-in;
+  display: flex;
+  min-height: 100vh;
+  background: #3e3e3e url("/img/auth-page-bg.png") no-repeat center/cover;
 
+  .animation-wrap {
+    transition: transform .7s ease-in .3s;
 
-  &.login-animation {
-    transform: translate(-50%, -50%) scale(0);
-    //transform: scale(0);
+    &.login-animation {
+      transform: scale(0);
+    }
+
+    .shared-form {
+      box-shadow: 0 10px 57px 0 rgb(23, 23, 23);
+    }
+
   }
 
   .auth-form {
@@ -103,7 +111,7 @@
   }
 
   .continue-without-authorization {
-    margin-top: 40px;
+    margin: 40px 0 20px;
     text-align: center;
 
     .continue-without-authorization-link {
@@ -117,13 +125,6 @@
   }
 
   .custom-filter {
-
-    .filter-select {
-      &:after,
-      &:before {
-        border-bottom-color: #008b00 !important;
-      }
-    }
 
     .select-label {
       color: #494949;
@@ -148,7 +149,7 @@
 
 .contacts-block {
   display: flex;
-  margin-top: 60px;
+  margin-top: auto;
   align-items: center;
 
   .logo-icon-svg {

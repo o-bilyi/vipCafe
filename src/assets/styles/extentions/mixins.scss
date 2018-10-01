@@ -15,7 +15,7 @@
 }
 
 @mixin success-style-btn {
-  background-image: linear-gradient(to right, #92cc76, #89c16e, #80b766, #78ac5e, #6fa256);
+  background-image: -webkit-linear-gradient( 140deg, rgb(15,178,246) 0%, rgb(111,162,86) 0%, rgb(146,204,118) 100%);
 }
 
 @mixin standard-style-btn {
