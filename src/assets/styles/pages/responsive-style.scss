@@ -729,3 +729,11 @@
     }
   }
 }
+
+@media (max-height: 680px) {
+  .catalog-page {
+    .goods-wrap {
+      max-height: 350px;
+    }
+  }
+}
