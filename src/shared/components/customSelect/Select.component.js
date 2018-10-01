@@ -87,6 +87,7 @@ class CustomSelect extends React.Component {
             displayEmpty
             id={labelText}
             open={openSelect}
+            title={selectedItem}
             value={selectedItem}
             aria-haspopup="true"
             className="filter-select"

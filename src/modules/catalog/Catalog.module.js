@@ -86,15 +86,7 @@ class Catalog extends React.Component {
   };
 
   _getFilters = () => {
-    const {
-      product,
-      sort,
-      brand,
-      type,
-      weight,
-    } = this.state;
-
-    if(DeviceSizeService.size.width < 768) {
+    if(DeviceSizeService.size.width < 992) {
       return (
         <div className='custom-filter-container'>
           <Button className="show-filters" onClick={this._toggleFilterModal}>фільтр і сортування</Button>
@@ -103,67 +95,12 @@ class Catalog extends React.Component {
     }
     return (
       <div className="custom-filter-container">
-        <div className="filter-product">
-
-          <CustomSelect
-            placeholder
-            labelText="Продукт"
-            items={cheeseSelect}
-            selectedItem={product}
-            handleChangeSelect={this.handleChangeSelect('product')}
-          />
-
-          <label className="filter-label-of-goods custom-label">Фільтр товарів:</label>
-
-          <CustomSelect
-            placeholder
-            labelText="сортування"
-            items={sortSelect}
-            selectedItem={sort}
-            handleChangeSelect={this.handleChangeSelect('sort')}
-          />
-
-          <CustomSelect
-            placeholder
-            labelText="Бренд"
-            items={brandSelect}
-            selectedItem={brand}
-            handleChangeSelect={this.handleChangeSelect('brand')}
-          />
-
-          <CustomSelect
-            placeholder
-            labelText="тип сиру"
-            items={typeSelect}
-            selectedItem={type}
-            handleChangeSelect={this.handleChangeSelect('type')}
-          />
-
-          <MultiSelect
-            labelText="вага"
-            countTheSelectedItem
-            items={weightSelect}
-            selectedItem={weight}
-            weightLength={this.state.weight.length}
-            resetSelectItems={this._resetSelectItems('weight')}
-            handleChangeSelect={this.handleChangeSelect('weight')}
-          />
-
-        </div>
+        {this._getFiltersProduct()}
       </div>
     )
   };
 
-  _resetSelectItems = (resetItem) => (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log(this.state[resetItem]);
-    this.setState({
-      [resetItem]: []
-    }, () =>  console.log(this.state[resetItem]));
-  };
-
-  render() {
+  _getFiltersProduct = () => {
     const {
       product,
       sort,
@@ -172,6 +109,66 @@ class Catalog extends React.Component {
       weight,
     } = this.state;
 
+    return (
+      <div className="filter-product">
+
+        <CustomSelect
+          placeholder
+          labelText="Продукт"
+          items={cheeseSelect}
+          selectedItem={product}
+          handleChangeSelect={this.handleChangeSelect('product')}
+        />
+
+        <label className="filter-label-of-goods custom-label">Фільтр товарів:</label>
+
+        <CustomSelect
+          placeholder
+          labelText="сортування"
+          items={sortSelect}
+          selectedItem={sort}
+          handleChangeSelect={this.handleChangeSelect('sort')}
+        />
+
+        <CustomSelect
+          placeholder
+          labelText="Бренд"
+          items={brandSelect}
+          selectedItem={brand}
+          handleChangeSelect={this.handleChangeSelect('brand')}
+        />
+
+        <CustomSelect
+          placeholder
+          labelText="тип сиру"
+          items={typeSelect}
+          selectedItem={type}
+          handleChangeSelect={this.handleChangeSelect('type')}
+        />
+
+        <MultiSelect
+          labelText="вага"
+          countTheSelectedItem
+          items={weightSelect}
+          selectedItem={weight}
+          weightLength={this.state.weight.length}
+          resetSelectItems={this._resetSelectItems('weight')}
+          handleChangeSelect={this.handleChangeSelect('weight')}
+        />
+
+      </div>
+    )
+  };
+
+  _resetSelectItems = (resetItem) => (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({
+      [resetItem]: []
+    }, () =>  this.state[resetItem]);
+  };
+
+  render() {
     const {coffee, cheeseAndMeat, grocery, chocolate} = this.state.activeGoods;
 
     return (
@@ -228,53 +225,7 @@ class Catalog extends React.Component {
           >
             <div className="catalog-mobile-filters">
               <button className="back-btn" onClick={this._toggleFilterModal}><ArrowIcon className="back-icon"/></button>
-              <div className="filter-product">
-
-                <CustomSelect
-                  animateLabel
-                  labelText="Продукт:"
-                  items={cheeseSelect}
-                  selectedItem={product}
-                  handleChangeSelect={this.handleChangeSelect('product')}
-                />
-
-                <CustomSelect
-                  animateLabel
-                  labelText="сортування"
-                  items={sortSelect}
-                  selectedItem={sort}
-                  handleChangeSelect={this.handleChangeSelect('sort')}
-                />
-
-                <CustomSelect
-                  animateLabel
-                  labelText="Бренд"
-                  items={brandSelect}
-                  selectedItem={brand}
-                  handleChangeSelect={this.handleChangeSelect('brand')}
-                />
-
-                <CustomSelect
-                  animateLabel
-                  labelText="тип сиру"
-                  items={typeSelect}
-                  selectedItem={type}
-                  handleChangeSelect={this.handleChangeSelect('type')}
-                />
-
-                <CustomSelect
-                  multiple
-                  animateLabel
-                  labelText="ВАГА"
-                  items={weightSelect}
-                  countTheSelectedItem
-                  selectedItem={weight}
-                  weightLength={this.state.weight.length}
-                  resetSelectItems={this._resetSelectItems('weight')}
-                  handleChangeSelect={this.handleChangeSelect('weight')}
-                />
-
-              </div>
+              {this._getFiltersProduct()}
             </div>
 
           </Dialog>

@@ -1,12 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {toastr} from 'react-redux-toastr';
-import connect from 'react-redux/es/connect/connect';
-import {userIsAuthenticated} from 'core/auth-redirect';
-import Wrapper from 'shared/components/wrapper/Wrapper.component';
-import CustomSelect from 'shared/components/customSelect/Select.component';
-import CustomCheckbox from 'shared/components/custom-checkbox/CustomCheckbox.component';
-import {Button, TextField} from '@material-ui/core';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import {toastr} from "react-redux-toastr";
+import connect from "react-redux/es/connect/connect";
+import {Button, TextField} from "@material-ui/core";
+import {userIsAuthenticated} from "core/auth-redirect";
+import Wrapper from "shared/components/wrapper/Wrapper.component";
+import CustomSelect from "shared/components/customSelect/Select.component";
+import CustomCheckbox from "shared/components/custom-checkbox/CustomCheckbox.component";
+
+import CheckIcon from "assets/svg/check-2.svg";
 
 const initialState = {
   name: '',
@@ -24,13 +27,14 @@ const initialState = {
   telegram: false,
   viber: false,
   openThanksModal: false,
+  saveChanges: false,
 };
 
-const deliveryItems = ['Нова Пошта', 'Міст Експрес'];
+const deliveryItems = ["Нова Пошта", "Міст Експрес"];
 
-const cityItems = ['Чернівці', 'Львів', 'Київ'];
+const cityItems = ["Чернівці", "Львів", "Київ"];
 
-const tradeFormatSelect = ['Ларьок', 'Бокс', 'Прилавок'];
+const tradeFormatSelect = ["Ларьок", "Бокс", "Прилавок"];
 
 class Dashboard extends React.Component {
   static propTypes = {
@@ -85,22 +89,22 @@ class Dashboard extends React.Component {
       return Promise.reject(response.statusText);
     }
 
-    fetch('/api/userProfile', {
+    fetch("/api/userProfile", {
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        "Accept": "application/json",
+        "Content-Type": "application/json",
       },
-      method: 'post',
+      method: "post",
       body: JSON.stringify(inputs),
     })
       .then(status)
       .then(() => {
         this.setState(initialState);
-        toastr.success('Форма відправлена!');
+        toastr.success("Форма відправлена!");
       })
       .catch((error) => {
-        toastr.warning('Помилка, повідомлення не відправлено!');
-        console.error('Request failed', error);
+        toastr.warning("Помилка, повідомлення не відправлено!");
+        console.error("Request failed", error);
       });
   };
 
@@ -127,6 +131,12 @@ class Dashboard extends React.Component {
   /**
    * handleChangeSelect functionality
    */
+
+  _saveChanges = () => {
+    this.setState({
+      saveChanges : true
+    });
+  };
 
 
   _getContent = () => {
@@ -161,8 +171,8 @@ class Dashboard extends React.Component {
               className="form-input-wrap"
               InputProps={{
                 classes: {
-                  root: 'form-input',
-                  input: 'input-style',
+                  root: "form-input",
+                  input: "input-style",
                 },
               }}/>
           </div>
@@ -180,8 +190,8 @@ class Dashboard extends React.Component {
               className="form-input-wrap"
               InputProps={{
                 classes: {
-                  root: 'form-input',
-                  input: 'input-style',
+                  root: "form-input",
+                  input: "input-style",
                 },
               }}/>
           </div>
@@ -198,13 +208,13 @@ class Dashboard extends React.Component {
               className="form-input-wrap"
               InputProps={{
                 classes: {
-                  root: 'form-input',
-                  input: 'input-style',
+                  root: "form-input",
+                  input: "input-style",
                 },
               }}/>
           </div>
 
-          <div className='input-container input-container-mobile'>
+          <div className="input-container input-container-mobile">
             <label className="form-label" htmlFor="#mobile">Телефон:</label>
             <TextField
               onChange={this.fieldsChange}
@@ -217,8 +227,8 @@ class Dashboard extends React.Component {
               className="form-input-wrap"
               InputProps={{
                 classes: {
-                  root: 'form-input',
-                  input: 'input-style',
+                  root: "form-input",
+                  input: "input-style",
                 },
               }}/>
           </div>
@@ -235,8 +245,8 @@ class Dashboard extends React.Component {
               placeholder="coffeeman@gmail.com"
               InputProps={{
                 classes: {
-                  root: 'form-input',
-                  input: 'input-style',
+                  root: "form-input",
+                  input: "input-style",
                 },
               }}/>
           </div>
@@ -253,13 +263,13 @@ class Dashboard extends React.Component {
               className="form-input-wrap"
               InputProps={{
                 classes: {
-                  root: 'form-input',
-                  input: 'input-style',
+                  root: "form-input",
+                  input: "input-style",
                 },
               }}/>
           </div>
 
-          <div className='input-container input-container-city'>
+          <div className="input-container input-container-city">
             <CustomSelect
               items={cityItems}
               labelText="Місто"
@@ -298,8 +308,8 @@ class Dashboard extends React.Component {
               className="form-input-wrap"
               InputProps={{
                 classes: {
-                  root: 'form-input',
-                  input: 'input-style',
+                  root: "form-input",
+                  input: "input-style",
                 },
               }}/>
           </div>
@@ -307,28 +317,31 @@ class Dashboard extends React.Component {
           <div className="input-container-telegram-and-viber">
             <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
             <CustomCheckbox
-              handleChangeCheckbox={this.handleChangeCheckbox('viber')}
+              handleChangeCheckbox={this.handleChangeCheckbox("viber")}
               checked={viber}
-              className='viber'
-              labelText='Viber'
+              className="viber"
+              labelText="Viber"
             />
 
             <CustomCheckbox
-              handleChangeCheckbox={this.handleChangeCheckbox('telegram')}
+              handleChangeCheckbox={this.handleChangeCheckbox("telegram")}
               checked={telegram}
-              className='telegram'
-              labelText='Telegram'
+              className="telegram"
+              labelText="Telegram"
             />
           </div>
         </div>
 
         <div className="button-container">
-          <Button
-            onClick={this.handleOpenThanksModal}
-            className="submit-button"
-            variant="extendedFab"
-            aria-label="signUp"
-            type="submit">Зберегти зміни</Button>
+          <div className={classNames("submit-button-wrap", this.state.saveChanges && "save")}>
+            <CheckIcon className="check-icon"/>
+            <Button
+              onClick={this._saveChanges}
+              className="submit-button text"
+              variant="extendedFab"
+              aria-label="signUp"
+              type="submit">Зберегти зміни</Button>
+          </div>
         </div>
       </form>
     );

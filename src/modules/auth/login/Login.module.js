@@ -103,7 +103,9 @@ class Login extends React.Component {
 
   onTransitionEnd = () => {
     if (this.state.onAnimation) {
-      this.props.loginAction(this.state.email, this.state.password);
+      setTimeout(() => {
+        this.props.loginAction(this.state.email, this.state.password);
+      }, 700);
     }
 
   };

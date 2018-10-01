@@ -92,6 +92,7 @@ class MultiSelect extends React.Component {
             displayEmpty
             id={labelText}
             open={openSelect}
+            title={selectedItem}
             value={selectedItem}
             aria-haspopup="true"
             className="filter-select"
@@ -101,7 +102,7 @@ class MultiSelect extends React.Component {
             onClose={this.handleCloseSelect}
             MenuProps={{className: 'filter-ul'}}
             renderValue={selected => selected.join(', ')}
-            SelectDisplayProps={{className: "select-label multi-select-label"}}
+            SelectDisplayProps={{className: "select-label"}}
           >
             <li className="count-select-item-wrap">
               <span className="count-select-item">count : {weightLength}</span>

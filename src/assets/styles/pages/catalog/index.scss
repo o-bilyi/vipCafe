@@ -109,66 +109,63 @@
   .custom-filter-container {
     text-align: center;
     margin-bottom: 20px;
+  }
 
-    .custom-label {
-      margin-right: 20px;
-      margin-bottom: 10px;
-    }
+  .custom-label {
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
 
-    .multi-input-label {
-      width: 100%;
-      display: block;
-      font-size: 12px;
-      text-align: left;
-      font-weight: bold;
-      text-transform: uppercase;
-      transform: translateY(15px);
-      color: rgba(76, 71, 67, 0.6);
-    }
+  .multi-input-label {
+    width: 100%;
+    display: block;
+    font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: translateY(20px);
+    color: rgba(76, 71, 67, 0.6);
+  }
 
-    .multi-select-label {
-      max-width: 90px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+  .filter-product {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+  }
 
-    .filter-product {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: center;
-    }
+  .select-label {
+    max-width: 90px;
+    overflow: hidden;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+  }
 
-    .select-label {
-      font-weight: bold;
-      text-transform: uppercase;
-    }
+  .filter-label {
+    margin-right: 24px;
+    color: rgba(76, 71, 67, 0.6);
+  }
 
-    .filter-label {
-      margin-right: 24px;
-      color: rgba(76, 71, 67, 0.6);
-    }
+  .filter-select {
+    cursor: pointer;
+    margin-top: 8px;
+    min-width: 120px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  }
 
-    .filter-select {
-      cursor: pointer;
-      margin-top: 8px;
-      min-width: 120px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-    }
+  .show-filters {
+    width: 100%;
+    color: #fff;
+    height: 40px;
+    max-width: 280px;
+    border-radius: 3px;
+    background-color: #373737;
+  }
 
-    .show-filters {
-      width: 100%;
-      color: #fff;
-      height: 40px;
-      max-width: 280px;
-      border-radius: 3px;
-      background-color: #373737;
-    }
-
-    .select-container {
-      margin-right: 30px;
-    }
+  .select-container {
+    margin-right: 30px;
   }
 
   .goods-wrap {
@@ -179,7 +176,7 @@
 }
 
 .filters-mobile-modal {
-  margin-top: 40px;
+  margin-top: 60px;
 
   .back-btn {
     width: 100%;
@@ -190,6 +187,23 @@
     margin-top: 20px;
     align-items: center;
     background-color: transparent;
+  }
+
+  .multi-input-label {
+    width: 100%;
+    display: block;
+    font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: translateY(20px);
+    color: rgba(76, 71, 67, 0.6);
+  }
+
+  .select-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgba(76, 71, 67, 0.6);
   }
 
   .back-icon {
@@ -270,6 +284,7 @@
     margin-top: -8px;
     align-items: center;
     margin-bottom: 16px;
+    pointer-events: none;
     background-color: #fff;
     border: 1px solid #e8e8e8;
     justify-content: space-between;
@@ -288,6 +303,7 @@
     outline: none;
     color: #9a9795;
     cursor: pointer;
+    pointer-events: auto;
     background-color: #e8e8e8;
     @include transition(background-color);
     &:hover {
