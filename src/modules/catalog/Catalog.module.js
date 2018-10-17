@@ -9,6 +9,7 @@ import GroceryIcon from 'assets/svg/grocery.svg';
 import ChocolateIcon from 'assets/svg/chocolate.svg';
 import ArrowIcon from '@material-ui/icons/ArrowBack';
 
+import {HttpService} from "services";
 import {DeviceSizeService} from 'utilits/index';
 import {Button, Dialog} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
@@ -54,6 +55,9 @@ class Catalog extends React.Component {
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+
+
+      new HttpService().getRequest("shop").then((res) => console.warn(res));
   }
 
   componentWillUnmount() {

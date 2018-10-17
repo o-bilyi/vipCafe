@@ -5,6 +5,7 @@ import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {DeviceSizeService} from 'utilits';
+import {HttpService, SERVER_API_URL} from "services";
 // import {toastr} from 'react-redux-toastr';
 import {loginAction} from 'core/actions/index';
 import {TextField, Button} from '@material-ui/core';
@@ -72,16 +73,13 @@ class Login extends React.Component {
     event.preventDefault();
 
     this.setState({
-      onAnimation: true,
+      // onAnimation: true,
     });
 
-    // function status(response) {
-    //   if (response.ok) {
-    //     return Promise.resolve(response);
-    //   }
-    //   return Promise.reject(response.statusText);
-    // }
-    //
+    // SERVER_API_URL = "http://law-med.be.co.ua/wp-json/vipcaffe/v1/user/";
+
+    new HttpService().getRequest(this.state.email).then((res) => console.warn(res));
+
     // fetch('/api/sendMessage', {
     //   headers: {
     //     'Accept': 'application/json',
