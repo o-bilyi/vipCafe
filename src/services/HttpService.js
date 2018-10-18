@@ -1,16 +1,8 @@
 import 'whatwg-fetch';
 import {LoggerService, storageService} from './';
-import {loginSuccess, logoutSuccessAction} from 'core/actions';
+import {loginSuccess,logoutSuccessAction} from 'core/actions';
 
-// export const SERVER_API_URL = 'https://vipKafe/wp-json/wp/v2/';
-// export const SERVER_API_URL = "http://law-med.be.co.ua/wp-json/vipcaffe/v1/user/";
-export const SERVER_API_URL = "http://law-med.be.co.ua/wp-json/wp/v2/";
-
-export const API_LINKS = {
-  login: 'login',
-  logout: 'logout',
-  register: 'register'
-};
+export const SERVER_API_URL = "http://eliteauto.be.co.ua/wp-json/";
 
 export const responseTypes = {
   json: 'json',
@@ -22,9 +14,18 @@ export const responseTypes = {
 
 export const tokenKey = 'platformToken';
 
+const URLS = {
+  shop : "wp/v2/shop",
+  login : "vipcaffe/v1/user/",
+  register : "vipcaffe/v1/user/"
+};
+
 let store = null;
 let secureToken = null;
+
 class HttpService {
+  URLS = URLS;
+
   /**
    * @type {{'Content-Type': string}}
    * @private
@@ -67,7 +68,12 @@ class HttpService {
   _checkResponseCodes = (status, convertedResponse) => {
     const statusAction = this._codesToHandle[status];
     if (statusAction && typeof  statusAction === 'function') {
-      convertedResponse.then(res => statusAction(res));
+      convertedResponse.then(res => {
+        statusAction(res);
+        this._codesToHandle = {};
+      });
+    } else {
+      this._codesToHandle = {};
     }
     if (status !== 200) {
       LoggerService.log(status, convertedResponse, this.LINK, this.METHOD);

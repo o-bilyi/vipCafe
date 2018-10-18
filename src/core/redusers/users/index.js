@@ -1,21 +1,24 @@
-import {logoutActionTypes} from '../../models/auth';
+import {logoutActionTypes, loginActionTypes} from '../../models/auth';
 import {generateReducer, baseHandler} from '../utils';
-import {usersProfileActionTypes} from '../../models/users';
 
 const initialState = {
   id : null,
-  name : null,
-  email : null,
-  lastName : null,
-  surname : null,
-  nameCompany : null,
+  f_name : null,
+  l_name : null,
+  p_name : null,
+  mail : null,
+  tel : {
+    number : null,
+    telegram : null,
+    viber : null,
+  },
   mobile : null,
+  site : null,
   city : null,
+  company : null,
+  trade_format : null,
   delivery : null,
-  tradeFormat : null,
-  sitePage : null,
-  telegram : null,
-  viber : null,
+  thumbnail : null,
   discount : 30,
 };
 
@@ -25,8 +28,6 @@ export const userProfile = generateReducer(initialState, {
    * @param state
    * @return {{fetching: boolean, isAuthorized: boolean}}
    */
-  [logoutActionTypes.LOGOUT_SUCCESS_ACTION]: () => {
-    return initialState;
-  },
-  [usersProfileActionTypes.USER_PROFILE_SUCCESS_ACTION]: baseHandler,
+  [logoutActionTypes.LOGOUT_SUCCESS_ACTION]: () => initialState,
+  [loginActionTypes.LOGIN_SUCCESS_ACTION]: baseHandler,
 });

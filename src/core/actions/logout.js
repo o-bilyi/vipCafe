@@ -9,7 +9,6 @@ import {logoutActionTypes} from 'core/models/auth';
  * @return {{type, payload}}
  */
 export const logoutSuccessAction = payload => {
-    httpService.deleteToken();
   return baseHandler(logoutActionTypes.LOGOUT_SUCCESS_ACTION, payload)
 };
 const isAuthorized = false;

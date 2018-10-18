@@ -1,10 +1,8 @@
 import React from 'react';
 import {store} from "index";
-import {httpService, API_LINKS} from "services";
 import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
 import {DeviceSizeService, MD5} from 'utilits';
-import {toastr} from 'react-redux-toastr';
 import {loginAction} from 'core/actions/index';
 import {TextField, Button} from '@material-ui/core';
 import {userIsNotAuthenticated} from 'core/auth-redirect';
@@ -65,17 +63,22 @@ class Login extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-      // store.dispatch(loginAction(this.state.email, MD5(this.state.password)));
-      httpService.getRequest(this.state.email).then(res => {
-          if(res[0].pass === MD5(this.state.password)) {
-              toastr.success('Форма відправлена!');
-              setTimeout(() => {
-                  store.dispatch(loginAction())
-              }, 2000);
-          }else {
-              toastr.error('Логін або Пароль не вірний!');
-          }
+      store.dispatch(loginAction({
+        email : this.state.email,
+        pass :MD5(this.state.password)
+      })).then(res => {
+        console.warn(res, res.code);
       });
+      // httpService.getRequest(this.state.email, MD5(this.state.password)).then(res => {
+      //     if(res[0].pass === MD5(this.state.password)) {
+      //         toastr.success('Форма відправлена!');
+      //         setTimeout(() => {
+      //             store.dispatch(loginAction())
+      //         }, 2000);
+      //     }else {
+      //         toastr.error('Логін або Пароль не вірний!');
+      //     }
+      // });
   };
 
   _getContent = () => {

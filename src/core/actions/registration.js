@@ -1,4 +1,4 @@
-import {API_LINKS, httpService} from 'services';
+import {httpService} from 'services';
 import {baseHandler} from 'core/redusers/utils';
 import {registrationActionTypes} from 'core/models/auth';
 
@@ -30,6 +30,6 @@ export function registrationAction(username, password, token) {
       },
       400 : FAIL_ACTION,
       500: FAIL_ACTION,
-    }).postRequest(API_LINKS.register, body);
+    }).postRequest(httpService.register, body);
   };
 }

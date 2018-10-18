@@ -26,10 +26,15 @@ const brandSelect = ['РОСІЙСЬКИЙ', 'МАЦАРЕЛЛА'];
 const typeSelect = ['ТВЕРДИЙ', 'ПЛАВЛЕНИЙ'];
 const weightSelect = ['250г (8)','450г (44)','1кг (8)','10кг (44)','15кг (8)','20кг (44)'];
 
+
+const keys = {
+  syrMyaso : "syr-myaso"
+};
+
 const tabIcons = {
     bakaliya :  <GroceryIcon className="tab-icon"/>,
     kava :  <CoffeeIcon className="tab-icon"/>,
-    ["syr-myaso"] :  [<CheeseIcon className="tab-icon"/>,<SteakIcon className="tab-icon"/>],
+    [keys.syrMyaso] :  [<CheeseIcon className="tab-icon"/>,<SteakIcon className="tab-icon"/>],
     shokolad :  <ChocolateIcon className="tab-icon"/>,
 };
 
@@ -64,7 +69,7 @@ class Catalog extends React.Component {
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
-    httpService.getRequest("shop").then(res => this.setState({
+    httpService.getRequest(httpService.URLS.shop).then(res => this.setState({
         tabs : res
     }));
   }
@@ -201,39 +206,6 @@ class Catalog extends React.Component {
                 }
             </div>
         );
-        // return (
-        //     <div className="tab-categories">
-        //         <Button onClick={() => this.handleChangeGoods('coffee')}
-        //                 classes={{label: 'tab-item-wrap'}}
-        //                 className={classNames('tab-item coffee', coffee && 'active')}>
-        //             <CoffeeIcon className="tab-icon"/>
-        //             <span className="text">кава</span>
-        //         </Button>
-        //         <Button onClick={() => this.handleChangeGoods('cheeseAndMeat')}
-        //                 classes={{label: 'tab-item-wrap'}}
-        //                 className={classNames('tab-item cheeseAndMeat', cheeseAndMeat && 'active')}>
-        //           <span className="tab-icon">
-        //             <SteakIcon className="steak-icon"/>
-        //             <CheeseIcon className="cheese-icon"/>
-        //           </span>
-        //             <span className="text">сир/м'ясо</span>
-        //         </Button>
-        //         <Button onClick={() => this.handleChangeGoods('grocery')}
-        //                 classes={{label: 'tab-item-wrap'}}
-        //                 className={classNames('tab-item grocery', grocery && 'active')}>
-        //             <GroceryIcon className="tab-icon"/>
-        //             <span className="text">бакалія</span>
-        //         </Button>
-        //         <Button onClick={() => this.handleChangeGoods('chocolate')}
-        //                 classes={{label: 'tab-item-wrap'}}
-        //                 className={classNames('tab-item chocolate', chocolate && 'active')}>
-        //           <span className="tab-icon">
-        //             <ChocolateIcon className="chocolate-icon"/>
-        //           </span>
-        //             <span className="text">шоколад</span>
-        //         </Button>
-        //     </div>
-        // )
     };
 
   render() {
