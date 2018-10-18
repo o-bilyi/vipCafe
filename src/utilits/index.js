@@ -71,6 +71,9 @@ export const euroSymbol = <span className="euro-icon">&#8364;</span>;
  */
 export const MD5 = function (string) {
 
+    /**
+     * @return {number}
+     */
     function RotateLeft(lValue, iShiftBits) {
         return (lValue<<iShiftBits) | (lValue>>>(32-iShiftBits));
     }
@@ -201,7 +204,7 @@ export const MD5 = function (string) {
         return utftext;
     }
 
-    let x=Array();
+    let x;
     let k,AA,BB,CC,DD,a,b,c,d;
     const S11=7, S12=12, S13=17, S14=22;
     const S21=5, S22=9 , S23=14, S24=20;
@@ -216,7 +219,7 @@ export const MD5 = function (string) {
 
     for (k=0;k<x.length;k+=16) {
         AA=a; BB=b; CC=c; DD=d;
-        a=FF(a,b,c,d,x[k+0], S11,0xD76AA478);
+        a=FF(a,b,c,d,x[k], S11,0xD76AA478);
         d=FF(d,a,b,c,x[k+1], S12,0xE8C7B756);
         c=FF(c,d,a,b,x[k+2], S13,0x242070DB);
         b=FF(b,c,d,a,x[k+3], S14,0xC1BDCEEE);

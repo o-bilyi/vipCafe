@@ -3,8 +3,8 @@ import {LoggerService, storageService} from './';
 import {loginSuccess, logoutSuccessAction} from 'core/actions';
 
 // export const SERVER_API_URL = 'https://vipKafe/wp-json/wp/v2/';
-export let SERVER_API_URL;
-SERVER_API_URL = "http://law-med.be.co.ua/wp-json/vipcaffe/v1/user/";
+// export const SERVER_API_URL = "http://law-med.be.co.ua/wp-json/vipcaffe/v1/user/";
+export const SERVER_API_URL = "http://law-med.be.co.ua/wp-json/wp/v2/";
 
 export const API_LINKS = {
   login: 'login',
@@ -24,7 +24,7 @@ export const tokenKey = 'platformToken';
 
 let store = null;
 let secureToken = null;
-export class HttpService {
+class HttpService {
   /**
    * @type {{'Content-Type': string}}
    * @private
@@ -194,3 +194,5 @@ export class HttpService {
     }).then(this._convertResponse);
   }
 }
+
+export const httpService = new HttpService();

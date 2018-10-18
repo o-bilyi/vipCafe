@@ -423,8 +423,8 @@ export default class SignUp extends React.Component {
             <Button
               onClick={this.handleOpenThanksModal}
               className="submit-button"
-              variant="extendedFab"
               aria-label="signUp"
+              variant="extendedFab"
               type="submit">зареєструвати</Button>
           </div>
 

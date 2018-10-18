@@ -3,19 +3,6 @@
   min-height: 100vh;
   background: #3e3e3e url("/img/auth-page-bg.png") no-repeat center/cover;
 
-  .animation-wrap {
-    transition: transform .7s ease-in .3s;
-
-    &.login-animation {
-      transform: scale(0);
-    }
-
-    .shared-form {
-      box-shadow: 0 10px 57px 0 rgb(23, 23, 23);
-    }
-
-  }
-
   .auth-form {
     background: #3e3e3e url("/img/auth-form-bg.png") no-repeat center/cover;
 
@@ -31,12 +18,14 @@
   &.login {
     .shared-form {
       max-width: 480px;
+      box-shadow: 0 10px 57px 0 rgb(23, 23, 23);
     }
   }
 
   .auth-header-mobile {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     padding: 6px 20px;
     align-items: center;
     justify-content: space-between;

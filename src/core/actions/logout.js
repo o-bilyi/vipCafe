@@ -1,4 +1,4 @@
-import {HttpService} from 'services';
+import {httpService} from 'services';
 import {baseHandler} from 'core/redusers/utils';
 import {logoutActionTypes} from 'core/models/auth';
 
@@ -9,7 +9,7 @@ import {logoutActionTypes} from 'core/models/auth';
  * @return {{type, payload}}
  */
 export const logoutSuccessAction = payload => {
-  HttpService.deleteToken();
+    httpService.deleteToken();
   return baseHandler(logoutActionTypes.LOGOUT_SUCCESS_ACTION, payload)
 };
 const isAuthorized = false;

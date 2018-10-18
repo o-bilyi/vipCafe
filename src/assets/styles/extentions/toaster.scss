@@ -392,6 +392,9 @@ body {
     }
     &.rrt-success {
       background-color: #60bb71;
+      display: flex;
+      align-items: center;
+
       .rrt-progressbar {
         background-color: #3e914d
       }
