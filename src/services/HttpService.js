@@ -17,7 +17,8 @@ export const tokenKey = 'platformToken';
 const URLS = {
   shop : "wp/v2/shop",
   login : "vipcaffe/v1/user/",
-  register : "vipcaffe/v1/user/"
+  register : "vipcaffe/v1/user/",
+  checkSession : "vipcaffe/v1/return_session/"
 };
 
 let store = null;

@@ -9,16 +9,16 @@ import GroceryIcon from 'assets/svg/grocery.svg';
 import ChocolateIcon from 'assets/svg/chocolate.svg';
 import ArrowIcon from '@material-ui/icons/ArrowBack';
 
-// import {HttpService} from "services";
+import {httpService} from "services";
 import {DeviceSizeService} from 'utilits/index';
 import {Button, Dialog} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
+import {Progress} from "shared/components/preloader/Preloader";
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import ItemGoods from 'shared/components/goods/ItemGoods.component';
 import CustomSelect from 'shared/components/customSelect/Select.component';
 import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
 import MultiSelect from 'shared/components/customSelect/MultiSelect.component';
-import {httpService} from "services";
 
 const cheeseSelect = ['СИР', 'М\'ЯСО'];
 const sortSelect = ['ВІД ДОРОГИХ ДО ДЕШЕВИХ', 'ВІД ДЕШЕВИХ ДО ДОРОГИХ'];
@@ -28,14 +28,17 @@ const weightSelect = ['250г (8)','450г (44)','1кг (8)','10кг (44)','15кг
 
 
 const keys = {
-  syrMyaso : "syr-myaso"
+    coffee : "kava",
+    cheeseAndMeat : "syr-myaso",
+    grocery : "bakaliya",
+    chocolate : "shokolad",
 };
 
 const tabIcons = {
-    bakaliya :  <GroceryIcon className="tab-icon"/>,
-    kava :  <CoffeeIcon className="tab-icon"/>,
-    [keys.syrMyaso] :  [<CheeseIcon className="tab-icon"/>,<SteakIcon className="tab-icon"/>],
-    shokolad :  <ChocolateIcon className="tab-icon"/>,
+    [keys.grocery] :  <GroceryIcon className="tab-icon"/>,
+    [keys.coffee] :  <CoffeeIcon className="tab-icon"/>,
+    [keys.cheeseAndMeat] :  [<CheeseIcon className="tab-icon"/>,<SteakIcon className="tab-icon"/>],
+    [keys.chocolate] :  <ChocolateIcon className="tab-icon"/>,
 };
 
 class Catalog extends React.Component {
@@ -49,10 +52,10 @@ class Catalog extends React.Component {
      * active tab
      */
     activeGoods: {
-      bakaliya: true,
-      kava: false,
-      ["syr-myaso"]: false,
-      shokolad: false,
+      [keys.grocery]: true,
+      [keys.coffee]: false,
+      [keys.cheeseAndMeat]: false,
+      [keys.chocolate]: false,
     },
     /**
      * customSelect value
@@ -69,9 +72,7 @@ class Catalog extends React.Component {
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
-    httpService.getRequest(httpService.URLS.shop).then(res => this.setState({
-        tabs : res
-    }));
+    httpService.getRequest(httpService.URLS.shop).then(res => this.setState({tabs : res}));
   }
 
   componentWillUnmount() {
@@ -186,27 +187,29 @@ class Catalog extends React.Component {
     }, () =>  this.state[resetItem]);
   };
 
-    getTabCategory = () => {
-        return (
-            <div className="tab-categories">
-                {
-                    this.state.tabs.map((elem, key) => {
-                        return (
-                            <Button
-                                key={key} onClick={() => this.handleChangeGoods(elem.slug)}
-                                classes={{label: 'tab-item-wrap'}}
-                                className={classNames(`tab-item ${elem.slug}`, this.state.activeGoods[elem.slug] && 'active')}>
-                                {
-                                    tabIcons[elem.slug]
-                                }
-                                <span className="text">{elem.name}</span>
-                            </Button>
-                        )
-                    })
-                }
-            </div>
-        );
-    };
+  getTabCategory = () => {
+      const tabs = this.state.tabs;
+      return (
+          <div className="tab-categories">
+              {
+                  tabs ? tabs.map((elem, key) => {
+                      return (
+                          <Button
+                              key={key + 1} onClick={() => this.handleChangeGoods(elem.slug)}
+                              classes={{label: 'tab-item-wrap'}}
+                              className={classNames(`tab-item ${elem.slug}`, this.state.activeGoods[elem.slug] && 'active')}>
+                              {
+                                  tabIcons[elem.slug]
+                              }
+                              <span className="text">{elem.name}</span>
+                          </Button>
+                      )
+                  })
+                  : <Progress globalProgress={false}/>
+              }
+          </div>
+      );
+  };
 
   render() {
     return (

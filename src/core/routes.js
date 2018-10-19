@@ -1,8 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import {Route} from 'react-router-dom';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import green from '@material-ui/core/colors/green';
+import {Progress} from "shared/components/preloader/Preloader";
 
 export const navigationScheme = {
   login : '/',
@@ -21,8 +20,6 @@ export const navigationScheme = {
 
   sharedAndOffersSingleItem : '/single-item',
 };
-
-const Loading = () => <div className="loader"><CircularProgress style={{color : green[500]}}/></div>;
 
 export const MAIN_ROUTES = [
   {
@@ -94,7 +91,7 @@ export function generateRoutes(routes) {
   return routes.map((i, k) => {
     const component = Loadable({
       loader: i.component,
-      loading: Loading,
+      loading: Progress,
     });
     return <Route {...i} component={component} key={k}/>;
   });

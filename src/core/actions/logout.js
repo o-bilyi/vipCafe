@@ -1,4 +1,4 @@
-import {httpService} from 'services';
+// import {httpService} from 'services';
 import {baseHandler} from 'core/redusers/utils';
 import {logoutActionTypes} from 'core/models/auth';
 

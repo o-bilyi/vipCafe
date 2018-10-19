@@ -15,7 +15,7 @@ const check = async () => {
     setTimeout(() => {
       store.dispatch(loginSuccess());
       res(true);
-    }, 2000)
+    }, 1000)
   })
 };
 check().then(res => {
