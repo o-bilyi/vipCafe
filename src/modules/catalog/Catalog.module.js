@@ -37,7 +37,7 @@ const keys = {
 const tabIcons = {
     [keys.grocery] :  <GroceryIcon className="tab-icon"/>,
     [keys.coffee] :  <CoffeeIcon className="tab-icon"/>,
-    [keys.cheeseAndMeat] :  [<CheeseIcon className="tab-icon"/>,<SteakIcon className="tab-icon"/>],
+    [keys.cheeseAndMeat] : [<CheeseIcon key={1} className="tab-icon"/>,<SteakIcon key={2} className="tab-icon"/>],
     [keys.chocolate] :  <ChocolateIcon className="tab-icon"/>,
 };
 

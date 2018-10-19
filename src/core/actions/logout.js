@@ -1,6 +1,7 @@
 // import {httpService} from 'services';
 import {baseHandler} from 'core/redusers/utils';
 import {logoutActionTypes} from 'core/models/auth';
+import {storageService} from '../../services';
 
 // const body = JSON.stringify({message: 'bye'});
 
@@ -9,6 +10,7 @@ import {logoutActionTypes} from 'core/models/auth';
  * @return {{type, payload}}
  */
 export const logoutSuccessAction = payload => {
+  storageService.deleteLocal("user");
   return baseHandler(logoutActionTypes.LOGOUT_SUCCESS_ACTION, payload)
 };
 const isAuthorized = false;

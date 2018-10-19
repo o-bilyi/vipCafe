@@ -1,4 +1,4 @@
-import {httpService} from 'services';
+import {httpService, storageService} from 'services';
 import {loginActionTypes} from '../models/auth';
 
 const baseHandler = (type, data) => {
@@ -9,6 +9,7 @@ const baseHandler = (type, data) => {
 };
 
 export const loginSuccess = (payload) => {
+  storageService.setLocal("user", JSON.stringify(payload));
   return baseHandler(loginActionTypes.LOGIN_SUCCESS_ACTION, payload);
 };
 
@@ -21,7 +22,7 @@ export function loginAction(cred) {
     dispatch(baseHandler(loginActionTypes.LOGIN_INIT_ACTION, {cred}));
     const FAIL_ACTION = (res) => dispatch(baseHandler(loginActionTypes.LOGIN_FAIL_ACTION, {res}));
     return httpService.handleStatusCodes({
-      200: (res) => dispatch(baseHandler(loginActionTypes.LOGIN_SUCCESS_ACTION, res.user)),
+      200: (res) => dispatch(loginSuccess(res.user)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
     }).getRequest(httpService.URLS.login + `?mail=${cred.email}&pass=${cred.pass}`);

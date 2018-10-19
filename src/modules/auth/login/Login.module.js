@@ -67,7 +67,7 @@ class Login extends React.Component {
         email : this.state.email,
         pass :MD5(this.state.password)
       })).then(res => {
-        console.warn(res, res.code);
+        console.warn(res);
       });
       // httpService.getRequest(this.state.email, MD5(this.state.password)).then(res => {
       //     if(res[0].pass === MD5(this.state.password)) {

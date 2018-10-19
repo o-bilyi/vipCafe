@@ -5,21 +5,21 @@ import './assets/styles/index.scss';
 import { Provider } from 'react-redux';
 import { configureStore, history } from './core';
 import { RouterService } from './shared/services';
-import {loginSuccess} from './core/actions';
+
+import {checkAuth} from './core/actions/check-auth';
 
 export const store = configureStore();
 
 RouterService.setStore(store);
-const check = async () => {
-  return new Promise(res => {
-    setTimeout(() => {
-      store.dispatch(loginSuccess());
-      res(true);
-    }, 1000)
-  })
-};
-check().then(res => {
-  console.log(res);
+// const check = async () => {
+//   return new Promise(res => {
+//     setTimeout(() => {
+//       store.dispatch(loginSuccess());
+//       res(true);
+//     }, 1000)
+//   })
+// };
+checkAuth(store.dispatch).then(() => {
   ReactDOM.render(
     <Provider store={store}>
       <App history={history}/>
