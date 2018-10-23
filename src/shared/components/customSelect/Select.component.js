@@ -95,7 +95,6 @@ class CustomSelect extends React.Component {
             onOpen={this.handleOpenSelect}
             onClose={this.handleCloseSelect}
             MenuProps={{className: 'filter-ul'}}
-            // renderValue={(selectedItem) => selectedItem}
             SelectDisplayProps={{className: "select-label"}}
           >
             {

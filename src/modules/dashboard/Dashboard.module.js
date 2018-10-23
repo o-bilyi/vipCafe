@@ -4,13 +4,13 @@ import classNames from "classnames";
 import {toastr} from "react-redux-toastr";
 import connect from "react-redux/es/connect/connect";
 import {Button, TextField} from "@material-ui/core";
+import {httpService} from 'services';
 import {userIsAuthenticated} from "core/auth-redirect";
 import Wrapper from "shared/components/wrapper/Wrapper.component";
 import CustomSelect from "shared/components/customSelect/Select.component";
 import CustomCheckbox from "shared/components/custom-checkbox/CustomCheckbox.component";
 
 import CheckIcon from "assets/svg/check-2.svg";
-import {httpService} from "../../services";
 
 const initialState = {
   userProfile : {
@@ -33,15 +33,12 @@ const initialState = {
     trade_format: '',
     /*select default props*/
   },
+  deliveryItems : ["Нова Пошта", "Міст Експрес"],
+  cityItems : ["Чернівці", "Львів", "Київ"],
+  tradeFormatSelect : ["Ларьок", "Бокс", "Прилавок"],
   openThanksModal: false,
   saveChanges: false,
 };
-
-const deliveryItems = ["Нова Пошта", "Міст Експрес"];
-
-const cityItems = ["Чернівці", "Львів", "Київ"];
-
-const tradeFormatSelect = ["Ларьок", "Бокс", "Прилавок"];
 
 class Dashboard extends React.Component {
   static propTypes = {
@@ -94,6 +91,8 @@ class Dashboard extends React.Component {
           this.setState({
             saveChanges : true
           });
+          console.warn(res);
+          // storageService.setLocal("user", res.user)
         }
       })
   };
@@ -123,7 +122,6 @@ class Dashboard extends React.Component {
    */
 
   handleChangeSelect = name => event => {
-    console.warn([name], event.target.value);
     this.setState({
       userProfile : {
         ...this.state.userProfile,
@@ -146,6 +144,7 @@ class Dashboard extends React.Component {
       delivery,
       trade_format
     } = this.state.userProfile;
+    const {cityItems, deliveryItems, tradeFormatSelect} = this.state;
 
     return (
       <form autoComplete="off" method="post" className="shared-form" onSubmit={this.handleSubmit}>
