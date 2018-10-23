@@ -1,7 +1,6 @@
 import {auth} from './auth';
 import {basket} from './basket';
 import {archive} from './archive';
-import {catalog} from './catalog';
 import {userProfile} from './users';
 import {combineReducers} from 'redux';
 import {sharesAndOffers} from './shares-and-offers';
@@ -12,7 +11,6 @@ export default combineReducers({
   routing,
   auth,
   userProfile,
-  catalog,
   sharesAndOffers,
   basket,
   archive,

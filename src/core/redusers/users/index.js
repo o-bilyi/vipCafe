@@ -12,7 +12,6 @@ const initialState = {
     telegram : null,
     viber : null,
   },
-  mobile : null,
   site : null,
   city : null,
   company : null,

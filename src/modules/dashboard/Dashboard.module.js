@@ -10,22 +10,29 @@ import CustomSelect from "shared/components/customSelect/Select.component";
 import CustomCheckbox from "shared/components/custom-checkbox/CustomCheckbox.component";
 
 import CheckIcon from "assets/svg/check-2.svg";
+import {httpService} from "../../services";
 
 const initialState = {
-  name: '',
-  surName: '',
-  lastName: '',
-  mobile: '',
-  email: '',
-  nameCompany: '',
+  userProfile : {
+    id: '',
+    f_name: '',
+    l_name: '',
+    p_name: '',
+    tel: {
+      number : '',
+      telegram : false,
+      viber : false
+    },
+    mail: '',
+    company: '',
+    site: '',
 
-  city: '',
-  delivery: '',
-  tradeFormat: '',
-
-  sitePage: '',
-  telegram: false,
-  viber: false,
+    /*select default props*/
+    city: '',
+    delivery: '',
+    trade_format: '',
+    /*select default props*/
+  },
   openThanksModal: false,
   saveChanges: false,
 };
@@ -43,69 +50,52 @@ class Dashboard extends React.Component {
 
   state = initialState;
 
+  componentDidMount() {
+    this._setFields();
+  }
+
+  _setFields = () => {
+    this.setState({
+      userProfile : {
+        ...this.props.userProfile
+      }
+    })
+  };
+
   fieldsChange = event => {
     this.setState({
-      [event.target.name]: event.target.value,
+      userProfile: {
+        ...this.state.userProfile,
+        [event.target.name]: event.target.value
+      },
+    });
+  };
+
+  changeTel = event => {
+    this.setState({
+      userProfile: {
+        ...this.state.userProfile,
+        tel : {
+          ...this.state.userProfile.tel,
+          [event.target.name]: event.target.value
+        }
+      },
     });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-
-    const {
-      name,
-      surName,
-      lastName,
-      mobile,
-      email,
-      nameCompany,
-      city,
-      delivery,
-      tradeFormat,
-      sitePage,
-      telegram,
-      viber,
-    } = this.state;
-
-    const inputs = {
-      name,
-      surName,
-      lastName,
-      mobile,
-      email,
-      nameCompany,
-      city,
-      delivery,
-      tradeFormat,
-      sitePage,
-      telegram,
-      viber,
-    };
-
-    function status(response) {
-      if (response.ok) {
-        return Promise.resolve(response);
-      }
-      return Promise.reject(response.statusText);
-    }
-
-    fetch("/api/userProfile", {
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "post",
-      body: JSON.stringify(inputs),
-    })
-      .then(status)
-      .then(() => {
-        this.setState(initialState);
-        toastr.success("Форма відправлена!");
+    const {id, f_name, p_name, l_name, city, company, delivery, site, tel, trade_format} = this.state.userProfile;
+    httpService.getRequest(httpService.URLS.changeUserInformation +
+      `?user=${id}&f_name=${f_name}&l_name=${l_name}&p_name=${p_name}&tel=${tel.number}&telegram=${tel.telegram}&viber=${tel.viber}&site=${site}&city=${city}&company=${company}&trade_format=${trade_format}&delivery=${delivery}`)
+      .then(res => {
+        if (res) {
+          toastr.success('Зміни внесено!');
+          this.setState({
+            saveChanges : true
+          });
+        }
       })
-      .catch((error) => {
-        toastr.warning("Помилка, повідомлення не відправлено!");
-        console.error("Request failed", error);
-      });
   };
 
   /**
@@ -113,7 +103,15 @@ class Dashboard extends React.Component {
    */
 
   handleChangeCheckbox = name => event => {
-    this.setState({[name]: event.target.checked});
+    this.setState({
+      userProfile : {
+        ...this.state.userProfile,
+        tel : {
+          ...this.state.userProfile.tel,
+          [name]: event.target.checked
+        }
+      }
+    });
   };
 
   /**
@@ -125,49 +123,44 @@ class Dashboard extends React.Component {
    */
 
   handleChangeSelect = name => event => {
-    this.setState({[name]: event.target.value});
+    console.warn([name], event.target.value);
+    this.setState({
+      userProfile : {
+        ...this.state.userProfile,
+        [name]: event.target.value
+      }
+    });
   };
 
   /**
    * handleChangeSelect functionality
    */
 
-  _saveChanges = () => {
-    this.setState({
-      saveChanges : true
-    });
-  };
-
-
   _getContent = () => {
     const {
-      name, surName,
-      lastName, mobile,
-      email, nameCompany,
-
+      f_name, l_name,
+      p_name, tel,
+      mail, company,
+      site,
       city,
       delivery,
-      tradeFormat,
-
-      sitePage,
-      telegram,
-      viber,
-    } = this.state;
+      trade_format
+    } = this.state.userProfile;
 
     return (
       <form autoComplete="off" method="post" className="shared-form" onSubmit={this.handleSubmit}>
         <div className="shared-form-container">
           <div className="input-container input-container-name">
-            <label className="form-label" htmlFor="#name">Ім’я:</label>
+            <label className="form-label" htmlFor="#f_name">Ім’я:</label>
             <TextField
               autoComplete="off"
               onChange={this.fieldsChange}
               required
               placeholder="Боб"
-              value={name}
+              value={f_name}
               type="text"
-              name="name"
-              id="name"
+              name="f_name"
+              id="f_name"
               className="form-input-wrap"
               InputProps={{
                 classes: {
@@ -178,15 +171,15 @@ class Dashboard extends React.Component {
           </div>
 
           <div className="input-container input-container-surName">
-            <label className="form-label" htmlFor="#name">Прізвище:</label>
+            <label className="form-label" htmlFor="#l_name">Прізвище:</label>
             <TextField
               onChange={this.fieldsChange}
               required
               placeholder="Боб"
-              value={surName}
+              value={l_name}
               type="text"
-              name="name"
-              id="name"
+              name="l_name"
+              id="l_name"
               className="form-input-wrap"
               InputProps={{
                 classes: {
@@ -197,14 +190,14 @@ class Dashboard extends React.Component {
           </div>
 
           <div className="input-container input-container-lastName">
-            <label className="form-label" htmlFor="#lastName">По-батькові:</label>
+            <label className="form-label" htmlFor="#p_name">По-батькові:</label>
             <TextField
               onChange={this.fieldsChange}
-              value={lastName}
+              value={p_name}
               placeholder="Бобіков"
               type="text"
-              name="lastName"
-              id="lastName"
+              name="p_name"
+              id="p_name"
               className="form-input-wrap"
               InputProps={{
                 classes: {
@@ -215,14 +208,14 @@ class Dashboard extends React.Component {
           </div>
 
           <div className="input-container input-container-mobile">
-            <label className="form-label" htmlFor="#mobile">Телефон:</label>
+            <label className="form-label" htmlFor="#number">Телефон:</label>
             <TextField
-              onChange={this.fieldsChange}
+              onChange={this.changeTel}
               required
-              value={mobile}
+              value={tel.number}
               placeholder="+380"
               type="number"
-              name="mobile"
+              name="number"
               id="mobile"
               className="form-input-wrap"
               InputProps={{
@@ -234,12 +227,13 @@ class Dashboard extends React.Component {
           </div>
 
           <div className="input-container input-container-email">
-            <label className="form-label" htmlFor="#mobile">Електронна адреса:</label>
+            <label className="form-label" htmlFor="#email">Електронна адреса:</label>
             <TextField
+              disabled
               id="email"
-              name="email"
+              name="mail"
               type="email"
-              value={email}
+              value={mail}
               className="form-input-wrap"
               onChange={this.fieldsChange}
               placeholder="coffeeman@gmail.com"
@@ -252,14 +246,14 @@ class Dashboard extends React.Component {
           </div>
 
           <div className="input-container input-container-nameCompany">
-            <label className="form-label" htmlFor="#nameCompany">Назва компанії:</label>
+            <label className="form-label" htmlFor="#company">Назва компанії:</label>
             <TextField
               onChange={this.fieldsChange}
-              value={nameCompany}
+              value={company}
               placeholder="lariok.com"
               type="text"
-              name="nameCompany"
-              id="nameCompany"
+              name="company"
+              id="company"
               className="form-input-wrap"
               InputProps={{
                 classes: {
@@ -291,20 +285,20 @@ class Dashboard extends React.Component {
             <CustomSelect
               items={tradeFormatSelect}
               labelText="Формат торгівлі:"
-              selectedItem={tradeFormat}
-              handleChangeSelect={this.handleChangeSelect("tradeFormat")}
+              selectedItem={trade_format}
+              handleChangeSelect={this.handleChangeSelect("trade_format")}
             />
           </div>
 
           <div className="input-container input-container-sitePage">
-            <label className="form-label" htmlFor="#sitePage">Сайт:</label>
+            <label className="form-label" htmlFor="#site">Сайт:</label>
             <TextField
               onChange={this.fieldsChange}
-              value={sitePage}
+              value={site}
               placeholder="LariOK"
               type="text"
-              name="sitePage"
-              id="sitePage"
+              name="site"
+              id="site"
               className="form-input-wrap"
               InputProps={{
                 classes: {
@@ -318,14 +312,14 @@ class Dashboard extends React.Component {
             <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
             <CustomCheckbox
               handleChangeCheckbox={this.handleChangeCheckbox("viber")}
-              checked={viber}
+              checked={tel.viber}
               className="viber"
               labelText="Viber"
             />
 
             <CustomCheckbox
               handleChangeCheckbox={this.handleChangeCheckbox("telegram")}
-              checked={telegram}
+              checked={tel.telegram}
               className="telegram"
               labelText="Telegram"
             />
@@ -336,7 +330,6 @@ class Dashboard extends React.Component {
           <div className={classNames("submit-button-wrap", this.state.saveChanges && "save")}>
             <CheckIcon className="check-icon"/>
             <Button
-              onClick={this._saveChanges}
               className="submit-button text"
               variant="extendedFab"
               aria-label="signUp"

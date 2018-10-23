@@ -12,14 +12,38 @@ import Dialog from '@material-ui/core/Dialog';
 import {addToBasket} from 'core/actions/basket';
 import WarningIcon from 'assets/svg/warning.svg';
 
+const typeProduct = {
+  "melena": "мелена",
+  "capsul": "капсульна",
+  "zernova": "зернова",
+};
+
+const containerProduct = {
+  "upakovka": "упаковці",
+  "jashik": "ящику",
+};
+
+const unitsProduct = {
+  "capsul": "капсул",
+  "shtuk": "штук",
+  "gram": "г",
+  "kilogram": "кілограм",
+};
+
+const getIconForGoods =  {
+  "melena": <TechnologyIcon className='icon'/>,
+  "capsul": <TechnologyIcon className='icon'/>,
+  "zernova": <GrainsIcon className='icon'/>
+};
+
 export default class ItemGoods extends React.Component {
   static propTypes = {
     id: PropTypes.number,
-    img: PropTypes.string,
-    title: PropTypes.string,
-    price: PropTypes.number,
-    count: PropTypes.number,
-    properties: PropTypes.arrayOf(PropTypes.object),
+    img: PropTypes.any,
+    title: PropTypes.any,
+    price: PropTypes.any,
+    count: PropTypes.any,
+    properties: PropTypes.any,
   };
 
   state = {
@@ -54,37 +78,36 @@ export default class ItemGoods extends React.Component {
     })
   };
 
-  _getIconForGoods = (name) => {
-    switch (name) {
-      case 'капсульна' :
-        return  <TechnologyIcon className='icon'/>;
-      case 'мелена' :
-        return  <TechnologyIcon className='icon'/>;
-      case 'зернова' :
-        return <GrainsIcon className='icon'/>;
-      default : return <TechnologyIcon className='icon'/>;
-    }
-  };
-
   _getTopContent = () => {
     const {img, title, properties} = this.props;
 
+    console.warn(properties);
+
     return [
-      <div key={1} className='item-image-wrap'>
-        <img className='item-image' src={img} alt='item-img'/>
-      </div>,
-
+      <div key={1} className='item-image-wrap' style={{backgroundImage : `url(${img})`}}/>,
       <h2 key={2} className='item-title'>{title}</h2>,
-
       <div key={3} className='item-properties-wrap'>
-
         <div className="item-types">
           {
-            properties.map((item, key) => {
+            [
+              <div className='item-properties' key={1}>
+                {
+                  getIconForGoods[properties.type]
+                }
+                <span className='text'>{typeProduct[properties.type]}</span>
+              </div>,
+
+              properties.odunits === "gram" &&
+              <div className='item-properties' key={2}>
+                <WeightIcon className='icon'/>
+                <span className='text'>{properties.value} {unitsProduct["gram"]}</span>
+              </div>
+            ]
+            /*properties.map((item, key) => {
               return [
                 <div className='item-properties' key={key}>
                   {
-                    this._getIconForGoods(item.name)
+                    getIconForGoods(properties.odunits)
                   }
                   <span className='text'>{item.name}</span>
                 </div>,
@@ -95,40 +118,38 @@ export default class ItemGoods extends React.Component {
                   <span className='text'>{item.weight} г</span>
                 </div>
               ];
-            })
+            })*/
           }
         </div>
-
         <div className="in-the-package">
           <div className='item-properties'>
-            {
-              properties.map((item, key) => {
-                return (
-                  <div className='item-properties' key={key}>
-                    {
-                      item.numberInBox &&
-                      [
-                        <BoxIcon key={1} className='icon'/>,
-                        <span key={2} className='text'>в ящику {item.numberInBox} штук</span>,
-                      ]
-                    }
-                    {
+            {/*{
+            properties.map((item, key) => {
+              return (
+                <div className='item-properties' key={key}>
+                  {
+                    item.numberInBox &&
+                    [
+                      <BoxIcon key={1} className='icon'/>,
+                      <span key={2} className='text'>в ящику {item.numberInBox} штук</span>,
+                    ]
+                  }
+                  {
 
-                      item.numberInPackage &&
-                        [
-                          <BoxIcon key={3} className='icon'/>,
-                          <span key={4} className='text'>в упаковці {item.numberInPackage} капсул</span>
-                        ]
-                    }
-                  </div>
-                );
-              })
-            }
+                    item.numberInPackage &&
+                      [
+                        <BoxIcon key={3} className='icon'/>,
+                        <span key={4} className='text'>в упаковці {item.numberInPackage} капсул</span>
+                      ]
+                  }
+                </div>
+              );
+            })
+          }*/}
           </div>
         </div>
-
-      </div>,
-    ];
+      </div>
+    ]
   };
 
   getBottomContent = () => {

@@ -11,14 +11,6 @@ import {checkAuth} from './core/actions/check-auth';
 export const store = configureStore();
 
 RouterService.setStore(store);
-// const check = async () => {
-//   return new Promise(res => {
-//     setTimeout(() => {
-//       store.dispatch(loginSuccess());
-//       res(true);
-//     }, 1000)
-//   })
-// };
 checkAuth(store.dispatch).then(() => {
   ReactDOM.render(
     <Provider store={store}>

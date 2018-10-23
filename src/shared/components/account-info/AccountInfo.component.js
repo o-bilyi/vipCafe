@@ -38,8 +38,8 @@ class AccountInfo extends React.Component {
       return (
         <div className="account-info-wrap">
           <div className="user-info">
-            <h2 className="user-name">Тарасенко Петро</h2>
-            <p className="user-email">tarasenko@gmail.com</p>
+            <h2 className="user-name">{this.props.userProfile.f_name}</h2>
+            <p className="user-email">{this.props.userProfile.mail}</p>
           </div>
           <Link to={navigationScheme.dashboard} className="go-to-dashboard">
             <span className="text">особистий кабінет</span>

@@ -24,39 +24,40 @@ const cheeseSelect = ['СИР', 'М\'ЯСО'];
 const sortSelect = ['ВІД ДОРОГИХ ДО ДЕШЕВИХ', 'ВІД ДЕШЕВИХ ДО ДОРОГИХ'];
 const brandSelect = ['РОСІЙСЬКИЙ', 'МАЦАРЕЛЛА'];
 const typeSelect = ['ТВЕРДИЙ', 'ПЛАВЛЕНИЙ'];
-const weightSelect = ['250г (8)','450г (44)','1кг (8)','10кг (44)','15кг (8)','20кг (44)'];
+const weightSelect = ['250г (8)', '450г (44)', '1кг (8)', '10кг (44)', '15кг (8)', '20кг (44)'];
 
 
 const keys = {
-    coffee : "kava",
-    cheeseAndMeat : "syr-myaso",
-    grocery : "bakaliya",
-    chocolate : "shokolad",
+  coffee: "kava",
+  cheeseAndMeat: "syr-myaso",
+  grocery: "bakaliya",
+  chocolate: "shokolad",
+};
+
+const categoryTabID = {
+  [keys.grocery]: 6,
+  [keys.coffee]: 2,
+  [keys.cheeseAndMeat]: 3,
+  [keys.chocolate]: 7
 };
 
 const tabIcons = {
-    [keys.grocery] :  <GroceryIcon className="tab-icon"/>,
-    [keys.coffee] :  <CoffeeIcon className="tab-icon"/>,
-    [keys.cheeseAndMeat] : [<CheeseIcon key={1} className="tab-icon"/>,<SteakIcon key={2} className="tab-icon"/>],
-    [keys.chocolate] :  <ChocolateIcon className="tab-icon"/>,
+  [keys.grocery]: <GroceryIcon className="tab-icon"/>,
+  [keys.coffee]: <CoffeeIcon className="tab-icon"/>,
+  [keys.cheeseAndMeat]: [<CheeseIcon key={1} className="tab-icon"/>, <SteakIcon key={2} className="tab-icon"/>],
+  [keys.chocolate]: <ChocolateIcon className="tab-icon"/>,
 };
 
 class Catalog extends React.Component {
   static propTypes = {
-    items : PropTypes.array,
     isAuthorized: PropTypes.bool
   };
 
   state = {
-    /**
-     * active tab
-     */
-    activeGoods: {
-      [keys.grocery]: true,
-      [keys.coffee]: false,
-      [keys.cheeseAndMeat]: false,
-      [keys.chocolate]: false,
-    },
+    tabs: [],
+    activeGoods: keys.coffee, //active category
+    products: [],
+
     /**
      * customSelect value
      */
@@ -65,14 +66,17 @@ class Catalog extends React.Component {
     brand: '',
     type: '',
     weight: [],
-    tabs: [],
+    /**
+     * customSelect value
+     */
 
     openFilterModal: false,
   };
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
-    httpService.getRequest(httpService.URLS.shop).then(res => this.setState({tabs : res}));
+    httpService.getRequest(httpService.URLS.shop).then(res => this.setState({tabs: res}));
+    this._getGoods(this.state.activeGoods);
   }
 
   componentWillUnmount() {
@@ -83,29 +87,43 @@ class Catalog extends React.Component {
     this.setState({[name]: event.target.value});
   };
 
-  handleChangeGoods = name => {
+  handleChangeGoods = (name = "") => {
     this.setState({
-      activeGoods: {
-        [name]: true,
-      },
+      activeGoods: name
+    }, () => this._getGoods(name));
+  };
+
+  _getGoods = (activeCategory) => {
+    httpService.getRequest(httpService.URLS.getProducts + `?shop=${categoryTabID[activeCategory]}`).then(res => {
+      this.setState({
+        products: res
+      })
     });
   };
 
   getGoodsItem = (props, key) => {
-    if(this.props.isAuthorized){
-      return <ItemWithPrice {...props} key={key}/>;
+    const items = {
+      count: 1,
+      id: props.id,
+      price: props.price,
+      img: props.gallery[0].thumb,
+      title: props.title["rendered"],
+      properties: {...props.product_type}
+    };
+    if (this.props.isAuthorized) {
+      return <ItemWithPrice {...items} key={key}/>;
     }
-    return <ItemGoods {...props} key={key}/>
+    return <ItemGoods {...items} key={key}/>
   };
 
   _toggleFilterModal = () => {
     this.setState({
-      openFilterModal : !this.state.openFilterModal
+      openFilterModal: !this.state.openFilterModal
     });
   };
 
   _getFilters = () => {
-    if(DeviceSizeService.size.width < 992) {
+    if (DeviceSizeService.size.width < 992) {
       return (
         <div className='custom-filter-container'>
           <Button className="show-filters" onClick={this._toggleFilterModal}>фільтр і сортування</Button>
@@ -184,31 +202,31 @@ class Catalog extends React.Component {
     event.stopPropagation();
     this.setState({
       [resetItem]: []
-    }, () =>  this.state[resetItem]);
+    }, () => this.state[resetItem]);
   };
 
   getTabCategory = () => {
-      const tabs = this.state.tabs;
-      return (
-          <div className="tab-categories">
-              {
-                  tabs ? tabs.map((elem, key) => {
-                      return (
-                          <Button
-                              key={key + 1} onClick={() => this.handleChangeGoods(elem.slug)}
-                              classes={{label: 'tab-item-wrap'}}
-                              className={classNames(`tab-item ${elem.slug}`, this.state.activeGoods[elem.slug] && 'active')}>
-                              {
-                                  tabIcons[elem.slug]
-                              }
-                              <span className="text">{elem.name}</span>
-                          </Button>
-                      )
-                  })
-                  : <Progress globalProgress={false}/>
-              }
-          </div>
-      );
+    const tabs = this.state.tabs;
+    return (
+      <div className="tab-categories">
+        {
+          tabs ? tabs.map((elem, key) => {
+              return (
+                <Button
+                  key={key + 1} onClick={() => this.handleChangeGoods(elem.slug)}
+                  classes={{label: 'tab-item-wrap'}}
+                  className={classNames(`tab-item ${elem.slug}`, this.state.activeGoods === elem.slug && 'active')}>
+                  {
+                    tabIcons[elem.slug]
+                  }
+                  <span className="text">{elem.name}</span>
+                </Button>
+              )
+            })
+            : <Progress globalProgress={false}/>
+        }
+      </div>
+    );
   };
 
   render() {
@@ -226,7 +244,7 @@ class Catalog extends React.Component {
 
           <div className="goods-wrap">
             {
-              this.props.items.map((item, key) => {
+              this.state.products.map((item, key) => {
                 return this.getGoodsItem(item, key);
               })
             }
@@ -238,7 +256,8 @@ class Catalog extends React.Component {
             className="filters-mobile-modal"
           >
             <div className="catalog-mobile-filters">
-              <button className="back-btn" onClick={this._toggleFilterModal}><ArrowIcon className="back-icon"/></button>
+              <button className="back-btn" onClick={this._toggleFilterModal}><ArrowIcon
+                className="back-icon"/></button>
               {this._getFiltersProduct()}
             </div>
 
@@ -248,10 +267,10 @@ class Catalog extends React.Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
-    isAuthorized: state.auth.isAuthorized,
-    items : state.catalog.items
+    isAuthorized: state.auth.isAuthorized
   };
 };
 

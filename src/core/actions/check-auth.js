@@ -10,8 +10,7 @@ export const checkAuth = dispatch => {
     }
     const userData = JSON.parse(user);
 
-    return httpService.getRequest(httpService.URLS.checkSession + `?hash=${userData.hash}`).then(res => {
-      console.warn(res, userData.hash);
+    return httpService.getRequest(httpService.URLS.checkSession + `?hash=${userData.session_id}`).then(res => {
       if (res) {
         dispatch(loginSuccess(userData));
       }

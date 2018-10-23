@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 import {LoggerService, storageService} from './';
-import {loginSuccess,logoutSuccessAction} from 'core/actions';
+import {loginSuccess} from 'core/actions';
 
 export const SERVER_API_URL = "http://eliteauto.be.co.ua/wp-json/";
 
@@ -18,7 +18,9 @@ const URLS = {
   shop : "wp/v2/shop",
   login : "vipcaffe/v1/user/",
   register : "vipcaffe/v1/user/",
-  checkSession : "vipcaffe/v1/return_session"
+  checkSession : "vipcaffe/v1/return_session",
+  getProducts : "wp/v2/product", //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
+  changeUserInformation : "vipcaffe/v1/edituser" //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
 };
 
 let store = null;
@@ -80,7 +82,8 @@ class HttpService {
       LoggerService.log(status, convertedResponse, this.LINK, this.METHOD);
     }
     if (status === 401) {
-      store.dispatch(logoutSuccessAction());
+      // store.dispatch(logoutAction());
+      LoggerService.log(status, convertedResponse, this.LINK, this.METHOD);
     }
   };
 

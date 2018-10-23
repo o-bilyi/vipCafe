@@ -2,6 +2,7 @@ import React from 'react';
 import {store} from "index";
 import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
+import {toastr} from 'react-redux-toastr';
 import {DeviceSizeService, MD5} from 'utilits';
 import {loginAction} from 'core/actions/index';
 import {TextField, Button} from '@material-ui/core';
@@ -67,18 +68,12 @@ class Login extends React.Component {
         email : this.state.email,
         pass :MD5(this.state.password)
       })).then(res => {
-        console.warn(res);
+        if (res.user) {
+          toastr.success('Вітаємо!');
+        } else {
+          toastr.error('Логін або Пароль не вірний!');
+        }
       });
-      // httpService.getRequest(this.state.email, MD5(this.state.password)).then(res => {
-      //     if(res[0].pass === MD5(this.state.password)) {
-      //         toastr.success('Форма відправлена!');
-      //         setTimeout(() => {
-      //             store.dispatch(loginAction())
-      //         }, 2000);
-      //     }else {
-      //         toastr.error('Логін або Пароль не вірний!');
-      //     }
-      // });
   };
 
   _getContent = () => {
