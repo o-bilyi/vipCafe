@@ -17,11 +17,12 @@ export const tokenKey = 'platformToken';
 const URLS = {
   shop : "wp/v2/shop",
   login : "vipcaffe/v1/user/",
+  getProducts : "wp/v2/product",
   register : "vipcaffe/v1/user/",
+  logout : "vipcaffe/v1/logout_session",
+  orders : "vipcaffe/v1/getorders",
   checkSession : "vipcaffe/v1/return_session",
-  getProducts : "wp/v2/product", //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
-  changeUserInformation : "vipcaffe/v1/edituser", //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
-  logout : "vipcaffe/v1/logout_session" //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
+  changeUserInformation : "vipcaffe/v1/edituser"
 };
 
 let store = null;

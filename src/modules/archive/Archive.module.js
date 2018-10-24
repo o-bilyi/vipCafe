@@ -10,6 +10,9 @@ import RouterService from 'shared/services/RouterService';
 import OrderHeader from './components/OrderHeader.component';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
+import {httpService, storageService} from 'services';
+import {store} from 'index';
+import {addToArchive} from 'core/actions/archive';
 
 const initialState = {
   date: {
@@ -250,6 +253,7 @@ const items = [
   return i;
 });
 
+const userId = JSON.parse(storageService.getLocal("user")).id;
 
 export const onRepeatOrderClick = (item) => {
   console.warn('repeat order ', item);
@@ -260,11 +264,24 @@ export default class ArchiveOfOrders extends React.Component {
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+    this._getOrders();
   }
 
   componentWillUnmount() {
     DeviceSizeService.unsubscribe(this.deviceServiceId);
   }
+
+  _getOrders = () => {
+    this.setState({
+      ...this.state
+    });
+    httpService.getRequest(httpService.URLS.orders + `/${userId}`)
+      .then(res => {
+        if(res) {
+          store.dispatch(addToArchive(res))
+        }
+    })
+  };
 
   handleChange = (direction) => (value) => {
     this.setState({

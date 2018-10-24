@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import {toastr} from "react-redux-toastr";
-import connect from "react-redux/es/connect/connect";
 import {Button, TextField} from "@material-ui/core";
-import {httpService} from 'services';
+import {httpService, storageService} from 'services';
+import connect from "react-redux/es/connect/connect";
 import {userIsAuthenticated} from "core/auth-redirect";
 import Wrapper from "shared/components/wrapper/Wrapper.component";
 import CustomSelect from "shared/components/customSelect/Select.component";
@@ -14,6 +14,7 @@ import CheckIcon from "assets/svg/check-2.svg";
 
 const initialState = {
   userProfile : {
+    session_id: '',
     id: '',
     f_name: '',
     l_name: '',
@@ -33,9 +34,9 @@ const initialState = {
     trade_format: '',
     /*select default props*/
   },
-  deliveryItems : ["Нова Пошта", "Міст Експрес"],
+  deliveryItems : ["Нова Пошта", "Міст Експрес", "d1", "d2"],
   cityItems : ["Чернівці", "Львів", "Київ"],
-  tradeFormatSelect : ["Ларьок", "Бокс", "Прилавок"],
+  tradeFormatSelect : ["Ларьок", "f1", "f2"],
   openThanksModal: false,
   saveChanges: false,
 };
@@ -82,20 +83,45 @@ class Dashboard extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const {id, f_name, p_name, l_name, city, company, delivery, site, tel, trade_format} = this.state.userProfile;
+    const {session_id,id, f_name, p_name, l_name, city, company, delivery, site, tel, trade_format} = this.state.userProfile;
+    const telegram = tel.telegram ? 1 : 0;
+    const viber = tel.viber ? 1 : 0;
     httpService.getRequest(httpService.URLS.changeUserInformation +
-      `?user=${id}&f_name=${f_name}&l_name=${l_name}&p_name=${p_name}&tel=${tel.number}&telegram=${tel.telegram}&viber=${tel.viber}&site=${site}&city=${city}&company=${company}&trade_format=${trade_format}&delivery=${delivery}`)
+      `?user=${id}&f_name=${f_name}&l_name=${l_name}&p_name=${p_name}&tel=${tel.number}&telegram=${telegram}
+      &viber=${viber}&site=${site}&city=${city}&company=${company}&trade_format=${trade_format}&delivery=${delivery}&hash=${session_id}`)
+    //  const body = JSON.stringify({
+    //    session_id, id, f_name, p_name, l_name, city, company,
+    //    delivery, site,tel : tel.number, trade_format, telegram, viber
+    // });
+    // httpService.postRequest(httpService.URLS.changeUserInformation, body)
       .then(res => {
-        if (res) {
+        if (res && res.user) {
+          storageService.setLocal("user", JSON.stringify(res.user));
+          this._saveChangesAnimation();
           toastr.success('Зміни внесено!');
-          this.setState({
-            saveChanges : true
-          });
-          console.warn(res);
-          // storageService.setLocal("user", res.user)
+        } else {
+          toastr.error('Зміни не внесено!');
         }
       })
   };
+
+  /**
+   * saveChangesAnimation
+   */
+  _saveChangesAnimation = () => {
+    this.setState({
+      saveChanges : true
+    },() => {
+      setTimeout(() => {
+        this.setState({
+          saveChanges : false
+        })
+      },2000);
+    });
+  };
+  /**
+   * saveChangesAnimation
+   */
 
   /**
    * checkbox functionality

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {store} from '../../../index';
 import {Link} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
+// import {bindActionCreators} from 'redux';
 import {navigationScheme} from 'core/index';
 import {Dialog,Button} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
@@ -14,7 +14,6 @@ import PowerIcon from 'assets/svg/shut-down.svg';
 class AccountInfo extends React.Component {
   static propTypes = {
     userProfile: PropTypes.object,
-    logoutAction: PropTypes.func,
     isAuthorized: PropTypes.bool,
   };
 
@@ -29,7 +28,7 @@ class AccountInfo extends React.Component {
   };
 
   _logOut = () => {
-    this.props.logoutAction();
+    store.dispatch(logoutAction());
     store.dispatch(clearBasket());
   };
 
@@ -83,10 +82,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    logoutAction,
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccountInfo);
+export default connect(mapStateToProps)(AccountInfo);

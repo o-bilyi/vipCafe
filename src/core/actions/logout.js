@@ -1,8 +1,8 @@
 import {httpService, storageService} from 'services';
-import {baseHandler} from 'core/redusers/utils';
 import {logoutActionTypes} from 'core/models/auth';
+import {baseHandler} from './utils';
 
-// const body = JSON.stringify({message: 'bye'});
+
 
 /**
  * @param payload
@@ -22,12 +22,13 @@ export function logoutAction() {
   //   type : logoutActionTypes.LOGOUT_SUCCESS_ACTION,
   //   payload : isAuthorized
   // });
-  const hash = storageService.getLocal("user").session_id;
+  const hash = JSON.parse(storageService.getLocal("user")).session_id;
+
   return dispatch => {
     dispatch(baseHandler(logoutActionTypes.LOGOUT_INIT_ACTION, {hash}));
     const FAIL_ACTION = (res) => dispatch(baseHandler(logoutActionTypes.LOGOUT_FAIL_ACTION, {res}));
     return httpService.handleStatusCodes({
-      200: () => dispatch(logoutSuccessAction()),
+      200: (res) => dispatch(logoutSuccessAction(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
     }).getRequest(httpService.URLS.logout + `?hash=${hash}`);

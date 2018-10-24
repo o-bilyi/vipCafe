@@ -1,12 +1,6 @@
-import {httpService, storageService} from 'services';
+import {baseHandler} from './utils';
 import {loginActionTypes} from '../models/auth';
-
-const baseHandler = (type, data) => {
-  return {
-    type,
-    payload: data,
-  };
-};
+import {httpService, storageService} from 'services';
 
 export const loginSuccess = (payload) => {
   storageService.setLocal("user", JSON.stringify(payload));
