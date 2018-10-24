@@ -20,7 +20,8 @@ const URLS = {
   register : "vipcaffe/v1/user/",
   checkSession : "vipcaffe/v1/return_session",
   getProducts : "wp/v2/product", //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
-  changeUserInformation : "vipcaffe/v1/edituser" //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
+  changeUserInformation : "vipcaffe/v1/edituser", //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
+  logout : "vipcaffe/v1/logout_session" //http://eliteauto.be.co.ua/wp-json/wp/v2/product?slug=bakaliya
 };
 
 let store = null;
