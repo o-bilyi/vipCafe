@@ -1,5 +1,5 @@
 import {logoutActionTypes, loginActionTypes} from '../../models/auth';
-import {generateReducer, baseHandler} from '../utils';
+import {generateReducer, baseHandlerReduser} from '../utils';
 
 const initialState = {
   id : null,
@@ -28,5 +28,5 @@ export const userProfile = generateReducer(initialState, {
    * @return {{fetching: boolean, isAuthorized: boolean}}
    */
   [logoutActionTypes.LOGOUT_SUCCESS_ACTION]: () => initialState,
-  [loginActionTypes.LOGIN_SUCCESS_ACTION]: baseHandler,
+  [loginActionTypes.LOGIN_SUCCESS_ACTION]: baseHandlerReduser,
 });

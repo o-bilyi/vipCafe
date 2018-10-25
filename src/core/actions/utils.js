@@ -1,4 +1,4 @@
-export const baseHandler = (type, data) => {
+export const baseHandlerAction = (type, data) => {
   return {
     type,
     payload: data,

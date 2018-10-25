@@ -12,7 +12,7 @@ export function generateReducer(initialState, handlers) {
  * @param action
  * @return {{}}
  */
-export const baseHandler = (state, action) => {
+export const baseHandlerReduser = (state, action) => {
   return {
     ...state,
     ...action.payload

@@ -1,5 +1,5 @@
 import {httpService} from 'services';
-import {baseHandler} from 'core/redusers/utils';
+import {baseHandlerReduser} from 'core/redusers/utils';
 import {registrationActionTypes} from 'core/models/auth';
 
 /**
@@ -15,15 +15,15 @@ export function registrationAction(username, password, token) {
     token,
   });
   return dispatch => {
-    dispatch(baseHandler(registrationActionTypes.REGISTRATION_INIT_ACTION, {username, password}));
+    dispatch(baseHandlerReduser(registrationActionTypes.REGISTRATION_INIT_ACTION, {username, password}));
 
-    const FAIL_ACTION = () => dispatch(baseHandler(registrationActionTypes.REGISTRATION_FAIL_ACTION, {username, password}));
+    const FAIL_ACTION = () => dispatch(baseHandlerReduser(registrationActionTypes.REGISTRATION_FAIL_ACTION, {username, password}));
 
     return new httpService().handleStatusCodes({
       200: (res) => {
         if(res.token) {
           httpService.setToken(res.token);
-          dispatch(baseHandler(registrationActionTypes.REGISTRATION_SUCCESS_ACTION,{username, password}));
+          dispatch(baseHandlerReduser(registrationActionTypes.REGISTRATION_SUCCESS_ACTION,{username, password}));
         } else {
           FAIL_ACTION();
         }
