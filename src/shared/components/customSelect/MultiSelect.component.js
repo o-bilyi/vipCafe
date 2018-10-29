@@ -104,10 +104,14 @@ class MultiSelect extends React.Component {
             renderValue={selected => selected.join(', ')}
             SelectDisplayProps={{className: "select-label"}}
           >
-            <li className="count-select-item-wrap">
-              <span className="count-select-item">count : {weightLength}</span>
-              <button onClick={resetSelectItems} className="clear-select-item">очистити</button>
-            </li>
+            {
+              this.props.countTheSelectedItem &&
+              <li className="count-select-item-wrap">
+                <span className="count-select-item">count : {weightLength}</span>
+                <button onClick={resetSelectItems} className="clear-select-item">очистити</button>
+              </li>
+            }
+
 
             {
               placeholder &&

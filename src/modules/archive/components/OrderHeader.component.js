@@ -28,7 +28,7 @@ export default function OrderHeader(props) {
 }
 
 OrderHeader.propTypes = {
-  num : PropTypes.number,
+  num : PropTypes.string,
   allPrice : PropTypes.number,
   orderAddress : PropTypes.string,
   onRepeatOrderClick : PropTypes.func

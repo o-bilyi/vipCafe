@@ -6,9 +6,9 @@ import connect from 'react-redux/es/connect/connect';
  * @return {string}
  */
 function CountItem(props) {
-  const countItem = props[props.storageTarget].length;
+  const countItem = props[props.storageTarget];
   if(countItem) {
-    return <span className="count-item">{countItem}</span>;
+    return <span className="count-item">{countItem.length}</span>;
   }
   return '';
 }

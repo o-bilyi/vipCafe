@@ -1,4 +1,7 @@
 import React from 'react';
+import {store} from "index";
+import {addToArchive} from "core/actions/archive";
+import {httpService} from "services";
 
 class DeviceSize {
   /**
@@ -69,7 +72,7 @@ export const euroSymbol = <span className="euro-icon">&#8364;</span>;
 /**
  * @return {string}
  */
-export const MD5 = function (string) {
+export function MD5(string) {
 
     /**
      * @return {number}
@@ -292,4 +295,15 @@ export const MD5 = function (string) {
     const temp = WordToHex(a)+WordToHex(b)+WordToHex(c)+WordToHex(d);
 
     return temp.toLowerCase();
+};
+
+export function setArchive (userID) {
+  httpService.getRequest(httpService.URLS.orders + `/${userID}`)
+    .then(res => {
+      if(res) {
+        store.dispatch(addToArchive(res))
+      } else {
+          console.warn("error")
+      }
+    });
 };

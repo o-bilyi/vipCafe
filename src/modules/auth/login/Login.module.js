@@ -3,7 +3,7 @@ import {store} from "index";
 import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
 import {toastr} from 'react-redux-toastr';
-import {DeviceSizeService, MD5} from 'utilits';
+import {DeviceSizeService, MD5, setArchive} from 'utilits';
 import {loginAction} from 'core/actions/index';
 import {TextField, Button} from '@material-ui/core';
 import {userIsNotAuthenticated} from 'core/auth-redirect';
@@ -66,10 +66,11 @@ class Login extends React.Component {
     event.preventDefault();
       store.dispatch(loginAction({
         email : this.state.email,
-        pass :MD5(this.state.password)
+        pass : MD5(this.state.password)
       })).then(res => {
         if (res.user) {
           toastr.success('Вітаємо!');
+          setArchive(res.user.id);
         } else {
           toastr.error('Логін або Пароль не вірний!');
         }

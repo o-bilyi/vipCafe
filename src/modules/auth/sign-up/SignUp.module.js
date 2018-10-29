@@ -1,13 +1,14 @@
 import React from 'react';
 import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
-import {DeviceSizeService} from 'utilits';
 import {toastr} from 'react-redux-toastr';
+import {DeviceSizeService} from 'utilits';
 import {Dialog, Button, TextField} from '@material-ui/core';
 
 import LogoIconSVG from 'assets/svg/logo.svg';
 
 import CustomSelect from 'shared/components/customSelect/Select.component';
+import CustomMultiSelect from 'shared/components/customSelect/MultiSelect.component';
 import CustomCheckbox from 'shared/components/custom-checkbox/CustomCheckbox.component';
 
 const initialState = {
@@ -19,7 +20,7 @@ const initialState = {
   nameCompany: '',
 
   city: '',
-  delivery: '',
+  delivery: [],
   tradeFormat: '',
 
   sitePage: '',
@@ -149,6 +150,7 @@ export default class SignUp extends React.Component {
       .then(() => {
         this.setState(initialState);
         toastr.success('Форма відправлена!');
+        // setArchive();
       })
       .catch((error) => {
         toastr.warning('Помилка, повідомлення не відправлено!');
@@ -196,8 +198,7 @@ export default class SignUp extends React.Component {
    * checkbox functionality
    */
 
-
-  _getContent = () => {
+  _getForm = () => {
     const {
       name,
       surName,
@@ -215,241 +216,9 @@ export default class SignUp extends React.Component {
       viber,
       error,
     } = this.state;
-
-    if (DeviceSizeService.size.width < 1025) {
-      return [
-        <div key={1} className="auth-header-mobile">
-          <div className="logo">
-            <LogoIconSVG className="logo-icon-svg"/>
-          </div>
-          <div className="email-and-number">
-            <a
-              className="email-link"
-              href="mailto:vipcafe@info">vipcafe@info</a>
-            <div className="separator"/>
-            <a
-              className="number-link"
-              href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
-          </div>
-        </div>,
-
-        <form key={2} autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
-          <h1 className="title-page">Реєстрація акаунту</h1>
-          <div className="shared-form-container">
-            <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
-              <label className="form-label" htmlFor="#name">Ім’я: <sup className="required-field">*</sup></label>
-              <TextField
-                autoComplete="off"
-                onChange={this.requiredFields}
-                required
-                placeholder="Боб"
-                value={name}
-                type="text"
-                name="name"
-                id="name"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-              {error.name && <p className="error-text">{error.name}</p>}
-            </div>
-
-            <div className="input-container input-container-surName">
-              <label className="form-label" htmlFor="#name">Прізвище:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                required
-                placeholder="Боб"
-                value={surName}
-                type="text"
-                name="name"
-                id="name"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-              {error.surName && <p className="error-text">{error.surName}</p>}
-            </div>
-
-            <div className="input-container input-container-lastName">
-              <label className="form-label" htmlFor="#lastName">По-батькові:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                value={lastName}
-                placeholder="Бобіков"
-                type="text"
-                name="lastName"
-                id="lastName"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className={`input-container input-container-mobile ${error.mobile ? 'error' : ''}`}>
-              <label className="form-label" htmlFor="#mobile">Телефон: <sup className="required-field">*</sup></label>
-              <TextField
-                onChange={this.requiredFields}
-                required
-                value={mobile}
-                placeholder="+380"
-                type="number"
-                name="mobile"
-                id="mobile"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-              {error.mobile && <p className="error-text">{error.mobile}</p>}
-            </div>
-
-            <div className="input-container input-container-email">
-              <label className="form-label" htmlFor="#mobile">Електронна адреса:</label>
-              <TextField
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                className="form-input-wrap"
-                onChange={this.fieldsChange}
-                placeholder="coffeeman@gmail.com"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className="input-container input-container-nameCompany">
-              <label className="form-label" htmlFor="#nameCompany">Назва компанії:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                value={nameCompany}
-                placeholder="lariok.com"
-                type="text"
-                name="nameCompany"
-                id="nameCompany"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className='input-container input-container-city'>
-              <CustomSelect
-                requiredFiled
-                items={cityItems}
-                labelText="Місто"
-                selectedItem={city}
-                handleChangeSelect={this.handleChangeSelect('city')}
-              />
-            </div>
-
-            <div className="input-container input-container-delivery">
-              <CustomSelect
-                items={deliveryItems}
-                labelText="Доставка:"
-                selectedItem={delivery}
-                handleChangeSelect={this.handleChangeSelect('delivery')}
-              />
-            </div>
-
-            <div className="input-container input-container-tradeFormat">
-              <CustomSelect
-                items={tradeFormatSelect}
-                labelText="Формат торгівлі:"
-                selectedItem={tradeFormat}
-                handleChangeSelect={this.handleChangeSelect('tradeFormat')}
-              />
-            </div>
-
-            <div className="input-container input-container-sitePage">
-              <label className="form-label" htmlFor="#sitePage">Сайт:</label>
-              <TextField
-                onChange={this.fieldsChange}
-                value={sitePage}
-                placeholder="LariOK"
-                type="text"
-                name="sitePage"
-                id="sitePage"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: 'form-input',
-                    input: 'input-style',
-                  },
-                }}/>
-            </div>
-
-            <div className="input-container-telegram-and-viber">
-              <p className="telegram-and-viber-title">На вказаному телефоні є:</p>
-              <CustomCheckbox
-                handleChangeCheckbox={this.handleChangeCheckbox('viber')}
-                checked={viber}
-                className='viber'
-                labelText='Viber'
-              />
-
-              <CustomCheckbox
-                handleChangeCheckbox={this.handleChangeCheckbox('telegram')}
-                checked={telegram}
-                className='telegram'
-                labelText='Telegram'
-              />
-            </div>
-          </div>
-
-          <p className="privacy-policy">Натискаючи “Зареєструвати” Ви погоджуєтесь з
-            <Link className="privacy-policy-link" to={navigationScheme.privacyPolicy}>політикою конфіденційності.</Link>
-            Після реєстрації з Вами зв’яжеться менеджер.</p>
-
-          <div className="button-container">
-            <Button
-              onClick={this.handleOpenThanksModal}
-              className="submit-button"
-              aria-label="signUp"
-              variant="extendedFab"
-              type="submit">зареєструвати</Button>
-          </div>
-
-          <div className="registered-link-wrap">
-            <Link
-              to={navigationScheme.login}
-              className="registered-link">Вже зареєстровані?
-              <span className="underline">Увійти в акаунт</span></Link>
-          </div>
-        </form>,
-
-        <div key={3} className="continue-without-authorization">
-          <Link
-            to={navigationScheme.catalog}
-            className="continue-without-authorization-link">
-            Продовжити без авторизації</Link>
-        </div>,
-      ];
-    }
-    return [
-      <form key={1} autoComplete="off"
-            method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
-        <img src="/img/clover.png" className="auth-form-clover" alt="clover"/>
+    return (
+      <form key={5} autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
         <h1 className="title-page">Реєстрація акаунту</h1>
-
         <div className="shared-form-container">
           <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
             <label className="form-label" htmlFor="#name">Ім’я: <sup className="required-field">*</sup></label>
@@ -489,6 +258,7 @@ export default class SignUp extends React.Component {
                   input: 'input-style',
                 },
               }}/>
+            {error.surName && <p className="error-text">{error.surName}</p>}
           </div>
 
           <div className="input-container input-container-lastName">
@@ -576,10 +346,11 @@ export default class SignUp extends React.Component {
           </div>
 
           <div className="input-container input-container-delivery">
-            <CustomSelect
+            <label className="form-label" htmlFor="#nameCompany">Доставка:</label>
+            <CustomMultiSelect
               items={deliveryItems}
-              labelText="Доставка:"
               selectedItem={delivery}
+              countTheSelectedItem={false}
               handleChangeSelect={this.handleChangeSelect('delivery')}
             />
           </div>
@@ -634,8 +405,12 @@ export default class SignUp extends React.Component {
           Після реєстрації з Вами зв’яжеться менеджер.</p>
 
         <div className="button-container">
-          <Button onClick={this.handleOpenThanksModal} className="submit-button" variant="extendedFab" aria-label="signUp"
-                  type="submit">зареєструвати</Button>
+          <Button
+            onClick={this.handleOpenThanksModal}
+            className="submit-button"
+            aria-label="signUp"
+            variant="extendedFab"
+            type="submit">зареєструвати</Button>
         </div>
 
         <div className="registered-link-wrap">
@@ -644,7 +419,41 @@ export default class SignUp extends React.Component {
             className="registered-link">Вже зареєстровані?
             <span className="underline">Увійти в акаунт</span></Link>
         </div>
-      </form>,
+      </form>
+    )
+  };
+
+
+  _getContent = () => {
+    if (DeviceSizeService.size.width < 1025) {
+      return [
+        <div key={1} className="auth-header-mobile">
+          <div className="logo">
+            <LogoIconSVG className="logo-icon-svg"/>
+          </div>
+          <div className="email-and-number">
+            <a
+              className="email-link"
+              href="mailto:vipcafe@info">vipcafe@info</a>
+            <div className="separator"/>
+            <a
+              className="number-link"
+              href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+          </div>
+        </div>,
+
+        this._getForm(),
+
+        <div key={3} className="continue-without-authorization">
+          <Link
+            to={navigationScheme.catalog}
+            className="continue-without-authorization-link">
+            Продовжити без авторизації</Link>
+        </div>,
+      ];
+    }
+    return [
+      this._getForm(),
 
       <div key={2} className="continue-without-authorization">
         <Link

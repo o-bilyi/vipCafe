@@ -4,9 +4,7 @@ export function addToArchive(item) {
   return {
     type: archiveActionTypes.ADD_ARCHIVE_ITEM_ACTION,
     payload: {
-      item : {
-        ...item
-      }
+      item : [...item]
     }
   };
 }
