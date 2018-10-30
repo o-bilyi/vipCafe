@@ -3,7 +3,7 @@ import {store} from 'index';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {navigationScheme} from 'core';
-import BoxIcon from 'assets/svg/goods-icon/box.svg';
+// import BoxIcon from 'assets/svg/goods-icon/box.svg';
 import GrainsIcon from 'assets/svg/goods-icon/grains.svg';
 import WeightIcon from 'assets/svg/goods-icon/weight-icon.svg';
 import TechnologyIcon from 'assets/svg/goods-icon/technology.svg';
@@ -81,7 +81,7 @@ export default class ItemGoods extends React.Component {
   _getTopContent = () => {
     const {img, title, properties} = this.props;
 
-    console.warn(properties);
+    // console.warn(properties);
 
     return [
       <div key={1} className='item-image-wrap' style={{backgroundImage : `url(${img})`}}/>,

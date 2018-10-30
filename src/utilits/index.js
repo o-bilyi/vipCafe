@@ -35,6 +35,10 @@ class DeviceSize {
     this._subscribers.forEach(i => i.func(this.size));
   };
 
+  /**
+   *
+   * @returns {{width: number, height: number}}
+   */
   get size() {
     return {
       width : this._width,

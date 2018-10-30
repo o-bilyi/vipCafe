@@ -79,3 +79,37 @@
     position: absolute;
   }
 }
+
+.warning-modal {
+
+  .description-warning-item {
+    padding: 15px;
+    line-height: 2;
+  }
+}
+
+.send-to-manager-modal {
+  text-align: center;
+
+  .send-to-manager-modal-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .send-to-manager-modal-form {
+    padding: 10px;
+  }
+
+  .input-container {
+    margin-bottom: 20px;
+  }
+
+  .input-style {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .submit-button {
+    @include button(150px);
+    @include success-style-btn;
+  }
+}
