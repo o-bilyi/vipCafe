@@ -55,9 +55,10 @@ export default class DrawComponent extends React.Component {
   _getMenuItems = (array) => {
     return array.map((item, key) => {
       return (
-        <ListItem key={key} button className="menu-item">
+        <ListItem key={key} className="menu-item">
           <NavLink
             className="menu-link"
+            aria-label={item.text}
             to={item.to} activeClassName="active">
             <ListItemIcon>
               <item.icon className="menu-icon"/>
@@ -123,6 +124,7 @@ export default class DrawComponent extends React.Component {
     return (
       <Drawer
         variant="permanent"
+        aria-label="navigation menu"
         classes={{
           paper: classNames("navigation-menu", !open && "active"),
         }}

@@ -51,11 +51,11 @@ export const secondMenuItems = [
 ];
 
 export const managerBlock = (
-  <ListItem button className="menu-item">
-    <div className="menu-link">
+  <ListItem className="menu-item">
+    <button aria-label="send manager message" className="menu-link">
       <ListItemIcon>
         <DraftsIcon className="menu-icon"/>
       </ListItemIcon>
-    </div>
+    </button>
   </ListItem>
 );
