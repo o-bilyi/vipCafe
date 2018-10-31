@@ -26,7 +26,7 @@ export default class MobileItem extends React.Component {
   }
 
   _getContentTab = () => {
-    return this.item.orders.map((item, key) => {
+    return this.item.product.map((item, key) => {
       return (
         <div className="item animated fadeInDown" key={key}>
           <div className="left-block">
@@ -34,7 +34,7 @@ export default class MobileItem extends React.Component {
           </div>
           <div className="right-block">
             <h2 className="item-title">{item.title}</h2>
-            <p className="item-count">{item.count} шт.</p>
+            <p className="item-count">{item.quality} шт.</p>
             <p className="item-price">{item.price}{euroSymbol}\шт.</p>
             <p className="item-all-price">{item.price}{euroSymbol}</p>
           </div>
@@ -53,8 +53,8 @@ export default class MobileItem extends React.Component {
               {
                 <OrderHeader
                   allPrice={123}
-                  num={this.item.num}
-                  orderAddress={this.item.orderAddress}
+                  num={this.item.ID}
+                  orderAddress={this.item.order_mail}
                   onRepeatOrderClick={() => onRepeatOrderClick(this.item)}
                 />
               }
