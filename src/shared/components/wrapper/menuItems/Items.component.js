@@ -52,10 +52,10 @@ export const secondMenuItems = [
 
 export const managerBlock = (
   <ListItem className="menu-item">
-    <li aria-label="send manager message" className="menu-link">
+    <button aria-label="send manager message" className="menu-link">
       <ListItemIcon>
         <DraftsIcon className="menu-icon"/>
       </ListItemIcon>
-    </li>
+    </button>
   </ListItem>
 );
