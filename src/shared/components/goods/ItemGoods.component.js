@@ -153,7 +153,7 @@ export default class ItemGoods extends React.Component {
   };
 
   getBottomContent = () => {
-    return <Link to={navigationScheme.login} className="login-to-platform">увійти в кабінет</Link>;
+    return <Link to={navigationScheme.login} title="go to user dashboard page" className="login-to-platform">увійти в кабінет</Link>;
   };
 
   render() {
@@ -164,9 +164,11 @@ export default class ItemGoods extends React.Component {
           <div className="icon-container">
             <WarningIcon className="icon"/>
           </div>
-          <div className="description">
+          <div className="description" title="Замовлення лише в цілих упаковках або ящиках!">
             Замовлення лише в цілих упаковках або ящиках!
-            <button className="show-description-modal" onClick={this._handleOpenDescriptionModal}>детальніше</button>
+            <button
+              title="open details modal" type="button" className="show-description-modal"
+              onClick={this._handleOpenDescriptionModal}>детальніше</button>
           </div>
         </div>
 

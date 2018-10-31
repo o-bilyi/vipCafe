@@ -482,7 +482,13 @@
         width: 80px;
       }
 
+      &.active {
+        .first-menu-links {
+          margin-top: 40px;
+        }
+      }
     }
+
     .header,
     .open-menu-btn,
     .navigation-menu .menu-toolbar {

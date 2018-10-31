@@ -14,7 +14,8 @@ export const firstMenuItems = [
   {
     to: navigationScheme.catalog,
     icon: StoreIcon,
-    text: 'каталог товарів'
+    text: 'каталог товарів',
+    title:'go to catalog page'
   },
   {
     to: {
@@ -22,7 +23,8 @@ export const firstMenuItems = [
       state: "shared",
     },
     icon: SharedAndOffersIcon,
-    text: 'акції і пропозиції'
+    text: 'акції і пропозиції',
+    title:'go to shared page'
   },
   {
     to: {
@@ -32,6 +34,7 @@ export const firstMenuItems = [
     icon: TransformIcon,
     text: 'нові поступлення',
     number: <CountItem storageTarget="sharesAndOffers"/>,
+    title:'go to offers page'
   },
 ];
 
@@ -41,18 +44,20 @@ export const secondMenuItems = [
     icon: ArchiveIcon,
     text: 'архів замовлень',
     number: <CountItem storageTarget="archive"/>,
+    title:'go to archive orders page'
   },
   {
     to: navigationScheme.basket,
     icon: ShoppingCartIcon,
     text: 'позицій в кошику',
     number: <CountItem storageTarget="basket"/>,
+    title:'go to basket page'
   },
 ];
 
 export const managerBlock = (
   <ListItem className="menu-item">
-    <button aria-label="send manager message" className="menu-link">
+    <button aria-label="open a modal window in which you can write a message to the manager" className="menu-link">
       <ListItemIcon>
         <DraftsIcon className="menu-icon"/>
       </ListItemIcon>

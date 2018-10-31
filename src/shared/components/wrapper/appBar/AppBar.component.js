@@ -35,7 +35,7 @@ export default class AppBarComponent extends React.Component {
         <div className="search-and-show-menu">
           <Button
             color="inherit"
-            aria-label="Open drawer"
+            title="Open menu"
             onClick={this.props.handleDrawerOpen}
             className={classNames('open-menu-btn', this.props.open && 'hidden')}>
             <MenuIcon className="menu-icon"/>

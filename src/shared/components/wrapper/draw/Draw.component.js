@@ -16,10 +16,10 @@ import Logo from "assets/svg/logo.svg";
 
 export default class DrawComponent extends React.Component {
   static propTypes = {
-    auth : PropTypes.bool,
-    open : PropTypes.bool,
-    handleDrawerOpen : PropTypes.func,
-    handleDrawerClose : PropTypes.func,
+    auth: PropTypes.bool,
+    open: PropTypes.bool,
+    handleDrawerOpen: PropTypes.func,
+    handleDrawerClose: PropTypes.func,
   };
 
   state = {
@@ -58,7 +58,7 @@ export default class DrawComponent extends React.Component {
         <ListItem key={key} className="menu-item">
           <NavLink
             className="menu-link"
-            aria-label={item.text}
+            title={item.title}
             to={item.to} activeClassName="active">
             <ListItemIcon>
               <item.icon className="menu-icon"/>
@@ -78,7 +78,7 @@ export default class DrawComponent extends React.Component {
           <IconButton className="hidden-menu-btn" onClick={this.props.handleDrawerClose}>
             <ArrowBackIcon className="arrow-back-icon"/>
           </IconButton>
-          <Link to={navigationScheme.login} className="logo-link">
+          <Link to={navigationScheme.login} title="go to login page" className="logo-link">
             <Logo className="icon-logo"/>
           </Link>
           <SearchComponent/>
@@ -90,7 +90,7 @@ export default class DrawComponent extends React.Component {
         <IconButton className="hidden-menu-btn" onClick={this.props.handleDrawerClose}>
           <ArrowBackIcon className="arrow-back-icon"/>
         </IconButton>
-        <Link to={navigationScheme.login} className="logo-link">
+        <Link to={navigationScheme.login} title="go to login page" className="logo-link">
           <Logo className="icon-logo"/>
         </Link>
       </div>
@@ -124,31 +124,34 @@ export default class DrawComponent extends React.Component {
     return (
       <Drawer
         variant="permanent"
-        aria-label="navigation menu"
+        title="navigation menu"
+        open={open}
         classes={{
           paper: classNames("navigation-menu", !open && "active"),
-        }}
-        open={open}>
+        }}>
 
         {
-          this._getToolbar()
+          open && this._getToolbar()
         }
 
-        <h2 className={classNames("menu-title",
-          !open && "hidden")}>Перегляньте:</h2>
+        {
+          open &&
+          <h2 className="menu-title">Перегляньте:</h2>
+        }
 
-        <List className="menu-item-wrap">
+        <List className="menu-item-wrap first-menu-links">
           {this._getMenuItems(firstMenuItems)}
         </List>
 
         <div className="order-items">
-          <h2 className={classNames("menu-title",
-            !open && "hidden")}>Ваші замовлення:</h2>
+          {
+            open &&
+            <h2 className="menu-title">Ваші замовлення:</h2>
+          }
 
           {
             this._getOrderButtons()
           }
-
         </div>
 
         {
@@ -164,7 +167,9 @@ export default class DrawComponent extends React.Component {
                 <a className="phone-link" href="tel:+38 (095) 313 13 13">+38 (095) 313 13 13</a>
               </div>
 
-              <Button className="send-to-manager" onClick={this._handleOpenManagerModal}>НАПИСАТИ МЕНЕДЖЕРУ</Button>
+              <Button className="send-to-manager"
+                      title="open a modal window in which you can write a message to the manager"
+                      onClick={this._handleOpenManagerModal}>НАПИСАТИ МЕНЕДЖЕРУ</Button>
             </div>
             :
             <List className="menu-item-wrap" onClick={this._handleOpenManagerModal}>
