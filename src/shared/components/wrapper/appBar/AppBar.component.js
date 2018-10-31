@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from 'classnames';
-import {Button, AppBar} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import {DeviceSizeService} from 'utilits/index';
+import {Button, AppBar} from '@material-ui/core';
 import SearchComponent from '../../search/Search.component';
 import AccountInfo from '../../account-info/AccountInfo.component';
-import {DeviceSizeService} from 'utilits/index';
 
 export default class AppBarComponent extends React.Component {
   static propTypes = {
@@ -16,12 +16,13 @@ export default class AppBarComponent extends React.Component {
   state = {
     showSearch : true
   };
-  deviceServiceId = null;
+
   componentDidMount() {
-    this.deviceServiceId = DeviceSizeService.subscribe(this.checkWidth)
+      this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
   }
+
   componentWillUnmount() {
-    DeviceSizeService.unsubscribe(this.deviceServiceId);
+      DeviceSizeService.unsubscribe(this.deviceServiceId);
   }
 
   render() {
@@ -42,7 +43,7 @@ export default class AppBarComponent extends React.Component {
 
           <div className="search-and-user-info">
             {
-              this.state.showSearch &&
+				DeviceSizeService.size.width > 1024 &&
                 <SearchComponent/>
             }
             <AccountInfo/>
@@ -51,17 +52,5 @@ export default class AppBarComponent extends React.Component {
 
       </AppBar>
     )
-  }
-
-  checkWidth = ({width}) => {
-    let showSearch = false;
-    if(width > 1024) {
-      showSearch = true;
-    }
-    if(this.state.showSearch !== showSearch) {
-      this.setState({
-        showSearch
-      });
-    }
   }
 }

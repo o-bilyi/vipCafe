@@ -10,11 +10,11 @@ export const checkAuth = dispatch => {
       return;
     }
     const userData = JSON.parse(user);
+    setArchive(userData.id);
 
     return httpService.getRequest(httpService.URLS.checkSession + `?hash=${userData.session_id}`).then(res => {
       if (res) {
         dispatch(loginSuccess(userData));
-        setArchive(userData.id);
       }
       resolve();
     });

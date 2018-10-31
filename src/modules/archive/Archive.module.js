@@ -191,7 +191,7 @@ class ArchiveOfOrders extends React.Component {
     if (DeviceSizeService.size.width < 680) {
       RouterService.navigateTo({
         pathname: navigationScheme.archiveOrder,
-        state: items[index],
+        state: this.state.orders[index],
       });
       return;
     }

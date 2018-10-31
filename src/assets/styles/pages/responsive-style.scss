@@ -546,6 +546,16 @@
       width: 120px;
     }
   }
+
+  .shared-and-offers-page {
+    .width-container {
+      padding: 20px 10px;
+    }
+
+    .header-tab {
+      margin-bottom: 20px;
+    }
+  }
 }
 
 @media (max-width: 680px) {

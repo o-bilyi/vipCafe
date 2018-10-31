@@ -52,10 +52,10 @@ export const secondMenuItems = [
 
 export const managerBlock = (
   <ListItem button className="menu-item">
-    <div className="menu-link">
+    <li className="menu-link">
       <ListItemIcon>
         <DraftsIcon className="menu-icon"/>
       </ListItemIcon>
-    </div>
+    </li>
   </ListItem>
 );
