@@ -18,10 +18,10 @@ const typeProduct = {
   "zernova": "зернова",
 };
 
-const containerProduct = {
-  "upakovka": "упаковці",
-  "jashik": "ящику",
-};
+// const containerProduct = {
+//   "upakovka": "упаковці",
+//   "jashik": "ящику",
+// };
 
 const unitsProduct = {
   "capsul": "капсул",

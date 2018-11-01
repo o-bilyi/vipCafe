@@ -756,6 +756,19 @@
       padding-top: 15px;
     }
   }
+
+  .catalog-page {
+    .tab-categories {
+      .tab-icon {
+        width: 23px;
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
+      .text {
+        display: block;
+      }
+    }
+  }
 }
 
 @media (max-height: 680px) {

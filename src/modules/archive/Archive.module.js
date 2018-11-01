@@ -17,9 +17,7 @@ const initialState = {
     from: undefined,
     to: undefined,
   },
-  selectItem: 0,
-  load : false,
-  orders : []
+  selectItem: 0
 };
 
 const items = [
@@ -151,28 +149,18 @@ export const onRepeatOrderClick = (item) => {
 
 class ArchiveOfOrders extends React.Component {
   static propTypes = {
-   orders : PropTypes.object
+    archive: PropTypes.array,
   };
 
   state = initialState;
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
-    this._getOrders()
   }
 
   componentWillUnmount() {
     DeviceSizeService.unsubscribe(this.deviceServiceId);
   }
-
-  _getOrders = () => {
-    if (this.props.orders.items.length) {
-      this.setState({
-        orders : this.props.orders.items,
-        load : true
-      })
-    }
-  };
 
   handleChange = (direction) => (value) => {
     this.setState({
@@ -191,7 +179,7 @@ class ArchiveOfOrders extends React.Component {
     if (DeviceSizeService.size.width < 680) {
       RouterService.navigateTo({
         pathname: navigationScheme.archiveOrder,
-        state: this.state.orders[index],
+        state: this.props.archive[index],
       });
       return;
     }
@@ -201,12 +189,12 @@ class ArchiveOfOrders extends React.Component {
   };
 
   _getHeadTab = () => {
-    const orders = this.props.orders.items;
+    const orders = this.props.archive;
     const isNotMobile = DeviceSizeService.size.width > 680;
     return orders.length && orders.map((item, key) => {
       const itemDate = <li className="list-date-wrap"><span className="list-date">{item.order_date}</span></li>;
       const classes = classNames('list-item', {
-        active : isNotMobile && this.state.selectItem === key
+        active: isNotMobile && this.state.selectItem === key,
       });
       return (
         <ul className="list" key={item.ID}>
@@ -228,7 +216,7 @@ class ArchiveOfOrders extends React.Component {
   }
 
   _getItemsTab = () => {
-    const selectItem = this.props.orders.items[this.state.selectItem];
+    const selectItem = this.props.archive[this.state.selectItem];
     return selectItem.product.map((item) => {
       return (
         <div className="item animated fadeInDown" key={this.uniqueKey}>
@@ -247,9 +235,9 @@ class ArchiveOfOrders extends React.Component {
   };
 
   _getContent = () => {
-    const selectItem = this.props.orders.items[this.state.selectItem];
-    if (DeviceSizeService.size.width < 680) {
-      return;
+    const selectItem = this.props.archive[this.state.selectItem];
+    if (!selectItem || DeviceSizeService.size.width < 680) {
+      return null;
     }
     return (
       <div className="tab-right-column">
@@ -261,7 +249,7 @@ class ArchiveOfOrders extends React.Component {
             onRepeatOrderClick={() => onRepeatOrderClick(selectItem)}
           />
         }
-        <div className="goods-count">Товарів в замовленні: {items.length}</div>
+        <div className="goods-count">Товарів в замовленні: {selectItem.product.length}</div>
         <div className="items-wrap">
           <div className="scroll-container">
             {
@@ -344,15 +332,14 @@ class ArchiveOfOrders extends React.Component {
           }
         </div>
       </div>
-    )
+    );
   };
 
   render() {
-    console.warn(this.state.load);
     return (
       <Wrapper>
         <div className="archive-page">
-          { this.state.load && this._getBody()}
+          {this._getBody()}
         </div>
       </Wrapper>
     );
@@ -361,8 +348,8 @@ class ArchiveOfOrders extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    orders : state.archive
-  }
+    archive: state.archive,
+  };
 };
 
 export default connect(mapStateToProps)(ArchiveOfOrders);

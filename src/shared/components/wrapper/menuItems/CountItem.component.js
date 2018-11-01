@@ -21,7 +21,7 @@ CountItem.propTypes = {
 const mapStateToProps = state => {
   return {
     basket: state.basket.items,
-    archive: state.archive.items,
+    archive: state.archive,
     sharesAndOffers: state.sharesAndOffers.items
   };
 };

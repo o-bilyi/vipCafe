@@ -1,15 +1,13 @@
 import {generateReducer} from '../utils';
 import {archiveActionTypes} from '../../models/archive';
 
-const initialState = {
-  items: []
-};
+const initialState = [];
 
 const addHandler = (state, action) => {
-  return {
+  return [
     ...state,
-    items : action.payload.item,
-  };
+    ...action.payload.item,
+  ];
 };
 
 export const archive = generateReducer(initialState, {

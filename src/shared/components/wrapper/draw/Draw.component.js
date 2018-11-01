@@ -58,7 +58,7 @@ export default class DrawComponent extends React.Component {
         <ListItem key={key} className="menu-item">
           <NavLink
             className="menu-link"
-            title={item.title}
+            title={item.text}
             to={item.to} activeClassName="active">
             <ListItemIcon>
               <item.icon className="menu-icon"/>
@@ -72,29 +72,24 @@ export default class DrawComponent extends React.Component {
   };
 
   _getToolbar = () => {
-    if (DeviceSizeService.size.width < 1024) {
-      return (
-        <div className="menu-toolbar">
-          <IconButton className="hidden-menu-btn" onClick={this.props.handleDrawerClose}>
-            <ArrowBackIcon className="arrow-back-icon"/>
-          </IconButton>
-          <Link to={navigationScheme.login} title="go to login page" className="logo-link">
-            <Logo className="icon-logo"/>
-          </Link>
-          <SearchComponent/>
-        </div>
-      );
-    }
     return (
-      <div className="menu-toolbar">
+      <div className="menu-toolbar" aria-label="open navigation">
         <IconButton className="hidden-menu-btn" onClick={this.props.handleDrawerClose}>
           <ArrowBackIcon className="arrow-back-icon"/>
         </IconButton>
-        <Link to={navigationScheme.login} title="go to login page" className="logo-link">
-          <Logo className="icon-logo"/>
-        </Link>
+        {
+          this.props.open &&
+          <Link to={navigationScheme.login} title="go to login page" className="logo-link">
+            <Logo className="icon-logo"/>
+          </Link>
+        }
+
+        {
+          DeviceSizeService.size.width < 1024 &&
+          <SearchComponent/>
+        }
       </div>
-    );
+    )
   };
 
   _getOrderButtons = () => {
@@ -102,7 +97,7 @@ export default class DrawComponent extends React.Component {
       return (
         <List className="menu-item-wrap">
           {this._getMenuItems(secondMenuItems)}
-          <Link to={navigationScheme.basket} className={classNames("to-order",
+          <Link to={navigationScheme.basket} title="go to basket" className={classNames("to-order",
             !this.props.open && "hidden")}>ОФОРМИТИ ЗАМОВЛЕННЯ</Link>
         </List>
       );
@@ -111,7 +106,7 @@ export default class DrawComponent extends React.Component {
       <List className="menu-item-wrap" onClick={this._handleOpenWarningModal}>
         <div className="pointer-events">
           {this._getMenuItems(secondMenuItems)}
-          <Link to={navigationScheme.login} className={classNames("to-order",
+          <Link to={navigationScheme.login} title="go to login page" className={classNames("to-order",
             !this.props.open && "hidden")}>Зайти</Link>
         </div>
       </List>
