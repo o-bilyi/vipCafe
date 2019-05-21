@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import {LoggerService, storageService} from './';
 import {loginSuccess} from 'core/actions';
 
-export const SERVER_API_URL = "http://eliteauto.be.co.ua/wp-json/";
+export const SERVER_API_URL = "http://vipkafe.com.ua/wp-json/";
 
 export const responseTypes = {
   json: 'json',
@@ -18,11 +18,13 @@ const URLS = {
   shop : "wp/v2/shop",
   login : "vipcaffe/v1/user/",
   getProducts : "wp/v2/product",
-  register : "vipcaffe/v1/user/",
+  registerApi : "vipcaffe/v1/add_user_func",
   logout : "vipcaffe/v1/logout_session",
   orders : "vipcaffe/v1/getorders",
   checkSession : "vipcaffe/v1/return_session",
-  changeUserInformation : "vipcaffe/v1/edituser"
+  changeUserInformation : "vipcaffe/v1/edituser",
+  getTradeOptions : "vipcaffe/v1/get_trade_options",
+  getDeliveryOptions : "vipcaffe/v1/get_delivery_options",
 };
 
 let store = null;

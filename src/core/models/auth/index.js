@@ -15,3 +15,10 @@ export const registrationActionTypes = {
   REGISTRATION_SUCCESS_ACTION: 'REGISTRATION_SUCCESS_ACTION',
   REGISTRATION_FAIL_ACTION: 'REGISTRATION_FAIL_ACTION',
 };
+
+export const changeUserInformation = {
+  DASHBOARD_CHANGE_USER_ACTION : "DASHBOARD_CHANGE_USER_ACTION"
+};
+
+export class tradeOptionsTypes {
+}

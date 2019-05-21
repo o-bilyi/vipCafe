@@ -9,20 +9,20 @@ import AccountInfo from '../../account-info/AccountInfo.component';
 
 export default class AppBarComponent extends React.Component {
   static propTypes = {
-    open : PropTypes.bool,
-    handleDrawerOpen : PropTypes.func
+    open: PropTypes.bool,
+    handleDrawerOpen: PropTypes.func
   };
 
   state = {
-    showSearch : true
+    showSearch: true
   };
 
   componentDidMount() {
-      this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+    this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
   }
 
   componentWillUnmount() {
-      DeviceSizeService.unsubscribe(this.deviceServiceId);
+    DeviceSizeService.unsubscribe(this.deviceServiceId);
   }
 
   render() {
@@ -43,8 +43,8 @@ export default class AppBarComponent extends React.Component {
 
           <div className="search-and-user-info">
             {
-				DeviceSizeService.size.width > 1024 &&
-                <SearchComponent/>
+              DeviceSizeService.size.width > 1024 &&
+              <SearchComponent/>
             }
             <AccountInfo/>
           </div>

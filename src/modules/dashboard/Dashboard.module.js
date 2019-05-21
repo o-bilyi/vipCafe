@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import {toastr} from "react-redux-toastr";
 import {Button, TextField} from "@material-ui/core";
-import {httpService, storageService} from 'services';
+import {httpService} from 'services';
 import connect from "react-redux/es/connect/connect";
 import {userIsAuthenticated} from "core/auth-redirect";
 import Wrapper from "shared/components/wrapper/Wrapper.component";
 import CustomSelect from "shared/components/customSelect/Select.component";
 import CustomCheckbox from "shared/components/custom-checkbox/CustomCheckbox.component";
+import {dashboardChangeUserInformationSuccess} from "../../core/actions";
 
 import CheckIcon from "assets/svg/check-2.svg";
 
@@ -28,11 +29,10 @@ const initialState = {
     company: '',
     site: '',
 
-    /*select default props*/
+
     city: '',
     delivery: '',
-    trade_format: '',
-    /*select default props*/
+    trade_format: ''
   },
   deliveryItems : ["Нова Пошта", "Міст Експрес", "d1", "d2"],
   cityItems : ["Чернівці", "Львів", "Київ"],
@@ -96,7 +96,7 @@ class Dashboard extends React.Component {
     // httpService.postRequest(httpService.URLS.changeUserInformation, body)
       .then(res => {
         if (res && res.user) {
-          storageService.setLocal("user", JSON.stringify(res.user));
+          this.props.dispatch(dashboardChangeUserInformationSuccess(res.user));
           this._saveChangesAnimation();
           toastr.success('Зміни внесено!');
         } else {

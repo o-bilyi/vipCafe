@@ -1,23 +1,26 @@
 import React from 'react';
+import {store} from "../../../index";
 import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
 import {toastr} from 'react-redux-toastr';
 import {DeviceSizeService} from 'utilits';
+import {registrationAction} from "../../../core/actions";
 import {Dialog, Button, TextField} from '@material-ui/core';
-
-import LogoIconSVG from 'assets/svg/logo.svg';
-
 import CustomSelect from 'shared/components/customSelect/Select.component';
 import CustomMultiSelect from 'shared/components/customSelect/MultiSelect.component';
 import CustomCheckbox from 'shared/components/custom-checkbox/CustomCheckbox.component';
 
+import LogoIconSVG from 'assets/svg/logo.svg';
+import {tradeOptionsAction} from "../../../core/actions/get-trade-options";
+import {deliveryOptionsAction} from "../../../core/actions/get-delivery-options";
+
 const initialState = {
-  name: '',
-  surName: '',
-  lastName: '',
+  name: 'Test Register',
+  surName: 'With',
+  lastName: 'React',
   mobile: '',
-  email: '',
-  nameCompany: '',
+  email: 'testSignUp@gmail.com',
+  nameCompany: 'Company',
 
   city: '',
   delivery: [],
@@ -27,11 +30,12 @@ const initialState = {
   telegram: false,
   viber: false,
   openThanksModal: false,
+  tradeOptions: [],
+  deliveryOptions: [],
 
   error: {
     name: null,
-    mobile: null,
-    city: null,
+    mobile: null
   },
 };
 
@@ -47,26 +51,15 @@ const validation = {
       return 'Не менше 4 символів та не більше 13!';
     }
     return null;
-  },
-  city: (val) => {
-    if (val.length.length < 3) {
-      return 'Введіть місто';
-    }
-    return null;
-  },
+  }
 };
-
-const deliveryItems = ['Нова Пошта', 'Міст Експрес'];
-
-const cityItems = ['Чернівці', 'Львів', 'Київ'];
-
-const tradeFormatSelect = ['Ларьок', 'Бокс', 'Прилавок'];
 
 export default class SignUp extends React.Component {
   state = initialState;
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
+    this.getTradeAndDeliveryOptions();
   }
 
   componentWillUnmount() {
@@ -117,45 +110,53 @@ export default class SignUp extends React.Component {
     } = this.state;
 
     const inputs = {
-      name,
-      surName,
-      lastName,
-      mobile,
-      email,
-      nameCompany,
+      f_name : name,
+      l_name : surName,
+      p_name : lastName,
+      tel : mobile,
+      mail : email,
+      company : nameCompany,
       city,
-      delivery,
-      tradeFormat,
-      sitePage,
+      delivery : delivery.join(),
+      trade_format : tradeFormat,
+      site : sitePage,
       telegram,
       viber,
     };
 
-    function status(response) {
-      if (response.ok) {
-        return Promise.resolve(response);
-      }
-      return Promise.reject(response.statusText);
-    }
-
-    fetch('/api/signUp', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'post',
-      body: JSON.stringify(inputs),
-    })
-      .then(status)
-      .then(() => {
-        this.setState(initialState);
-        toastr.success('Форма відправлена!');
-        // setArchive();
-      })
-      .catch((error) => {
-        toastr.warning('Помилка, повідомлення не відправлено!');
-        console.error('Request failed', error);
+    registrationAction(inputs)
+      .then(res => {
+        if (res.data && res.data.status === "404") {
+          toastr.warning('Помилка, повідомлення не відправлено!');
+          console.error('Request failed', res);
+        } else {
+          this.setState(initialState);
+          this.handleOpenThanksModal();
+        }
       });
+  };
+
+  getTradeAndDeliveryOptions = () => {
+    store.dispatch(tradeOptionsAction()).then(items => {
+      const keys = Object.keys(items);
+      const customArray = [];
+       for (const key of keys) {
+        customArray.push(items[key].trade_name);
+      }
+      this.setState({
+        tradeOptions : customArray
+      });
+    });
+    store.dispatch(deliveryOptionsAction()).then(items => {
+      const keys = Object.keys(items);
+      const customArray = [];
+      for (const key of keys) {
+        customArray.push(items[key].delivery_name);
+      }
+      this.setState({
+        deliveryOptions : customArray
+      })
+    });
   };
 
   /**
@@ -166,9 +167,6 @@ export default class SignUp extends React.Component {
     this.setState({[name]: event.target.value});
   };
 
-  /**
-   * handleChangeSelect functionality
-   */
 
   /**
    * thanks modal functionality
@@ -182,9 +180,6 @@ export default class SignUp extends React.Component {
     this.setState({openThanksModal: false});
   };
 
-  /**
-   * thanks modal functionality
-   */
 
   /**
    * checkbox functionality
@@ -217,7 +212,7 @@ export default class SignUp extends React.Component {
       error,
     } = this.state;
     return (
-      <form key={5} autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
+      <form autoComplete="off" method="post" className="auth-form shared-form" onSubmit={this.handleSubmit}>
         <h1 className="title-page">Реєстрація акаунту</h1>
         <div className="shared-form-container">
           <div className={`input-container input-container-name ${error.name ? 'error' : ''}`}>
@@ -249,8 +244,8 @@ export default class SignUp extends React.Component {
               placeholder="Боб"
               value={surName}
               type="text"
-              name="name"
-              id="name"
+              name="surName"
+              id="surName"
               className="form-input-wrap"
               InputProps={{
                 classes: {
@@ -336,19 +331,27 @@ export default class SignUp extends React.Component {
           </div>
 
           <div className='input-container input-container-city'>
-            <CustomSelect
-              requiredFiled
-              items={cityItems}
-              labelText="Місто"
-              selectedItem={city}
-              handleChangeSelect={this.handleChangeSelect('city')}
-            />
+            <label className="form-label" htmlFor="#city">Місто:</label>
+            <TextField
+              onChange={this.fieldsChange}
+              value={city}
+              placeholder="Місто"
+              type="text"
+              name="city"
+              id="city"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
           </div>
 
           <div className="input-container input-container-delivery">
             <label className="form-label" htmlFor="#nameCompany">Доставка:</label>
             <CustomMultiSelect
-              items={deliveryItems}
+              items={this.state.deliveryOptions}
               selectedItem={delivery}
               countTheSelectedItem={false}
               handleChangeSelect={this.handleChangeSelect('delivery')}
@@ -357,7 +360,7 @@ export default class SignUp extends React.Component {
 
           <div className="input-container input-container-tradeFormat">
             <CustomSelect
-              items={tradeFormatSelect}
+              items={this.state.tradeOptions}
               labelText="Формат торгівлі:"
               selectedItem={tradeFormat}
               handleChangeSelect={this.handleChangeSelect('tradeFormat')}
@@ -406,7 +409,6 @@ export default class SignUp extends React.Component {
 
         <div className="button-container">
           <Button
-            onClick={this.handleOpenThanksModal}
             className="submit-button"
             aria-label="signUp"
             variant="extendedFab"
@@ -426,57 +428,61 @@ export default class SignUp extends React.Component {
 
   _getContent = () => {
     if (DeviceSizeService.size.width < 1025) {
-      return [
-        <div key={1} className="auth-header-mobile">
-          <div className="logo">
-            <LogoIconSVG className="logo-icon-svg"/>
+      return (
+        <React.Fragment>
+          <div className="auth-header-mobile">
+            <div className="logo">
+              <LogoIconSVG className="logo-icon-svg"/>
+            </div>
+            <div className="email-and-number">
+              <a
+                className="email-link"
+                href="mailto:vipcafe@info">vipcafe@info</a>
+              <div className="separator"/>
+              <a
+                className="number-link"
+                href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+            </div>
           </div>
-          <div className="email-and-number">
-            <a
-              className="email-link"
-              href="mailto:vipcafe@info">vipcafe@info</a>
-            <div className="separator"/>
-            <a
-              className="number-link"
-              href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+
+          { this._getForm() }
+
+          <div className="continue-without-authorization">
+            <Link
+              to={navigationScheme.catalog}
+              className="continue-without-authorization-link">
+              Продовжити без авторизації</Link>
           </div>
-        </div>,
+        </React.Fragment>
+      )
+    }
+    return (
+      <React.Fragment>
+        { this._getForm() }
 
-        this._getForm(),
-
-        <div key={3} className="continue-without-authorization">
+        <div className="continue-without-authorization">
           <Link
             to={navigationScheme.catalog}
             className="continue-without-authorization-link">
             Продовжити без авторизації</Link>
-        </div>,
-      ];
-    }
-    return [
-      this._getForm(),
-
-      <div key={2} className="continue-without-authorization">
-        <Link
-          to={navigationScheme.catalog}
-          className="continue-without-authorization-link">
-          Продовжити без авторизації</Link>
-      </div>,
-
-      <div key={3} className="contacts-block">
-        <div className="logo">
-          <LogoIconSVG className="logo-icon-svg"/>
         </div>
-        <div className="separator"/>
-        <div className="email-and-number">
-          <a
-            className="email-link"
-            href="mailto:vipcafe@info">vipcafe@info</a>
-          <a
-            className="number-link"
-            href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+
+        <div className="contacts-block">
+          <div className="logo">
+            <LogoIconSVG className="logo-icon-svg"/>
+          </div>
+          <div className="separator"/>
+          <div className="email-and-number">
+            <a
+              className="email-link"
+              href="mailto:vipcafe@info">vipcafe@info</a>
+            <a
+              className="number-link"
+              href="tel:+38(095)3131313">+38 (095) 313 13 13</a>
+          </div>
         </div>
-      </div>,
-    ];
+      </React.Fragment>
+    )
 
   };
 
@@ -502,7 +508,7 @@ export default class SignUp extends React.Component {
               <div className="button-container">
                 <Link
                   to={navigationScheme.catalog}
-                  className="go-to-platform" aria-label="go-to-platform">
+                  className="go-to-platform" aria-label="go to platform">
                   переглянути сайт</Link>
               </div>
 

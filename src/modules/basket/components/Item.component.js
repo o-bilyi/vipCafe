@@ -15,8 +15,8 @@ export default class Item extends React.Component {
     title : PropTypes.string,
     getAllPrice: PropTypes.func,
     count : PropTypes.number,
-    properties : PropTypes.array,
-    price : PropTypes.number
+    properties : PropTypes.object,
+    price : PropTypes.string
   };
 
   state = {
@@ -66,7 +66,7 @@ export default class Item extends React.Component {
             <h2 className="title-item">{title}</h2>
             <div className="properties">
               {
-                properties.map((item, key) => {
+                properties.length && properties.map((item, key) => {
                   return  <p className="item-props" key={key}>icon {item.name}</p>
                 })
               }

@@ -2,7 +2,6 @@
   .navigation-menu {
     top: 0;
     left: 0;
-    border: none;
     width: 320px;
     position: fixed;
     box-shadow: none;
@@ -10,6 +9,7 @@
     background-color: #484848;
     border-right: solid 1px #434343;
     transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    border: none;
 
     &::-webkit-scrollbar {
       width: 1px;

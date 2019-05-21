@@ -1,6 +1,10 @@
 .thanks-modal-bg {
   padding: 40px 0;
   background: #3e3e3e url("/img/auth-page-bg.png") no-repeat center/cover;
+
+  @media(max-width: 768px) {
+    padding: 0;
+  }
 }
 .thanks-modal-wrap {
   display: flex;
@@ -12,7 +16,7 @@
   .thanks-modal {
     color: #fff;
     display: flex;
-    max-width: 640px;
+    //max-width: 640px;
     text-align: center;
     align-items: center;
     flex-direction: column;
@@ -47,7 +51,7 @@
   }
 
   .button-container {
-    margin-top: 40px;
+    margin: 40px 0;
   }
 
   .go-to-platform {

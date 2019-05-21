@@ -55,7 +55,9 @@ const logoutFailReducer = (state) => {
 };
 
 export const auth = generateReducer(initialState, {
+  [loginActionTypes.REGISTRATION_INIT_ACTION]: loginInitReducer,
   [registrationActionTypes.REGISTRATION_SUCCESS_ACTION]: loginSuccessReducer,
+  [loginActionTypes.REGISTRATION_FAIL_ACTION]: loginFailReducer,
 
   [loginActionTypes.LOGIN_SUCCESS_ACTION]: loginSuccessReducer,
 

@@ -119,7 +119,7 @@ export default class DrawComponent extends React.Component {
     return (
       <Drawer
         variant="permanent"
-        title="navigation menu"
+        role="navigation menu"
         open={open}
         classes={{
           paper: classNames("navigation-menu", !open && "active"),

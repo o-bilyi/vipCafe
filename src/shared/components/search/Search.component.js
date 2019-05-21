@@ -48,7 +48,8 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className={classNames("search-wrap",this.state.open && "open")}>
+      <div role="search" className={classNames("search-wrap",this.state.open && "open")}>
+
         <TextField
           id="search"
           type="search"
@@ -68,9 +69,13 @@ class Search extends React.Component {
           onChange={this._changeValue}
           className={classNames("search-input-wrap", this.props.classes.textField)}
         />
-        <Button className="clear-btn" onClick={this._clearInput}>
-          <CrossIcon className="search-icon"/>
-        </Button>
+
+        {
+          this.state.value &&
+          <Button className="clear-btn" onClick={this._clearInput}>
+            <CrossIcon className="search-icon"/>
+          </Button>
+        }
 
         <Button className="search-btn" onClick={this._toggleSearchInput}>
           <SearchIcon className="search-icon"/>

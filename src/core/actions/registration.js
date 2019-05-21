@@ -1,35 +1,15 @@
-import {httpService} from 'services';
-import {baseHandlerReduser} from 'core/redusers/utils';
-import {registrationActionTypes} from 'core/models/auth';
+import {httpService, storageService} from 'services';
 
-/**
- * @param username
- * @param password
- * @param token
- * @return {*|Promise<Response>}
- */
-export function registrationAction(username, password, token) {
-  const body = JSON.stringify({
-    username,
-    password,
-    token,
-  });
-  return dispatch => {
-    dispatch(baseHandlerReduser(registrationActionTypes.REGISTRATION_INIT_ACTION, {username, password}));
+const registerSuccess = (payload) => {
+  storageService.setLocal("user", JSON.stringify(payload));
+};
 
-    const FAIL_ACTION = () => dispatch(baseHandlerReduser(registrationActionTypes.REGISTRATION_FAIL_ACTION, {username, password}));
-
-    return new httpService().handleStatusCodes({
-      200: (res) => {
-        if(res.token) {
-          httpService.setToken(res.token);
-          dispatch(baseHandlerReduser(registrationActionTypes.REGISTRATION_SUCCESS_ACTION,{username, password}));
-        } else {
-          FAIL_ACTION();
-        }
-      },
-      400 : FAIL_ACTION,
-      500: FAIL_ACTION,
-    }).postRequest(httpService.register, body);
-  };
+export function registrationAction(params) {
+  const body = JSON.stringify(params);
+  const FAIL_ACTION = (res) => console.error(res);
+  return httpService.handleStatusCodes({
+    200: (res) => registerSuccess(res),
+    400 : FAIL_ACTION,
+    500: FAIL_ACTION,
+  }).postRequest(httpService.URLS.registerApi, body);
 }

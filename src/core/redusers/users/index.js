@@ -1,4 +1,4 @@
-import {logoutActionTypes, loginActionTypes} from '../../models/auth';
+import {logoutActionTypes, loginActionTypes, changeUserInformation} from '../../models/auth';
 import {generateReducer, baseHandlerReduser} from '../utils';
 
 const initialState = {
@@ -29,4 +29,5 @@ export const userProfile = generateReducer(initialState, {
    */
   [logoutActionTypes.LOGOUT_SUCCESS_ACTION]: () => initialState,
   [loginActionTypes.LOGIN_SUCCESS_ACTION]: baseHandlerReduser,
+  [changeUserInformation.DASHBOARD_CHANGE_USER_ACTION]: baseHandlerReduser,
 });
