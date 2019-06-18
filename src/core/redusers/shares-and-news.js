@@ -11,11 +11,11 @@ const addHandler = (state, action) => {
 };
 
 export const news = generateReducer(initialState, {
-  [newsActionTypes.FAIL_TO_NEWS_ITEM_ACTION]: addHandler,
+  [newsActionTypes.FAIL_TO_NEWS_ITEM_ACTION]: () => initialState,
   [newsActionTypes.ADD_TO_NEWS_ITEM_ACTION]: addHandler,
 });
 
 export const shares = generateReducer(initialState, {
-  [sharesActionTypes.FAIL_TO_SHARES_ITEM_ACTION]: initialState,
+  [sharesActionTypes.FAIL_TO_SHARES_ITEM_ACTION]: () => initialState,
   [sharesActionTypes.ADD_TO_SHARES_ITEM_ACTION]: addHandler,
 });

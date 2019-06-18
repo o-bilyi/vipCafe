@@ -1,5 +1,5 @@
 import {baseHandlerAction} from "./utils";
-import {httpService} from "../../services";
+import { httpService, URLS } from "../../services";
 import {sharesActionTypes} from '../models/shares-and-news';
 
 function successShares(res) {
@@ -15,10 +15,10 @@ export function getShares() {
   return dispatch => {
     dispatch(baseHandlerAction(sharesActionTypes.INIT_TO_SHARES_ITEM_ACTION, true));
     const FAIL_ACTION = (res) => dispatch(baseHandlerAction(sharesActionTypes.FAIL_TO_SHARES_ITEM_ACTION, {res}));
-    return httpService.handleStatusCodes({
+    return httpService().handleStatusCodes({
       200: (res) => dispatch(successShares(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(httpService.URLS.shares);
+    }).getRequest(URLS.shares);
   };
 }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import {toastr} from "react-redux-toastr";
 import {Button, TextField} from "@material-ui/core";
-import {httpService} from 'services';
+import { httpService, URLS } from "services";
 import connect from "react-redux/es/connect/connect";
 import {userIsAuthenticated} from "core/auth-redirect";
 import Wrapper from "shared/components/wrapper/Wrapper.component";
@@ -82,14 +82,14 @@ class Dashboard extends React.Component {
     const {session_id,id, f_name, p_name, l_name, city, company, delivery, site, tel, trade_format} = this.state.userProfile;
     const telegram = tel.telegram ? 1 : 0;
     const viber = tel.viber ? 1 : 0;
-    httpService.getRequest(httpService.URLS.changeUserInformation +
+    httpService().getRequest(URLS.changeUserInformation +
       `?user=${id}&f_name=${f_name}&l_name=${l_name}&p_name=${p_name}&tel=${tel.number}&telegram=${telegram}
       &viber=${viber}&site=${site}&city=${city}&company=${company}&trade_format=${trade_format}&delivery=${delivery}&hash=${session_id}`)
     //  const body = JSON.stringify({
     //    session_id, id, f_name, p_name, l_name, city, company,
     //    delivery, site,tel : tel.number, trade_format, telegram, viber
     // });
-    // httpService.postRequest(httpService.URLS.changeUserInformation, body)
+    // httpService().postRequest(URLS.changeUserInformation, body)
       .then(res => {
         if (res && res.user) {
           this.props.dispatch(dashboardChangeUserInformationSuccess(res.user));

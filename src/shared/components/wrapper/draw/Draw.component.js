@@ -9,8 +9,9 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SearchComponent from "../../search/Search.component";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import {Button, Drawer, IconButton, List, ListItem, TextField} from "@material-ui/core";
+import {Button, Drawer, IconButton, List, ListItem,} from "@material-ui/core";
 import {firstMenuItems, managerBlock, secondMenuItems} from "../menuItems/Items.component";
+import { FeedbackForm } from "shared/components/wrapper/draw/components/FeedbackForm.component";
 
 import Logo from "assets/svg/logo.svg";
 
@@ -45,11 +46,6 @@ export default class DrawComponent extends React.Component {
     this.setState({
       openManagerModal: !this.state.openManagerModal,
     });
-  };
-
-  _sendToManager = (event) => {
-    event.preventDefault();
-    console.warn("send", event.target);
   };
 
   _getMenuItems = (array) => {
@@ -192,54 +188,8 @@ export default class DrawComponent extends React.Component {
           }}
           aria-labelledby="send to manager modal"
           onClose={this._handleOpenManagerModal}>
-          <form className="send-to-manager-modal-form" onSubmit={this._sendToManager}>
-            <div className="input-container">
-              <TextField
-                type="text"
-                name="name"
-                placeholder="ваше ім'я"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  },
-                }}/>
-            </div>
-            <div className="input-container">
-              <TextField
-                name="tel"
-                type="text"
-                placeholder="ваш телефон"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  },
-                }}/>
-            </div>
-            <div className="input-container">
-              <TextField
-                type="text"
-                multiline
-                name="description"
-                placeholder="ваше повідомлення"
-                className="form-input-wrap"
-                InputProps={{
-                  classes: {
-                    root: "form-input",
-                    input: "input-style",
-                  },
-                }}/>
-            </div>
-            <Button
-              variant="extendedFab"
-              aria-label="login"
-              className="submit-button"
-              type="submit">відправити</Button>
-          </form>
-        </Dialog>
+			<FeedbackForm />
+		</Dialog>
       </Drawer>
     )
   }

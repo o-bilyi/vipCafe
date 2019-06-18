@@ -6,7 +6,7 @@ import {ConnectedRouter} from 'react-router-redux';
 import {generateRoutes, MAIN_ROUTES} from '../core';
 import connect from 'react-redux/es/connect/connect';
 import {getNews} from "../core/actions/news";
-// import {getShares} from "../core/actions/shares";
+import {getShares} from "../core/actions/shares";
 
 class App extends React.Component {
   static propTypes = {
@@ -15,7 +15,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    // this.props.dispatch(getShares())
+    this.props.dispatch(getShares())
     this.props.dispatch(getNews())
   }
 

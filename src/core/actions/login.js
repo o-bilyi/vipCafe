@@ -1,5 +1,5 @@
 import {baseHandlerAction} from './utils';
-import {httpService, storageService} from 'services';
+import { httpService, storageService, URLS } from "services";
 import {loginActionTypes, changeUserInformation} from '../models/auth';
 
 export const loginSuccess = (payload) => {
@@ -20,10 +20,10 @@ export function loginAction(cred) {
   return dispatch => {
     dispatch(baseHandlerAction(loginActionTypes.LOGIN_INIT_ACTION, {cred}));
     const FAIL_ACTION = (res) => dispatch(baseHandlerAction(loginActionTypes.LOGIN_FAIL_ACTION, {res}));
-    return httpService.handleStatusCodes({
+    return httpService().handleStatusCodes({
       200: (res) => dispatch(loginSuccess(res.user)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(httpService.URLS.login + `?mail=${cred.email}&pass=${cred.pass}`);
+    }).getRequest(URLS.login + `?mail=${cred.email}&pass=${cred.pass}`);
   };
 }

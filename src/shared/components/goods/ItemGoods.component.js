@@ -42,11 +42,12 @@ export default class ItemGoods extends React.Component {
   countItem = (value) => {
     if (this.state.count >= this.state.quantity) {
       return;
-    } else {
-      this.setState({
-        count: Number(value.target.value),
-      });
     }
+    return (
+        this.setState({
+          count: Number(value.target.value)
+        })
+    )
   };
 
   getTotalCost = () => {
@@ -70,7 +71,6 @@ export default class ItemGoods extends React.Component {
   };
 
   _getTopContent = () => {
-    console.warn(this.props.properties);
     const {img, title, properties} = this.props;
     const propertiesKeys = Object.keys(properties);
 

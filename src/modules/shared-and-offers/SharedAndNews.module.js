@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {navigationScheme} from 'core';
-import {getShares} from "../../core/actions";
+// import {getShares} from "../../core/actions";
 import RouterService from 'shared/services/RouterService';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
@@ -29,7 +29,7 @@ class SharesAndNews extends React.Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(getShares())
+    // this.props.dispatch(getShares())
   }
 
   componentWillReceiveProps(newProps) {

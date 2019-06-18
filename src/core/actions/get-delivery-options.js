@@ -1,5 +1,5 @@
 import {baseHandlerAction} from './utils';
-import {httpService, storageService} from 'services';
+import { httpService, storageService, URLS } from "services";
 import {deliveryOptionsTypes} from '../models/delivery-options';
 
 export const getDeliveryOptionsSuccess = (payload) => {
@@ -12,10 +12,10 @@ export function deliveryOptionsAction() {
   return dispatch => {
     dispatch(baseHandlerAction(deliveryOptionsTypes.DELIVERY_OPTIONS_INIT_ACTION, true));
     const FAIL_ACTION = res => dispatch(baseHandlerAction(deliveryOptionsTypes.DELIVERY_OPTIONS_FAIL_ACTION, {res}));
-    return httpService.handleStatusCodes({
+    return httpService().handleStatusCodes({
       200: (res) => dispatch(getDeliveryOptionsSuccess(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(httpService.URLS.getDeliveryOptions);
+    }).getRequest(URLS.getDeliveryOptions);
   };
 }

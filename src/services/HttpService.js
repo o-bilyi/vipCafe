@@ -14,7 +14,7 @@ export const responseTypes = {
 
 export const tokenKey = 'platformToken';
 
-const URLS = {
+export const URLS = {
   shop : "wp/v2/shop",
   login : "vipcaffe/v1/user/",
   resetPassword : "vipcaffe/v1/forgotpwd",
@@ -39,8 +39,6 @@ let store = null;
 let secureToken = null;
 
 class HttpService {
-  URLS = URLS;
-
   /**
    * @type {{'Content-Type': string}}
    * @private
@@ -217,4 +215,4 @@ class HttpService {
   }
 }
 
-export const httpService = new HttpService();
+export const httpService = () => new HttpService();

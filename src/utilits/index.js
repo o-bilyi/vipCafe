@@ -1,7 +1,7 @@
 import React from 'react';
 import {store} from "index";
 import {addToArchive} from "core/actions/archive";
-import {httpService} from "services";
+import { httpService, URLS } from "services";
 
 class DeviceSize {
   /**
@@ -302,7 +302,7 @@ export function MD5(string) {
 };
 
 export function setArchive (userID) {
-  httpService.getRequest(httpService.URLS.orders + `/${userID}`)
+  httpService().getRequest(URLS.orders + `/${userID}`)
     .then(res => {
       if(res) {
         store.dispatch(addToArchive(res))

@@ -9,7 +9,7 @@ import GroceryIcon from 'assets/svg/grocery.svg';
 import ChocolateIcon from 'assets/svg/chocolate.svg';
 import ArrowIcon from '@material-ui/icons/ArrowBack';
 
-import {httpService} from "services";
+import { httpService, URLS } from "services";
 import {DeviceSizeService} from 'utilits/index';
 import {Button, Dialog} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
@@ -70,7 +70,7 @@ class Catalog extends React.Component {
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
-    httpService.getRequest(httpService.URLS.shop).then(res => {
+    httpService().getRequest(URLS.shop).then(res => {
       this.setState({tabs: res});
     });
     // this._getGoods(this.state.activeGoods);
@@ -93,7 +93,7 @@ class Catalog extends React.Component {
   _getGoods = (activeCategory) => {
     const { start, limit, filters } = this.state;
 
-    httpService.getRequest(httpService.URLS.getProducts +
+    httpService().getRequest(URLS.getProducts +
       `?start=${start}&limit=${limit}&category=${activeCategory}&filters=${filters}`)
         .then(res => {
           console.warn(res);

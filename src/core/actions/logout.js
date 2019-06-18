@@ -1,4 +1,4 @@
-import {httpService, storageService} from 'services';
+import { httpService, storageService, URLS } from "services";
 import {logoutActionTypes} from 'core/models/auth';
 import {baseHandlerAction} from './utils';
 
@@ -27,10 +27,10 @@ export function logoutAction() {
   return dispatch => {
     dispatch(baseHandlerAction(logoutActionTypes.LOGOUT_INIT_ACTION, {hash}));
     const FAIL_ACTION = (res) => dispatch(baseHandlerAction(logoutActionTypes.LOGOUT_FAIL_ACTION, {res}));
-    return httpService.handleStatusCodes({
+    return httpService().handleStatusCodes({
       200: (res) => dispatch(logoutSuccessAction(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(httpService.URLS.logout + `?hash=${hash}`);
+    }).getRequest(URLS.logout + `?hash=${hash}`);
   };
 }
