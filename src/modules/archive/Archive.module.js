@@ -265,80 +265,85 @@ class ArchiveOfOrders extends React.Component {
     const {from, to} = this.state.date;
     const modifiers = {start: from, end: to};
 
-    return (
-      <div className="archive-wrap">
-        <div className="archive-head">
-          <div className="search">
-            <label htmlFor="search" className="label">Пошук по номеру чи назві:</label>
-            <input
-              placeholder="141"
-              type="search"
-              className="search-input"
-            />
-          </div>
-          <div className="date-wrap">
-            <span className="label">Пошук за період:</span>
-
-            <div className="date-input-wrap">
-              <DayPickerInput
-                value={from}
-                format="LL"
-                placeholder="--  --  --"
-                dayPickerProps={{
-                  selectedDays: [from, {from, to}],
-                  disabledDays: {after: to},
-                  toMonth: to,
-                  modifiers,
-                  numberOfMonths: 1,
-                  locale: 'uk',
-                  localeUtils: MomentLocaleUtils,
-                }}
-                onDayChange={this.handleChange('from')}
+    if (this.props.archive.length) {
+      return (
+        <div className="archive-wrap">
+          <div className="archive-head">
+            <div className="search">
+              <label htmlFor="search" className="label">Пошук по номеру чи назві:</label>
+              <input
+                placeholder="141"
+                type="search"
+                className="search-input"
               />
             </div>
+            <div className="date-wrap">
+              <span className="label">Пошук за період:</span>
 
-            <span className="arrow">/</span>
+              <div className="date-input-wrap">
+                <DayPickerInput
+                  value={from}
+                  format="LL"
+                  placeholder="--  --  --"
+                  dayPickerProps={{
+                    selectedDays: [from, {from, to}],
+                    disabledDays: {after: to},
+                    toMonth: to,
+                    modifiers,
+                    numberOfMonths: 1,
+                    locale: 'uk',
+                    localeUtils: MomentLocaleUtils,
+                  }}
+                  onDayChange={this.handleChange('from')}
+                />
+              </div>
 
-            <div className="date-input-wrap">
-              <DayPickerInput
-                value={to}
-                format="LL"
-                placeholder="--  --  --"
-                ref={el => (this.to = el)}
-                dayPickerProps={{
-                  selectedDays: [from, {from, to}],
-                  disabledDays: {before: from},
-                  modifiers,
-                  month: from,
-                  fromMonth: from,
-                  numberOfMonths: 1,
-                  locale: 'uk',
-                  localeUtils: MomentLocaleUtils,
-                }}
-                onDayChange={this.handleChange('to')}
-              />
+              <span className="arrow">/</span>
+
+              <div className="date-input-wrap">
+                <DayPickerInput
+                  value={to}
+                  format="LL"
+                  placeholder="--  --  --"
+                  ref={el => (this.to = el)}
+                  dayPickerProps={{
+                    selectedDays: [from, {from, to}],
+                    disabledDays: {before: from},
+                    modifiers,
+                    month: from,
+                    fromMonth: from,
+                    numberOfMonths: 1,
+                    locale: 'uk',
+                    localeUtils: MomentLocaleUtils,
+                  }}
+                  onDayChange={this.handleChange('to')}
+                />
+              </div>
+              <Button onClick={this._resetDateFilter} className="reset-date">очистити дату</Button>
             </div>
-            <Button onClick={this._resetDateFilter} className="reset-date">очистити дату</Button>
           </div>
-        </div>
-        <div className="archive-body">
-          <div className="tab-left-column">
+          <div className="archive-body">
+            <div className="tab-left-column">
+              {
+                this._getHeadTab()
+              }
+            </div>
             {
-              this._getHeadTab()
+              this._getContent()
             }
           </div>
-          {
-            this._getContent()
-          }
         </div>
-      </div>
-    );
+      );
+    }
+    return (
+      <div className="empty-title">У вас ще не було замовлень</div>
+    )
   };
 
   render() {
     return (
       <Wrapper>
-        <div className="archive-page">
+        <div className={classNames("archive-page", !this.props.archive.length && "empty-body")}>
           {this._getBody()}
         </div>
       </Wrapper>

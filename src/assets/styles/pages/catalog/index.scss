@@ -19,7 +19,7 @@
       text-transform: uppercase;
       border: 1px solid rgba(104, 89, 76, 0.2);
 
-      &.kava {
+      /*&.kava {
         &.active,
         &:hover {
           background-color: #4c4743;
@@ -45,10 +45,11 @@
         &:hover {
           background-color: #68594c;
         }
-      }
+      }*/
 
       &.active,
       &:hover {
+        background-color: #4c4743;
         color: #fff;
 
         .tab-icon {

@@ -8,7 +8,8 @@ import connect from 'react-redux/es/connect/connect';
 function CountItem(props) {
   const countItem = props[props.storageTarget];
   if(countItem) {
-    return <span className="count-item">{countItem.length}</span>;
+    const count = Object.keys(countItem).length;
+    return <span className="count-item">{count}</span>;
   }
   return '';
 }
@@ -22,7 +23,7 @@ const mapStateToProps = state => {
   return {
     basket: state.basket.items,
     archive: state.archive,
-    sharesAndOffers: state.sharesAndOffers.items
+    news: state.news
   };
 };
 

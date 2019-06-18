@@ -34,10 +34,6 @@ const initialState = {
     delivery: '',
     trade_format: ''
   },
-  deliveryItems : ["Нова Пошта", "Міст Експрес", "d1", "d2"],
-  cityItems : ["Чернівці", "Львів", "Київ"],
-  tradeFormatSelect : ["Ларьок", "f1", "f2"],
-  openThanksModal: false,
   saveChanges: false,
 };
 
@@ -170,7 +166,6 @@ class Dashboard extends React.Component {
       delivery,
       trade_format
     } = this.state.userProfile;
-    const {cityItems, deliveryItems, tradeFormatSelect} = this.state;
 
     return (
       <form autoComplete="off" method="post" className="shared-form" onSubmit={this.handleSubmit}>
@@ -288,18 +283,27 @@ class Dashboard extends React.Component {
               }}/>
           </div>
 
-          <div className="input-container input-container-city">
-            <CustomSelect
-              items={cityItems}
-              labelText="Місто"
-              selectedItem={city}
-              handleChangeSelect={this.handleChangeSelect("city")}
-            />
+          <div className='input-container input-container-city'>
+            <label className="form-label" htmlFor="#city">Місто:</label>
+            <TextField
+              onChange={this.fieldsChange}
+              value={city}
+              placeholder="Місто"
+              type="text"
+              name="city"
+              id="city"
+              className="form-input-wrap"
+              InputProps={{
+                classes: {
+                  root: 'form-input',
+                  input: 'input-style',
+                },
+              }}/>
           </div>
 
           <div className="input-container input-container-delivery">
             <CustomSelect
-              items={deliveryItems}
+              items={delivery.split(",")}
               labelText="Доставка:"
               selectedItem={delivery}
               handleChangeSelect={this.handleChangeSelect("delivery")}
@@ -308,7 +312,7 @@ class Dashboard extends React.Component {
 
           <div className="input-container input-container-tradeFormat">
             <CustomSelect
-              items={tradeFormatSelect}
+              items={trade_format.split(",")}
               labelText="Формат торгівлі:"
               selectedItem={trade_format}
               handleChangeSelect={this.handleChangeSelect("trade_format")}

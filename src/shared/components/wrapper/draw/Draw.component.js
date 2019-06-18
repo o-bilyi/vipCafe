@@ -210,7 +210,7 @@ export default class DrawComponent extends React.Component {
               <TextField
                 name="tel"
                 type="text"
-                placeholder="ваше телефон"
+                placeholder="ваш телефон"
                 className="form-input-wrap"
                 InputProps={{
                   classes: {
@@ -223,8 +223,8 @@ export default class DrawComponent extends React.Component {
               <TextField
                 type="text"
                 multiline
-                name="tel"
-                placeholder="ваше телефон"
+                name="description"
+                placeholder="ваше повідомлення"
                 className="form-input-wrap"
                 InputProps={{
                   classes: {

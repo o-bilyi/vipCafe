@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RouterService from 'shared/services/RouterService';
+import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import ItemGoods from 'shared/components/goods/ItemGoods.component';
 import PriceItem from 'shared/components/goods/ItemWithPrice.component';
-
-import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
 import ArrowBackIcon from '@material-ui/icons/KeyboardBackspace';
 
 export default function SingItem(props) {
-  const {auth, img, date, title, description, sharedItems} = props.location.state;
+  const {auth, image, date_start, date_end, title, description, products} = props.location.state;
   const Item = auth ? PriceItem : ItemGoods;
 
   return (
@@ -21,20 +20,39 @@ export default function SingItem(props) {
         </button>
 
         <div className="single-item-wrap">
-          <div className="img-container" style={{backgroundImage : `url(${img})`}}/>
+          <div className="img-container" style={{backgroundImage : `url(${image})`}}/>
 
-          <p className="start-date">{date.start}</p>
+          {
+            date_start &&
+            <p className="start-date">{date_start}</p>
+          }
 
           <h1 className="single-item-title">{title}</h1>
 
-          <p className="single-item-description">{description}</p>
+          {
+            description &&
+            <p className="single-item-description">{description}</p>
+          }
 
-          <p className="finish-date">{date.end}</p>
+          {
+            date_end &&
+            <p className="finish-date">{date_end}</p>
+          }
 
           <div className="single-item-items goods-wrap">
             {
-              sharedItems.map((item, key) => {
-                return <Item key={key} {...item}/>
+              products.map((item, key) => {
+                return (
+                  <Item
+                    key={key}
+                    id={item["product_id"]}
+                    title={item["post_title"]}
+                    img={item.image}
+                    price={item["price_big"]}
+                    count={item["quantity"]}
+                    properties={null}
+                  />
+                  )
               })
             }
           </div>
@@ -50,14 +68,12 @@ SingItem.propTypes = {
   location : PropTypes.shape({
     state : PropTypes.shape({
       auth: PropTypes.bool,
-      img: PropTypes.string,
-      date: PropTypes.shape({
-        start: PropTypes.string,
-        end: PropTypes.string,
-      }),
+      image: PropTypes.string,
+      date_start: PropTypes.string,
+      date_end: PropTypes.string,
       title: PropTypes.string,
       description: PropTypes.string,
-      sharedItems: PropTypes.array,
+      products: PropTypes.array,
     })
   })
 };

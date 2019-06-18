@@ -13,7 +13,7 @@ export const navigationScheme = {
   archive : '/archive',
   dashboard: '/dashboard',
   privacyPolicy : '/privacy-policy',
-  sharesAndOffers : '/shares-and-offers',
+  sharesAndNews : '/shares',
 
   archiveOrder : '/archive-order',
   checkoutOrder : '/checkout-order',
@@ -58,9 +58,9 @@ export const MAIN_ROUTES = [
     component: () => import('../modules/basket/Basket.module')
   },
   {
-    path: navigationScheme.sharesAndOffers,
+    path: navigationScheme.sharesAndNews,
     exact: true,
-    component: () => import('../modules/shared-and-offers/SharedAndOffers.module')
+    component: () => import('../modules/shared-and-offers/SharedAndNews.module')
   },
   {
     path: navigationScheme.sharedAndOffersSingleItem,

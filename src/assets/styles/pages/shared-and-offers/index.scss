@@ -55,6 +55,7 @@
   }
 
   .item {
+    flex-grow: 1;
     margin: 0 10px;
     max-width: 31%;
     color: #484848;
@@ -108,6 +109,9 @@
   .item-description {
     padding: 20px 0;
     line-height: 1.5;
+    p {
+      word-wrap: break-word;
+    }
   }
 
   .item-link {

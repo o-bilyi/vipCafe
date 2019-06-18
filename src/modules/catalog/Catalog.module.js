@@ -20,9 +20,6 @@ import CustomSelect from 'shared/components/customSelect/Select.component';
 import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
 import MultiSelect from 'shared/components/customSelect/MultiSelect.component';
 
-const cheeseSelect = ['СИР', 'М\'ЯСО'];
-const sortSelect = ['ВІД ДОРОГИХ ДО ДЕШЕВИХ', 'ВІД ДЕШЕВИХ ДО ДОРОГИХ'];
-const brandSelect = ['РОСІЙСЬКИЙ', 'МАЦАРЕЛЛА'];
 const typeSelect = ['ТВЕРДИЙ', 'ПЛАВЛЕНИЙ'];
 const weightSelect = ['250г (8)', '450г (44)', '1кг (8)', '10кг (44)', '15кг (8)', '20кг (44)'];
 
@@ -34,12 +31,6 @@ const keys = {
   chocolate: "shokolad",
 };
 
-const categoryTabID = {
-  [keys.grocery]: 6,
-  [keys.coffee]: 2,
-  [keys.cheeseAndMeat]: 3,
-  [keys.chocolate]: 7
-};
 
 const tabIcons = {
   [keys.grocery]: <GroceryIcon className="tab-icon"/>,
@@ -55,8 +46,12 @@ class Catalog extends React.Component {
 
   state = {
     tabs: [],
-    activeGoods: keys.coffee, //active category
+    activeGoods: 0, //active category
     products: [],
+    start: 0,
+    limit: 20,
+    filters: 0,
+    productFilters: [],
 
     /**
      * customSelect value
@@ -75,8 +70,10 @@ class Catalog extends React.Component {
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
-    httpService.getRequest(httpService.URLS.shop).then(res => this.setState({tabs: res}));
-    this._getGoods(this.state.activeGoods);
+    httpService.getRequest(httpService.URLS.shop).then(res => {
+      this.setState({tabs: res});
+    });
+    // this._getGoods(this.state.activeGoods);
   }
 
   componentWillUnmount() {
@@ -87,28 +84,36 @@ class Catalog extends React.Component {
     this.setState({[name]: event.target.value});
   };
 
-  handleChangeGoods = (name = "") => {
+  handleChangeGoods = (id) => {
     this.setState({
-      activeGoods: name
-    }, () => this._getGoods(name));
+      activeGoods: id
+    }, () => this._getGoods(id));
   };
 
   _getGoods = (activeCategory) => {
-    httpService.getRequest(httpService.URLS.getProducts + `?shop=${categoryTabID[activeCategory]}`).then(res => {
-      this.setState({
-        products: res
-      })
-    });
+    const { start, limit, filters } = this.state;
+
+    httpService.getRequest(httpService.URLS.getProducts +
+      `?start=${start}&limit=${limit}&category=${activeCategory}&filters=${filters}`)
+        .then(res => {
+          console.warn(res);
+
+          this.setState({
+            productFilters: res.data_filter,
+            products: res.products
+          })
+      });
   };
 
   getGoodsItem = (props, key) => {
     const items = {
       count: 1,
-      id: props.id,
-      price: props.price,
-      img: props.gallery[0].thumb,
-      title: props.title["rendered"],
-      properties: {...props.product_type}
+      quantity: props["quantity"],
+      id: props["id_post"],
+      price: props["price_big"],
+      img: "no-img",
+      title: props["post_title"],
+      properties: {...props["attributes"]}
     };
     if (this.props.isAuthorized) {
       return <ItemWithPrice {...items} key={key}/>;
@@ -139,17 +144,48 @@ class Catalog extends React.Component {
 
   _getFiltersProduct = () => {
     const {
-      product,
-      sort,
-      brand,
+      // product,
+      // sort,
+      // brand,
       type,
       weight,
+      productFilters
     } = this.state;
 
     return (
       <div className="filter-product">
+        {
+          productFilters.map((item, key) => {
+            if (item.name === "Тип") {
+              return (
+                <CustomSelect
+                  key={key}
+                  placeholder
+                  labelText={item.name}
+                  items={typeSelect}
+                  selectedItem={type}
+                  handleChangeSelect={this.handleChangeSelect('type')}
+                />
+              )
+            }else if (item.name === "Вага") {
+              return (
+                <MultiSelect
+                  key={key}
+                  labelText={item.name}
+                  countTheSelectedItem
+                  items={weightSelect}
+                  selectedItem={weight}
+                  weightLength={this.state.weight.length}
+                  resetSelectItems={this._resetSelectItems('weight')}
+                  handleChangeSelect={this.handleChangeSelect('weight')}
+                />
+              )
+            }
+            return null
+          })
+        }
 
-        <CustomSelect
+        {/*<CustomSelect
           placeholder
           labelText="Продукт"
           items={cheeseSelect}
@@ -191,7 +227,7 @@ class Catalog extends React.Component {
           weightLength={this.state.weight.length}
           resetSelectItems={this._resetSelectItems('weight')}
           handleChangeSelect={this.handleChangeSelect('weight')}
-        />
+        />*/}
 
       </div>
     )
@@ -210,14 +246,15 @@ class Catalog extends React.Component {
     return (
       <div className="tab-categories">
         {
-          tabs ? tabs.map((elem, key) => {
+          tabs ? tabs.map((elem) => {
               return (
                 <Button
-                  key={key + 1} onClick={() => this.handleChangeGoods(elem.slug)}
+                  id={elem.id}
+                  key={elem.id} onClick={() => this.handleChangeGoods(elem.id)}
                   classes={{label: 'tab-item-wrap'}}
-                  className={classNames(`tab-item ${elem.slug}`, this.state.activeGoods === elem.slug && 'active')}>
+                  className={classNames(`tab-item ${elem.id}`, this.state.activeGoods === elem.id && 'active')}>
                   {
-                    tabIcons[elem.slug]
+                    tabIcons[elem.id]
                   }
                   <span className="text">{elem.name}</span>
                 </Button>
@@ -239,16 +276,24 @@ class Catalog extends React.Component {
           }
 
           {
-            this._getFilters()
+            this.state.productFilters.length
+            ? this._getFilters()
+            : null
           }
 
-          <div className="goods-wrap">
-            {
-              this.state.products.map((item, key) => {
-                return this.getGoodsItem(item, key);
-              })
-            }
-          </div>
+          {
+            this.state.products.length
+              ?
+              <div className="goods-wrap">
+                {
+                  this.state.products.map((item, key) => {
+                    return this.getGoodsItem(item, key);
+                  })
+                }
+              </div>
+              : null
+          }
+
           <Dialog
             fullScreen
             open={this.state.openFilterModal}

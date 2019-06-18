@@ -10,7 +10,7 @@ import {changeBasket} from 'core/actions';
 
 export default class Item extends React.Component {
   static propTypes = {
-    id : PropTypes.number,
+    id : PropTypes.string,
     img : PropTypes.string,
     title : PropTypes.string,
     getAllPrice: PropTypes.func,

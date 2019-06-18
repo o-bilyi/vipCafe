@@ -11,12 +11,13 @@ export const checkAuth = dispatch => {
     }
     const userData = JSON.parse(user);
 
-    return httpService.getRequest(httpService.URLS.checkSession + `?hash=${userData.session_id}`).then(res => {
-      if (res) {
-        setArchive(userData.id);
-        dispatch(loginSuccess(userData));
-      }
-      resolve();
+    return httpService.getRequest(httpService.URLS.checkSession + `?hash=${userData.session_id}`)
+      .then(res => {
+        if (res !== false) {
+          setArchive(userData.id);
+          dispatch(loginSuccess(userData));
+        }
+        resolve();
     });
   });
 };

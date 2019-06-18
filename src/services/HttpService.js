@@ -17,7 +17,8 @@ export const tokenKey = 'platformToken';
 const URLS = {
   shop : "wp/v2/shop",
   login : "vipcaffe/v1/user/",
-  getProducts : "wp/v2/product",
+  resetPassword : "vipcaffe/v1/forgotpwd",
+  getProducts : "vipcaffe/v1/get_products",
   registerApi : "vipcaffe/v1/add_user_func",
   logout : "vipcaffe/v1/logout_session",
   orders : "vipcaffe/v1/getorders",
@@ -25,6 +26,13 @@ const URLS = {
   changeUserInformation : "vipcaffe/v1/edituser",
   getTradeOptions : "vipcaffe/v1/get_trade_options",
   getDeliveryOptions : "vipcaffe/v1/get_delivery_options",
+  shares : "wp/v2/shares",
+  news : "wp/v2/news",
+  cartGet : "vipcaffe/v1/get-cart", // params {hash} return items
+  cartSet : "vipcaffe/v1/set-cart", // params {hash}
+  cartDelete : "vipcaffe/v1/delete-cart", // params {hash}
+  feedback : "vipcaffe/v1/feedback", // params {email, message, phone}
+  repeatOrder : "vipcaffe/v1/repeat_order" // params {id order} if ok return order{}
 };
 
 let store = null;

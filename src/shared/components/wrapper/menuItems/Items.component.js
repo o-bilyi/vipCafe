@@ -8,7 +8,7 @@ import DraftsIcon from 'assets/svg/navigation-menu/envelope.svg';
 import ArchiveIcon from 'assets/svg/navigation-menu/archive.svg';
 import TransformIcon from 'assets/svg/navigation-menu/new-item.svg';
 import ShoppingCartIcon from 'assets/svg/navigation-menu/basket.svg';
-import SharedAndOffersIcon from 'assets/svg/navigation-menu/shares-and-offers.svg';
+import SharesIcon from 'assets/svg/navigation-menu/shares.svg';
 
 export const firstMenuItems = [
   {
@@ -19,21 +19,21 @@ export const firstMenuItems = [
   },
   {
     to: {
-      pathname: navigationScheme.sharesAndOffers,
-      state: "shared",
+      pathname: navigationScheme.sharesAndNews,
+      state: "shares",
     },
-    icon: SharedAndOffersIcon,
+    icon: SharesIcon,
     text: 'акції і пропозиції',
     title:'go to shared page'
   },
   {
     to: {
-      pathname: navigationScheme.sharesAndOffers,
-      state: "offers",
+      pathname: navigationScheme.sharesAndNews,
+      state: "news",
     },
     icon: TransformIcon,
     text: 'нові поступлення',
-    number: <CountItem storageTarget="sharesAndOffers"/>,
+    number: <CountItem storageTarget="news"/>,
     title:'go to offers page'
   },
 ];

@@ -1,6 +1,8 @@
 import React from 'react';
+import {toastr} from "react-redux-toastr";
 import {DeviceSizeService} from 'utilits';
 import {Button, TextField} from '@material-ui/core';
+import {resetPassAction} from "../../../core/actions/reset-password";
 
 import LogoIconSVG from 'assets/svg/logo.svg';
 
@@ -26,30 +28,18 @@ export default class ForgotPass extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    // function status(response) {
-    //   if (response.ok) {
-    //     return Promise.resolve(response);
-    //   }
-    //   return Promise.reject(response.statusText);
-    // }
-    //
-    // fetch('/api/sendMessage', {
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   method: 'post',
-    //   body: JSON.stringify(inputs),
-    // })
-    //   .then(status)
-    //   .then(() => {
-    //     this.setState(initialState);
-    //     toastr.success('Форма відправлена!');
-    //   })
-    //   .catch((error) => {
-    //     toastr.error('Логін або Пароль не вірний!');
-    //     console.error('Request failed', error);
-    //   });
+    resetPassAction(this.state.email)
+      .then(res => {
+        if (res.data.result) {
+          toastr.success('Новий пароль вислано вам на e-mail!');
+          this.setState({
+            email : ''
+          });
+        } else {
+          toastr.warning('Помилка, повідомлення не відправлено!');
+          console.error('Request failed', res);
+        }
+      });
   };
 
   _getContent = () => {

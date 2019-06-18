@@ -4,6 +4,15 @@
   align-items: flex-start;
   justify-content: center;
   background-color: #393939;
+
+  &.empty-body {
+    align-items: center;
+  }
+
+  .empty-title {
+    color: white;
+    font-size: 16px;
+  }
 }
 
 .archive-wrap {
