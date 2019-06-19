@@ -32,7 +32,6 @@ export default class ItemGoods extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      quantity : Number(props.quantity),
       count: props.count,
       openDescriptionModal: false,
       wasAddedItem: null,
@@ -40,7 +39,7 @@ export default class ItemGoods extends React.Component {
   }
 
   countItem = (value) => {
-    if (this.state.count >= this.state.quantity) {
+    if (this.state.count >= Number(this.props.quantity)) {
       return;
     }
     return (

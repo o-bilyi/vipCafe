@@ -96,7 +96,7 @@
     overflow: hidden;
   }
 
-  .send-to-manager-modal-form {
+  .send-to-manager-form {
     padding: 10px;
   }
 
@@ -111,5 +111,10 @@
   .submit-button {
     @include button(150px);
     @include success-style-btn;
+
+    &:disabled {
+      @include disabled-button;
+      cursor: not-allowed;
+    }
   }
 }

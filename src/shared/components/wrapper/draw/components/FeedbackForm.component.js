@@ -2,44 +2,59 @@ import React from "react";
 import { Button, TextField } from "@material-ui/core";
 import { feedbackAction } from "core/actions/feedback-action";
 
+const validation = {
+	email : (val) => {
+		let error = null;
+		const emailValidation = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+		if (!emailValidation.test(val)) {
+			error = "E-mail введений не вірно!";
+		}
+		return error;
+	},
+	tel : (val) => {
+		if (val.length <= 10) {
+			return "Не менше 2 символів!";
+		}
+		return null;
+	}
+};
+
 export class FeedbackForm extends React.Component {
 	state = {
-		email : "",
-		tel : "",
-		message : "",
-		emailError : false,
-		telError : false,
+		email : "o.d.bilyigmail.com",
+		tel : "0684090455",
+		message : "Test Item",
+		error : {
+			tel : null,
+			email : null,
+		},
 	}
 
 	fieldsChange = event => {
+		const errorText = validation[event.target.name](event.target.value);
+
 		this.setState({
-			...this.state,
-			[event.target.name] : event.target.value
+			[event.target.name] : event.target.value,
+			error : {
+				...this.state.error,
+				[event.target.name] : errorText,
+			},
 		});
 	};
 
-	_emailField = () => {
-		const emailValid = this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-		if (!emailValid) {
-			this.setState({
-				emailError : true
-			})
-		}
-	}
-
-	_telValidate = () => {
-		const reg = /^[0]?[789]\d{9}$/;
-		if (!reg.test(this.state.tel)) {
-			this.setState({
-				telError : true
-			})
-		}
-	}
+	haveError = () => {
+		let haveError = false;
+		const fields = Object.keys(this.state.error);
+		fields.forEach(i => {
+			if (this.state.error[i] !== null || this.state[i] === "") {
+				haveError = true;
+			}
+		});
+		return haveError;
+	};
 
 	_sendToManager = (event) => {
 		event.preventDefault();
-		this._emailField();
-		this._telValidate();
 
 		const {email, tel, message, emailError, telError} = this.state
 
@@ -49,13 +64,15 @@ export class FeedbackForm extends React.Component {
 	}
 
 	render() {
+		const {error, email, tel, message} = this.state;
+
 		return (
-			<form className="send-to-manager-modal-form" onSubmit={this._sendToManager}>
-				<div className={`input-container ${this.state.emailError ? 'error' : ''}`}>
+			<form className="send-to-manager-form" onSubmit={this._sendToManager}>
+				<div className={`input-container ${error.email ? 'error' : ''}`}>
 					<TextField
 						type="email"
 						name="email"
-						value={this.state.email}
+						value={email}
 						placeholder="ваш email"
 						onChange={this.fieldsChange}
 						className="form-input-wrap"
@@ -65,13 +82,13 @@ export class FeedbackForm extends React.Component {
 								input: "input-style",
 							},
 						}}/>
-					{this.state.emailError && <p className="error-text">Не вірний формат email</p>}
+					{error.email && <p className="error-text">Не вірний формат email</p>}
 				</div>
-				<div className={`input-container ${this.state.telError ? 'error' : ''}`}>
+				<div className={`input-container ${error.tel ? 'error' : ''}`}>
 					<TextField
 						name="tel"
 						type="text"
-						value={this.state.tel}
+						value={tel}
 						placeholder="ваш телефон"
 						onChange={this.fieldsChange}
 						className="form-input-wrap"
@@ -81,14 +98,14 @@ export class FeedbackForm extends React.Component {
 								input: "input-style",
 							},
 						}}/>
-					{this.state.telError && <p className="error-text">Не вірний формат телуфона</p>}
+					{error.tel && <p className="error-text">Не вірний формат телуфона</p>}
 				</div>
 				<div className="input-container">
 					<TextField
 						type="text"
 						multiline
 						name="message"
-						value={this.state.message}
+						value={message}
 						onChange={this.fieldsChange}
 						placeholder="ваше повідомлення"
 						className="form-input-wrap"
@@ -100,8 +117,8 @@ export class FeedbackForm extends React.Component {
 						}}/>
 				</div>
 				<Button
-					variant="extendedFab"
 					aria-label="login"
+					disabled={this.haveError()}
 					className="submit-button"
 					type="submit">відправити</Button>
 			</form>

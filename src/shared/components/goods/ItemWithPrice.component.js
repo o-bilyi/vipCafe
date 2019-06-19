@@ -29,7 +29,7 @@ export default class ItemWithPrice extends ItemGoods {
         <button
           title="add to basket"
           onClick={this._addToBasket(this.props)}
-          disabled={this.state.count === 0 || this.state.count >= this.state.quantity}
+          disabled={this.state.count === 0 || this.state.count >= this.props.quantity}
           className={classNames("add-to-basket", this.props.id === this.state.wasAddedItem ? "success" : "")}>
           <span className="add-to-basket-text">додати в кошик</span>
           <Link to={navigationScheme.basket} title="open in basket" className="open-basket-text">відкрити в кошику</Link>

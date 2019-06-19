@@ -20,10 +20,6 @@ import CustomSelect from 'shared/components/customSelect/Select.component';
 import ItemWithPrice from 'shared/components/goods/ItemWithPrice.component';
 import MultiSelect from 'shared/components/customSelect/MultiSelect.component';
 
-const typeSelect = ['ТВЕРДИЙ', 'ПЛАВЛЕНИЙ'];
-const weightSelect = ['250г (8)', '450г (44)', '1кг (8)', '10кг (44)', '15кг (8)', '20кг (44)'];
-
-
 const keys = {
   coffee: "kava",
   cheeseAndMeat: "syr-myaso",
@@ -144,9 +140,6 @@ class Catalog extends React.Component {
 
   _getFiltersProduct = () => {
     const {
-      // product,
-      // sort,
-      // brand,
       type,
       weight,
       productFilters
@@ -156,13 +149,17 @@ class Catalog extends React.Component {
       <div className="filter-product">
         {
           productFilters.map((item, key) => {
+            const arrayProps = [];
+            for(let i = 0; i < item.values.length; i ++) {
+              arrayProps.push(item.values[i].text)
+            }
             if (item.name === "Тип") {
               return (
                 <CustomSelect
                   key={key}
                   placeholder
                   labelText={item.name}
-                  items={typeSelect}
+                  items={arrayProps}
                   selectedItem={type}
                   handleChangeSelect={this.handleChangeSelect('type')}
                 />
@@ -173,7 +170,7 @@ class Catalog extends React.Component {
                   key={key}
                   labelText={item.name}
                   countTheSelectedItem
-                  items={weightSelect}
+                  items={arrayProps}
                   selectedItem={weight}
                   weightLength={this.state.weight.length}
                   resetSelectItems={this._resetSelectItems('weight')}
@@ -184,51 +181,6 @@ class Catalog extends React.Component {
             return null
           })
         }
-
-        {/*<CustomSelect
-          placeholder
-          labelText="Продукт"
-          items={cheeseSelect}
-          selectedItem={product}
-          handleChangeSelect={this.handleChangeSelect('product')}
-        />
-
-        <label className="filter-label-of-goods custom-label">Фільтр товарів:</label>
-
-        <CustomSelect
-          placeholder
-          labelText="сортування"
-          items={sortSelect}
-          selectedItem={sort}
-          handleChangeSelect={this.handleChangeSelect('sort')}
-        />
-
-        <CustomSelect
-          placeholder
-          labelText="Бренд"
-          items={brandSelect}
-          selectedItem={brand}
-          handleChangeSelect={this.handleChangeSelect('brand')}
-        />
-
-        <CustomSelect
-          placeholder
-          labelText="тип сиру"
-          items={typeSelect}
-          selectedItem={type}
-          handleChangeSelect={this.handleChangeSelect('type')}
-        />
-
-        <MultiSelect
-          labelText="вага"
-          countTheSelectedItem
-          items={weightSelect}
-          selectedItem={weight}
-          weightLength={this.state.weight.length}
-          resetSelectItems={this._resetSelectItems('weight')}
-          handleChangeSelect={this.handleChangeSelect('weight')}
-        />*/}
-
       </div>
     )
   };
