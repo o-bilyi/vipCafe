@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, TextField } from "@material-ui/core";
 import { feedbackAction } from "core/actions/feedback-action";
 
@@ -20,6 +21,10 @@ const validation = {
 };
 
 export class FeedbackForm extends React.Component {
+	static propTypes = {
+		onCloseDialog : PropTypes.func
+	};
+
 	state = {
 		email : "o.d.bilyigmail.com",
 		tel : "0684090455",
@@ -56,11 +61,13 @@ export class FeedbackForm extends React.Component {
 	_sendToManager = (event) => {
 		event.preventDefault();
 
-		const {email, tel, message, emailError, telError} = this.state
+		const {email, tel, message} = this.state
 
-		if (!emailError && !telError) {
-			feedbackAction({email,tel, message})
-		}
+		feedbackAction({email,tel, message}).then((res) => {
+			if (res.result === true) {
+				this.props.onCloseDialog()
+			}
+		})
 	}
 
 	render() {

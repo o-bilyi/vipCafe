@@ -179,17 +179,17 @@ export default class DrawComponent extends React.Component {
             <Link to={navigationScheme.login}>Увійти</Link>
           </div>
         </Dialog>
+
         <Dialog
           maxWidth={"xs"}
           className="send-to-manager-modal"
           open={this.state.openManagerModal}
-          classes={{
-            paper: "send-to-manager-modal-container"
-          }}
+          classes={{ paper: "send-to-manager-modal-container" }}
           aria-labelledby="send to manager modal"
           onClose={this._handleOpenManagerModal}>
-			<FeedbackForm />
+			<FeedbackForm onCloseDialog={this._handleOpenManagerModal}/>
 		</Dialog>
+
       </Drawer>
     )
   }

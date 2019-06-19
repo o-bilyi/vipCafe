@@ -37,7 +37,8 @@ const tabIcons = {
 
 class Catalog extends React.Component {
   static propTypes = {
-    isAuthorized: PropTypes.bool
+    isAuthorized: PropTypes.bool,
+    userId: PropTypes.number
   };
 
   state = {
@@ -90,7 +91,7 @@ class Catalog extends React.Component {
     const { start, limit, filters } = this.state;
 
     httpService().getRequest(URLS.getProducts +
-      `?start=${start}&limit=${limit}&category=${activeCategory}&filters=${filters}`)
+      `?user_id=${this.props.userId}&start=${start}&limit=${limit}&category=${activeCategory}&filters=${filters}`)
         .then(res => {
           console.warn(res);
 
@@ -106,7 +107,7 @@ class Catalog extends React.Component {
       count: 1,
       quantity: props["quantity"],
       id: props["id_post"],
-      price: props["price_big"],
+      price: props.price,
       img: "no-img",
       title: props["post_title"],
       properties: {...props["attributes"]}
@@ -267,7 +268,8 @@ class Catalog extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthorized: state.auth.isAuthorized
+    isAuthorized: state.auth.isAuthorized,
+    userId : state.userProfile.id
   };
 };
 
