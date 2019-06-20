@@ -1,3 +1,4 @@
+import { store } from "index";
 import {baseHandlerAction} from "./utils";
 import { httpService, URLS } from "../../services";
 import {newsActionTypes} from '../models/shares-and-news';
@@ -19,6 +20,6 @@ export function getNews() {
       200: (res) => dispatch(successNews(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(URLS.news);
+    }).getRequest(URLS.news + `?user_id=${store.getState().userProfile.id}`);
   };
 }

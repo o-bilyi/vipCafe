@@ -1,3 +1,4 @@
+import {store} from "index";
 import {baseHandlerAction} from "./utils";
 import { httpService, URLS } from "../../services";
 import {sharesActionTypes} from '../models/shares-and-news';
@@ -19,6 +20,6 @@ export function getShares() {
       200: (res) => dispatch(successShares(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(URLS.shares);
+    }).getRequest(URLS.shares + `?user_id=${store.getState().userProfile.id}`);
   };
 }

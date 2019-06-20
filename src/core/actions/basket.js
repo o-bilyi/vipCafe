@@ -22,6 +22,13 @@ export function changeBasket(item) {
   };
 }
 
+export function removeItemWithBasket(id) {
+  return {
+    type: basketActionTypes.REMOVE_BASKET_ITEM_ACTION,
+    payload: id,
+  };
+}
+
 export function setSale(sale) {
   return {
     type: basketActionTypes.SATE_BASKET_SALE_ACTION,

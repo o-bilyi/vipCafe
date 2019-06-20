@@ -50,7 +50,7 @@ export default function SingItem(props) {
                     img={item.image}
                     price={item.price}
                     count={item["quantity"]}
-                    properties={null}
+                    properties={item.properties}
                   />
                   )
               })

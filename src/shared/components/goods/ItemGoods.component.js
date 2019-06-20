@@ -29,13 +29,10 @@ export default class ItemGoods extends React.Component {
     quantity: PropTypes.string
   };
 
-  constructor(props){
-    super(props);
-    this.state = {
-      count: props.count,
-      openDescriptionModal: false,
-      wasAddedItem: null,
-    };
+  state = {
+    count: 1,
+    openDescriptionModal: false,
+    wasAddedItem: null,
   }
 
   countItem = (value) => {
@@ -79,7 +76,7 @@ export default class ItemGoods extends React.Component {
         <h2 className='item-title'>{title}</h2>
         <div className="item-types">
           {
-            propertiesKeys.length
+            propertiesKeys.length !== 0
             &&
             propertiesKeys.map((item, key) => {
               return (

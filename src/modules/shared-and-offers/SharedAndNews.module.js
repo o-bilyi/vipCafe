@@ -47,7 +47,8 @@ class SharesAndNews extends React.Component {
       state : {
         auth : this.props.auth,
         ...item,
-        title : item.title["rendered"],
+        title : item.title.rendered,
+        price : item.price,
         description : item.excerpt.rendered
       }
     })

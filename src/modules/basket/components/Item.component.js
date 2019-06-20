@@ -6,7 +6,7 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {store} from 'index';
-import {changeBasket} from 'core/actions';
+import { changeBasket, removeItemWithBasket } from "core/actions";
 
 export default class Item extends React.Component {
   static propTypes = {
@@ -25,8 +25,9 @@ export default class Item extends React.Component {
   };
 
   copyOrRemoveItem = (method, id) => () => {
-    console.warn(method);
-    console.warn(id);
+    if (method === "remove") {
+      store.dispatch(removeItemWithBasket(id))
+    }
   };
 
   incrementItem = () => this.updateBasket(this.state.count + 1);
