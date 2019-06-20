@@ -26,9 +26,9 @@ export class FeedbackForm extends React.Component {
 	};
 
 	state = {
-		email : "o.d.bilyigmail.com",
-		tel : "0684090455",
-		message : "Test Item",
+		email : "",
+		tel : "",
+		message : "",
 		error : {
 			tel : null,
 			email : null,

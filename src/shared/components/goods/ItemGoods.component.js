@@ -71,7 +71,7 @@ export default class ItemGoods extends React.Component {
 
   _getTopContent = () => {
     const {img, title, properties} = this.props;
-    const propertiesKeys = Object.keys(properties);
+    const propertiesKeys = properties ? Object.keys(properties) : [];
 
     return (
       <React.Fragment>

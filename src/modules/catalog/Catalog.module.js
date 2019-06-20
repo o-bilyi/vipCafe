@@ -106,9 +106,9 @@ class Catalog extends React.Component {
     const items = {
       count: 1,
       quantity: props["quantity"],
-      id: props["id_post"],
+      id: props["product_id"],
       price: props.price,
-      img: "no-img",
+      img: props.img,
       title: props["post_title"],
       properties: {...props["attributes"]}
     };

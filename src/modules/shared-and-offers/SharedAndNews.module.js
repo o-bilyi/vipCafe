@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {navigationScheme} from 'core';
-// import {getShares} from "../../core/actions";
 import RouterService from 'shared/services/RouterService';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
 
@@ -28,10 +27,6 @@ class SharesAndNews extends React.Component {
     selectTab : this.props.location.state || tabName.shares,
   };
 
-  componentDidMount() {
-    // this.props.dispatch(getShares())
-  }
-
   componentWillReceiveProps(newProps) {
     if(newProps.location.state !== this.props.location.state) {
       this.setState({
@@ -47,11 +42,10 @@ class SharesAndNews extends React.Component {
   };
 
   _openSingleItem = (item) => {
-    const auth = this.props.auth;
     RouterService.navigateTo({
       pathname : navigationScheme.sharedAndOffersSingleItem,
       state : {
-        auth,
+        auth : this.props.auth,
         ...item,
         title : item.title["rendered"],
         description : item.excerpt.rendered

@@ -48,7 +48,7 @@ export default function SingItem(props) {
                     id={item["product_id"]}
                     title={item["post_title"]}
                     img={item.image}
-                    price={item["price_big"]}
+                    price={item.price}
                     count={item["quantity"]}
                     properties={null}
                   />
