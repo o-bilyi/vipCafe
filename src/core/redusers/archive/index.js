@@ -12,4 +12,5 @@ const addHandler = (state, action) => {
 
 export const archive = generateReducer(initialState, {
   [archiveActionTypes.ADD_ARCHIVE_ITEM_ACTION]: addHandler,
+  [archiveActionTypes.FAIL_ARCHIVE_ITEM_ACTION]: initialState,
 });

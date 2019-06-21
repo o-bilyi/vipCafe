@@ -35,17 +35,6 @@ const removeItemHandler = (state, action) => {
   };
 };
 
-const copyItemHandler = (state, action) => {
-  const item = action.payload.item;
-  const newItems = state.items.filter((i) => item.id !== i.id);
-  newItems.push(item);
-  return {
-    ...state,
-    items : newItems,
-    price : calculatePrice(newItems)
-  };
-};
-
 export const basket = generateReducer(initialState, {
   [basketActionTypes.REMOVE_ALL_BASKET_ITEMS_ACTION]: (state) => {
     return {

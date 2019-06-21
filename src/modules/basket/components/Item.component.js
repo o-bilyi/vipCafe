@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {euroSymbol} from 'utilits/index';
 import ClearIcon from '@material-ui/icons/Clear';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {store} from 'index';
@@ -56,7 +55,6 @@ export default class Item extends React.Component {
         <td className="buttons-and-img">
           <div className="buttons">
             <button onClick={this.copyOrRemoveItem('remove', id)} className="remove-item"><ClearIcon className="icon"/></button>
-            <button onClick={this.copyOrRemoveItem('copy', id)} className="copy-item"><FileCopyIcon className="icon"/></button>
           </div>
           <div className="image-wrap">
             <img src={img} className="img-item" alt="img-item"/>

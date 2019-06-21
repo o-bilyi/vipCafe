@@ -32,7 +32,9 @@ export const URLS = {
   cartSet : "vipcaffe/v1/set-cart", // params {hash}
   cartDelete : "vipcaffe/v1/delete-cart", // params {hash}
   feedback : "vipcaffe/v1/feedback", // params {email, message, phone}
-  repeatOrder : "vipcaffe/v1/repeat_order" // params {id order} if ok return order{}
+  repeatOrder : "vipcaffe/v1/repeat_order", // params {id order} if ok return order{}
+  getArchiveOrders : "vipcaffe/v1/get_orders", // param {id user} return user orders
+  search : "vipcaffe/v1/get_products", // param {search=Barilla} return products
 };
 
 let store = null;

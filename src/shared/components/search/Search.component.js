@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import {store} from "../../../index";
 import CrossIcon from "assets/svg/cross.svg";
 import SearchIcon from "assets/svg/search.svg";
+import {search} from "../../../core/actions/search";
 import {Button, TextField} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import RouterService from "../../services/RouterService";
+import {navigationScheme} from "../../../core";
+import {toastr} from "react-redux-toastr";
 
 const styles = () => ({
   textField: {
@@ -32,6 +37,9 @@ class Search extends React.Component {
     this.setState({
       open : !this.state.open
     })
+    if (this.state.value) {
+      this._goToSearchResultPage(this.state.value)
+    }
   };
 
   _changeValue = (event) => {
@@ -39,6 +47,22 @@ class Search extends React.Component {
       value : event.target.value
     })
   };
+
+  _goToSearchResultPage = () => {
+    store.dispatch(search(this.state.value)).then(data => {
+      if (data.products.length) {
+        RouterService.navigateTo({
+          pathname : navigationScheme.searchResultPage,
+          state : {
+            auth : store.getState().auth.isAuthorized,
+            searchResults : data.products
+          }
+        })
+      } else {
+        toastr.error('По вашому запиту нічого не знайдено!');
+      }
+    })
+  }
 
   _clearInput = () => {
     this.setState({

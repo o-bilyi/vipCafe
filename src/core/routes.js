@@ -19,6 +19,8 @@ export const navigationScheme = {
   checkoutOrder : '/checkout-order',
 
   sharedAndOffersSingleItem : '/single-item',
+
+  searchResultPage : '/search-result',
 };
 
 export const MAIN_ROUTES = [
@@ -81,6 +83,11 @@ export const MAIN_ROUTES = [
     path: navigationScheme.checkoutOrder,
     exact: true,
     component: () => import('../modules/checkout-page/CheckoutPage.module')
+  },
+  {
+    path: navigationScheme.searchResultPage,
+    exact: true,
+    component: () => import('../modules/search-result/SearchResult.module')
   },
   {
     component: () => import('../modules/404/Error.module')

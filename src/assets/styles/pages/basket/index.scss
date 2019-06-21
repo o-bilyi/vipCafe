@@ -71,7 +71,7 @@
   .buttons-and-img {
     width: 135px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
   }
 
@@ -147,13 +147,8 @@
   }
 
   .remove-item {
-    border-bottom: 1px solid #dcdcdc;
-  }
-
-  .remove-item,
-  .copy-item {
     width: 45px;
-    height: 45px;
+    height: 100%;
     background-color: #e8e8e8;
 
     .icon {
@@ -163,13 +158,6 @@
 
   .remove-item:hover {
     background-color: #c93f3f;
-    .icon {
-      fill: #fff;
-    }
-  }
-
-  .copy-item:hover {
-    background-color: #75a95d;
     .icon {
       fill: #fff;
     }
