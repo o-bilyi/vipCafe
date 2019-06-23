@@ -7,19 +7,28 @@ export function addToArchive(item) {
   return {
     type: archiveActionTypes.ADD_ARCHIVE_ITEM_ACTION,
     payload: {
-      item : [...item]
+      items : [...item]
     }
   };
 }
 
-export function getArchive() {
+function filterArchive(item) {
+  return {
+    type: archiveActionTypes.FILTER_ARCHIVE_ITEM_ACTION,
+    payload: {
+      items : [...item]
+    }
+  };
+}
+
+export function getArchive(params) {
   return dispatch => {
     dispatch(baseHandlerAction(archiveActionTypes.INIT_ARCHIVE_ITEM_ACTION, true));
     const FAIL_ACTION = (res) => dispatch(baseHandlerAction(archiveActionTypes.FAIL_ARCHIVE_ITEM_ACTION, {res}));
     return httpService().handleStatusCodes({
-      200: (res) => dispatch(addToArchive(res)),
+      200: (res) => params ? dispatch(filterArchive(res)) : dispatch(addToArchive(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(URLS.getArchiveOrders + `?user=2`); // ${store.getState().userProfile.id}
+    }).getRequest(URLS.getArchiveOrders + '?user=2&' + params); // ${store.getState().userProfile.id}
   };
 }

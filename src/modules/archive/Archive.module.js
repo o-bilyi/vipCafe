@@ -11,14 +11,9 @@ import RouterService from 'shared/services/RouterService';
 import OrderHeader from './components/OrderHeader.component';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
-
-const initialState = {
-  date: {
-    from: undefined,
-    to: undefined,
-  },
-  selectItem: 0
-};
+import {getArchive} from "../../core/actions";
+import {getRepeatOrder} from "../../core/actions/repeat-order";
+import {toastr} from "react-redux-toastr";
 
 const items = [
   {
@@ -46,121 +41,64 @@ const items = [
         count: 20,
         price: 50,
       },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 1,
-        price: 12,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 10,
-        price: 23,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 20,
-        price: 50,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 1,
-        price: 12,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 10,
-        price: 23,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 20,
-        price: 50,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 1,
-        price: 12,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 10,
-        price: 23,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 20,
-        price: 50,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 1,
-        price: 12,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 10,
-        price: 23,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 20,
-        price: 50,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 1,
-        price: 12,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 10,
-        price: 23,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 20,
-        price: 50,
-      },
     ],
   },
-].map(i => {
-  i.id = Math.random();
-  return i;
-});
-
-export const onRepeatOrderClick = (item) => {
-  console.warn('repeat order ', item);
-};
+];
 
 class ArchiveOfOrders extends React.Component {
   static propTypes = {
-    archive: PropTypes.array,
+    archive: PropTypes.arrayOf(PropTypes.shape({
+      ID : PropTypes.string,
+      user_id : PropTypes.string,
+      order_name : PropTypes.string,
+      order_phone : PropTypes.string,
+      order_total : PropTypes.string,
+      order_status : PropTypes.string,
+      order_date : PropTypes.string,
+      products : PropTypes.array
+    })),
   };
 
-  state = initialState;
+  constructor(props) {
+    super(props);
+    this.state = {
+      archive : props.archive,
+      date: {
+        from: undefined,
+        to: undefined,
+      },
+      selectItem: 0,
+      search : ''
+    }
+  }
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.archive !== this.props.archive) {
+      this.setState({
+        archive : nextProps.archive
+      })
+    }
+  }
+
   componentWillUnmount() {
     DeviceSizeService.unsubscribe(this.deviceServiceId);
   }
+
+  onRepeatOrderClick = (id) => {
+    this.props.dispatch(getRepeatOrder(id)).then(item => {
+      if ((item.result)) {
+        console.warn(item)
+        this.forceUpdate();
+      } else {
+        toastr.error('Замовлення відсутнє');
+      }
+    })
+    console.warn('repeat order ', id);
+  };
 
   handleChange = (direction) => (value) => {
     this.setState({
@@ -168,18 +106,51 @@ class ArchiveOfOrders extends React.Component {
         ...this.state.date,
         [direction]: value,
       },
+      ['date_' + direction] : this._formatDate(value)
+      ,
+    }, () => {
+      if ( direction === 'to') {
+        this.props.dispatch(getArchive(
+          `date_start=${this.state['date_from']}&date_end=${this.state['date_to']}`
+        ))
+      }
     });
   };
 
+  _formatDate = (date) => {
+    const pad = n => (n < 10 ? `0${n}` : n)
+    const newDate = new Date(date);
+    const year = newDate.getFullYear();
+    const month = pad(newDate.getMonth() + 1);
+    const day = pad(newDate.getDate());
+    return `${year}-${month}-${day}`
+  }
+
   _resetDateFilter = () => {
-    this.setState(initialState);
+    this.setState({
+      date: {
+        from: undefined,
+        to: undefined,
+      },
+      search : ''
+    }, () =>  this.props.dispatch(getArchive()));
   };
+
+  _searchInArchive = (value) => {
+    const searchValue = value.target.value;
+    this.setState({
+      search : searchValue
+    })
+    setTimeout(() => {
+      this.props.dispatch(getArchive(`search=${searchValue}`))
+    }, 900)
+  }
 
   _selectItem = (index) => () => {
     if (DeviceSizeService.size.width < 680) {
       RouterService.navigateTo({
         pathname: navigationScheme.archiveOrder,
-        state: this.props.archive[index],
+        state: this.state.archive[index],
       });
       return;
     }
@@ -189,7 +160,7 @@ class ArchiveOfOrders extends React.Component {
   };
 
   _getHeadTab = () => {
-    const orders = this.props.archive;
+    const orders = this.state.archive;
     const isNotMobile = DeviceSizeService.size.width > 680;
     return orders.length && orders.map((item, key) => {
       const itemDate = <li className="list-date-wrap"><span className="list-date">{item.order_date}</span></li>;
@@ -201,7 +172,7 @@ class ArchiveOfOrders extends React.Component {
           {itemDate}
           <li className={classes}
               onClick={this._selectItem(key)}>
-            <p className="number">№ {item.order_total}</p>
+            <p className="number">№ {item.ID}</p>
             <p className="title">{item.order_name}</p>
             <p className="order-address">Замовлення {item.order_mail}</p>
           </li>
@@ -210,18 +181,13 @@ class ArchiveOfOrders extends React.Component {
     });
   };
 
-  _key = 0;
-  get uniqueKey() {
-    return this._key++;
-  }
-
   _getItemsTab = () => {
-    const selectItem = this.props.archive[this.state.selectItem];
-    return selectItem.product.map((item) => {
+    const selectItem = this.state.archive[this.state.selectItem];
+    return selectItem.products.map((item, key) => {
       return (
-        <div className="item animated fadeInDown" key={this.uniqueKey}>
+        <div className="item animated fadeInDown" key={key}>
           <div className="left-block">
-            <img src={items[0].orders[0].img} alt="item img" className="item-img"/>
+            <img src={items[0].orders[0].img} alt="item img" className="item-img"/> /*mock image*/
           </div>
           <div className="right-block">
             <h2 className="item-title">{item.title}</h2>
@@ -235,7 +201,7 @@ class ArchiveOfOrders extends React.Component {
   };
 
   _getContent = () => {
-    const selectItem = this.props.archive[this.state.selectItem];
+    const selectItem = this.state.archive[this.state.selectItem];
     if (!selectItem || DeviceSizeService.size.width < 680) {
       return null;
     }
@@ -245,11 +211,11 @@ class ArchiveOfOrders extends React.Component {
           <OrderHeader
             allPrice={123}
             num={selectItem.ID}
-            orderAddress={selectItem.order_mail}
-            onRepeatOrderClick={() => onRepeatOrderClick(selectItem)}
+            orderAddress={selectItem['order_mail']}
+            onRepeatOrderClick={() => this.onRepeatOrderClick(selectItem.ID)}
           />
         }
-        <div className="goods-count">Товарів в замовленні: {selectItem.product.length}</div>
+        <div className="goods-count">Товарів в замовленні: {selectItem.products.length}</div>
         <div className="items-wrap">
           <div className="scroll-container">
             {
@@ -265,7 +231,7 @@ class ArchiveOfOrders extends React.Component {
     const {from, to} = this.state.date;
     const modifiers = {start: from, end: to};
 
-    if (this.props.archive.length) {
+    if (this.state.archive.length) {
       return (
         <div className="archive-wrap">
           <div className="archive-head">
@@ -274,7 +240,9 @@ class ArchiveOfOrders extends React.Component {
               <input
                 placeholder="141"
                 type="search"
+                value={this.state.search}
                 className="search-input"
+                onChange={this._searchInArchive}
               />
             </div>
             <div className="date-wrap">
@@ -282,6 +250,7 @@ class ArchiveOfOrders extends React.Component {
 
               <div className="date-input-wrap">
                 <DayPickerInput
+                  id='from'
                   value={from}
                   format="LL"
                   placeholder="--  --  --"
@@ -302,8 +271,8 @@ class ArchiveOfOrders extends React.Component {
 
               <div className="date-input-wrap">
                 <DayPickerInput
+                  id='to'
                   value={to}
-                  format="LL"
                   placeholder="--  --  --"
                   ref={el => (this.to = el)}
                   dayPickerProps={{
@@ -319,7 +288,7 @@ class ArchiveOfOrders extends React.Component {
                   onDayChange={this.handleChange('to')}
                 />
               </div>
-              <Button onClick={this._resetDateFilter} className="reset-date">очистити дату</Button>
+              <Button onClick={this._resetDateFilter} className="reset-date">очистити</Button>
             </div>
           </div>
           <div className="archive-body">
@@ -343,7 +312,7 @@ class ArchiveOfOrders extends React.Component {
   render() {
     return (
       <Wrapper>
-        <div className={classNames("archive-page", !this.props.archive.length && "empty-body")}>
+        <div className={classNames("archive-page", !this.state.archive.length && "empty-body")}>
           {this._getBody()}
         </div>
       </Wrapper>

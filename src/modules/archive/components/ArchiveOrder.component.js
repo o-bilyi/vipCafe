@@ -2,8 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {euroSymbol} from 'utilits';
 import OrderHeader from './OrderHeader.component';
-import {onRepeatOrderClick} from '../Archive.module';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
+import {store} from "../../../index";
+import {getRepeatOrder} from "../../../core/actions/repeat-order";
+import {toastr} from "react-redux-toastr";
+
+export const onRepeatOrderClick = (id) => {
+  store.dispatch(getRepeatOrder(id)).then(item => {
+    if ((item.result)) {
+      this.forceUpdate();
+    } else {
+      toastr.error('Замовлення відсутнє');
+    }
+  })
+  console.warn('repeat order ', id);
+};
 
 export default class MobileItem extends React.Component {
   static propTypes = {
@@ -55,7 +68,7 @@ export default class MobileItem extends React.Component {
                   allPrice={123}
                   num={this.item.ID}
                   orderAddress={this.item.order_mail}
-                  onRepeatOrderClick={() => onRepeatOrderClick(this.item)}
+                  onRepeatOrderClick={() => onRepeatOrderClick(this.item.ID)}
                 />
               }
 

@@ -5,19 +5,12 @@ import ReduxToastr from 'react-redux-toastr';
 import {ConnectedRouter} from 'react-router-redux';
 import {generateRoutes, MAIN_ROUTES} from '../core';
 import connect from 'react-redux/es/connect/connect';
-import {getNews, getShares, getArchive} from "../core/actions";
 
 class App extends React.Component {
   static propTypes = {
     auth: PropTypes.bool,
     history: PropTypes.object
   };
-
-  componentDidMount() {
-    this.props.dispatch(getShares())
-    this.props.dispatch(getNews())
-    this.props.dispatch(getArchive())
-  }
 
   render() {
     return (

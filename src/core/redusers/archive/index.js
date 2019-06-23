@@ -6,11 +6,18 @@ const initialState = [];
 const addHandler = (state, action) => {
   return [
     ...state,
-    ...action.payload.item,
+    ...action.payload.items,
+  ];
+};
+
+const filterHandler = (state, action) => {
+  return [
+    ...action.payload.items
   ];
 };
 
 export const archive = generateReducer(initialState, {
   [archiveActionTypes.ADD_ARCHIVE_ITEM_ACTION]: addHandler,
+  [archiveActionTypes.FILTER_ARCHIVE_ITEM_ACTION]: filterHandler,
   [archiveActionTypes.FAIL_ARCHIVE_ITEM_ACTION]: initialState,
 });

@@ -33,7 +33,7 @@ export const URLS = {
   cartDelete : "vipcaffe/v1/delete-cart", // params {hash}
   feedback : "vipcaffe/v1/feedback", // params {email, message, phone}
   repeatOrder : "vipcaffe/v1/repeat_order", // params {id order} if ok return order{}
-  getArchiveOrders : "vipcaffe/v1/get_orders", // param {id user} return user orders
+  getArchiveOrders : "vipcaffe/v1/get_orders", // param {id user} {date_start=2019-02-02 & date_end=2019-03-04 & search=30} return user orders
   search : "vipcaffe/v1/get_products", // param {search=Barilla} return products
 };
 
