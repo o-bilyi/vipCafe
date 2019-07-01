@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import {navigationScheme} from 'core';
 import {Button} from '@material-ui/core';
 import connect from 'react-redux/es/connect/connect';
-import {DeviceSizeService, euroSymbol} from 'utilits';
+import {calculatePrice, DeviceSizeService, euroSymbol} from 'utilits';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import RouterService from 'shared/services/RouterService';
 import OrderHeader from './components/OrderHeader.component';
@@ -14,36 +14,6 @@ import Wrapper from 'shared/components/wrapper/Wrapper.component';
 import {getArchive} from "../../core/actions";
 import {getRepeatOrder} from "../../core/actions/repeat-order";
 import {toastr} from "react-redux-toastr";
-
-const items = [
-  {
-    id: 0,
-    date: '28.05.18',
-    num: 14176,
-    title: 'Lavazza Crema e Aroma Espresso Blue',
-    orderAddress: 'для Віктора з Вінниці',
-    orders: [
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 1,
-        price: 12,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 10,
-        price: 23,
-      },
-      {
-        img: 'img/img-item.png',
-        title: 'Lavazza Crema e Aroma Espresso Blue',
-        count: 20,
-        price: 50,
-      },
-    ],
-  },
-];
 
 class ArchiveOfOrders extends React.Component {
   static propTypes = {
@@ -187,7 +157,7 @@ class ArchiveOfOrders extends React.Component {
       return (
         <div className="item animated fadeInDown" key={key}>
           <div className="left-block">
-            <img src={items[0].orders[0].img} alt="item img" className="item-img"/> /*mock image*/
+            <img src={item.image} alt="item img" className="item-img"/>
           </div>
           <div className="right-block">
             <h2 className="item-title">{item.title}</h2>
@@ -209,7 +179,7 @@ class ArchiveOfOrders extends React.Component {
       <div className="tab-right-column">
         {
           <OrderHeader
-            allPrice={123}
+            allPrice={calculatePrice(selectItem.products)}
             num={selectItem.ID}
             orderAddress={selectItem['order_mail']}
             onRepeatOrderClick={() => this.onRepeatOrderClick(selectItem.ID)}

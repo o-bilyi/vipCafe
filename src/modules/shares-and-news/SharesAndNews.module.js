@@ -60,7 +60,6 @@ class SharesAndNews extends React.Component {
 
     return (
       selectItemKeys.map((item, key) => {
-        console.warn(selectItems[item])
         return (
           <div className="item" key={key}>
             {

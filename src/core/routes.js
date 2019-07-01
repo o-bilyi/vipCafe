@@ -62,12 +62,12 @@ export const MAIN_ROUTES = [
   {
     path: navigationScheme.sharesAndNews,
     exact: true,
-    component: () => import('../modules/shared-and-offers/SharedAndNews.module')
+    component: () => import('../modules/shares-and-news/SharesAndNews.module')
   },
   {
     path: navigationScheme.sharedAndOffersSingleItem,
     exact: true,
-    component: () => import('../modules/shared-and-offers/components/SingleItem.component')
+    component: () => import('../modules/shares-and-news/components/SingleItem.component')
   },
   {
     path: navigationScheme.archive,

@@ -311,3 +311,11 @@ export function setArchive (userID) {
       }
     });
 };
+
+export const calculatePrice = (items) => {
+    let price = 0;
+    items.forEach(i => {
+        price += i.price * i['quality']
+    });
+    return price;
+};

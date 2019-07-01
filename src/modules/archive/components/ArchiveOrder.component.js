@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {euroSymbol} from 'utilits';
+import {calculatePrice, euroSymbol} from 'utilits';
+import {store} from "../../../index";
+import {toastr} from "react-redux-toastr";
 import OrderHeader from './OrderHeader.component';
 import Wrapper from 'shared/components/wrapper/Wrapper.component';
-import {store} from "../../../index";
 import {getRepeatOrder} from "../../../core/actions/repeat-order";
-import {toastr} from "react-redux-toastr";
 
 export const onRepeatOrderClick = (id) => {
   store.dispatch(getRepeatOrder(id)).then(item => {
@@ -26,7 +26,7 @@ export default class MobileItem extends React.Component {
         num: PropTypes.number,
         date: PropTypes.string,
         title: PropTypes.string,
-        orders: PropTypes.array,
+        products: PropTypes.array,
         orderAddress: PropTypes.string,
       }),
     }),
@@ -35,15 +35,17 @@ export default class MobileItem extends React.Component {
   constructor(props) {
     super(props);
 
+    console.warn(props.location.state);
+
     this.item = props.location.state;
   }
 
   _getContentTab = () => {
-    return this.item.product.map((item, key) => {
+    return this.item.products.map((item) => {
       return (
-        <div className="item animated fadeInDown" key={key}>
+        <div className="item animated fadeInDown" key={item['ID_product']}>
           <div className="left-block">
-            <img src={item.img} alt="item img" className="item-img"/>
+            <img src={item.image} alt="item img" className="item-img"/>
           </div>
           <div className="right-block">
             <h2 className="item-title">{item.title}</h2>
@@ -65,14 +67,14 @@ export default class MobileItem extends React.Component {
 
               {
                 <OrderHeader
-                  allPrice={123}
+                  allPrice={calculatePrice(this.item.products)}
                   num={this.item.ID}
-                  orderAddress={this.item.order_mail}
+                  orderAddress={this.item['order_mail']}
                   onRepeatOrderClick={() => onRepeatOrderClick(this.item.ID)}
                 />
               }
 
-              <div className="goods-count">Товарів в замовленні: {this.item.length}</div>
+              <div className="goods-count">Товарів в замовленні: {this.item.products.length}</div>
 
               <div className="items-wrap">
                 <div className="scroll-container">
