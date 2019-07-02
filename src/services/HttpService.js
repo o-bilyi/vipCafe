@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import {LoggerService, storageService} from './';
 import {loginSuccess} from 'core/actions';
 
-export const SERVER_API_URL = "http://vipkafe.com.ua/wp-json/";
+export const SERVER_API_URL = "http://vipkafe.com.ua/wp-json/"; //s6525203
 
 export const responseTypes = {
   json: 'json',
@@ -28,9 +28,9 @@ export const URLS = {
   getDeliveryOptions : "vipcaffe/v1/get_delivery_options",
   shares : "wp/v2/shares",
   news : "wp/v2/news",
-  cartGet : "vipcaffe/v1/get-cart", // params {hash} return items
-  cartSet : "vipcaffe/v1/set-cart", // params {hash}
-  cartDelete : "vipcaffe/v1/delete-cart", // params {hash}
+  getCart : "vipcaffe/v1/get-cart", // params {hash} return items
+  setCart : "vipcaffe/v1/set-cart", // params {hash}
+  deleteCart : "vipcaffe/v1/delete-cart", // params {hash}
   feedback : "vipcaffe/v1/feedback", // params {email, message, phone}
   repeatOrder : "vipcaffe/v1/repeat_order", // params {id order} if ok return order{}
   getArchiveOrders : "vipcaffe/v1/get_orders", // param {id user} {date_start=2019-02-02 & date_end=2019-03-04 & search=30} return user orders

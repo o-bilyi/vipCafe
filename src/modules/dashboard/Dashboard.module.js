@@ -28,8 +28,6 @@ const initialState = {
     mail: '',
     company: '',
     site: '',
-
-
     city: '',
     delivery: '',
     trade_format: ''
@@ -85,11 +83,6 @@ class Dashboard extends React.Component {
     httpService().getRequest(URLS.changeUserInformation +
       `?user=${id}&f_name=${f_name}&l_name=${l_name}&p_name=${p_name}&tel=${tel.number}&telegram=${telegram}
       &viber=${viber}&site=${site}&city=${city}&company=${company}&trade_format=${trade_format}&delivery=${delivery}&hash=${session_id}`)
-    //  const body = JSON.stringify({
-    //    session_id, id, f_name, p_name, l_name, city, company,
-    //    delivery, site,tel : tel.number, trade_format, telegram, viber
-    // });
-    // httpService().postRequest(URLS.changeUserInformation, body)
       .then(res => {
         if (res && res.user) {
           this.props.dispatch(dashboardChangeUserInformationSuccess(res.user));

@@ -18,7 +18,7 @@ const initialState = {
   trade_format : null,
   delivery : null,
   thumbnail : null,
-  discount : 30,
+  discount : 0,
 };
 
 export const userProfile = generateReducer(initialState, {

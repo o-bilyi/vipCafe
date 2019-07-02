@@ -13,10 +13,6 @@ export const dashboardChangeUserInformationSuccess = (payload) => {
 };
 
 export function loginAction(cred) {
-  // const body = JSON.stringify({
-  //   email: email,
-  //   password: pass,
-  // });
   return dispatch => {
     dispatch(baseHandlerAction(loginActionTypes.LOGIN_INIT_ACTION, {cred}));
     const FAIL_ACTION = (res) => dispatch(baseHandlerAction(loginActionTypes.LOGIN_FAIL_ACTION, {res}));

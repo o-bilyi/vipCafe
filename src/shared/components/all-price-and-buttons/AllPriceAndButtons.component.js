@@ -6,9 +6,11 @@ import {Button} from '@material-ui/core';
 import {navigationScheme} from 'core';
 import {store} from '../../../index';
 import {clearBasket} from 'core/actions';
+import {httpService, URLS} from "../../../services";
+import {RouterService} from "../../services";
 
 export default function AllPriceAndButtons(props) {
-  const {allPrice, discount, checkOrder} = props;
+  const {allPrice, discount, checkOrder, checkoutOrderInfo} = props;
 
   const _getDiscountPrice = (price, discount) => price * discount / 100;
 
@@ -19,7 +21,20 @@ export default function AllPriceAndButtons(props) {
   };
 
   const submitBasketAction = () => {
-   return console.warn("sumit busket");
+    const {basket, userProfile} = store.getState();
+    const orderInfo = [
+        ...basket.items,
+      checkoutOrderInfo()
+    ]
+    httpService()
+      .getRequest(URLS.setCart + `?hash=${userProfile.session_id}&session_basket=${JSON.stringify(orderInfo)}`).then((res) => {
+          if (res) {
+            clearBasketAction();
+            RouterService.navigateTo(navigationScheme.catalog)
+          }
+    })
+
+    return console.warn("submit basket");
   };
 
   const _submitOrCheckOrder = () => {

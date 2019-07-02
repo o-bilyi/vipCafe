@@ -29,6 +29,6 @@ export function getArchive(params) {
       200: (res) => params ? dispatch(filterArchive(res)) : dispatch(addToArchive(res)),
       400: FAIL_ACTION,
       500: FAIL_ACTION,
-    }).getRequest(URLS.getArchiveOrders + '?user=2&' + params); // ${store.getState().userProfile.id}
+    }).getRequest(URLS.getArchiveOrders + `?user=${store.getState().userProfile.id}&` + params); // ${store.getState().userProfile.id} //?user=2&
   };
 }
