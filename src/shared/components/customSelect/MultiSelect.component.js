@@ -85,7 +85,7 @@ class MultiSelect extends React.Component {
           </InputLabel>
         }
 
-        <FormControl className="select-container">
+        <FormControl className="select-container multi-select">
 
           <Select
             multiple

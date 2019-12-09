@@ -238,12 +238,14 @@
   }
 
   .select-label {
+    width: 100%;
     height: 40px;
-    display: flex;
     cursor: pointer;
     text-align: left;
     margin-right: 24px;
-    align-items: center;
+    vertical-align: top;
+    padding-right: 24px;
+    display: inline-block;
   }
 
 }

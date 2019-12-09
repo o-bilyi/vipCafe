@@ -6,7 +6,6 @@ import {toastr} from 'react-redux-toastr';
 import {DeviceSizeService} from 'utilits';
 import {registrationAction} from "../../../core/actions";
 import {Dialog, Button, TextField} from '@material-ui/core';
-import CustomSelect from 'shared/components/customSelect/Select.component';
 import CustomMultiSelect from 'shared/components/customSelect/MultiSelect.component';
 import CustomCheckbox from 'shared/components/custom-checkbox/CustomCheckbox.component';
 
@@ -24,7 +23,7 @@ const initialState = {
 
   city: '',
   delivery: [],
-  tradeFormat: '',
+  tradeFormat: [],
 
   sitePage: '',
   telegram: false,
@@ -118,7 +117,7 @@ export default class SignUp extends React.Component {
       company : nameCompany,
       city,
       delivery : delivery.join(),
-      trade_format : tradeFormat,
+      trade_format : tradeFormat.join(),
       site : sitePage,
       telegram,
       viber,
@@ -359,10 +358,11 @@ export default class SignUp extends React.Component {
           </div>
 
           <div className="input-container input-container-tradeFormat">
-            <CustomSelect
+            <label className="form-label" htmlFor="#tradeFormat">Формат торгівлі:</label>
+            <CustomMultiSelect
               items={this.state.tradeOptions}
-              labelText="Формат торгівлі:"
               selectedItem={tradeFormat}
+              countTheSelectedItem={false}
               handleChangeSelect={this.handleChangeSelect('tradeFormat')}
             />
           </div>
