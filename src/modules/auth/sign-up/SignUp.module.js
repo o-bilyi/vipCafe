@@ -15,12 +15,12 @@ import {tradeOptionsAction} from "../../../core/actions/get-trade-options";
 import {deliveryOptionsAction} from "../../../core/actions/get-delivery-options";
 
 const initialState = {
-  name: 'Test Register',
-  surName: 'With',
-  lastName: 'React',
+  name: '',
+  surName: '',
+  lastName: '',
   mobile: '',
-  email: 'testSignUp@gmail.com',
-  nameCompany: 'Company',
+  email: '',
+  nameCompany: '',
 
   city: '',
   delivery: [],

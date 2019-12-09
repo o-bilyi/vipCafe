@@ -17,6 +17,12 @@ const validation = {
 			return "Не менше 2 символів!";
 		}
 		return null;
+	},
+	text : (val) => {
+		if (val.length <= 10) {
+			return "Не менше 5 символів!";
+		}
+		return null;
 	}
 };
 
@@ -32,6 +38,7 @@ export class FeedbackForm extends React.Component {
 		error : {
 			tel : null,
 			email : null,
+			message : null,
 		},
 	}
 

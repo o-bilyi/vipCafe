@@ -11,8 +11,8 @@ import {userIsNotAuthenticated} from 'core/auth-redirect';
 import LogoIconSVG from 'assets/svg/logo.svg';
 
 const initialState = {
-  email: 'test@test.ua',
-  password: '111111',
+  email: '',
+  password: '',
   onAnimation: false,
   error: {
     email: null,
