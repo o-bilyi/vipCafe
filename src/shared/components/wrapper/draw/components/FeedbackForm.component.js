@@ -18,9 +18,9 @@ const validation = {
 		}
 		return null;
 	},
-	text : (val) => {
+	message : (val) => {
 		if (val.length <= 10) {
-			return "Не менше 5 символів!";
+			return "Не менше 10 символів!";
 		}
 		return null;
 	}
@@ -40,7 +40,7 @@ export class FeedbackForm extends React.Component {
 			email : null,
 			message : null,
 		},
-	}
+	};
 
 	fieldsChange = event => {
 		const errorText = validation[event.target.name](event.target.value);
@@ -68,14 +68,14 @@ export class FeedbackForm extends React.Component {
 	_sendToManager = (event) => {
 		event.preventDefault();
 
-		const {email, tel, message} = this.state
+		const {email, tel, message} = this.state;
 
 		feedbackAction({email,tel, message}).then((res) => {
 			if (res.result === true) {
 				this.props.onCloseDialog()
 			}
 		})
-	}
+	};
 
 	render() {
 		const {error, email, tel, message} = this.state;
@@ -96,7 +96,7 @@ export class FeedbackForm extends React.Component {
 								input: "input-style",
 							},
 						}}/>
-					{error.email && <p className="error-text">Не вірний формат email</p>}
+					{error.email && <p className="error-text">{error.email}</p>}
 				</div>
 				<div className={`input-container ${error.tel ? 'error' : ''}`}>
 					<TextField
@@ -112,7 +112,7 @@ export class FeedbackForm extends React.Component {
 								input: "input-style",
 							},
 						}}/>
-					{error.tel && <p className="error-text">Не вірний формат телуфона</p>}
+					{error.tel && <p className="error-text">{error.tel}</p>}
 				</div>
 				<div className="input-container">
 					<TextField
@@ -129,6 +129,7 @@ export class FeedbackForm extends React.Component {
 								input: "input-style",
 							},
 						}}/>
+					{error.message && <p className="error-text">{error.message}</p>}
 				</div>
 				<Button
 					aria-label="login"
