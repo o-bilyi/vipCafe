@@ -3,10 +3,11 @@ import {store} from "index";
 import {navigationScheme} from 'core';
 import {Link} from 'react-router-dom';
 import {toastr} from 'react-redux-toastr';
-import {DeviceSizeService, MD5, setArchive} from 'utilits';
 import {loginAction} from 'core/actions/index';
 import {TextField, Button} from '@material-ui/core';
 import {userIsNotAuthenticated} from 'core/auth-redirect';
+import {DeviceSizeService, MD5, setArchive} from 'utilits';
+import { Progress } from "shared/components/preloader/Preloader";
 
 import LogoIconSVG from 'assets/svg/logo.svg';
 
@@ -14,6 +15,7 @@ const initialState = {
   email: '',
   password: '',
   onAnimation: false,
+  loading: false,
   error: {
     email: null,
     password: null,
@@ -64,6 +66,10 @@ class Login extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({
+        ...this.state,
+        loading: true
+    })
       store.dispatch(loginAction({
         email : this.state.email,
         pass : MD5(this.state.password)
@@ -78,7 +84,8 @@ class Login extends React.Component {
   };
 
   _getContent = () => {
-    const {email, password, error} = this.state;
+    const {email, password, error, loading} = this.state;
+    if (loading) return <div className="auth-page login shared-form-wrap">{<Progress anotherColor/>}</div>
     if (DeviceSizeService.size.width < 1025) {
       return (
         <div className="auth-page login shared-form-wrap">

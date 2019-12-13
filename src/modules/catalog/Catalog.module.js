@@ -82,7 +82,7 @@ class Catalog extends React.Component {
   }
 
   handleChangeSelect = name => event => {
-    this.setState({[name]: event.target.value});
+    this.setState({[name]: event.target.value}, () => this._getGoods(this.state.activeGoods));
   };
 
   handleChangeGoods = (id) => {

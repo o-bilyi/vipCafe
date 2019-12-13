@@ -3,20 +3,9 @@ import {store} from 'index';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {navigationScheme} from 'core';
-// import BoxIcon from 'assets/svg/goods-icon/box.svg';
-// import GrainsIcon from 'assets/svg/goods-icon/grains.svg';
-// import WeightIcon from 'assets/svg/goods-icon/weight-icon.svg';
-// import TechnologyIcon from 'assets/svg/goods-icon/technology.svg';
-
 import Dialog from '@material-ui/core/Dialog';
 import {addToBasket} from 'core/actions/basket';
 import WarningIcon from 'assets/svg/warning.svg';
-
-// const getIconForGoods =  {
-//   "melena": <TechnologyIcon className='icon'/>,
-//   "capsul": <TechnologyIcon className='icon'/>,
-//   "zernova": <GrainsIcon className='icon'/>
-// };
 
 export default class ItemGoods extends React.Component {
   static propTypes = {
@@ -30,15 +19,21 @@ export default class ItemGoods extends React.Component {
   };
 
   state = {
-    count: 1,
+    count: this.props.quantity > 1 ? 1 : 0,
     openDescriptionModal: false,
     wasAddedItem: null,
   }
 
-  countItem = (value) => {
-    if (this.state.count >= Number(this.props.quantity)) {
-      return;
+  toMany = () => {
+    if (this.props.quantity === '0') {
+      return "Немає в наявності"
+    } else if (this.state.count >= this.props.quantity) {
+      return "Виберіть меншу кількість"
     }
+    return "Додати в кошик"
+  }
+
+  countItem = (value) => {
     return (
         this.setState({
           count: Number(value.target.value)
