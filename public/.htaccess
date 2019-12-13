@@ -13,7 +13,7 @@ ErrorDocument 404 /index.html
 
 #Устанавливаем e-mail адрес по-умолчанию для администратора сервера
 ServerSignature EMail
-SetEnv SERVER_ADMIN beluy845@gmail.com
+SetEnv SERVER_ADMIN info@vipkafe.com.ua
 
 #Защищаем .htaccess файл
 <files .htaccess>

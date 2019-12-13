@@ -14,7 +14,7 @@ const validation = {
 	},
 	tel : (val) => {
 		if (val.length <= 10) {
-			return "Не менше 2 символів!";
+			return "Не менше 10 символів!";
 		}
 		return null;
 	},

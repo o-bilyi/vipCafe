@@ -220,7 +220,7 @@ export default class SignUp extends React.Component {
               autoComplete="off"
               onChange={this.requiredFields}
               required
-              placeholder="Боб"
+              placeholder="Ім’я"
               value={name}
               type="text"
               name="name"
@@ -240,7 +240,7 @@ export default class SignUp extends React.Component {
             <TextField
               onChange={this.fieldsChange}
               required
-              placeholder="Боб"
+              placeholder="Прізвище"
               value={surName}
               type="text"
               name="surName"
@@ -260,7 +260,7 @@ export default class SignUp extends React.Component {
             <TextField
               onChange={this.fieldsChange}
               value={lastName}
-              placeholder="Бобіков"
+              placeholder="По-батькові"
               type="text"
               name="lastName"
               id="lastName"
@@ -279,7 +279,7 @@ export default class SignUp extends React.Component {
               onChange={this.requiredFields}
               required
               value={mobile}
-              placeholder="+380"
+              placeholder="380"
               type="number"
               name="mobile"
               id="mobile"

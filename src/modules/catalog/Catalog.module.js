@@ -67,10 +67,14 @@ class Catalog extends React.Component {
 
   componentDidMount() {
     this.deviceServiceId = DeviceSizeService.subscribe(() => this.forceUpdate());
-    httpService().getRequest(URLS.shop).then(res => {
-      this.setState({tabs: res});
-    });
-    // this._getGoods(this.state.activeGoods);
+    httpService().getRequest(URLS.shop)
+      .then(res => {
+        this.setState({
+          tabs: res,
+          activeGoods: res && res[res.findIndex(item => item.name === 'КАВА')].id
+        });
+    })
+      .then(() => this._getGoods(this.state.activeGoods))
   }
 
   componentWillUnmount() {
@@ -93,8 +97,6 @@ class Catalog extends React.Component {
     httpService().getRequest(URLS.getProducts +
       `?user_id=${this.props.userId}&start=${start}&limit=${limit}&category=${activeCategory}&filters=${filters}`)
         .then(res => {
-          console.warn(res);
-
           this.setState({
             productFilters: res.data_filter,
             products: res.products
@@ -146,6 +148,8 @@ class Catalog extends React.Component {
       productFilters
     } = this.state;
 
+    if (!productFilters.length) return <Progress/>
+
     return (
       <div className="filter-product">
         {
@@ -196,10 +200,11 @@ class Catalog extends React.Component {
 
   getTabCategory = () => {
     const tabs = this.state.tabs;
+    if (!tabs.length) return <Progress/>
     return (
       <div className="tab-categories">
         {
-          tabs ? tabs.map((elem) => {
+          tabs.map((elem) => {
               return (
                 <Button
                   id={elem.id}
@@ -213,7 +218,6 @@ class Catalog extends React.Component {
                 </Button>
               )
             })
-            : <Progress globalProgress={false}/>
         }
       </div>
     );
@@ -229,15 +233,12 @@ class Catalog extends React.Component {
           }
 
           {
-            this.state.productFilters.length
-            ? this._getFilters()
-            : null
+            this._getFilters()
           }
 
           {
             this.state.products.length
-              ?
-              <div className="goods-wrap">
+              ? <div className="goods-wrap">
                 {
                   this.state.products.map((item, key) => {
                     return this.getGoodsItem(item, key);

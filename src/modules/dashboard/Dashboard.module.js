@@ -169,7 +169,7 @@ class Dashboard extends React.Component {
               autoComplete="off"
               onChange={this.fieldsChange}
               required
-              placeholder="Боб"
+              placeholder=">Ім’я"
               value={f_name}
               type="text"
               name="f_name"
@@ -188,7 +188,7 @@ class Dashboard extends React.Component {
             <TextField
               onChange={this.fieldsChange}
               required
-              placeholder="Боб"
+              placeholder="Прізвище"
               value={l_name}
               type="text"
               name="l_name"
@@ -207,7 +207,7 @@ class Dashboard extends React.Component {
             <TextField
               onChange={this.fieldsChange}
               value={p_name}
-              placeholder="Бобіков"
+              placeholder=">По-батькові"
               type="text"
               name="p_name"
               id="p_name"
@@ -226,7 +226,7 @@ class Dashboard extends React.Component {
               onChange={this.changeTel}
               required
               value={tel.number}
-              placeholder="+380"
+              placeholder="380"
               type="number"
               name="number"
               id="mobile"

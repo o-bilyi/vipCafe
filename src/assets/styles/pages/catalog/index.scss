@@ -19,34 +19,6 @@
       text-transform: uppercase;
       border: 1px solid rgba(104, 89, 76, 0.2);
 
-      /*&.kava {
-        &.active,
-        &:hover {
-          background-color: #4c4743;
-        }
-      }
-
-      &.syr-myaso {
-        &.active,
-        &:hover {
-          background-color: #bf6d25;
-        }
-      }
-
-      &.bakaliya {
-        &.active,
-        &:hover {
-          background-color: #2bb26d;
-        }
-      }
-
-      &.shokolad {
-        &.active,
-        &:hover {
-          background-color: #68594c;
-        }
-      }*/
-
       &.active,
       &:hover {
         background-color: #4c4743;
@@ -179,6 +151,17 @@
     &::-webkit-scrollbar {
       width: 2px;
       border-radius: 3px;
+    }
+
+    &.is-empty {
+      box-shadow: none;
+      justify-content: center;
+      background-color: transparent;
+    }
+
+    .empty-title {
+      font-size: 24px;
+      color: rgba(76, 71, 67, 0.6);
     }
   }
 }
