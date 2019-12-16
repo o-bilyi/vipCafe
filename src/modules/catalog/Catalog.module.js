@@ -42,6 +42,7 @@ class Catalog extends React.Component {
   };
 
   state = {
+    loading: true,
     tabs: [],
     activeGoods: 0, //active category
     products: [],
@@ -87,6 +88,7 @@ class Catalog extends React.Component {
 
   handleChangeGoods = (id) => {
     this.setState({
+      loading: true,
       activeGoods: id
     }, () => this._getGoods(id));
   };
@@ -99,7 +101,8 @@ class Catalog extends React.Component {
         .then(res => {
           this.setState({
             productFilters: res.data_filter,
-            products: res.products
+            products: res.products,
+            loading: false
           })
       });
   };
@@ -120,13 +123,27 @@ class Catalog extends React.Component {
     return <ItemGoods {...items} key={key}/>
   };
 
+  getGoodsItems = () => {
+    const {loading, products} = this.state;
+    if (!products.length || loading) return <Progress/>;
+    return (
+      <div className="goods-wrap">
+        {
+          products.map((item, key) => {
+            return this.getGoodsItem(item, key);
+          })
+        }
+      </div>
+    )
+  }
+
   _toggleFilterModal = () => {
     this.setState({
       openFilterModal: !this.state.openFilterModal
     });
   };
 
-  _getFilters = () => {
+  getFilters = () => {
     if (DeviceSizeService.size.width < 992) {
       return (
         <div className='custom-filter-container'>
@@ -143,12 +160,13 @@ class Catalog extends React.Component {
 
   _getFiltersProduct = () => {
     const {
+      loading,
       type,
       weight,
       productFilters
     } = this.state;
 
-    if (!productFilters.length) return <Progress/>
+    if (loading || !productFilters.length) return <Progress/>
 
     return (
       <div className="filter-product">
@@ -233,19 +251,11 @@ class Catalog extends React.Component {
           }
 
           {
-            this._getFilters()
+            this.getFilters()
           }
 
           {
-            this.state.products.length
-              ? <div className="goods-wrap">
-                {
-                  this.state.products.map((item, key) => {
-                    return this.getGoodsItem(item, key);
-                  })
-                }
-              </div>
-              : null
+            this.getGoodsItems()
           }
 
           <Dialog
